@@ -32,8 +32,8 @@ public class ParkManager extends User
 		 * System.out.println("Start date: /n");
 		 * }
 		 */
-		//System.out.println("\nStart time (hh:mm): "); //(hh:mm am/pm)
-		//startTime = IODriver.input.next();
+		System.out.println("\nStart time (hh:mm am/pm): "); 
+		startTime = IODriver.input.next();
 		
 		System.out.println("\nDuration (1 or 2 days): ");
 		duration = IODriver.input.next();
@@ -56,9 +56,9 @@ public class ParkManager extends User
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
 		
-		Job newJob = new Job(startDate, duration, this.parkName, this.name, description, lightSlots, medSlots, heavySlots);
+		Job newJob = new Job(startDate, startTime, duration, this.parkName, this.name, description, lightSlots, medSlots, heavySlots);
 		//add to job list
-		System.out.println("Job Added! Review Job Details:\n");
+		System.out.println("\nJob Added! Review Job Details:\n");
 		System.out.println(newJob.toString());
 		
 		//Print menu of options 
@@ -86,11 +86,19 @@ public class ParkManager extends User
 	}
 	
 	public void cancelJob(Job theJob){
-		//find job in job list and remove it
+		//find job in job list
+		//show details of job
+		//ask for confirmation 
+		//remove job
 	}
 	
 	public void editJob(Job theJob){
-		//find job in job list and edit it
+		//find job in job list
+		//show details of job
+		//while user does not exit
+			//ask which detail should be edited
+			//ask for new input and change the value of the correct field
+			//show details of job again
 	}
 	
 	public void viewJobs(){

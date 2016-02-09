@@ -12,6 +12,7 @@ public class Job implements Serializable {
 		private static final long serialVersionUID = -8923477868319938597L;
 		Scanner scan;
 		String startDate;
+		String startTime;
 		String duration;
 		String location;
 		String parkManager;
@@ -25,6 +26,7 @@ public class Job implements Serializable {
 		/**
 		 * Job constructor
 		 * @param start Start date of job.
+		 * @param startTime Start time of job.
 		 * @param dur Duration of job.
 		 * @param loc Location of job.
 		 * @param parkMan Park manager in charge of job.
@@ -33,10 +35,11 @@ public class Job implements Serializable {
 		 * @param med The number of medium positions available in job.
 		 * @param heavy The number of heavy positions available in job.
 		 */
-		public Job(String start, String dur, String loc, String parkMan, 
+		public Job(String start, String time, String dur, String loc, String parkMan, 
 				String descript, int light, int med, int heavy){
 			scan = new Scanner(System.in);
 		    this.startDate = start;
+		    this.startTime = time;
 		    this.duration = dur;
 		    this.location = loc;
 		    this.parkManager = parkMan;
@@ -49,7 +52,8 @@ public class Job implements Serializable {
 		
 		@Override
 		public String toString(){
-			String toString = "Start:"+this.startDate+ "\n" + "End:"+ this.duration +
+			String toString = "Date:"+this.startDate+ "\n" + "Time:"+ this.startTime +
+					"\n"+"Duration:"+ this.duration + " day(s)" +
 					"\n"+"Park Manager:"+this.parkManager+ "\n" + 
 					"Location:" +this.location+"\n" + "Description:"+this.description+"\n" +
 					"Light slots:" +this.lightSlots+"\n" + "Medium slots:" +this.mediumSlots
