@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,20 +7,18 @@ import java.util.Scanner;
  * 
  * @author Heather
  */
-public class Volunteer extends AbstractUser {
+public class Volunteer extends AbstractUser implements Serializable  {
 	
+	private static final long serialVersionUID = 1L;
 	public static ArrayList<Job> jobs;		
 	public Scanner scanner = new Scanner(System.in);
-	public String myFname, myLname;
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
 	 * Constructs a volunteer
 	 */
-	public Volunteer(final String theFname, final String theLname, final String theEmail) {
+	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
-		myFname = theFname;
-		myLname = theLname;
 		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
 		volunteerMenu();
@@ -30,7 +29,7 @@ public class Volunteer extends AbstractUser {
 	 */
 	public void volunteerMenu() {
 		StringBuilder greetingAndMenu = new StringBuilder();
-		greetingAndMenu.append("Welcome, " + myFname + " " + myLname + "!"
+		greetingAndMenu.append("Welcome, " + super.fname + " " + super.lname + "!"
 				+ "\nPlease select from the options below...");
 		System.out.println(greetingAndMenu);
 	}
@@ -38,10 +37,10 @@ public class Volunteer extends AbstractUser {
 	/*
 	 * View joined jobs specific to a volunteer.
 	 */
-	public void viewJobsEnrolled(ArrayList<Job> theJobList) {
+	public void viewEnrolledJobs(ArrayList<Job> theJobList) {
 		StringBuilder result = new StringBuilder();
 		for (Job j : enrolledJobs) {
-			result.append(j.<job_title> + "\n");
+			result.append(j.getTitle() + "\n");	// add title field in Job class
 		}
 		result.substring(0, result.length());
 		System.out.println(result);
