@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * A job class, that can be used in console i/o.
  * It contains 3 different view "menus" depending on the user type.
- * @author Sean Hoyt
+ * @author Sean Hoyt (Modified by Luciana)
  *
  */
 public class Job implements Serializable {

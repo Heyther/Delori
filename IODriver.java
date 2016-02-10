@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
-/*
- * This is the "main" class
- * So far it only has functionality for adding a job as a park manager
+/* 
+ * Driver class. Controls menus and user types.
+ * 
+ * @author: Luciana 
  */
 
 public class IODriver{
@@ -36,7 +37,7 @@ public class IODriver{
 	}
 	
 	public void parkManagerMenu(ParkManager manager){
-		System.out.println(manager.name + " [Park Manager]");
+		System.out.println(manager.toString() + " [Park Manager]");
 		System.out.println("Please type a number. \n"
 				+ "1) View my upcoming jobs \n"
 				+ "2) Add new job \n"
@@ -76,7 +77,7 @@ public class IODriver{
 		IODriver io = new IODriver();
 		System.out.println("Welcome to Urban Parks! \n");
 		
-		ParkManager testParkMan = new ParkManager("Mary Thompson", "mthom@gmail.com", "Green Park");
+		ParkManager testParkMan = new ParkManager("Mary", "Thompson", "mthom@gmail.com", "Green Park");
 		
 		//Keep running menu until user chooses to exit
 		while(!io.quit){ 
