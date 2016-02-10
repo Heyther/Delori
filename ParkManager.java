@@ -1,5 +1,6 @@
-/*
+/* 
  * 
+ * @author: Luciana
  */
 public class ParkManager extends User
 {
@@ -7,12 +8,16 @@ public class ParkManager extends User
 	public String parkAddress;
 	public String parkCity;
 	
-	public ParkManager(String name, String email, String park)
+	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
 	{
-		this.name = name;
-		this.email = email;
-		this.parkName = park;
+		super(theFname, theLname, theEmail);
+		this.parkName = thePark;
 		this.type = "Park Manager";
+	}
+	
+	public String toString()
+	{
+		return this.fname + " " + this.lname;
 	}
 	
 	/*
@@ -56,7 +61,7 @@ public class ParkManager extends User
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
 		
-		Job newJob = new Job(startDate, startTime, duration, this.parkName, this.name, description, lightSlots, medSlots, heavySlots);
+		Job newJob = new Job(startDate, startTime, duration, this.parkName, this.toString(), description, lightSlots, medSlots, heavySlots);
 		//add to job list
 		System.out.println("\nJob Added! Review Job Details:\n");
 		System.out.println(newJob.toString());
