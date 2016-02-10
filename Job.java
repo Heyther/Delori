@@ -11,6 +11,7 @@ public class Job implements Serializable {
 	
 		private static final long serialVersionUID = -8923477868319938597L;
 		Scanner scan;
+		String jobTitle;
 		String startDate;
 		String startTime;
 		String duration;
@@ -25,6 +26,7 @@ public class Job implements Serializable {
 
 		/**
 		 * Job constructor
+		 * @param jobTitle Title description of job.
 		 * @param start Start date of job.
 		 * @param startTime Start time of job.
 		 * @param dur Duration of job.
@@ -35,9 +37,10 @@ public class Job implements Serializable {
 		 * @param med The number of medium positions available in job.
 		 * @param heavy The number of heavy positions available in job.
 		 */
-		public Job(String start, String time, String dur, String loc, String parkMan, 
+		public Job(String jobTitle, String start, String time, String dur, String loc, String parkMan, 
 				String descript, int light, int med, int heavy){
 			scan = new Scanner(System.in);
+			this.jobTitle = jobTitle;
 		    this.startDate = start;
 		    this.startTime = time;
 		    this.duration = dur;
@@ -52,14 +55,31 @@ public class Job implements Serializable {
 		
 		@Override
 		public String toString(){
-			String toString = "Date:"+this.startDate+ "\n" + "Time:"+ this.startTime +
-					"\n"+"Duration:"+ this.duration + " day(s)" +
-					"\n"+"Park Manager:"+this.parkManager+ "\n" + 
-					"Location:" +this.location+"\n" + "Description:"+this.description+"\n" +
-					"Light slots:" +this.lightSlots+"\n" + "Medium slots:" +this.mediumSlots
-					+ "\n" + "Heavy slots:"  +this.heavySlots;
+			String toString = "Job Title:"+this.jobTitle
+			                 + "Date:"+this.startDate+"\n"
+			                 + "Time:"+ this.startTime +"\n"
+			                 +"Duration:"+ this.duration + "day(s)" +"\n"
+			                 +"Park Manager:"+this.parkManager+ "\n" 
+			                 +"Location:" +this.location+"\n"         
+			                 +"Description:"+this.description+"\n"
+			                 +"Light slots:" +this.lightSlots+"\n"
+			                 + "Medium slots:" +this.mediumSlots+"\n" 
+			                 + "Heavy slots:" +this.heavySlots;
 			return toString;
 		}
+		/**
+		*Getter for job title.
+		*/
+		public String getJobTitle(){
+		    return jobTitle;
+		}
+		/**
+		*Setter for job title.
+		*@param theJobTitle
+		*/
+        public void setJobTitle(String theJobTitle){
+            this.jobTitle = theJobTitle;
+        }		
 		/**
 		 * Getter for start date.
 		 * @return Returns startDate.
@@ -74,15 +94,28 @@ public class Job implements Serializable {
 			this.startDate = startDate;
 		}
 		/**
-		 * Getter for end date.
+		 * Getter for start time.
+		 * @return Returns startDate.
+		 */
+		public String getStartTime() {
+			return startDate;
+		}
+		/**
+		 * Setter for start time.
+		 */
+		public void setStartTime(String startTime) {
+			this.startTime = startTime;
+		}
+		/**
+		 * Getter for duration.
 		 * @return Returns String endDate.
 		 */
 		public String getDuration() {
 			return duration;
 		}
 		/**
-		 * Setter for endDate
-		 * @param endDate End date of job.
+		 * Setter for duration
+		 * @param duration.
 		 */
 		public void setDuration(String duration) {
 			this.duration = duration;
@@ -115,6 +148,20 @@ public class Job implements Serializable {
 		 */
 		public void setDescription(String description) {
 			this.description = description;
+		}
+		/**
+		**Getter for parkManager
+		/*@return parkManager 
+		*/
+		public String getParkManager() {
+			return parkManager;
+		}
+		/**
+		 * Setter for parkManager.
+		 * @param description New description for job.
+		 */
+		public void setParkManager(String parkManager) {
+			this.parkManager = parkManager;
 		}
 		/**
 		 * Getter for lightSlots.
@@ -189,24 +236,22 @@ public class Job implements Serializable {
 							+ "(1)Edit Job\n(2)Back\n(3)Exit\n"));
 			int input = scan.nextInt();
 			
-			for(;;){
-				switch(input){
-					case 1:
-						editJobMenu();
-						break;
-					case 2:
-						System.out.println("You went back");
-						viewParkManagerJobMenu();
-						break;
-					case 3:
-						System.exit(0);
-					default:
-						System.out.println("Not valid char");
-						viewParkManagerJobMenu();
-						break;
-				//1viewJobMenu(someJob);
-				}
+			switch(input){
+				case 1:
+					editJobMenu();
+					break;
+				case 2:
+					System.out.println("You went back");
+					viewParkManagerJobMenu();
+					break;
+				case 3:
+					System.exit(0);
+				default:
+					System.out.println("Not valid char");
+					viewParkManagerJobMenu();
+					break;
 			}
+			
 		}
 		/**
 		 * An i/o menu for the volunteer to view particular details of job.
@@ -218,26 +263,25 @@ public class Job implements Serializable {
 							+ "(1)Volunteer\n(2)Back\n(3)Exit\n"));
 			int input = scan.nextInt();
 			
-			for(;;){
-				switch(input){
-					case 1:
-						//job will add volunteer if not on blackball list
-						System.out.println("Yay you were added");
-						viewVolunteerJobMenu();
-						break;
-					case 2:
-						System.out.println("You went back");
-						viewVolunteerJobMenu();
-						break;
-					case 3:
-						System.exit(0);
-						break;
-					default:
-						System.out.println("Not valid char");
-						viewVolunteerJobMenu();
-						break;
-				}
+			switch(input){
+				case 1:
+					//job will add volunteer if not on blackball list
+					System.out.println("Yay you were added");
+					viewVolunteerJobMenu();
+					break;
+				case 2:
+					System.out.println("You went back");
+					viewVolunteerJobMenu();
+					break;
+				case 3:
+					System.exit(0);
+					break;
+				default:
+					System.out.println("Not valid char");
+					viewVolunteerJobMenu();
+					break;
 			}
+			
 		}
 		 /** An i/o menu for the urban parks staff member to view particular details of job
 		 ** Or edit the details of a given job
@@ -248,23 +292,24 @@ public class Job implements Serializable {
 							+ "(1)Edit Job\n(2)Back\n(3)Exit\n"));
 			int input = scan.nextInt();
 			
-			for(;;){
-				switch(input){
-					case 1:
-						editJobMenu();
-						break;
-					case 2:
-						System.out.println("You went back");
-						viewUrbanParkStaffMemberJobMenu();
-						break;
-					case 3:
-						System.exit(0);
-					default:
-						System.out.println("Not valid input");
-						viewUrbanParkStaffMemberJobMenu();
-				//1viewJobMenu(someJob);
-				}
+			
+			switch(input){
+				case 1:
+					editJobMenu();
+					break;
+				case 2:
+					System.out.println("You went back");
+					viewUrbanParkStaffMemberJobMenu();
+					break;
+				case 3:
+					System.exit(0);
+					break;
+				default:
+					System.out.println("Not valid input");
+					viewUrbanParkStaffMemberJobMenu();
+					break;
 			}
+			
 		}
 		/**
 		 * A Menu for selecting each of the fields that need to be edited during console i/o.
@@ -274,17 +319,21 @@ public class Job implements Serializable {
 			String inputS = "";
 			int inputSelect = 0;
 			int inputI;
+			
 			System.out.println("Welcome to job editing menu!"
 					+ " Please select of one the following"
 					+ " options:\n"
-					+ "(1)Start Date\n"
-					+ "(2)End Date\n"
-					+ "(3)Location\n"
-					+ "(4)Description\n"
-					+ "(5)Edit Light Slots\n"
-					+ "(6)Edit Medium Slots\n"
-					+ "(7)Edit Heavy Slots\n"
-					+ "(8)Back\n"
+					+ "(1)Job Title\n"
+					+ "(2)Start Date\n"
+					+ "(3)Start Time\n"
+				    + "(4)Duration\n"
+					+ "(5)Location\n"
+					+ "(6)Park Manager\n"
+					+ "(7)Description\n"
+					+ "(8)Edit Light Slots\n"
+					+ "(9)Edit Medium Slots\n"
+					+ "(10)Edit Heavy Slots\n"
+					+ "(11)Back\n"
 					);
 			
 			//inputSelect = scan.nextInt();
@@ -296,53 +345,71 @@ public class Job implements Serializable {
 			}
 			scan.nextLine();
 			switch(inputSelect){
-				case 1:
-					System.out.print("Start:\n");
+			    case 1:
+			        System.out.print("Job Title:\n");
+					inputS = scan.next();
+					scan.nextLine();			
+					this.setJobTitle(inputS);
+					break;
+				case 2:
+					System.out.print("Start Date:\n");
 					inputS = scan.next();
 					scan.nextLine();			
 					this.setStartDate(inputS);
 					break;
-				case 2:
-					System.out.print("End:\n");
+				case 3:
+					System.out.print("Start Time:\n");
+					inputS = scan.next();
+					scan.nextLine();			
+					this.setStartTime(inputS);
+					break;
+				case 4:
+					System.out.print("Duration:\n");
 					inputS = scan.next();
 					scan.nextLine();			
 					this.setDuration(inputS);
 					break;
-				case 3:
+				case 5:
 					System.out.print("Location:\n");
 					inputS = scan.nextLine();
 					this.setLocation(inputS);
 					break;
-				case 4:
+				case 6:
+				    System.out.print("Park Manager:\n");
+					inputS = scan.nextLine();
+					this.setParkManager(inputS);
+					break;
+				case 7:
 					System.out.print("Description:\n");
 					inputS = scan.nextLine();
 					this.setDescription(inputS);
 					break;
-				case 5:
+				case 8:
 					System.out.print("Light Slots:\n");
 					inputI = scan.nextInt();
 					scan.nextLine();			
 					this.setLightSlots(inputI);
 					break;
-				case 6:
+				case 9:
 					System.out.print("Medium Slots:\n");
 					inputI = scan.nextInt();
 					scan.nextLine();			
 					this.setMediumSlots(inputI);
 					break;
-				case 7:
+				case 10:
 					System.out.print("Heavy Slots:\n");
 					inputI = scan.nextInt();
 					scan.nextLine();			
 					this.setHeavySlots(inputI);
 					break;
-				case 8:
+				case 11:
 					viewParkManagerJobMenu();
 					break;
 				default:
 					editJobMenu();
 					break;	
 				}
+				editJobMenu();
 			}
 		
 	    
