@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 
-/*
+/**
  * Represents a calendar full of jobs.
  * 
  * @author Heather
+ * @date
  */
 public class Calendar {
 

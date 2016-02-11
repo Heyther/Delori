@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
-/* 
+/**
  * Driver class. Controls menus and user types.
  * 
- * @author: Luciana 
+ * @author: Luciana (Modified by Heather)
+ * @date
  */
 
 public class IODriver{
@@ -15,13 +16,13 @@ public class IODriver{
 		input.useDelimiter("\n");
 	}
 	
-	public void printMenu(User currentUser){
-		switch (currentUser.type){
-		case "Volunteer": //volunteerMenu(currentUser);
+	public void printMenu(AbstractUser currentUser){
+		switch (currentUser.getRole()){
+		case VOLUNTEER: //volunteerMenu(currentUser);
 			break;
-		case "Staff": //staffMenu(currentUser);
+		case PARKMANAGER: //parkManagerMenu((ParkManager)currentUser);
 			break;
-		case "Park Manager": parkManagerMenu((ParkManager)currentUser);
+		case UPSMEMBER: //staffMenu(currentUser); 
 			break;
 		default: 
 			break;
@@ -59,13 +60,13 @@ public class IODriver{
 		}
 	}
 	
-	public void jobDetailsMenu(User currentUser){
-		switch (currentUser.type){
-		case "Volunteer": //volunteerMenu((Volunteer)currentUser);
+	public void jobDetailsMenu(AbstractUser currentUser){
+		switch (currentUser.getRole()){
+		case VOLUNTEER: //volunteerMenu((Volunteer)currentUser);
 			break;
-		case "Staff": //staffMenu((UrbanParkStaffMember)currentUser);
+		case PARKMANAGER: //parkManagerMenu((ParkManager)currentUser);
 			break;
-		case "Park Manager": parkManagerMenu((ParkManager)currentUser);
+		case UPSMEMBER: //staffMenu((UrbanParkStaffMember)currentUser);
 			break;
 		default: 
 			break;
@@ -77,7 +78,7 @@ public class IODriver{
 		IODriver io = new IODriver();
 		System.out.println("Welcome to Urban Parks! \n");
 		
-		ParkManager testParkMan = new ParkManager("Mary", "Thompson", "mthom@gmail.com", "Green Park");
+		ParkManager testParkMan = new ParkManager("Mary", "Thompson", "mthom@gmail.com", "Green Park", UserStatus.PARKMANAGER);
 		
 		//Keep running menu until user chooses to exit
 		while(!io.quit){ 
