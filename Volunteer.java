@@ -1,37 +1,51 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
+/**
  * Represents a Volunteer.
  * 
  * @author Heather
+ * @date 
  */
-public class Volunteer extends AbstractUser implements Serializable  {
+@SuppressWarnings("serial")
+public class Volunteer extends AbstractUser  {
 	
-	private static final long serialVersionUID = 1L;
-	public static ArrayList<Job> jobs;		
+	protected UserStatus role; 
+	public ArrayList<Job> jobs;		
 	public Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
 	 * Constructs a volunteer
 	 */
-	public Volunteer(String theFname, String theLname, String theEmail) {
+	public Volunteer(String theFname, String theLname, String theEmail, UserStatus theRole) {
 		super(theFname, theLname, theEmail);
 		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
 		volunteerMenu();
+		role = theRole;
 	}
 	
+	/*
+	 * Retrieves the user's role.
+	 * @see AbstractUser#getRole()
+	 */
+	public UserStatus getRole() {
+		return role;
+	}
+
+	/*
+	 * Sets the user's role.
+	 */
+	public void setRole(UserStatus role) {
+		this.role = role;
+	}
+
 	/*
 	 * Console/menu driven io
 	 */
 	public void volunteerMenu() {
-		StringBuilder greetingAndMenu = new StringBuilder();
-		greetingAndMenu.append("Welcome, " + super.fname + " " + super.lname + "!"
-				+ "\nPlease select from the options below...");
-		System.out.println(greetingAndMenu);
+		
 	}
 
 	/*
@@ -40,7 +54,7 @@ public class Volunteer extends AbstractUser implements Serializable  {
 	public void viewEnrolledJobs(ArrayList<Job> theJobList) {
 		StringBuilder result = new StringBuilder();
 		for (Job j : enrolledJobs) {
-			result.append(j.getTitle() + "\n");	// add title field in Job class
+			result.append(j.getJobTitle() + "\n");
 		}
 		result.substring(0, result.length());
 		System.out.println(result);
@@ -59,5 +73,19 @@ public class Volunteer extends AbstractUser implements Serializable  {
 	public void signUp(Job theJob) {
 		enrolledJobs.add(theJob);
 	}
+
+	/*
+	 * Displays the menu for a volunteer.
+	 * @see AbstractUser#userDisplayMenu()
+	 */
+	@Override
+	public StringBuilder userDisplayMenu() {
+		StringBuilder greetingAndMenu = new StringBuilder();
+		greetingAndMenu.append("Welcome, " + super.fname + " " + super.lname + "!"
+				+ "\nPlease select from the options below...");
+		return greetingAndMenu;
+	}
+	
+
 	
 }

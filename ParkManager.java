@@ -1,18 +1,21 @@
 /* 
  * 
  * @author: Luciana
+ * @date
  */
-public class ParkManager extends User
+@SuppressWarnings("serial")
+public class ParkManager extends AbstractUser 
 {
+	protected UserStatus role;
 	public String parkName;
 	public String parkAddress;
 	public String parkCity;
 	
-	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
+	public ParkManager(String theFname, String theLname, String theEmail, String thePark, UserStatus theRole)
 	{
 		super(theFname, theLname, theEmail);
 		this.parkName = thePark;
-		this.type = "Park Manager";
+		role = theRole;
 	}
 	
 	public String toString()
@@ -61,17 +64,17 @@ public class ParkManager extends User
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
 		
-		Job newJob = new Job(startDate, startTime, duration, this.parkName, this.toString(), description, lightSlots, medSlots, heavySlots);
+		//Job newJob = new Job(startDate, startTime, duration, this.parkName, this.toString(), description, lightSlots, medSlots, heavySlots);
 		//add to job list
 		System.out.println("\nJob Added! Review Job Details:\n");
-		System.out.println(newJob.toString());
+		//System.out.println(newJob.toString());
 		
 		//Print menu of options 
-		jobDetailsMenu(newJob);
+		//jobDetailsMenu(newJob);
 		
 	}
 	
-	public void jobDetailsMenu(Job theJob){
+	public void jobDetailsMenu(Job theJob) {
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
 				+ "2) Cancel job\n "
@@ -90,14 +93,14 @@ public class ParkManager extends User
 		}
 	}
 	
-	public void cancelJob(Job theJob){
+	public void cancelJob(Job theJob) {
 		//find job in job list
 		//show details of job
 		//ask for confirmation 
 		//remove job
 	}
 	
-	public void editJob(Job theJob){
+	public void editJob(Job theJob) {
 		//find job in job list
 		//show details of job
 		//while user does not exit
@@ -106,8 +109,29 @@ public class ParkManager extends User
 			//show details of job again
 	}
 	
-	public void viewJobs(){
+	public void viewJobs() {
 		//view list of all the park manager's upcoming jobs
+	}
+
+	@Override
+	public StringBuilder userDisplayMenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*
+	 * Retrieves the user's role.
+	 * @see AbstractUser#getRole()
+	 */
+	public UserStatus getRole() {
+		return role;
+	}
+
+	/*
+	 * Sets the user's role.
+	 */
+	public void setRole(UserStatus role) {
+		this.role = role;
 	}
 
 }

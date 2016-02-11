@@ -1,4 +1,3 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,30 +9,30 @@ import java.util.Scanner;
  * @version 1.1
  *
  */
-public class UrbanParkStaffMember implements Serializable {
+@SuppressWarnings("serial")
+public class UrbanParkStaffMember extends AbstractUser {
 
+	protected UserStatus role;
 	public String myFirstName;
 	public String myLastName;
 	public Scanner scan;
 	public static ArrayList<String> myNames;
 	public static ArrayList<String> myJobs;
 
-	
-	public UrbanParkStaffMember() {
-		this("First", "Last");
-	}
+	// extending AbstractUser, so this might not be necessary. 
+//	public UrbanParkStaffMember() {
+//		this("First", "Last");
+//	}
 	
 	/*
-	 * Constructor 
-	 * @param theFirstName first name
-	 * @param theLastName last name
+	 * Constructs an Urban Park Staff Member.
 	 */
-	public UrbanParkStaffMember(String theFirstName, String theLastName) {
-		myFirstName = theFirstName;
-		myLastName = theLastName;
+	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail, UserStatus theRole) {
+		super(theFirstName, theLastName, theEmail);
 		scan = new Scanner(System.in);
 		myNames = new ArrayList<String>();
 		myJobs = new ArrayList<String>();
+		role = theRole;
 	}
 	
 	/*
@@ -107,11 +106,37 @@ public class UrbanParkStaffMember implements Serializable {
 	 * Temporary main for tests
 	 */
 	public static void main(String[] args) {
-		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey", "Bear");
+		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey", "Bear", "looks@trees.com", UserStatus.UPSMEMBER);
 		myNames.add("Robert");
 		myNames.add("Mark");
 		myJobs.add("river clean up");
 		myJobs.add("feed the gorilla");
 		staff1.staffMenu();
 	}
+
+	/*
+	 * Displays the menu for a UP staff member.
+	 * @see AbstractUser#userDisplayMenu()
+	 */
+	@Override
+	public StringBuilder userDisplayMenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*
+	 * Retrieves the user's role.
+	 * @see AbstractUser#getRole()
+	 */
+	public UserStatus getRole() {
+		return role;
+	}
+
+	/*
+	 * Sets the user's role.
+	 */
+	public void setRole(UserStatus role) {
+		this.role = role;
+	}
+	
 }

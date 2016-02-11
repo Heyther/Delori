@@ -4,8 +4,9 @@ import java.util.Scanner;
 /**
  * A job class, that can be used in console i/o.
  * It contains 3 different view "menus" depending on the user type.
- * @author Sean Hoyt (Modified by Luciana)
- *
+ * 
+ * @author Sean Hoyt (Modified by Luciana, Heather)
+ * @date 
  */
 public class Job implements Serializable {
 	
@@ -14,6 +15,7 @@ public class Job implements Serializable {
 		String jobTitle;
 		String startDate;
 		String startTime;
+		String endDate;
 		String duration;
 		String location;
 		String parkManager;
@@ -22,7 +24,7 @@ public class Job implements Serializable {
 		int mediumSlots;
 		int heavySlots;
 		int totalSlots;
-		//constructor
+		
 
 		/**
 		 * Job constructor
@@ -37,12 +39,13 @@ public class Job implements Serializable {
 		 * @param med The number of medium positions available in job.
 		 * @param heavy The number of heavy positions available in job.
 		 */
-		public Job(String jobTitle, String start, String time, String dur, String loc, String parkMan, 
+		public Job(String jobTitle, String start, String time, String endDate, String dur, String loc, String parkMan, 
 				String descript, int light, int med, int heavy){
 			scan = new Scanner(System.in);
 			this.jobTitle = jobTitle;
 		    this.startDate = start;
 		    this.startTime = time;
+		    this.endDate = endDate;
 		    this.duration = dur;
 		    this.location = loc;
 		    this.parkManager = parkMan;
@@ -53,6 +56,7 @@ public class Job implements Serializable {
 		    this.totalSlots = light + med + heavy;
 	    }
 		
+
 		@Override
 		public String toString(){
 			String toString = "Job Title:"+this.jobTitle
@@ -67,6 +71,7 @@ public class Job implements Serializable {
 			                 + "Heavy slots:" +this.heavySlots;
 			return toString;
 		}
+		
 		/**
 		*Getter for job title.
 		*/
@@ -80,6 +85,7 @@ public class Job implements Serializable {
         public void setJobTitle(String theJobTitle){
             this.jobTitle = theJobTitle;
         }		
+        
 		/**
 		 * Getter for start date.
 		 * @return Returns startDate.
@@ -106,6 +112,15 @@ public class Job implements Serializable {
 		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
+		
+		public String getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(String endDate) {
+			this.endDate = endDate;
+		}
+		
 		/**
 		 * Getter for duration.
 		 * @return Returns String endDate.
