@@ -25,6 +25,7 @@ public class ParkManager extends AbstractUser
 	
 	/*
 	 * Prompts user for details of the job and creates a new job with the given details
+	 * U1
 	 */
 	public void addJob()
 	{
@@ -63,21 +64,23 @@ public class ParkManager extends AbstractUser
 		
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
-		
-		//Job newJob = new Job(startDate, startTime, duration, this.parkName, this.toString(), description, lightSlots, medSlots, heavySlots);
+		//(String jobTitle, String start, String time, String endDate, String dur, String loc, String parkMan, String descript, int light, int med, int heavy)
+		Job newJob = new Job("Stand-in title", startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
 		//add to job list
+		IODriver.calendar.addJobToList(newJob);
 		System.out.println("\nJob Added! Review Job Details:\n");
-		//System.out.println(newJob.toString());
+		System.out.println(newJob.toString());
 		
 		//Print menu of options 
-		//jobDetailsMenu(newJob);
+		jobDetailsMenu(newJob);
 		
 	}
 	
 	public void jobDetailsMenu(Job theJob) {
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
-				+ "2) Cancel job\n "
+				+ "2) Cancel job\n " 
+				+ "3) View signed-up volunteers\n"
 				+ "3) Exit " );
 		String response = IODriver.input.next();
 		
@@ -86,13 +89,19 @@ public class ParkManager extends AbstractUser
 			break;
 		case "2": cancelJob(theJob);
 			break;
-		case "3": //Do nothing to go back to home menu
+		case "3": 
+			break;
+		case "4"://Do nothing to go back to home menu
 			break;
 		default: jobDetailsMenu(theJob); //Invalid response. Try again.
 			break;
 		}
 	}
 	
+	/*
+	 * Cancel a job (Delete it from the list of jobs)
+	 * U2
+	 */
 	public void cancelJob(Job theJob) {
 		//find job in job list
 		//show details of job
@@ -100,6 +109,10 @@ public class ParkManager extends AbstractUser
 		//remove job
 	}
 	
+	/*
+	 * Edit the details of a job
+	 * U3
+	 */
 	public void editJob(Job theJob) {
 		//find job in job list
 		//show details of job
@@ -109,8 +122,20 @@ public class ParkManager extends AbstractUser
 			//show details of job again
 	}
 	
+	/*
+	 * View all the park manager's upcoming jobs
+	 * U8
+	 */
 	public void viewJobs() {
 		//view list of all the park manager's upcoming jobs
+	}
+	
+	/*
+	 * View the volunteers signed up for my job
+	 * U9
+	 */
+	public void viewEnrolledVolunteers(){
+		
 	}
 
 	@Override

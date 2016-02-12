@@ -28,11 +28,16 @@ public class Calendar {
 		String[] start = theJob.getStartDate().split("/");
 		String[] end = theJob.getEndDate().split("/");
 		// check if job is not over 2-days duration
-		if (start[2].equals(end[2]) & Integer.parseInt(start[0]) >= Integer.parseInt(end[0]) 
-										& Integer.parseInt(end[0]) - Integer.parseInt(start[0]) < 3 ) {
+		//if (start[2].equals(end[2]) & Integer.parseInt(start[0]) >= Integer.parseInt(end[0]) 
+										//& Integer.parseInt(end[0]) - Integer.parseInt(start[0]) < 3 ) {
 			jobList.add(theJob);
 			totalPendingJobs++;
-		}
+		//}
+	}
+	
+	public void deleteFromJobList(Job theJob){
+		jobList.remove(theJob);
+		totalPendingJobs--;
 	}
 	
 	/*
