@@ -29,11 +29,14 @@ public class ParkManager extends AbstractUser
 	 */
 	public void addJob()
 	{
-		String startDate, startTime, duration, description;
+		String title, startDate, startTime, duration, description;
 		int lightSlots = 0, medSlots = 0, heavySlots = 0;
 		System.out.println("\nAdd New Job \n");
 		
-		System.out.println("\nStart date (mm/dd/yy): ");
+		System.out.println("Job Title: ");
+		title = IODriver.input.next();
+		
+		System.out.println("Start date (mm/dd/yy): ");
 		startDate = IODriver.input.next();
 		/*
 		 * if (response < currentDate) { 
@@ -41,10 +44,10 @@ public class ParkManager extends AbstractUser
 		 * System.out.println("Start date: /n");
 		 * }
 		 */
-		System.out.println("\nStart time (hh:mm am/pm): "); 
+		System.out.println("Start time (hh:mm am/pm): "); 
 		startTime = IODriver.input.next();
 		
-		System.out.println("\nDuration (1 or 2 days): ");
+		System.out.println("Duration (1 or 2 days): ");
 		duration = IODriver.input.next();
 		/*
 		while (duration != "1" && duration != "2"){
@@ -53,21 +56,23 @@ public class ParkManager extends AbstractUser
 		}
 		*/
 		
-		System.out.println("\nDescription of job: ");
+		System.out.println("Description of job: ");
 		description = IODriver.input.next();
 		
-		System.out.println("\nNumber of light slots: ");
+		System.out.println("Number of light slots: ");
 		lightSlots = IODriver.input.nextInt();
 		
-		System.out.println("\nNumber of medium slots: ");
+		System.out.println("Number of medium slots: ");
 		medSlots = IODriver.input.nextInt();
 		
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
-		//(String jobTitle, String start, String time, String endDate, String dur, String loc, String parkMan, String descript, int light, int med, int heavy)
-		Job newJob = new Job("Stand-in title", startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-		//add to job list
+		
+		//Create new Job object and add to job list
+		Job newJob = new Job(title, startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
 		IODriver.calendar.addJobToList(newJob);
+		
+		//Show confirmation
 		System.out.println("\nJob Added! Review Job Details:\n");
 		System.out.println(newJob.toString());
 		
@@ -80,8 +85,8 @@ public class ParkManager extends AbstractUser
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
 				+ "2) Cancel job\n " 
-				+ "3) View signed-up volunteers\n"
-				+ "3) Exit " );
+				+ "3) View signed-up volunteers\n "
+				+ "4) Exit " );
 		String response = IODriver.input.next();
 		
 		switch (response){
@@ -89,7 +94,7 @@ public class ParkManager extends AbstractUser
 			break;
 		case "2": cancelJob(theJob);
 			break;
-		case "3": 
+		case "3": viewEnrolledVolunteers();
 			break;
 		case "4"://Do nothing to go back to home menu
 			break;
