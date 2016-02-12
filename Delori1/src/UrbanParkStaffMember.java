@@ -13,34 +13,32 @@ import java.util.Scanner;
 public class UrbanParkStaffMember extends AbstractUser {
 
 	protected UserStatus role;
-	public String myFirstName;
-	public String myLastName;
-	public transient Scanner scan;
+	public String fname;
+	public String lname;
+	public Scanner scan;
 	public static ArrayList<String> myNames;
 	public static ArrayList<String> myJobs;
 
-	// extending AbstractUser, so this might not be necessary. 
-//	public UrbanParkStaffMember() {
-//		this("First", "Last");
-//	}
-	
+
 	/*
 	 * Constructs an Urban Park Staff Member.
 	 */
-	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail, UserStatus theRole) {
+	public UrbanParkStaffMember(String theFirstName, String theLastName,
+									String theEmail, UserStatus theRole) {
 		super(theFirstName, theLastName, theEmail);
 		scan = new Scanner(System.in);
 		myNames = new ArrayList<String>();
 		myJobs = new ArrayList<String>();
 		role = theRole;
 	}
-	
+
 	/*
 	 * Console driven menu to select staff member functions.
 	 */
 	public void staffMenu() {
 		int select = -1;
-		System.out.println("Urban Park Staff Member: " + myFirstName + " " + myLastName + "\n");
+		System.out.println("Urban Park Staff Member: " + fname + " "
+				+ lname + "\n");
 		System.out.println("Select from the following:");
 		System.out.println("\t1) Search volunteer by last name.");
 		System.out.println("\t2) View job details.");
@@ -84,7 +82,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public void viewJobDetails() {
 		int jobNumber = -1;
 		System.out.println("View job details:");
-		for(int i = 0; i < myJobs.size(); i++) {
+		for (int i = 0; i < myJobs.size(); i++) {
 			System.out.println(i + 1 + ".) " + myJobs.get(i));
 		}
 		System.out.println("Select job number:");
@@ -97,8 +95,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 			System.out.println("Invalid entry. Try again. Job deets");
 			viewJobDetails();
 		} else {
-		System.out.println(jobNumber);
-		System.out.println(myJobs.get(jobNumber - 1));
+			System.out.println(jobNumber);
+			System.out.println(myJobs.get(jobNumber - 1));
 		}
 	}
 
@@ -106,7 +104,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * Temporary main for tests
 	 */
 	public static void main(String[] args) {
-		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey", "Bear", "looks@trees.com", UserStatus.UPSMEMBER);
+		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
+				"Bear", "looks@trees.com", UserStatus.UPSMEMBER);
 		myNames.add("Robert");
 		myNames.add("Mark");
 		myJobs.add("river clean up");
@@ -116,6 +115,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 
 	/*
 	 * Displays the menu for a UP staff member.
+	 * 
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
@@ -123,9 +123,10 @@ public class UrbanParkStaffMember extends AbstractUser {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/*
 	 * Retrieves the user's role.
+	 * 
 	 * @see AbstractUser#getRole()
 	 */
 	public UserStatus getRole() {
@@ -138,5 +139,5 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public void setRole(UserStatus role) {
 		this.role = role;
 	}
-	
+
 }

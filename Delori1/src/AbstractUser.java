@@ -83,23 +83,6 @@ public abstract class AbstractUser implements Serializable {
 	}
 
 
-	/*
-	 * Custom deserialization is needed.
-	 */
-	private void readObject(ObjectInputStream aStream) throws IOException, ClassNotFoundException {
-		aStream.defaultReadObject();
-		//manually deserialize and init superclass
-		//String winningParty = (String)aStream.readObject();
-		//init(winningParty);
-	}
 
-	/*
-	 * Custom serialization is needed.
-	 */
-	private void writeObject(ObjectOutputStream aStream) throws IOException {
-		aStream.defaultWriteObject();
-		//manually serialize superclass
-		//aStream.writeObject(getWinningParty());
-	}
 	
 }
