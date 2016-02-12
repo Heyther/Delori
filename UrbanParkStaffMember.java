@@ -15,7 +15,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	protected UserStatus role;
 	public String myFirstName;
 	public String myLastName;
-	public Scanner scan;
+	public transient Scanner scan;
 	public static ArrayList<String> myNames;
 	public static ArrayList<String> myJobs;
 

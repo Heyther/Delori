@@ -12,7 +12,7 @@ public class Volunteer extends AbstractUser  {
 	
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-	public Scanner scanner = new Scanner(System.in);
+	public transient Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
