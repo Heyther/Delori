@@ -60,6 +60,13 @@ public abstract class AbstractUser implements Serializable {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
+	
+	/*
+	 * Retrieves user's full name as one string.
+	 */
+	public String getFullName() {
+		return fname + " " +lname;
+	}
 
 	/*
 	 * Retrieves user's email.

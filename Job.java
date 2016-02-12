@@ -59,17 +59,27 @@ public class Job implements Serializable {
 
 		@Override
 		public String toString(){
-			String toString = "Job Title:"+this.jobTitle
-			                 + "Date:"+this.startDate+"\n"
-			                 + "Time:"+ this.startTime +"\n"
-			                 +"Duration:"+ this.duration + "day(s)" +"\n"
-			                 +"Park Manager:"+this.parkManager+ "\n" 
-			                 +"Location:" +this.location+"\n"         
-			                 +"Description:"+this.description+"\n"
-			                 +"Light slots:" +this.lightSlots+"\n"
-			                 + "Medium slots:" +this.mediumSlots+"\n" 
-			                 + "Heavy slots:" +this.heavySlots;
+			String toString = "Job Title: "+this.jobTitle+"\n"
+			                 + "Date: "+this.startDate+"\n"
+			                 + "Time: "+ this.startTime +"\n"
+			                 +"Duration: "+ this.duration + " day(s)" +"\n"
+			                 +"Park Manager: "+this.parkManager+ "\n" 
+			                 +"Location: " +this.location+"\n"         
+			                 +"Description: "+this.description+"\n"
+			                 +"Light slots: "+this.lightSlots+"\n"
+			                 + "Medium slots: "+this.mediumSlots+"\n" 
+			                 + "Heavy slots: "+this.heavySlots;
 			return toString;
+		}
+		
+		public boolean equals(Job other){
+			if (this.jobTitle.equals(other.jobTitle) && this.startDate.equals(other.startDate) 
+					&& this.startTime.equals(other.startTime) && this.location.equals(other.location)){
+				return true;
+			}
+			else
+				return false;
+			
 		}
 		
 		/**
