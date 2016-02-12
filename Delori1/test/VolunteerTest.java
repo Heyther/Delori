@@ -11,7 +11,7 @@ public class VolunteerTest {
 	 */
 	@Before
     public void setUp() {
-		Volunteer vol = new Volunteer("John", "Doe", "dough@gmail.com");
+		Volunteer vol = new Volunteer("John", "Doe", "dough@gmail.com", UserStatus.VOLUNTEER);
 	}
 
 
@@ -20,8 +20,8 @@ public class VolunteerTest {
      */
 	@Test
 	public void testVolunteer() {
-		Volunteer vol1 = new Volunteer("John", "Doe", "dough@gmail.com");
-		assertEquals("Not a volunteer. ", "John", vol1.myFname);
+		Volunteer vol1 = new Volunteer("John", "Doe", "dough@gmail.com", UserStatus.VOLUNTEER);
+		assertEquals("Not a volunteer. ", "John", vol1.getFname());
 	}
 
 
