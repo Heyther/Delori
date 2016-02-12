@@ -12,7 +12,7 @@ public class Volunteer extends AbstractUser  {
 	
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-	public transient Scanner scanner = new Scanner(System.in);
+	public Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
@@ -22,7 +22,7 @@ public class Volunteer extends AbstractUser  {
 		super(theFname, theLname, theEmail);
 		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
-		volunteerMenu();
+		//volunteerMenu();
 		role = theRole;
 	}
 	
@@ -40,16 +40,16 @@ public class Volunteer extends AbstractUser  {
 	public void setRole(UserStatus role) {
 		this.role = role;
 	}
+//
+//	/*
+//	 * Console/menu driven io
+//	 */
+//	public void volunteerMenu() {
+//		
+//	}
 
 	/*
-	 * Console/menu driven io
-	 */
-	public void volunteerMenu() {
-		
-	}
-
-	/*
-	 * View joined jobs specific to a volunteer.
+	 * View joined jobs specific to a volunteer. (U7)
 	 */
 	public void viewEnrolledJobs(ArrayList<Job> theJobList) {
 		StringBuilder result = new StringBuilder();
@@ -68,7 +68,7 @@ public class Volunteer extends AbstractUser  {
 	}
 	
 	/*
-	 * Sign up for a job.
+	 * Sign up for a job. (U6)
 	 */
 	public void signUp(Job theJob) {
 		enrolledJobs.add(theJob);
