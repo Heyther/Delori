@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+import org.omg.Messaging.SyncScopeHelper;
 
 /* 
  * 
@@ -11,12 +14,14 @@ public class ParkManager extends AbstractUser
 	public String parkName;
 	public String parkAddress;
 	public String parkCity;
+	public ArrayList<Job> jobsManaging;
 	
 	public ParkManager(String theFname, String theLname, String theEmail, String thePark, UserStatus theRole)
 	{
 		super(theFname, theLname, theEmail);
 		this.parkName = thePark;
 		role = theRole;
+		jobsManaging = new ArrayList<Job>();
 	}
 	
 	public String toString()
@@ -72,6 +77,7 @@ public class ParkManager extends AbstractUser
 		//Create new Job object and add to job list
 		Job newJob = new Job(title, startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
 		IODriver.calendar.addJobToList(newJob);
+		this.jobsManaging.add(newJob);
 		
 		//Show confirmation
 		System.out.println("\nJob Added! Review Job Details:\n");
@@ -79,6 +85,10 @@ public class ParkManager extends AbstractUser
 		
 		//Print menu of options 
 		jobDetailsMenu(newJob);
+		
+	}
+	
+	public void viewJobDetails(){
 		
 	}
 	
@@ -95,7 +105,7 @@ public class ParkManager extends AbstractUser
 			break;
 		case "2": cancelJob(theJob);
 			break;
-		case "3": viewEnrolledVolunteers();
+		case "3": viewEnrolledVolunteers(theJob);
 			break;
 		case "4"://Do nothing to go back to home menu
 			break;
@@ -109,10 +119,21 @@ public class ParkManager extends AbstractUser
 	 * U2
 	 */
 	public void cancelJob(Job theJob) {
-		//find job in job list
-		//show details of job
-		//ask for confirmation 
-		//remove job
+		System.out.println("Are you sure you want to cancel this job?");
+		System.out.println(" 1) Yes, cancel the job. \n 2) No, keep the job \n");
+		String response = IODriver.input.next();
+		switch (response){
+		case "1": 
+			this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
+			//delete job from main job list
+			break;
+		case "2": 
+			jobDetailsMenu(theJob); //Print options again
+			break;
+		default: 
+			System.out.println("Invalid input. Please type 1 or 2. ");
+			break;
+		}
 	}
 	
 	/*
@@ -120,28 +141,100 @@ public class ParkManager extends AbstractUser
 	 * U3
 	 */
 	public void editJob(Job theJob) {
-		//find job in job list
-		//show details of job
-		//while user does not exit
-			//ask which detail should be edited
-			//ask for new input and change the value of the correct field
-			//show details of job again
+		System.out.println("Which detail would you like to edit?");
+		System.out.println(" 1) Job Title: " + "\n"
+					         +" 2) Date " + "\n"
+					         +" 3) Time " + "\n"
+					         +" 4) Duration " + "\n"        
+					         +" 5) Description "+"\n"
+					         +" 6) Light slots "+"\n"
+					         +" 7) Medium slots "+"\n" 
+					         +" 8) Heavy slots "+"\n"
+					         +" 9) Done editing ");
+		String response = IODriver.input.next();
+		String newValue;
+		switch (response){
+		case "1":
+			System.out.println("Enter new Job Title: ");
+			theJob.setJobTitle(IODriver.input.next());
+			System.out.println("Job Title has been changed");
+			editJob(theJob);
+			break;
+		case "2":
+			System.out.println("Enter new Date: ");
+			theJob.setStartDate(IODriver.input.next());
+			System.out.println("Start Date has been changed");
+			editJob(theJob);
+			break;
+		case "3":
+			System.out.println("Enter new Time: ");
+			theJob.setStartTime(IODriver.input.next());
+			System.out.println("Time has been changed");
+			editJob(theJob);
+			break;
+		case "4":
+			System.out.println("Enter new Duration: ");
+			theJob.setDuration(IODriver.input.next());
+			System.out.println("Duration has been changed");
+			editJob(theJob);
+			break;
+		case "5":
+			System.out.println("Enter new Description: ");
+			theJob.setDescription(IODriver.input.next());
+			System.out.println("Description has been changed");
+			editJob(theJob);
+			break;
+		case "6":
+			System.out.println("Enter new number of Light Slots: ");
+			theJob.setLightSlots(IODriver.input.nextInt());
+			System.out.println("Number of Light Slots has been changed");
+			editJob(theJob);
+			break;
+		case "7":
+			System.out.println("Enter new number of Medium Slots: ");
+			theJob.setMediumSlots(IODriver.input.nextInt());
+			System.out.println("Number of Medium Slots has been changed");
+			editJob(theJob);
+			break;
+		case "8":
+			System.out.println("Enter new number of Heavy Slots: ");
+			theJob.setHeavySlots(IODriver.input.nextInt());
+			System.out.println("Number of Heavy Slots has been changed");
+			editJob(theJob);
+			break;
+		case "9": 
+			System.out.println("Review Job Details: \n");
+			System.out.println(theJob.toString());
+			jobDetailsMenu(theJob);
+			break;
+		default:
+			System.out.println("Invalid input. Please type a number 1-9.");
+			editJob(theJob);
+			break;	
+		}
 	}
 	
 	/*
 	 * View all the park manager's upcoming jobs
 	 * U8
 	 */
-	public void viewJobs() {
+	public void viewJobsManaged() {
 		//view list of all the park manager's upcoming jobs
+		int i;
+		for (i = 0; i < this.jobsManaging.size(); i++){
+			System.out.println(i+1);
+			System.out.println(this.jobsManaging.get(i));
+		}
 	}
 	
 	/*
 	 * View the volunteers signed up for my job
 	 * U9
 	 */
-	public void viewEnrolledVolunteers(){
-		
+	public void viewEnrolledVolunteers(Job theJob){
+		//Find the job in the job list
+		//get the list of volunteers
+		//print out each volunteer and whether they are signed up for light, med, or heavy
 	}
 
 	@Override

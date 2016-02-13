@@ -133,7 +133,7 @@ public class IODriver {
 		String response = this.input.next();
 		
 		switch (response){
-		case "1": manager.viewJobs();
+		case "1": manager.viewJobsManaged();
 			break;
 		case "2": manager.addJob();
 			break;
