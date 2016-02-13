@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -118,7 +119,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder userDisplayMenu() {
+	public StringBuilder usersHomeMenu() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,6 +138,28 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public void setRole(UserStatus role) {
 		this.role = role;
+	}
+	
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
+	
+	/*
+	 * Checks if the object is-a Urban Park Staff Member.
+	 * @see AbstractUser#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject){
+		if (super.equals(theObject)) {
+			UrbanParkStaffMember v = (UrbanParkStaffMember) theObject;
+			if (getRole().equals(v.getRole())) { return true; };
+		}
+		return false;
 	}
 
 }

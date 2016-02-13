@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -67,6 +68,7 @@ public class Volunteer extends AbstractUser  {
 		enrolledJobs.remove(theJob);
 	}
 	
+	
 	/*
 	 * Sign up for a job. (U6)
 	 */
@@ -74,18 +76,41 @@ public class Volunteer extends AbstractUser  {
 		enrolledJobs.add(theJob);
 	}
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
+	
+	/*
+	 * Checks if the object is-a volunteer.
+	 * @see AbstractUser#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject){
+		if (super.equals(theObject)) {
+			Volunteer v = (Volunteer) theObject;
+			if (getRole().equals(v.getRole())) { return true; };
+		}
+		return false;
+	}
+	
 	/*
 	 * Displays the menu for a volunteer.
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder userDisplayMenu() {
+	public StringBuilder usersHomeMenu() {
 		StringBuilder greetingAndMenu = new StringBuilder();
 		greetingAndMenu.append("Welcome, " + super.fname + " " + super.lname + "!"
 				+ "\nPlease select from the options below...");
 		return greetingAndMenu;
 	}
 	
-
+	
+	
 	
 }

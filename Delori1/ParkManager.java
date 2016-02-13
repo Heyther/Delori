@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.omg.Messaging.SyncScopeHelper;
 
@@ -76,7 +77,7 @@ public class ParkManager extends AbstractUser
 		
 		//Create new Job object and add to job list
 		Job newJob = new Job(title, startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-		IODriver.calendar.addJobToList(newJob);
+		//IODriver.calendar.addJobToList(newJob);
 		this.jobsManaging.add(newJob);
 		
 		//Show confirmation
@@ -232,9 +233,33 @@ public class ParkManager extends AbstractUser
 		theJob.printVolunteers();
 	}
 
+	/*
+	 * Park Manager's display menu.
+	 * 
+	 * @see AbstractUser#userDisplayMenu()
+	 */
 	@Override
-	public StringBuilder userDisplayMenu() {
-		// TODO Auto-generated method stub
+	public StringBuilder usersHomeMenu() {
+//		//System.out.println(manager.toString() + " [Park Manager]");
+//		System.out.println("Please type a number. \n"
+//				+ "1) View my upcoming jobs \n"
+//				+ "2) Add new job \n"
+//				+ "3) Edit or cancel a job \n"
+//				+ "4) Exit ");
+//		String response = this.input.next();
+//		
+//		switch (response){
+//		//case "1": manager.viewJobs();
+//			//break;
+//		case "2": manager.addJob();
+//			break;
+//		case "3": 
+//			break;
+//		case "4": quit = true;
+//			break; 
+//		default: parkManagerMenu(manager);
+//			break;
+//		}
 		return null;
 	}
 	
@@ -253,4 +278,25 @@ public class ParkManager extends AbstractUser
 		this.role = role;
 	}
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
+	
+	/*
+	 * Checks if the object is-a Park Manager.
+	 * @see AbstractUser#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject){
+		if (super.equals(theObject)) {
+			ParkManager v = (ParkManager) theObject;
+			if (getRole().equals(v.getRole())) { return true; };
+		}
+		return false;
+	}
 }

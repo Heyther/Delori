@@ -1,7 +1,5 @@
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Represents a user.
@@ -12,7 +10,7 @@ import java.io.Serializable;
 public abstract class AbstractUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	protected String fname, lname, email; // maybe necessary?
+	protected String fname, lname, email;
 
 	/*
 	 * Constructs an instance of a user
@@ -23,15 +21,14 @@ public abstract class AbstractUser implements Serializable {
 		this.email = theEmail;
 	}
 
-	/* 
-	 * Displays a menu with options for a user.
-	 */
-	public abstract StringBuilder userDisplayMenu();
+	// Displays a menu with options for a user.
+	public abstract StringBuilder usersHomeMenu();
 	
-	/*
-	 * Retrieves the role of the user.
-	 */
+	// Retrieves the role of the user.
 	public abstract UserStatus getRole();
+	
+	// Retrieves all upcoming jobs.
+	//public abstract StringBuilder upcomingJobsMenu();
 	
 	/*
 	 * Retrieves user's first name.
@@ -82,7 +79,32 @@ public abstract class AbstractUser implements Serializable {
 		this.email = email;
 	}
 
+	/*
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(fname, lname, email);
+	}
 
+	/*
+	 * Checks if the object is an abstractUser.
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject) {
+		if (this == theObject) return true;
+		if (theObject == null) return false;
+		if (getClass() != theObject.getClass()) return false;
+		
+		AbstractUser other = (AbstractUser) theObject;
+		if (fname.equals(other.fname) && lname.equals(other.lname)
+				&& email.equals(other.email)) {
+			return true;
+		}
+		return false;
+		
+	}
 
-	
 }
