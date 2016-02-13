@@ -184,7 +184,7 @@ public class IODriver {
 		io.greetingAndLogin();
 		
 		ParkManager testParkMan = new ParkManager("Mary", "Thompson",
-				"mthom@gmail.com", "Green Park", UserStatus.PARKMANAGER);
+				"mthom@gmail.com", "Green Park");
 
 		// Keep running menu until user chooses to exit
 //		while (!io.quit) {
