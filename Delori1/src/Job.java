@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -24,6 +25,9 @@ public class Job implements Serializable {
 		int mediumSlots;
 		int heavySlots;
 		int totalSlots;
+		ArrayList<Volunteer> lightVolunteers;
+		ArrayList<Volunteer> mediumVolunteers;
+		ArrayList<Volunteer> heavyVolunteers;
 		
 
 		/**
@@ -54,6 +58,10 @@ public class Job implements Serializable {
 		    this.mediumSlots = med;
 		    this.heavySlots = heavy;
 		    this.totalSlots = light + med + heavy;
+		    
+		    lightVolunteers = new ArrayList<Volunteer>();
+		    mediumVolunteers = new ArrayList<Volunteer>();
+		    heavyVolunteers = new ArrayList<Volunteer>();   
 	    }
 		
 
@@ -74,12 +82,13 @@ public class Job implements Serializable {
 		
 		public boolean equals(Job other){
 			if (this.jobTitle.equals(other.jobTitle) && this.startDate.equals(other.startDate) 
-					&& this.startTime.equals(other.startTime) && this.location.equals(other.location)){
+					&& this.startTime.equals(other.startTime) && this.location.equals(other.location) 
+					&& this.duration.equals(other.duration) && this.location.equals(other.location) && 
+					this.lightSlots == other.lightSlots && this.mediumSlots == other.mediumSlots && this.heavySlots == other.heavySlots){
 				return true;
 			}
 			else
 				return false;
-			
 		}
 		
 		/**
@@ -243,6 +252,87 @@ public class Job implements Serializable {
 		 */
 		public void setTotalSlots(int totalSlots) {
 			this.totalSlots = totalSlots;
+		}
+		
+		/*
+		 * Returns an array list of all Volunteer objects by combining the lists of 
+		 * light, medium, and heavy workload volunteers
+		 */
+		public ArrayList<Volunteer> getVolunteers()
+		{
+			ArrayList<Volunteer> allVolunteers = new ArrayList<Volunteer>();
+			allVolunteers.addAll(lightVolunteers);
+			allVolunteers.addAll(mediumVolunteers);
+			allVolunteers.addAll(heavyVolunteers);
+			return allVolunteers;
+		}
+		
+		/*
+		 * Prints names of all volunteers who have signed up for this job to the console
+		 */
+		public void printVolunteers()
+		{
+			int i;
+			System.out.println("Light Workload:");
+			for (i = 0; i < lightVolunteers.size(); i++){
+				System.out.println(lightVolunteers.get(i).getFullName());
+			}
+			
+			System.out.println("Medium Workload:");
+			for (i = 0; i < mediumVolunteers.size(); i++){
+				System.out.println(mediumVolunteers.get(i).getFullName());
+			}
+			
+			System.out.println("Heavy Workload:");
+			for (i = 0; i < heavyVolunteers.size(); i++){
+				System.out.println(heavyVolunteers.get(i).getFullName());
+			}
+		}
+		
+		/*
+		 * Accepts a Volunteer and a workload and adds the volunteer to the appropriate list of volunteers
+		 * Decrements number of available slots of that workload
+		 */
+		public void signUpVolunteer(Volunteer theVolunteer, String workload){
+			switch (workload){
+			case "light":
+				lightVolunteers.add(theVolunteer);
+				lightSlots--;
+				break;
+			case "medium":
+				mediumVolunteers.add(theVolunteer);
+				mediumSlots--;
+				break;
+			case "heavy":
+				heavyVolunteers.add(theVolunteer);
+				heavySlots--;
+				break;
+			default: 
+				break;
+			}
+		}
+		
+		/*
+		 * Accepts a volunteer and a workload and deletes the volunteer from the appropriate list of volunteers
+		 * Increments number of available slots of that workload
+		 */
+		public void cancelVolunteer(Volunteer theVolunteer, String workload){
+			switch (workload){
+			case "light":
+				lightVolunteers.remove(theVolunteer);
+				lightSlots++;
+				break;
+			case "medium":
+				mediumVolunteers.remove(theVolunteer);
+				mediumSlots++;
+				break;
+			case "heavy":
+				heavyVolunteers.remove(theVolunteer);
+				heavySlots++;
+				break;
+			default: 
+				break;
+			}
 		}
 		
 		

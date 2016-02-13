@@ -88,10 +88,6 @@ public class ParkManager extends AbstractUser
 		
 	}
 	
-	public void viewJobDetails(){
-		
-	}
-	
 	public void jobDetailsMenu(Job theJob) {
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
@@ -229,12 +225,11 @@ public class ParkManager extends AbstractUser
 	
 	/*
 	 * View the volunteers signed up for my job
+	 * As is, this method only calls another method so is redundant
 	 * U9
 	 */
 	public void viewEnrolledVolunteers(Job theJob){
-		//Find the job in the job list
-		//get the list of volunteers
-		//print out each volunteer and whether they are signed up for light, med, or heavy
+		theJob.printVolunteers();
 	}
 
 	@Override
