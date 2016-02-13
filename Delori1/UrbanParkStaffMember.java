@@ -23,13 +23,12 @@ public class UrbanParkStaffMember extends AbstractUser {
 	/*
 	 * Constructs an Urban Park Staff Member.
 	 */
-	public UrbanParkStaffMember(String theFirstName, String theLastName,
-									String theEmail, UserStatus theRole) {
+	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail) {
 		super(theFirstName, theLastName, theEmail);
 		scan = new Scanner(System.in);
 		myNames = new ArrayList<String>();
 		myJobs = new ArrayList<String>();
-		role = theRole;
+		role = UserStatus.UPSMEMBER;
 	}
 
 	/*
@@ -105,7 +104,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public static void main(String[] args) {
 		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
-				"Bear", "looks@trees.com", UserStatus.UPSMEMBER);
+				"Bear", "looks@trees.com");
 		myNames.add("Robert");
 		myNames.add("Mark");
 		myJobs.add("river clean up");

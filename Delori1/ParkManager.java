@@ -16,11 +16,11 @@ public class ParkManager extends AbstractUser
 	public String parkCity;
 	public ArrayList<Job> jobsManaging;
 	
-	public ParkManager(String theFname, String theLname, String theEmail, String thePark, UserStatus theRole)
+	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
 	{
 		super(theFname, theLname, theEmail);
 		this.parkName = thePark;
-		role = theRole;
+		role = UserStatus.PARKMANAGER;
 		jobsManaging = new ArrayList<Job>();
 	}
 	

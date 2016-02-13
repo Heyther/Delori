@@ -107,12 +107,12 @@ public class IODriver {
 		String response = input.next();
 		// identify user by email through serialization
 		
-//		ArrayList<String> r = new ArrayList<String>();
-//		r.add("Title...");
-//		r.add("Option 1..");
-//		r.add("Option 2...........");
-//		r.add("Option 3");
-//		menuBox(r);
+		ArrayList<String> r = new ArrayList<String>();
+		r.add("Title...");
+		r.add("Option 1..");
+		r.add("Option 2...........");
+		r.add("Option 3");
+		menuBox(r);
 		
 	}
 
@@ -133,8 +133,8 @@ public class IODriver {
 		String response = this.input.next();
 		
 		switch (response){
-		case "1": manager.viewJobs();
-			break;
+		//case "1": manager.viewJobs();
+			//break;
 		case "2": manager.addJob();
 			break;
 		case "3": 

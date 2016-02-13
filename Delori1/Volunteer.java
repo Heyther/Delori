@@ -18,12 +18,12 @@ public class Volunteer extends AbstractUser  {
 	/*
 	 * Constructs a volunteer
 	 */
-	public Volunteer(String theFname, String theLname, String theEmail, UserStatus theRole) {
+	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
 		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
 		//volunteerMenu();
-		role = theRole;
+		role = UserStatus.VOLUNTEER;
 	}
 	
 	/*
