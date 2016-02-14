@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Job implements Serializable {
 	
 		private static final long serialVersionUID = -8923477868319938597L;
-		Scanner scan;
+		transient Scanner scan;
 		String jobTitle;
 		String startDate;
 		String startTime;

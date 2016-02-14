@@ -1,4 +1,7 @@
+
+
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -7,23 +10,28 @@ import java.util.Scanner;
  * @author Heather
  * @date 
  */
-@SuppressWarnings("serial")
+
 public class Volunteer extends AbstractUser  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-	public Scanner scanner = new Scanner(System.in);
+
+	public transient Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
 	 * Constructs a volunteer
 	 */
-	public Volunteer(String theFname, String theLname, String theEmail, UserStatus theRole) {
+	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
 		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
 		//volunteerMenu();
-		role = theRole;
+		role = UserStatus.VOLUNTEER;
 	}
 	
 	/*
@@ -67,6 +75,7 @@ public class Volunteer extends AbstractUser  {
 		enrolledJobs.remove(theJob);
 	}
 	
+	
 	/*
 	 * Sign up for a job. (U6)
 	 */
@@ -74,18 +83,47 @@ public class Volunteer extends AbstractUser  {
 		enrolledJobs.add(theJob);
 	}
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
+	
+	/*
+	 * Checks if the object is-a volunteer.
+	 * @see AbstractUser#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject){
+		if (super.equals(theObject)) {
+			Volunteer v = (Volunteer) theObject;
+			if (getRole().equals(v.getRole())) { return true; };
+		}
+		return false;
+	}
+	
 	/*
 	 * Displays the menu for a volunteer.
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder userDisplayMenu() {
+	public StringBuilder usersHomeMenu() {
 		StringBuilder greetingAndMenu = new StringBuilder();
 		greetingAndMenu.append("Welcome, " + super.fname + " " + super.lname + "!"
 				+ "\nPlease select from the options below...");
 		return greetingAndMenu;
 	}
 	
-
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return getLname() + ", " + getFname() + ": Email : " + getEmail();
+	}
+	
 	
 }
