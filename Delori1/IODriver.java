@@ -16,7 +16,7 @@ public class IODriver {
 	public static Scanner input;
 	Calendar calendar;
 	AbstractUser currentUser;
-	Data storedData;
+	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
 	String response;

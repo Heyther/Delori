@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Console driven i/o Urban Park Staff Member.
@@ -13,20 +14,14 @@ import java.util.Objects;
 
 public class UrbanParkStaffMember extends AbstractUser {
 
-<<<<<<< HEAD
-	private Data data;
-	protected UserStatus role;
-	public static ArrayList<Volunteer> myNames;
-	public static ArrayList<Job> myJobs;
-=======
+
 	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
 	public String fname;
 	public String lname;
 	public transient Scanner scan;
-	public static ArrayList<String> myNames;
-	public static ArrayList<String> myJobs;
->>>>>>> hdbr4
+	public static ArrayList<Volunteer> myNames;
+	public static ArrayList<Job> myJobs;
 
 
 	/*
@@ -34,19 +29,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail) {
 		super(theFirstName, theLastName, theEmail);
-		//myNames = new ArrayList<String>();
-		//myJobs = new ArrayList<String>();
 		role = UserStatus.UPSMEMBER;
-//			try {
-//				data = new Data();
-//			} catch (ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		
 		
 	}
 
@@ -84,7 +67,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 		String name;
 		System.out.println("Volunteer Search:");
 		System.out.println("Enter volunteers last name:");
-		name = IODriver.input.next();
+		name = scan.next();
+		myNames = IODriver.storedData.searchVolunteerByLname(name);
 		System.out.println(name);
 		if (myNames.contains(name)) {
 			System.out.println(name);
@@ -98,7 +82,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * Select job from job list and view the job details.
 	 */
 	public void viewJobDetails() {
-		myJobs = data.getJobs();
+		myJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		int jobNumber = -1;
 		System.out.println("View job details:");
 		for (int i = 0; i < myJobs.size(); i++) {
@@ -106,7 +90,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 		}
 		System.out.println("Select job number:");
 		try {
-			jobNumber = IODriver.input.nextInt();
+			jobNumber = scan.nextInt();
 		} catch (InputMismatchException e) {
 			IODriver.input.next();
 		}

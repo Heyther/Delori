@@ -165,11 +165,4 @@ public class Data {
 		aStream.close();
 	}
 	
-	/*
-	 * Main to for single use to instantiate data.
-	 */
-	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		Data data = new Data();
-		data.initializeData();
-	}
 }
