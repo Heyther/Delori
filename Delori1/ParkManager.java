@@ -243,28 +243,20 @@ public class ParkManager extends AbstractUser
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder usersHomeMenu() {
-//		//System.out.println(manager.toString() + " [Park Manager]");
-//		System.out.println("Please type a number. \n"
+	public ArrayList<String> usersHomeMenu() {
+		ArrayList<String> result = new ArrayList<String>();
+		result.add("Welcome, " + super.fname + " " + super.lname + "!"
+					+ " Please select from the options below...");
+		result.add("1. View upcoming jobs");
+		result.add("2. Add a job");
+		result.add("3. Exit");
+			
+		return result;
+
 //				+ "1) View my upcoming jobs \n"
 //				+ "2) Add new job \n"
 //				+ "3) Edit or cancel a job \n"
 //				+ "4) Exit ");
-//		String response = this.input.next();
-//		
-//		switch (response){
-//		//case "1": manager.viewJobs();
-//			//break;
-//		case "2": manager.addJob();
-//			break;
-//		case "3": 
-//			break;
-//		case "4": quit = true;
-//			break; 
-//		default: parkManagerMenu(manager);
-//			break;
-//		}
-		return null;
 	}
 	
 	/*

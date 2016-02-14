@@ -1,1 +1,12 @@
+<<<<<<< HEAD
 /.settings/
+=======
+/.classpath
+/.project
+/.settings/
+/IODriver$1.class
+/MenuOptions.class
+/urbanParkData.ser
+/DataTest.class
+/UrbanParkStaffMemberTest.class
+>>>>>>> hdbr4

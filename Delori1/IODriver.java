@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 
 public class IODriver {
-
+	
 	public static Scanner input;
 	Calendar calendar;
 	AbstractUser currentUser;
@@ -37,13 +37,19 @@ public class IODriver {
 	}
 
 	private void runProgram() {
-		//while (!quitProgram) {
+		while (!quitProgram) {
 			login();
-			printMenu(currentUser);
-		//}
+			MenuOptions selection = null;
+			while (selection != MenuOptions.OPTION_SEVEN) {
+				menuBox(currentUser.usersHomeMenu());
+				response = input.nextLine();
+			}
+			
+		}
 		System.out.println("\nGoodbye");
 	}
 
+	
 	/*
 	 * Asks the user to enter an email address and returns the user object 
 	 * associated with that email
