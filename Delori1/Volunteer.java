@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -13,7 +15,6 @@ public class Volunteer extends AbstractUser  {
 	
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-	public Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
