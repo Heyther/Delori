@@ -66,7 +66,7 @@ public class IODriver {
 			case ADD_A_JOB:
 			case VIEW_ALL_VOL:
 			case VIEW_UPCOMING_JOBS:  
-				System.out.println("Working for the man :)");
+				System.out.println("");
 				break;
 	
 			case EXIT:    
@@ -75,10 +75,10 @@ public class IODriver {
 	
 			case SEARCH_VOL_LASTNAME:
 			case VIEW_JOB_DETAIL:    
-				System.out.println("Ahh, the weekend ...");
+				System.out.println("");
 				break;
 	
-			default: System.out.println("What day is it?");;
+			default: System.out.println("");
 		}
 	}
 	
