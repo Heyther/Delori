@@ -110,16 +110,12 @@ public class Volunteer extends AbstractUser  {
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public ArrayList<String> usersHomeMenu() {
-		StringBuilder greetingAndMenu = new StringBuilder();
-		greetingAndMenu.append("");
-		
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("Welcome, " + super.fname + " " + super.lname + "!"
-					+ " Please select from the options below...");
-		result.add("1. " + MenuOptions.OPTION_ONE);
-		result.add("2. " + MenuOptions.OPTION_TWO);
-		result.add("3. " + MenuOptions.OPTION_SEVEN);
+	public ArrayList<MenuOptions> usersHomeMenu() {
+		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
+		result.add(MenuOptions.OPTION_WELCOME);
+		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
+		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
+		result.add(MenuOptions.EXIT);
 			
 		return result;
 	}

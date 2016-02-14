@@ -1,23 +1,24 @@
 
 public enum MenuOptions {
-	OPTION_ONE("View upcoming jobs"),
-	OPTION_TWO("View enrolled jobs"),
-	OPTION_THREE("View upcoming jobs"),
-	OPTION_FOUR("Add a job"),
-	OPTION_FIVE("View all volunteers"),
-	OPTION_SIX("View upcoming jobs"),
-	OPTION_SEVEN("Exit"),
-	OPTION_EIGHT("Search volunteer by last name"),
-	OPTION_NINE("View job details"),
-	OPTION_TEN(""),
-	OPTION_ELEVEN(""),
-	OPTION_TWELVE(""),
-	OPTION_THIRTEEN(""),
-	OPTION_FOURTEEN(""),
-	OPTION_FIFTEEN(""),
+
+	
+	// User selection options
+	VIEW_ENROLLED_JOBS("View enrolled jobs"),
+	ADD_A_JOB("Add a job"),
+	VIEW_ALL_VOL("View all volunteers"),
+	VIEW_UPCOMING_JOBS("View upcoming jobs"),
+	EXIT("Exit"),
+	SEARCH_VOL_LASTNAME("Search volunteer by last name"),
+	VIEW_JOB_DETAIL("View job details"),
+		
+	// Greetings or Titles
+	OPTION_LOGIN("Login to Urban Parks!"),
+	OPTION_WELCOME("Welcome to Urban Parks!"),
+	OPTION_ENTER_EMAIL("Please, enter your email."),
     ;
 	
 	private final String text;
+
 	
 	// Constructor for enums
 	private MenuOptions(String text) {
