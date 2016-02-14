@@ -8,19 +8,24 @@ import java.util.List;
  * @version 2/13/16
  *
  */
-public class Data implements Serializable {
+public class Data {
 
-	//
-	private static final long serialVersionUID = 1L;
-	private static final String SERIALIZED_FILE = "urbanParkData.ser";
-	private ArrayList<Job> allJobs;
-	private ArrayList<AbstractUser> allUsers;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3014553440474186296L;
+	private static final String SERIALIZED_FILE = "./urbanParkData.ser";
+	private List<Job> allJobs;
+	private List<AbstractUser> allUsers;
 
 	String myDataFile = "urbanParkData.ser";
 	private boolean dataInitialized;
 
-	public Data() throws ClassNotFoundException, IOException {
+	public Data() throws ClassNotFoundException, IOException  {
 		dataInitialized = false;
+		allUsers = new ArrayList<AbstractUser>();
+		allJobs = new ArrayList<Job>();
 		loadData();
 	}
 
@@ -50,7 +55,7 @@ public class Data implements Serializable {
 	/*
 	 * Retrieve all users in file.
 	 */
-	public ArrayList<AbstractUser> getUsers() {
+	public List<AbstractUser> getUsers() {
 		return allUsers;
 	}
 	
@@ -71,7 +76,7 @@ public class Data implements Serializable {
 	// Job data  
 	///////////////
 	
-	public ArrayList<Job> getJobs() {
+	public List<Job> getJobs() {
 		return allJobs;
 	}
 	
@@ -87,7 +92,8 @@ public class Data implements Serializable {
 	///////////////
 	
 	public void initializeData() throws IOException {
-		addUser(new ParkManager("Mary", "Thompson", "m@gmail.com", "Green Park"));
+		ParkManager m = new ParkManager("Mary", "Thompson", "m@gmail.com", "Green Park");
+		addUser(m);
 		addUser(new ParkManager("Smith", "Smithers", "s@gmail.com", "Evergreen Park"));
 		addUser(new UrbanParkStaffMember("Joe", "Fogel", "j@gmail.com"));
 		addUser(new UrbanParkStaffMember("Tim", "Sitz", "t@gmail.com"));
@@ -95,7 +101,11 @@ public class Data implements Serializable {
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		
 		addJob(new Job("Title", "1/1/2016", "1:00pm", "1/2/2016", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
-		serializeObject(getUsers(), getJobs());
+		
+		System.out.println(m.getFname());
+		System.out.println(m.getEmail());
+		
+		serializeObject();
 	}
 	
 	/*
@@ -120,14 +130,14 @@ public class Data implements Serializable {
 	public void loadData() throws ClassNotFoundException, IOException {
 		// if no file exists (for initial set up purposes)
 		if (!dataInitialized) {
-			allUsers = new ArrayList<AbstractUser>();
-			allJobs = new ArrayList<Job>();
 			initializeData();
 		}
-		// load existing system's database
-		ArrayList<Object> allData = readObject(); // retrieve saved data
-		allUsers.add((AbstractUser) allData.get(0));
-		allJobs.add((Job) allData.get(1));
+		readObject();
+		
+//		// load existing system's database
+//		ArrayList<Object> allData = readObject(); // retrieve saved data
+//		allUsers.addAll((ArrayList<AbstractUser>) allData.get(0));
+//		allJobs.add((Job) allData.get(1));
 			
 	}
 	
@@ -135,22 +145,22 @@ public class Data implements Serializable {
 	/*
 	 * De-serialization of data and read from file.
 	 */
-	public ArrayList<Object> readObject() throws IOException, ClassNotFoundException {
-		ArrayList<Object> accuulatedData = new ArrayList<Object>();
+	@SuppressWarnings("unchecked")
+	public void readObject() throws IOException, ClassNotFoundException {
 		ObjectInputStream aStream = new  ObjectInputStream(new FileInputStream(SERIALIZED_FILE));
-		accuulatedData.add(aStream.readObject());
-		accuulatedData.add(aStream.readObject());
+		
+		allUsers = (ArrayList<AbstractUser>) aStream.readObject();
+		allJobs = (ArrayList<Job>) aStream.readObject();
 		aStream.close();
-		return accuulatedData;
 	}
 
 	/*
 	 * Serialization of data and store in file.
 	 */
-	public void serializeObject(ArrayList<AbstractUser> theAllUsers, ArrayList<Job> theAllJobs) throws IOException {
+	public void serializeObject() throws IOException {
 		ObjectOutputStream aStream = new ObjectOutputStream(new FileOutputStream(SERIALIZED_FILE));
-		aStream.writeObject(theAllUsers);
-		aStream.writeObject(theAllJobs);
+		aStream.writeObject(allUsers);
+		aStream.writeObject(allJobs);
 		aStream.flush();
 		aStream.close();
 	}

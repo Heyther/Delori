@@ -8,9 +8,13 @@ import org.omg.Messaging.SyncScopeHelper;
  * @author: Luciana
  * @date
  */
-@SuppressWarnings("serial")
+
 public class ParkManager extends AbstractUser 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3323557037867953268L;
 	protected UserStatus role;
 	public String parkName;
 	public String parkAddress;

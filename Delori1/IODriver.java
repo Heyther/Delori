@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -16,40 +17,30 @@ public class IODriver {
 	Calendar calendar;
 	AbstractUser currentUser;
 	Data storedData;
-	boolean quit;
+	static boolean quitProgram;
 	Data jobs, users;
+	String response;
 
+	/*
+	 * Constructs the driver for the program.
+	 */
 	public IODriver() throws ClassNotFoundException, IOException {
+		// loads all the users and jobs data
 		storedData = new Data();
-		startupData();	// loads all the users and jobs data
-		greetingAndLogin();
+		calendar = new Calendar(storedData.getUsers(), storedData.getJobs());
+		response = "";
+		currentUser = null;
 		input = new Scanner(System.in);
 		input.useDelimiter("\n");
-		quit = false;
+		quitProgram = false;
+		runProgram();
 	}
 
-	public void greetingAndLogin() {
-		ArrayList<String> greet = new ArrayList<String>() {{
-			add("Welcome to Urban Parks!\n");
-			add("Please, enter your email.\n>");
-		}};
-		menuBox(greet);
-		String response = input.next();
-		AbstractUser currentUser = storedData.getReturningUser(response);
-		login();
-		
-//		ArrayList<String> r = new ArrayList<String>();
-//		r.add("Title...");
-//		r.add("Option 1..");
-//		r.add("Option 2...........");
-//		r.add("Option 3");
-//		menuBox(r);
-
-	}
-
-
-	public void startupData() {
-		calendar = new Calendar(storedData.getJobs(), storedData.getUsers());
+	private void runProgram() {
+		while (!quitProgram) {
+			login();
+		}
+		System.out.println("\nGoodbye");
 	}
 
 	/*
@@ -57,13 +48,22 @@ public class IODriver {
 	 * associated with that email
 	 * If the email is not in the system, it prompts the user again
 	 */
-	public void login(){
-		System.out.println("Enter your email address: ");
-		//Find user in user list with email input.next()
-		//If no such user exists, ask for email again
-		//System.out.println("No account was found with that email address. Please try again. ");
-		//System.out.println("Enter your email address: ");
-		//Return the User object
+	public void login(){		
+		ArrayList<String> greet = new ArrayList<String>() {{
+			add("Welcome to Urban Parks!");
+			add("Please, enter your email.");
+		}};
+		menuBox(greet);
+		System.out.print(">");
+		
+		
+		while (Objects.isNull( currentUser) ) {
+			response = input.nextLine();
+			currentUser = storedData.getReturningUser(response);
+			if (Objects.isNull(currentUser));
+		}
+//		System.out.println(response);
+		currentUser = storedData.getReturningUser(response);
 	}
 
 	/*
@@ -124,16 +124,6 @@ public class IODriver {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		IODriver driver = new IODriver();
-		//driver.greetingAndLogin();
-
-
-
-		// Keep running menu until user chooses to exit
-		//		while (!io.quit) {
-		//			io.printMenu(testParkMan);
-		//			//io.parkManagerMenu(testParkMan);
-		//		}
-		System.out.println("\nGoodbye");
 	}
 
 }

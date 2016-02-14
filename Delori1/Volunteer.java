@@ -8,12 +8,16 @@ import java.util.Scanner;
  * @author Heather
  * @date 
  */
-@SuppressWarnings("serial")
+
 public class Volunteer extends AbstractUser  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-	public Scanner scanner = new Scanner(System.in);
+	public transient Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*

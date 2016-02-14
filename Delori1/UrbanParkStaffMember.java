@@ -10,13 +10,14 @@ import java.util.Scanner;
  * @version 1.1
  *
  */
-@SuppressWarnings("serial")
+
 public class UrbanParkStaffMember extends AbstractUser {
 
+	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
 	public String fname;
 	public String lname;
-	public Scanner scan;
+	public transient Scanner scan;
 	public static ArrayList<String> myNames;
 	public static ArrayList<String> myJobs;
 
