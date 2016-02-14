@@ -37,9 +37,10 @@ public class IODriver {
 	}
 
 	private void runProgram() {
-		while (!quitProgram) {
+		//while (!quitProgram) {
 			login();
-		}
+			printMenu(currentUser);
+		//}
 		System.out.println("\nGoodbye");
 	}
 

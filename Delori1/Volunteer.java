@@ -117,7 +117,13 @@ public class Volunteer extends AbstractUser  {
 		return greetingAndMenu;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return getLname() + ", " + getFname() + ": Email : " + getEmail();
+	}
 	
 	
 }

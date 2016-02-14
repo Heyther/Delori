@@ -19,9 +19,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	protected UserStatus role;
 	public String fname;
 	public String lname;
-	public transient Scanner scan;
-	public static ArrayList<Volunteer> myNames;
-	public static ArrayList<Job> myJobs;
+	
 
 
 	/*
@@ -38,11 +36,12 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public void staffMenu() {
 		int select = -1;
-		System.out.println("Urban Park Staff Member: " + fname + " "
-				+ lname + "\n");
+		System.out.println("Urban Park Staff Member: " + this.getFname() + " "
+				+ this.getLname() + "\n");
 		System.out.println("Select from the following:");
 		System.out.println("\t1) Search volunteer by last name.");
 		System.out.println("\t2) View job details.");
+		System.out.println("\t3) Exit.");
 		System.out.println("Enter item number:");
 		try {
 			select = IODriver.input.nextInt();
@@ -50,13 +49,17 @@ public class UrbanParkStaffMember extends AbstractUser {
 			IODriver.input.next();
 		}
 		System.out.println(select);
-		if (select == 1) {
-			volunteerSearch();
-		} else if (select == 2) {
-			viewJobDetails();
-		} else {
+		switch (select) {
+		case 1: volunteerSearch();
+			break;
+		case 2: viewJobDetails();
+			break;
+		case 3 : ;
+			break;
+		default :
 			System.out.println("Invalid entry. Try again. Menu");
 			staffMenu();
+			break;
 		}
 	}
 
@@ -66,14 +69,21 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public void volunteerSearch() {
 		String name;
 		System.out.println("Volunteer Search:");
-		System.out.println("Enter volunteers last name:");
-		name = scan.next();
-		myNames = IODriver.storedData.searchVolunteerByLname(name);
+		System.out.println("Enter volunteers last name or 'b' to go back:");
+		name = IODriver.input.next();
+		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
 		System.out.println(name);
-		if (myNames.contains(name)) {
-			System.out.println(name);
-		} else {
-			System.out.println("Volunteer not found.");
+		if(volunteers.size() > 0) {
+			for(Volunteer vol: volunteers ) {
+				System.out.println(vol.toString());
+			}
+			staffMenu();
+
+		} else if(name.equals("b")) {
+			staffMenu();
+			
+		}else {
+			System.out.println("Volunteer not found, try again.");
 			volunteerSearch();
 		}
 	}
@@ -82,37 +92,29 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * Select job from job list and view the job details.
 	 */
 	public void viewJobDetails() {
-		myJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
-		int jobNumber = -1;
+		ArrayList<Job> jobs = (ArrayList<Job>) IODriver.storedData.getJobs();
+		int jobNumber = 0;
 		System.out.println("View job details:");
-		for (int i = 0; i < myJobs.size(); i++) {
-			System.out.println(i + 1 + ".) " + myJobs.get(i).getJobTitle());
+		for (int i = 0; i < jobs.size(); i++) {
+			System.out.println(i + 1 + ".) " + jobs.get(i).getJobTitle());
 		}
 		System.out.println("Select job number:");
 		try {
-			jobNumber = scan.nextInt();
+			jobNumber = IODriver.input.nextInt();
 		} catch (InputMismatchException e) {
 			IODriver.input.next();
 		}
-		if (jobNumber <= 0 || jobNumber > myJobs.size()) {
-			System.out.println("Invalid entry. Try again. Job deets");
+		if (jobNumber <= 0 || jobNumber > jobs.size()) {
+			System.out.println("Invalid entry, try again.");
 			viewJobDetails();
 		} else {
-			System.out.println(jobNumber);
-			System.out.println(myJobs.get(jobNumber - 1).toString());
+			System.out.println(jobs.get(jobNumber - 1).toString());
+			staffMenu();
 		}
-	}
-
-	/*
-	 * Temporary main for tests
-	 */
-	public static void main(String[] args) {
-		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
-				"Bear", "looks@trees.com");
 		
-		staff1.staffMenu();
 	}
 
+	
 	/*
 	 * Displays the menu for a UP staff member.
 	 * 
@@ -120,7 +122,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	@Override
 	public StringBuilder usersHomeMenu() {
-		// TODO Auto-generated method stub
+		staffMenu();
 		return null;
 	}
 
@@ -161,5 +163,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 		}
 		return false;
 	}
+
 
 }
