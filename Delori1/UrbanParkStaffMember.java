@@ -13,13 +13,10 @@ import java.util.Scanner;
 
 public class UrbanParkStaffMember extends AbstractUser {
 
+
 	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
-	public String fname;
-	public String lname;
-	public transient Scanner scan;
-	public static ArrayList<String> myNames;
-	public static ArrayList<String> myJobs;
+	
 
 
 	/*
@@ -27,9 +24,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail) {
 		super(theFirstName, theLastName, theEmail);
-		scan = new Scanner(System.in);
-		myNames = new ArrayList<String>();
-		myJobs = new ArrayList<String>();
 		role = UserStatus.UPSMEMBER;
 	}
 
@@ -38,25 +32,28 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public void staffMenu() {
 		int select = -1;
-		System.out.println("Urban Park Staff Member: " + fname + " "
-				+ lname + "\n");
+		System.out.println("Urban Park Staff Member: " + this.getFname() + " "
+				+ this.getLname() + "\n");
 		System.out.println("Select from the following:");
 		System.out.println("\t1) Search volunteer by last name.");
 		System.out.println("\t2) View job details.");
 		System.out.println("Enter item number:");
 		try {
-			select = scan.nextInt();
+			select = IODriver.input.nextInt();
 		} catch (InputMismatchException e) {
-			scan.next();
+			IODriver.input.next();
 		}
-		System.out.println(select);
-		if (select == 1) {
-			volunteerSearch();
-		} else if (select == 2) {
-			viewJobDetails();
-		} else {
+		switch (select) {
+		case 1: volunteerSearch();
+			break;
+		case 2: viewJobDetails();
+			break;
+		case 3 : ;
+			break;
+		default :
 			System.out.println("Invalid entry. Try again. Menu");
 			staffMenu();
+			break;
 		}
 	}
 
@@ -66,13 +63,20 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public void volunteerSearch() {
 		String name;
 		System.out.println("Volunteer Search:");
-		System.out.println("Enter volunteers last name:");
-		name = scan.next();
-		System.out.println(name);
-		if (myNames.contains(name)) {
-			System.out.println(name);
-		} else {
-			System.out.println("Volunteer not found.");
+		System.out.println("Enter volunteers last name or 'b' to go back:");
+		name = IODriver.input.next();
+		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
+		if(volunteers.size() > 0) {
+			for(Volunteer vol: volunteers ) {
+				System.out.println(vol.toString() + "\n");
+			}
+			staffMenu();
+
+		} else if(name.equals("b")) {
+			staffMenu();
+			
+		}else {
+			System.out.println("Volunteer not found, try again.\n");
 			volunteerSearch();
 		}
 	}
@@ -81,26 +85,29 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * Select job from job list and view the job details.
 	 */
 	public void viewJobDetails() {
-		int jobNumber = -1;
+		ArrayList<Job> jobs = (ArrayList<Job>) IODriver.storedData.getJobs();
+		int jobNumber = 0;
 		System.out.println("View job details:");
-		for (int i = 0; i < myJobs.size(); i++) {
-			System.out.println(i + 1 + ".) " + myJobs.get(i));
+		for (int i = 0; i < jobs.size(); i++) {
+			System.out.println("\t" + (i + 1) + ") " + jobs.get(i).jobSummary());
 		}
 		System.out.println("Select job number:");
 		try {
-			jobNumber = scan.nextInt();
+			jobNumber = IODriver.input.nextInt();
 		} catch (InputMismatchException e) {
-			scan.next();
+			IODriver.input.next();
 		}
-		if (jobNumber <= 0 || jobNumber > myJobs.size()) {
-			System.out.println("Invalid entry. Try again. Job deets");
+		if (jobNumber <= 0 || jobNumber > jobs.size()) {
+			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
 		} else {
-			System.out.println(jobNumber);
-			System.out.println(myJobs.get(jobNumber - 1));
+			jobs.get(jobNumber - 1).viewUrbanParkStaffMemberJobMenu();
+			staffMenu();
 		}
+		
 	}
 
+	
 //	/*
 //	 * Temporary main for tests
 //	 */
@@ -114,6 +121,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 //		staff1.staffMenu();
 //	}
 
+	/*
 	/*
 	 * Displays the menu for a UP staff member.
 	 * 
@@ -131,6 +139,11 @@ public class UrbanParkStaffMember extends AbstractUser {
 			
 		return result;
 	}
+	public StringBuilder usersHomeMenu() {
+		staffMenu();
+		return null;
+	}
+
 
 	/*
 	 * Retrieves the user's role.

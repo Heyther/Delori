@@ -72,6 +72,8 @@ public class Data {
 		return volunteers;		
 	}
 	
+
+	
 	///////////////
 	// Job data  
 	///////////////
@@ -101,6 +103,8 @@ public class Data {
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		
 		addJob(new Job("Title", "1/1/2016", "1:00pm", "1/2/2016", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
+		addJob(new Job("Job1", "1/2/2016", "1:00pm", "1/2/2016", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
+
 		
 		System.out.println(m.getFname());
 		System.out.println(m.getEmail());
@@ -165,25 +169,4 @@ public class Data {
 		aStream.close();
 	}
 	
-	
-	
-	
-//	// Temporary testing method
-//	public static void main(String[] args) {
-////		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("John", "Smith", "john@smith.com", UserStatus.UPSMEMBER);
-////		Volunteer vol1 = new Volunteer ("Mike", "Jones", "mikejones@who.com", UserStatus.VOLUNTEER);
-////		Job job1 = new Job("Feed lions", "2/12/16", "12:00", "2/12/16", "1", "Pat's House", "John Jackson", 
-////				"feed the lions some beef", 0, 2, 10);
-////		List<AbstractUser> test1 = new ArrayList<AbstractUser>();
-////		List<Job> test2 = new ArrayList<Job>();
-////		test1.add(staff1);
-////		test1.add(vol1);
-////		test2.add(job1);
-//		Data s1 = new Data();
-////		s1.saveData(test2, test1);
-//		s1.loadData();
-//		System.out.println(s1.allJobs.get(0).toString());	
-//
-//		
-//	}
 }

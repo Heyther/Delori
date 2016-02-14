@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -17,6 +19,7 @@ public class Volunteer extends AbstractUser  {
 	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
+
 	public transient Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
@@ -121,7 +124,13 @@ public class Volunteer extends AbstractUser  {
 		return result;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
+	}
 	
 	
 }
