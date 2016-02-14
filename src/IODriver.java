@@ -15,7 +15,7 @@ public class IODriver {
 	
 	public static Scanner input;
 	Calendar calendar;
-	AbstractUser currentUser;
+	public static AbstractUser currentUser;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
@@ -33,22 +33,54 @@ public class IODriver {
 		input = new Scanner(System.in);
 		input.useDelimiter("\n");
 		quitProgram = false;
+		//MenuOptions init = null;
 		runProgram();
 	}
 
+	
 	private void runProgram() {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
-			while (selection != MenuOptions.OPTION_SEVEN) {
+			
+			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
+				System.out.print(">");
 				response = input.nextLine();
+				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
+				
+				nextSelectionDisplay(selection);
 			}
 			
 		}
 		System.out.println("\nGoodbye");
 	}
-
+	
+	/*
+	 * Retrieves the next display based on user's selection
+	 */
+	public void nextSelectionDisplay(MenuOptions theOption) {
+		switch (theOption) {
+			case VIEW_ENROLLED_JOBS:
+				
+			case ADD_A_JOB:
+			case VIEW_ALL_VOL:
+			case VIEW_UPCOMING_JOBS:  
+				System.out.println("Working for the man :)");
+				break;
+	
+			case EXIT:    
+				quitProgram = true;
+				break;
+	
+			case SEARCH_VOL_LASTNAME:
+			case VIEW_JOB_DETAIL:    
+				System.out.println("Ahh, the weekend ...");
+				break;
+	
+			default: System.out.println("What day is it?");;
+		}
+	}
 	
 	/*
 	 * Asks the user to enter an email address and returns the user object 
@@ -56,29 +88,24 @@ public class IODriver {
 	 * If the email is not in the system, it prompts the user again
 	 */
 	public void login(){		
-		ArrayList<String> greet = new ArrayList<String>() {{
-			add("Welcome to Urban Parks!");
-			add("Please, enter your email.");
-		}};
+		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
+			greet.add(MenuOptions.OPTION_LOGIN);
+			greet.add(MenuOptions.OPTION_ENTER_EMAIL);
+		
 		menuBox(greet);
 		System.out.print(">");
 		
 		
-		while (Objects.isNull( currentUser) ) {
+		while (Objects.isNull(currentUser) ) {
 			response = input.nextLine();
 			currentUser = storedData.getReturningUser(response);
-			if (Objects.isNull(currentUser));
+			if (Objects.isNull(currentUser)) {
+				System.out.println("Wrong Email...\n Please, try again.\n>");
+			}
 		}
-//		System.out.println(response);
 		currentUser = storedData.getReturningUser(response);
 	}
 
-	/*
-	 * Calls the appropriate menu function depending on what type of user it gets passed
-	 */
-	public void printMenu(AbstractUser currentUser) {
-		currentUser.usersHomeMenu();
-	}
 	
 	public void upcomingJobsMenu(AbstractUser currentUser) {
 		//allJobs
@@ -86,6 +113,9 @@ public class IODriver {
 	}
 
 
+	/*
+	 * Repeats a string pattern n times
+	 */
 	private StringBuilder repeat(String str, int times) {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < times; i++) {
@@ -97,34 +127,36 @@ public class IODriver {
 	/*
 	 * Takes a list of menu options and displays them in a box format
 	 */
-	private void menuBox(ArrayList<String> menuOptions) {
+	private void menuBox(ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestString(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
 
 		results += divider + "\n";
 		for (int i = 0; i < menuOptions.size(); i++) {
-			if (boxWidth == menuOptions.get(i).length()) {
+			if (boxWidth == menuOptions.get(i).toString().length()) {
 				if (i == 1) { results += divider + "\n"; };
-				results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", i + ". " + menuOptions.get(i), "|\n"); }
+				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n"); }
+				
 			} else {
 				if (i == 1) { results += divider + "\n"; };
-				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).length()) + 4);
-				results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", menuOptions.get(i),"|\n");
+				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", i + ". " + menuOptions.get(i),"|\n"); }
+				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", menuOptions.get(i),"|\n"); }
 			}
 		}
 		results += divider + "\n";
 		System.out.println(results);
 	}
 
-	private int getLongestString(ArrayList<String> menuOptions) {
+	private int getLongestString(ArrayList<MenuOptions> menuOptions) {
 		int maxLength = 0;
-		for (String s : menuOptions) {
-			if (s.length() > maxLength) {
-				maxLength = s.length();
+		for (MenuOptions s : menuOptions) {
+			if (s.toString().length() > maxLength) {
+				maxLength = s.toString().length();
 			}
 		}
-		System.out.println(maxLength);
 		return maxLength;
 	}
 

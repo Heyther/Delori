@@ -128,14 +128,13 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public ArrayList<String> usersHomeMenu() {
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("Welcome, " + super.fname + " " + super.lname + "!"
-					+ " Please select from the options below...");
-		result.add("1. " + MenuOptions.OPTION_ONE);
-		result.add("2. " + MenuOptions.OPTION_FOUR);
-		result.add("3. " + MenuOptions.OPTION_FIVE);
-		result.add("4. " + MenuOptions.OPTION_SEVEN);
+	public ArrayList<MenuOptions> usersHomeMenu() {
+		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
+		result.add(MenuOptions.OPTION_WELCOME);
+		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
+		result.add(MenuOptions.ADD_A_JOB);
+		result.add(MenuOptions.VIEW_ALL_VOL);
+		result.add(MenuOptions.EXIT);
 			
 		return result;
 	}

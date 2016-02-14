@@ -27,7 +27,7 @@ public abstract class AbstractUser implements Serializable {
 	}
 
 	// Displays a menu with options for a user.
-	public abstract ArrayList<String> usersHomeMenu();
+	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
 	// Retrieves the role of the user.
 	public abstract UserStatus getRole();
