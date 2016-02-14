@@ -17,8 +17,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 
 	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
-	public String fname;
-	public String lname;
 	
 
 
@@ -48,7 +46,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 		} catch (InputMismatchException e) {
 			IODriver.input.next();
 		}
-		System.out.println(select);
 		switch (select) {
 		case 1: volunteerSearch();
 			break;
@@ -72,10 +69,9 @@ public class UrbanParkStaffMember extends AbstractUser {
 		System.out.println("Enter volunteers last name or 'b' to go back:");
 		name = IODriver.input.next();
 		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
-		System.out.println(name);
 		if(volunteers.size() > 0) {
 			for(Volunteer vol: volunteers ) {
-				System.out.println(vol.toString());
+				System.out.println(vol.toString() + "\n");
 			}
 			staffMenu();
 
@@ -83,7 +79,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 			staffMenu();
 			
 		}else {
-			System.out.println("Volunteer not found, try again.");
+			System.out.println("Volunteer not found, try again.\n");
 			volunteerSearch();
 		}
 	}
@@ -96,7 +92,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 		int jobNumber = 0;
 		System.out.println("View job details:");
 		for (int i = 0; i < jobs.size(); i++) {
-			System.out.println(i + 1 + ".) " + jobs.get(i).getJobTitle());
+			System.out.println("\t" + (i + 1) + ") " + jobs.get(i).jobSummary());
 		}
 		System.out.println("Select job number:");
 		try {
@@ -105,10 +101,10 @@ public class UrbanParkStaffMember extends AbstractUser {
 			IODriver.input.next();
 		}
 		if (jobNumber <= 0 || jobNumber > jobs.size()) {
-			System.out.println("Invalid entry, try again.");
+			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
 		} else {
-			System.out.println(jobs.get(jobNumber - 1).toString());
+			jobs.get(jobNumber - 1).viewUrbanParkStaffMemberJobMenu();
 			staffMenu();
 		}
 		
