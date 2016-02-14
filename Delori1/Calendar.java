@@ -17,7 +17,7 @@ public class Calendar {
 	/*
 	 * Constructs a calendar
 	 */
-	public Calendar(List<Job> theRecordOfJobs, List<AbstractUser> theRecordOfUsers) {
+	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
 		recordOfJobs = theRecordOfJobs;
 		recordOfUsers = theRecordOfUsers;

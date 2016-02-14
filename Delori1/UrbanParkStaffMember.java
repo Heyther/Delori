@@ -10,13 +10,23 @@ import java.util.Objects;
  * @version 1.1
  *
  */
-@SuppressWarnings("serial")
+
 public class UrbanParkStaffMember extends AbstractUser {
 
+<<<<<<< HEAD
 	private Data data;
 	protected UserStatus role;
 	public static ArrayList<Volunteer> myNames;
 	public static ArrayList<Job> myJobs;
+=======
+	private static final long serialVersionUID = 1483276272402890408L;
+	protected UserStatus role;
+	public String fname;
+	public String lname;
+	public transient Scanner scan;
+	public static ArrayList<String> myNames;
+	public static ArrayList<String> myJobs;
+>>>>>>> hdbr4
 
 
 	/*

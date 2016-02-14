@@ -10,11 +10,19 @@ import java.util.Scanner;
  * @author Heather
  * @date 
  */
-@SuppressWarnings("serial")
+
 public class Volunteer extends AbstractUser  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
+<<<<<<< HEAD
+=======
+	public transient Scanner scanner = new Scanner(System.in);
+>>>>>>> hdbr4
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
