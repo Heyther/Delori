@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,7 @@ public abstract class AbstractUser implements Serializable {
 	 */
 	private static final long serialVersionUID = 1322725593346883536L;
 	protected String fname, lname, email;
-
+	
 	/*
 	 * Constructs an instance of a user
 	 */
@@ -26,7 +27,7 @@ public abstract class AbstractUser implements Serializable {
 	}
 
 	// Displays a menu with options for a user.
-	public abstract StringBuilder usersHomeMenu();
+	public abstract ArrayList<String> usersHomeMenu();
 	
 	// Retrieves the role of the user.
 	public abstract UserStatus getRole();

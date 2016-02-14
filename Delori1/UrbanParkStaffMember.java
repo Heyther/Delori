@@ -101,18 +101,18 @@ public class UrbanParkStaffMember extends AbstractUser {
 		}
 	}
 
-	/*
-	 * Temporary main for tests
-	 */
-	public static void main(String[] args) {
-		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
-				"Bear", "looks@trees.com");
-		myNames.add("Robert");
-		myNames.add("Mark");
-		myJobs.add("river clean up");
-		myJobs.add("feed the gorilla");
-		staff1.staffMenu();
-	}
+//	/*
+//	 * Temporary main for tests
+//	 */
+//	public static void main(String[] args) {
+//		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
+//				"Bear", "looks@trees.com");
+//		myNames.add("Robert");
+//		myNames.add("Mark");
+//		myJobs.add("river clean up");
+//		myJobs.add("feed the gorilla");
+//		staff1.staffMenu();
+//	}
 
 	/*
 	 * Displays the menu for a UP staff member.
@@ -120,9 +120,16 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder usersHomeMenu() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> usersHomeMenu() {
+		ArrayList<String> result = new ArrayList<String>();
+		result.add("Welcome, " + super.fname + " " + super.lname + "!"
+					+ " Please select from the options below...");
+		result.add("1. " + MenuOptions.OPTION_ONE);
+		result.add("2. " + MenuOptions.OPTION_FOUR);
+		result.add("3. " + MenuOptions.OPTION_FIVE);
+		result.add("4. " + MenuOptions.OPTION_SEVEN);
+			
+		return result;
 	}
 
 	/*
