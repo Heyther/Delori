@@ -122,7 +122,7 @@ public class Volunteer extends AbstractUser  {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return getLname() + ", " + getFname() + ": Email : " + getEmail();
+		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
 	}
 	
 	

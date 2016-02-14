@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Job implements Serializable {
 	
 		private static final long serialVersionUID = -8923477868319938597L;
-		transient Scanner scan;
 		String jobTitle;
 		String startDate;
 		String startTime;
@@ -45,7 +44,7 @@ public class Job implements Serializable {
 		 */
 		public Job(String jobTitle, String start, String time, String endDate, String dur, String loc, String parkMan, 
 				String descript, int light, int med, int heavy){
-			scan = new Scanner(System.in);
+			IODriver.input = new Scanner(System.in);
 			this.jobTitle = jobTitle;
 		    this.startDate = start;
 		    this.startTime = time;
@@ -349,7 +348,7 @@ public class Job implements Serializable {
 			System.out.println(("Job details:\n"+this.toString()+
 					"\nPlease select one of the following options\n"+""
 							+ "(1)Edit Job\n(2)Back\n(3)Exit\n"));
-			int input = scan.nextInt();
+			int input = IODriver.input.nextInt();
 			
 			switch(input){
 				case 1:
@@ -357,7 +356,7 @@ public class Job implements Serializable {
 					break;
 				case 2:
 					System.out.println("You went back");
-					viewParkManagerJobMenu();
+					//viewParkManagerJobMenu();
 					break;
 				case 3:
 					System.exit(0);
@@ -376,7 +375,7 @@ public class Job implements Serializable {
 			System.out.println(("Job details:\n"+this.toString()+
 					"\nPlease select one of the following options\n"+""
 							+ "(1)Volunteer\n(2)Back\n(3)Exit\n"));
-			int input = scan.nextInt();
+			int input = IODriver.input.nextInt();
 			
 			switch(input){
 				case 1:
@@ -405,8 +404,7 @@ public class Job implements Serializable {
 			System.out.println(("Job details:\n"+this.toString()+
 					"\nPlease select one of the following options\n"+""
 							+ "(1)Edit Job\n(2)Back\n(3)Exit\n"));
-			int input = scan.nextInt();
-			
+			int input = IODriver.input.nextInt();
 			
 			switch(input){
 				case 1:
@@ -414,7 +412,7 @@ public class Job implements Serializable {
 					break;
 				case 2:
 					System.out.println("You went back");
-					viewUrbanParkStaffMemberJobMenu();
+					
 					break;
 				case 3:
 					System.exit(0);
@@ -454,67 +452,67 @@ public class Job implements Serializable {
 			//inputSelect = scan.nextInt();
 		
 			try {
-				inputSelect = scan.nextInt();
+				inputSelect = IODriver.input.nextInt();
 			} catch (InputMismatchException e) {
-					scan.next();
+					IODriver.input.next();
 			}
-			scan.nextLine();
+			IODriver.input.nextLine();
 			switch(inputSelect){
 			    case 1:
 			        System.out.print("Job Title:\n");
-					inputS = scan.next();
-					scan.nextLine();			
+					inputS = IODriver.input.next();
+					IODriver.input.nextLine();			
 					this.setJobTitle(inputS);
 					break;
 				case 2:
 					System.out.print("Start Date:\n");
-					inputS = scan.next();
-					scan.nextLine();			
+					inputS = IODriver.input.next();
+					IODriver.input.nextLine();			
 					this.setStartDate(inputS);
 					break;
 				case 3:
 					System.out.print("Start Time:\n");
-					inputS = scan.next();
-					scan.nextLine();			
+					inputS = IODriver.input.next();
+					IODriver.input.nextLine();			
 					this.setStartTime(inputS);
 					break;
 				case 4:
 					System.out.print("Duration:\n");
-					inputS = scan.next();
-					scan.nextLine();			
+					inputS = IODriver.input.next();
+					IODriver.input.nextLine();			
 					this.setDuration(inputS);
 					break;
 				case 5:
 					System.out.print("Location:\n");
-					inputS = scan.nextLine();
+					inputS = IODriver.input.nextLine();
 					this.setLocation(inputS);
 					break;
 				case 6:
 				    System.out.print("Park Manager:\n");
-					inputS = scan.nextLine();
+					inputS = IODriver.input.nextLine();
 					this.setParkManager(inputS);
 					break;
 				case 7:
 					System.out.print("Description:\n");
-					inputS = scan.nextLine();
+					inputS = IODriver.input.nextLine();
 					this.setDescription(inputS);
 					break;
 				case 8:
 					System.out.print("Light Slots:\n");
-					inputI = scan.nextInt();
-					scan.nextLine();			
+					inputI = IODriver.input.nextInt();
+					IODriver.input.nextLine();			
 					this.setLightSlots(inputI);
 					break;
 				case 9:
 					System.out.print("Medium Slots:\n");
-					inputI = scan.nextInt();
-					scan.nextLine();			
+					inputI = IODriver.input.nextInt();
+					IODriver.input.nextLine();			
 					this.setMediumSlots(inputI);
 					break;
 				case 10:
 					System.out.print("Heavy Slots:\n");
-					inputI = scan.nextInt();
-					scan.nextLine();			
+					inputI = IODriver.input.nextInt();
+					IODriver.input.nextLine();			
 					this.setHeavySlots(inputI);
 					break;
 				case 11:
@@ -527,5 +525,11 @@ public class Job implements Serializable {
 				editJobMenu();
 			}
 		
+		/*
+		 * Returns a brief summary of job.
+		 */
+		public String jobSummary() {
+			return this.getJobTitle() + ", " + this.getLocation() + ", " + this.getStartDate();
+		}
 	    
 }
