@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -9,13 +10,14 @@ import java.util.Scanner;
  * @version 1.1
  *
  */
-@SuppressWarnings("serial")
+
 public class UrbanParkStaffMember extends AbstractUser {
 
+	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
 	public String fname;
 	public String lname;
-	public Scanner scan;
+	public transient Scanner scan;
 	public static ArrayList<String> myNames;
 	public static ArrayList<String> myJobs;
 
@@ -23,13 +25,12 @@ public class UrbanParkStaffMember extends AbstractUser {
 	/*
 	 * Constructs an Urban Park Staff Member.
 	 */
-	public UrbanParkStaffMember(String theFirstName, String theLastName,
-									String theEmail, UserStatus theRole) {
+	public UrbanParkStaffMember(String theFirstName, String theLastName, String theEmail) {
 		super(theFirstName, theLastName, theEmail);
 		scan = new Scanner(System.in);
 		myNames = new ArrayList<String>();
 		myJobs = new ArrayList<String>();
-		role = theRole;
+		role = UserStatus.UPSMEMBER;
 	}
 
 	/*
@@ -105,7 +106,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public static void main(String[] args) {
 		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
-				"Bear", "looks@trees.com", UserStatus.UPSMEMBER);
+				"Bear", "looks@trees.com");
 		myNames.add("Robert");
 		myNames.add("Mark");
 		myJobs.add("river clean up");
@@ -119,7 +120,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
-	public StringBuilder userDisplayMenu() {
+	public StringBuilder usersHomeMenu() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -138,6 +139,28 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 */
 	public void setRole(UserStatus role) {
 		this.role = role;
+	}
+	
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
+	
+	/*
+	 * Checks if the object is-a Urban Park Staff Member.
+	 * @see AbstractUser#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object theObject){
+		if (super.equals(theObject)) {
+			UrbanParkStaffMember v = (UrbanParkStaffMember) theObject;
+			if (getRole().equals(v.getRole())) { return true; };
+		}
+		return false;
 	}
 
 }

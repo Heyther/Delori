@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -10,15 +11,16 @@ import java.util.ArrayList;
 public class Calendar {
 
 	public int totalPendingJobs;
-	public ArrayList<Job> jobList;
+	public List<Job> recordOfJobs;
+	public List<AbstractUser> recordOfUsers;
 	
 	/*
 	 * Constructs a calendar
 	 */
-	public Calendar() {
+	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
-		jobList = new ArrayList<Job>();
-		
+		recordOfJobs = theRecordOfJobs;
+		recordOfUsers = theRecordOfUsers;
 	}
 	
 	/*
@@ -30,13 +32,13 @@ public class Calendar {
 		// check if job is not over 2-days duration
 		//if (start[2].equals(end[2]) & Integer.parseInt(start[0]) >= Integer.parseInt(end[0]) 
 										//& Integer.parseInt(end[0]) - Integer.parseInt(start[0]) < 3 ) {
-			jobList.add(theJob);
+			recordOfJobs.add(theJob);
 			totalPendingJobs++;
 		//}
 	}
 	
 	public void deleteFromJobList(Job theJob){
-		jobList.remove(theJob);
+		recordOfJobs.remove(theJob);
 		totalPendingJobs--;
 	}
 	
@@ -44,8 +46,8 @@ public class Calendar {
 	 * We can either directly access the field or perhaps have this method...
 	 * we should decide soon.
 	 */
-	public ArrayList<Job> getListOfPendingJobs() {
-		return jobList;
+	public List<Job> getListOfPendingJobs() {
+		return recordOfJobs;
 	}
 	
 	
