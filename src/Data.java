@@ -21,11 +21,12 @@ public class Data {
 	String myDataFile = "urbanParkData.ser";
 	private boolean dataInitialized;
 
-	public Data(Calendar theCalendar) throws ClassNotFoundException, IOException  {
-		dataInitialized = false;
+
+	public Data() throws ClassNotFoundException, IOException  {
+		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
-		calendar = theCalendar;
+		calendar = new Calendar(allUsers, allJobs);
 		loadData();
 	}
 

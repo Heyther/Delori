@@ -27,9 +27,9 @@ public class IODriver {
 	 * Constructs the driver for the program.
 	 */
 	public IODriver() throws ClassNotFoundException, IOException {
-		calendar = new Calendar();
+		//calendar = new Calendar();
 		// loads all the users and jobs data
-		storedData = new Data(calendar);
+		storedData = new Data();
 		//calendar = new Calendar(storedData.getUsers(), storedData.getJobs());
 		
 		response = "";
