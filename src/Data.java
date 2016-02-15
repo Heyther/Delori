@@ -105,14 +105,7 @@ public class Data {
 //	public ArrayList<Job> getUpcomingJobs() {
 //		return 
 //	}
-	
-	/*
-	 * Deletes a job from the system
-	 */
-	public void deleteJob(Job theJob) throws IOException {
-		allJobs.remove(theJob);
-		serializeObject();
-	}
+
 	
 	///////////////
 	// Serialize  
