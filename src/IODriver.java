@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class IODriver {
 	
 	public static Scanner input;
-	Calendar calendar;
+	static Calendar calendar;
 	public static AbstractUser currentUser;
 	static Data storedData;
 	static boolean quitProgram;
