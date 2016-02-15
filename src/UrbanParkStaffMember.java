@@ -117,6 +117,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * 
 	 * @see AbstractUser#userDisplayMenu()
 	 */
+<<<<<<< HEAD
 //	@Override
 //	public ArrayList<String> usersHomeMenu() {
 //		ArrayList<String> result = new ArrayList<String>();
@@ -132,6 +133,18 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public ArrayList<String> usersHomeMenu() {
 		staffMenu();
 		return null;
+=======
+	@Override
+	public ArrayList<MenuOptions> usersHomeMenu() {
+		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
+		result.add(MenuOptions.OPTION_WELCOME);
+		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
+		result.add(MenuOptions.ADD_A_JOB);
+		result.add(MenuOptions.VIEW_ALL_VOL);
+		result.add(MenuOptions.EXIT);
+			
+		return result;
+>>>>>>> master
 	}
 
 
