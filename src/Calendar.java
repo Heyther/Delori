@@ -16,32 +16,33 @@ import java.util.GregorianCalendar;
 public class Calendar {
 	public int totalPendingJobs;
 	Data data;
-	//public List<Job> recordOfJobs;
-	//public List<AbstractUser> recordOfUsers;
+	public List<Job> recordOfJobs;
+	public List<AbstractUser> recordOfUsers;
 	
 	/*
 	 * This method might not be needed anymore, 
 	 * but will sit here and feel the shame
+	 * buhahaha this zombie was revived by Sean <.<
 	 */
-//	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
-//		totalPendingJobs = 0;
-//		recordOfJobs = theRecordOfJobs;
-//		recordOfUsers = theRecordOfUsers;
-//	}
+	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
+		totalPendingJobs = 0;
+		recordOfJobs = theRecordOfJobs;
+		recordOfUsers = theRecordOfUsers;
+	}
 	
 	/*
 	 * Constructs a calendar
 	 */
-	public Calendar() {
-		totalPendingJobs = 0;
-	}
+	//public Calendar() {
+	//	totalPendingJobs = 0;
+	//}
 
 	/*
 	 * Checks if the job is legitimate.
 	 */
 	public void verifyJob(Job theJob) {
 		//Job checkedJob = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		//String[] start = theJob.getStartDate().split("/");
 		//String[] end = theJob.getEndDate().split("/");
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
@@ -50,12 +51,13 @@ public class Calendar {
 		Date jobEndDate = null;
 		try {
 			jobStartDate = sdf.parse(theJob.startDate);
-			jobEndDate = sdf.parse(theJob.endDate);
+
 
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 		curDay.add(java.util.Calendar.MONTH, 3);
 		Date maxJobDate = curDay.getTime();
 		// check if job is not over 2-days duration
@@ -65,16 +67,19 @@ public class Calendar {
 		if(totalPendingJobs < 30 && Integer.parseInt(theJob.duration) <= 2){
 			try {
 				//business rule 2
+				if(theJob.startDate != null){
 				if(calculateWeekPendingJobs(sdf.parse(theJob.startDate)) < 5){
 					//business rules 5 & 6(i think 6 is covered by this)
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
-						if(jobEndDate.before(maxJobDate) && (jobEndDate.after(myDate))){
-							data.getJobs().add(theJob);
+					
+							//data.getJobs().add(theJob);
 							//checkedJob = theJob;
+							recordOfJobs.add(theJob);
 							totalPendingJobs++;
-						}
+						
 					}
 					
+				}
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -98,8 +103,9 @@ public class Calendar {
 	 * Checks that there is only 5 jobs at a time for any given week.
 	 */
 	public int calculateWeekPendingJobs(Date theDate){
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-		ListIterator<Job> jobItr = data.getJobs().listIterator();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		//ListIterator<Job> jobItr = data.getJobs().listIterator();
+		ListIterator<Job> jobItr = recordOfJobs.listIterator();
 		int weekTotal =0;
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
 		curDay.setTime(theDate);
