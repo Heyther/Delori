@@ -10,7 +10,9 @@ import java.util.Scanner;
  * @date 
  */
 public class Job implements Serializable {
-	
+		static final int LIGHT = 1;
+		static final int MEDIUM = 2;
+		static final int HEAVY = 3;
 		private static final long serialVersionUID = -8923477868319938597L;
 		String jobTitle;
 		String startDate;
@@ -283,17 +285,17 @@ public class Job implements Serializable {
 		 * Accepts a Volunteer and a workload and adds the volunteer to the appropriate list of volunteers
 		 * Decrements number of available slots of that workload
 		 */
-		public void signUpVolunteer(Volunteer theVolunteer, String workload){
+		public void signUpVolunteer(Volunteer theVolunteer, int workload){
 			switch (workload){
-			case "light":
+			case LIGHT:
 				lightVolunteers.add(theVolunteer);
 				lightSlots--;
 				break;
-			case "medium":
+			case MEDIUM:
 				mediumVolunteers.add(theVolunteer);
 				mediumSlots--;
 				break;
-			case "heavy":
+			case HEAVY:
 				heavyVolunteers.add(theVolunteer);
 				heavySlots--;
 				break;
