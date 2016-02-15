@@ -106,6 +106,14 @@ public class Data {
 //		return 
 //	}
 	
+	/*
+	 * Deletes a job from the system
+	 */
+	public void deleteJob(Job theJob) throws IOException {
+		allJobs.remove(theJob);
+		serializeObject();
+	}
+	
 	///////////////
 	// Serialize  
 	///////////////
