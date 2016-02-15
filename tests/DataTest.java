@@ -12,8 +12,8 @@ public class DataTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		
-		data = new Data();
+		Calendar calendar = new Calendar();
+		data = new Data(calendar);
 		
 	}
 
@@ -35,9 +35,14 @@ public class DataTest {
 	@Test
 	public void testAddJob() {
 		assertEquals(2, data.getJobs().size());
-		Job job = new Job("Title", "1/1/2016", "1:00pm", "1/2/2016", "1",
+		Job job = new Job("Title", "1/1/2016", "1:00pm", "1",
 				"Tacoma", "Evergreen Park", "Description:..", 1, 2, 3);
-		data.addJob(job);
+		try {
+			data.addJob(job);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(3, data.getJobs().size());
 	}
 
