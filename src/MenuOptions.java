@@ -15,7 +15,7 @@ public enum MenuOptions {
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),
-	OPTION_ENTER_EMAIL("Please, enter your email."),
+	OPTION_ENTER_EMAIL("Please, enter your email.")
     ;
 	
 	private final String text;

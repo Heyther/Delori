@@ -42,11 +42,12 @@ public class IODriver {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
+			menuBox(currentUser.usersHomeMenu());
+			System.out.print(">");
 			
 			while (selection != MenuOptions.EXIT) {
-				menuBox(currentUser.usersHomeMenu());
-				System.out.print(">");
-				response = input.next();
+				
+				response = input.nextLine();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
 			}
@@ -61,11 +62,13 @@ public class IODriver {
 	public void nextSelectionDisplay(MenuOptions theOption) throws IOException {
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
-				
+				if (currentUser instanceof Volunteer) {
+					((Volunteer) currentUser).viewEnrolledJobs(storedData.getJobs());
+				}
 			case ADD_A_JOB:
 				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
-				((ParkManager) currentUser).addJob();	
-				break;
+					((ParkManager) currentUser).addJob();	
+					break;
 				}
 			case VIEW_ALL_VOL:
 			case VIEW_UPCOMING_JOBS:  
