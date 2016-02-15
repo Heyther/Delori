@@ -1,5 +1,6 @@
 
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class Volunteer extends AbstractUser  {
 	/*
 	 * View joined jobs specific to a volunteer. (U7)
 	 */
-	public void viewEnrolledJobs(ArrayList<Job> theJobList) {
+	public void viewEnrolledJobs(ArrayList<Job> list) {
 		StringBuilder result = new StringBuilder();
 		for (Job j : enrolledJobs) {
 			result.append(j.getJobTitle() + "\n");

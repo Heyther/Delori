@@ -10,22 +10,22 @@ import java.util.List;
  */
 public class Data {
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3014553440474186296L;
 	private static final String SERIALIZED_FILE = "./urbanParkData.ser";
-	private List<Job> allJobs;
-	private List<AbstractUser> allUsers;
-
+	private ArrayList<Job> allJobs;
+	private ArrayList<AbstractUser> allUsers;
+	Calendar calendar;
 	String myDataFile = "urbanParkData.ser";
 	private boolean dataInitialized;
 
-	public Data() throws ClassNotFoundException, IOException  {
+	public Data(Calendar theCalendar) throws ClassNotFoundException, IOException  {
 		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
+		calendar = theCalendar;
 		loadData();
 	}
 
@@ -78,7 +78,7 @@ public class Data {
 	// Job data  
 	///////////////
 	
-	public List<Job> getJobs() {
+	public ArrayList<Job> getJobs() {
 		return allJobs;
 	}
 	
@@ -86,9 +86,25 @@ public class Data {
 	 * Adds a job to the system.
 	 */
 	public void addJob(Job theJob) throws IOException {
-		allJobs.add(theJob);
+		calendar.verifyJob(theJob);
 		serializeObject();
 	}
+	
+	/*
+	 * Deletes a job from the system
+	 */
+	public void deleteJob(Job theJob) throws IOException {
+		allJobs.remove(theJob);
+		calendar.totalPendingJobs--;
+		serializeObject();
+	}
+	
+	/*
+	 * Displays all upcoming jobs
+	 */
+//	public ArrayList<Job> getUpcomingJobs() {
+//		return 
+//	}
 	
 	/*
 	 * Deletes a job from the system
