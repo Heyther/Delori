@@ -22,7 +22,7 @@ public class Data {
 	private boolean dataInitialized;
 
 	public Data(Calendar theCalendar) throws ClassNotFoundException, IOException  {
-		dataInitialized = true;
+		dataInitialized = false;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
 		calendar = theCalendar;
@@ -122,8 +122,8 @@ public class Data {
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		
 		
-		addJob(new Job("Title", "1/1/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
-		addJob(new Job("Job1", "1/2/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
+		addJob(new Job("Title", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
+		addJob(new Job("Job1", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
 
 		
 		System.out.println(m.getFname());

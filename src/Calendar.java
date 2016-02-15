@@ -41,7 +41,7 @@ public class Calendar {
 	 */
 	public void verifyJob(Job theJob) {
 		//Job checkedJob = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		//String[] start = theJob.getStartDate().split("/");
 		//String[] end = theJob.getEndDate().split("/");
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();

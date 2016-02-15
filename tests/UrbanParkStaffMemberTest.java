@@ -17,4 +17,18 @@ public class UrbanParkStaffMemberTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testEqualsObject() {
+		
+		UrbanParkStaffMember same = new UrbanParkStaffMember("first", "last", "email");
+		assertTrue(staff.equals(same));
+	}
+	
+	@Test
+	public void testNotEqualsObject() {
+		UrbanParkStaffMember diff = new UrbanParkStaffMember("notfirst", "notlast", "notemail");
+		assertFalse(staff.equals(diff));
+	}
 }
+
+

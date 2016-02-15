@@ -15,7 +15,7 @@ public class DataTest {
 		Calendar calendar = new Calendar();
 		data = new Data(calendar);
 		
-	}
+	} 
 
 	
 	@Test
