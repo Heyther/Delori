@@ -45,12 +45,14 @@ public class IODriver {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
-			menuBox(currentUser.usersHomeMenu());
-			System.out.print(">");
+			//menuBox(currentUser.usersHomeMenu());
+			//System.out.print(">");
 			
 			while (selection != MenuOptions.EXIT) {
-				
-				response = input.nextLine();
+				menuBox(currentUser.usersHomeMenu());
+				System.out.print(">");
+
+				response = input.next();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
 			}

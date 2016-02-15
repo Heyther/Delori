@@ -103,8 +103,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
 		} else {
-			//jobs.get(jobNumber - 1).viewUrbanParkStaffMemberJobMenu();
-			usersHomeMenu();
+			System.out.println(jobs.get(jobNumber - 1).toString());
+			
 		}
 		
 	}
