@@ -37,6 +37,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 		System.out.println("Select from the following:");
 		System.out.println("\t1) Search volunteer by last name.");
 		System.out.println("\t2) View job details.");
+		System.out.println("\t3) Exit.");
+
 		System.out.println("Enter item number:");
 		try {
 			select = IODriver.input.nextInt();
@@ -108,18 +110,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 	}
 
 	
-//	/*
-//	 * Temporary main for tests
-//	 */
-//	public static void main(String[] args) {
-//		UrbanParkStaffMember staff1 = new UrbanParkStaffMember("Smokey",
-//				"Bear", "looks@trees.com");
-//		myNames.add("Robert");
-//		myNames.add("Mark");
-//		myJobs.add("river clean up");
-//		myJobs.add("feed the gorilla");
-//		staff1.staffMenu();
-//	}
 
 	/*
 	/*
@@ -127,22 +117,22 @@ public class UrbanParkStaffMember extends AbstractUser {
 	 * 
 	 * @see AbstractUser#userDisplayMenu()
 	 */
-	@Override
-	public ArrayList<String> usersHomeMenu() {
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("Welcome, " + super.fname + " " + super.lname + "!"
-					+ " Please select from the options below...");
-		result.add("1. " + MenuOptions.OPTION_ONE);
-		result.add("2. " + MenuOptions.OPTION_FOUR);
-		result.add("3. " + MenuOptions.OPTION_FIVE);
-		result.add("4. " + MenuOptions.OPTION_SEVEN);
-			
-		return result;
-	}
-//	public StringBuilder usersHomeMenu() {
-//		staffMenu();
-//		return null;
+//	@Override
+//	public ArrayList<String> usersHomeMenu() {
+//		ArrayList<String> result = new ArrayList<String>();
+//		result.add("Welcome, " + super.fname + " " + super.lname + "!"
+//					+ " Please select from the options below...");
+//		result.add("1. " + MenuOptions.OPTION_ONE);
+//		result.add("2. " + MenuOptions.OPTION_FOUR);
+//		result.add("3. " + MenuOptions.OPTION_FIVE);
+//		result.add("4. " + MenuOptions.OPTION_SEVEN);
+//			
+//		return result;
 //	}
+	public ArrayList<String> usersHomeMenu() {
+		staffMenu();
+		return null;
+	}
 
 
 	/*
