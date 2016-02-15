@@ -60,7 +60,7 @@ public class Volunteer extends AbstractUser  {
 	/*
 	 * View joined jobs specific to a volunteer. (U7)
 	 */
-	public void viewEnrolledJobs(java.util.List<Job> list) {
+	public void viewEnrolledJobs(ArrayList<Job> list) {
 		StringBuilder result = new StringBuilder();
 		for (Job j : enrolledJobs) {
 			result.append(j.getJobTitle() + "\n");

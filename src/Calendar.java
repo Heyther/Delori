@@ -14,22 +14,32 @@ import java.util.GregorianCalendar;
  */
 public class Calendar {
 	public int totalPendingJobs;
-	public List<Job> recordOfJobs;
-	public List<AbstractUser> recordOfUsers;
+	Data data;
+	//public List<Job> recordOfJobs;
+	//public List<AbstractUser> recordOfUsers;
+	
+	/*
+	 * This method might not be needed anymore, 
+	 * but will sit here and feel the shame
+	 */
+//	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
+//		totalPendingJobs = 0;
+//		recordOfJobs = theRecordOfJobs;
+//		recordOfUsers = theRecordOfUsers;
+//	}
 	
 	/*
 	 * Constructs a calendar
 	 */
-	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
+	public Calendar() {
 		totalPendingJobs = 0;
-		recordOfJobs = theRecordOfJobs;
-		recordOfUsers = theRecordOfUsers;
 	}
-	
+
 	/*
-	 * Add job to list of pending jobs
+	 * Checks if the job is legitimate.
 	 */
-	public void addJobToList(Job theJob) {
+	public Job verifyJob(Job theJob) {
+		Job checkedJob = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 		//String[] start = theJob.getStartDate().split("/");
 		//String[] end = theJob.getEndDate().split("/");
@@ -58,7 +68,8 @@ public class Calendar {
 					//business rules 5 & 6(i think 6 is covered by this)
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
 						if(jobEndDate.before(maxJobDate) && (jobEndDate.after(myDate))){
-							recordOfJobs.add(theJob);
+							//Data.data.getJobs().add(theJob);
+							checkedJob = theJob;
 							totalPendingJobs++;
 						}
 					}
@@ -70,20 +81,21 @@ public class Calendar {
 		
 		}
 		//}
+		return checkedJob;
 	}
 	
-	public void deleteFromJobList(Job theJob){
-		recordOfJobs.remove(theJob);
-		totalPendingJobs--;
-	}
+//	public void deleteFromJobList(Job theJob){
+//		recordOfJobs.remove(theJob);
+//		totalPendingJobs--;  // this line is now taken care of in Data's deleteJob
+//	}
 	
 	/*
 	 * We can either directly access the field or perhaps have this method...
 	 * we should decide soon.
 	 */
-	public List<Job> getListOfPendingJobs() {
-		return recordOfJobs;
-	}
+//	public List<Job> getListOfPendingJobs() {
+//		return recordOfJobs;
+//	}
 	
 	public int calculateWeekPendingJobs(Date theDate){
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");

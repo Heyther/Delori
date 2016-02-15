@@ -17,10 +17,8 @@ public class ParkManager extends AbstractUser
 	 */
 	private static final long serialVersionUID = 3323557037867953268L;
 	protected UserStatus role;
-	public String parkName;
-	public String parkAddress;
-	public String parkCity;
-	public ArrayList<Job> jobsManaging;
+	private String parkName;
+	private ArrayList<Job> jobsManaging;
 	
 	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
 	{
@@ -80,23 +78,21 @@ public class ParkManager extends AbstractUser
 		System.out.println("\nNumber of heavy slots: ");
 		heavySlots = IODriver.input.nextInt();
 		
-		//Create new Job object and add to job list
-		Job newJob = new Job(title, startDate, startTime, "Stand-in end date", duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-		//IODriver.calendar.addJobToList(newJob);
+		//Create new Job object and add to main job list and park manager's job list
+		Job newJob = new Job(title, startDate, startTime, duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
+		IODriver.storedData.addJob(newJob);
 		this.jobsManaging.add(newJob);
 		
 		//Show confirmation
 		System.out.println("\nJob Added! Review Job Details:\n");
 		System.out.println(newJob.toString());
 		
-		IODriver.storedData.addJob(newJob);
-
 		//Print menu of options 
 		jobDetailsMenu(newJob);
 		
 	}
 	
-	public void jobDetailsMenu(Job theJob) {
+	public void jobDetailsMenu(Job theJob) throws IOException {
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
 				+ "2) Cancel job\n " 
@@ -122,17 +118,17 @@ public class ParkManager extends AbstractUser
 	 * Cancel a job (Delete it from the list of jobs)
 	 * U2
 	 */
-	public void cancelJob(Job theJob) {
+	public void cancelJob(Job theJob) throws IOException {
 		System.out.println("Are you sure you want to cancel this job?");
 		System.out.println(" 1) Yes, cancel the job. \n 2) No, keep the job \n");
 		String response = IODriver.input.next();
 		switch (response){
 		case "1": 
 			this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
-			//delete job from main job list
+			IODriver.storedData.deleteJob(theJob);//delete job from main job list
 			break;
 		case "2": 
-			jobDetailsMenu(theJob); //Print options again
+			jobDetailsMenu(theJob); //Go back to job details menu
 			break;
 		default: 
 			System.out.println("Invalid input. Please type 1 or 2. ");
@@ -144,9 +140,12 @@ public class ParkManager extends AbstractUser
 	 * Edit the details of a job
 	 * U3
 	 */
-	public void editJob(Job theJob) {
+	public void editJob(Job theJob) throws IOException {
+		//Delete the job from the main job list (the edited one will be added instead)
+		IODriver.storedData.deleteJob(theJob);
+		
 		System.out.println("Which detail would you like to edit?");
-		System.out.println(" 1) Job Title: " + "\n"
+		System.out.println(" 1) Job Title " + "\n"
 					         +" 2) Date " + "\n"
 					         +" 3) Time " + "\n"
 					         +" 4) Duration " + "\n"        
@@ -157,6 +156,9 @@ public class ParkManager extends AbstractUser
 					         +" 9) Done editing ");
 		String response = IODriver.input.next();
 		String newValue;
+		
+		//For the field the user selected to edit, prompt for the new value and change the appropriate field in the job
+		//call the method again so that the user may edit another field
 		switch (response){
 		case "1":
 			System.out.println("Enter new Job Title: ");
@@ -207,6 +209,7 @@ public class ParkManager extends AbstractUser
 			editJob(theJob);
 			break;
 		case "9": 
+			IODriver.storedData.addJob(theJob);
 			System.out.println("Review Job Details: \n");
 			System.out.println(theJob.toString());
 			jobDetailsMenu(theJob);
@@ -222,22 +225,35 @@ public class ParkManager extends AbstractUser
 	 * View all the park manager's upcoming jobs
 	 * U8
 	 */
-	public void viewJobsManaged() {
+	public void viewJobsManaged() throws IOException {
 		//view list of all the park manager's upcoming jobs
 		int i;
 		for (i = 0; i < this.jobsManaging.size(); i++){
-			System.out.println(i+1);
-			System.out.println(this.jobsManaging.get(i));
+			System.out.print((i+1) + ". ");
+			System.out.println(this.jobsManaging.get(i).jobSummary());
+		}
+		System.out.println("\nType a number to select a job or type 0 to go back: ");
+		int jobNumber = IODriver.input.nextInt();
+		//Keep prompting until good input in received
+		while (jobNumber > jobsManaging.size()) {
+			System.out.println("Invalid input. Please try again.");
+			jobNumber = IODriver.input.nextInt();
+		}
+		//If a job number was typed, print job details and options (If 0 was typed, do nothing)
+		if (jobNumber != 0){
+			System.out.println(jobsManaging.get(jobNumber-1));
+			jobDetailsMenu(jobsManaging.get(jobNumber-1));
 		}
 	}
 	
 	/*
 	 * View the volunteers signed up for my job
-	 * As is, this method only calls another method so is redundant
+	 * Only prints the volunteers, does not allow the park manager to select the volunteers in any way
 	 * U9
 	 */
-	public void viewEnrolledVolunteers(Job theJob){
+	public void viewEnrolledVolunteers(Job theJob) throws IOException{
 		theJob.printVolunteers();
+		jobDetailsMenu(theJob);
 	}
 
 	/*

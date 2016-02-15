@@ -14,20 +14,23 @@ import java.util.Scanner;
 public class IODriver {
 	
 	public static Scanner input;
-	Calendar calendar;
+	static Calendar calendar;
 	public static AbstractUser currentUser;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
 	String response;
+	//private Volunteer currentIdentifiedUser;
 
 	/*
 	 * Constructs the driver for the program.
 	 */
 	public IODriver() throws ClassNotFoundException, IOException {
+		calendar = new Calendar();
 		// loads all the users and jobs data
-		storedData = new Data();
-		calendar = new Calendar(storedData.getUsers(), storedData.getJobs());
+		storedData = new Data(calendar);
+		//calendar = new Calendar(storedData.getUsers(), storedData.getJobs());
+		
 		response = "";
 		currentUser = null;
 		input = new Scanner(System.in);
@@ -60,6 +63,15 @@ public class IODriver {
 	 * Retrieves the next display based on user's selection
 	 */
 	public void nextSelectionDisplay(MenuOptions theOption) throws IOException {
+		
+//		if (currentUser instanceof Volunteer) {
+//			currentUser = (Volunteer) currentUser;
+//		} else if (currentUser instanceof ParkManager) {
+//			currentUser = (ParkManager) currentUser;
+//		} else {
+//			currentUser = (UrbanParkStaffMember) currentUser;
+//		}
+		
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
 				if (currentUser instanceof Volunteer) {
@@ -74,6 +86,8 @@ public class IODriver {
 			case VIEW_UPCOMING_JOBS:  
 				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
 					((ParkManager) currentUser).viewJobsManaged();
+				} else if (currentUser instanceof Volunteer) {
+					//calendar.getListOfPendingJobs();
 				}
 				break;
 	
