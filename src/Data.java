@@ -86,7 +86,7 @@ public class Data {
 	 * Adds a job to the system.
 	 */
 	public void addJob(Job theJob) throws IOException {
-		allJobs.add(calendar.verifyJob(theJob));
+		calendar.verifyJob(theJob);
 		serializeObject();
 	}
 	

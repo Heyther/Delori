@@ -1,4 +1,5 @@
 import java.text.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
@@ -38,8 +39,8 @@ public class Calendar {
 	/*
 	 * Checks if the job is legitimate.
 	 */
-	public Job verifyJob(Job theJob) {
-		Job checkedJob = null;
+	public void verifyJob(Job theJob) {
+		//Job checkedJob = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 		//String[] start = theJob.getStartDate().split("/");
 		//String[] end = theJob.getEndDate().split("/");
@@ -68,8 +69,8 @@ public class Calendar {
 					//business rules 5 & 6(i think 6 is covered by this)
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
 						if(jobEndDate.before(maxJobDate) && (jobEndDate.after(myDate))){
-							//Data.data.getJobs().add(theJob);
-							checkedJob = theJob;
+							data.getJobs().add(theJob);
+							//checkedJob = theJob;
 							totalPendingJobs++;
 						}
 					}
@@ -81,7 +82,7 @@ public class Calendar {
 		
 		}
 		//}
-		return checkedJob;
+		//return checkedJob;
 	}
 	
 //	public void deleteFromJobList(Job theJob){
@@ -89,17 +90,16 @@ public class Calendar {
 //		totalPendingJobs--;  // this line is now taken care of in Data's deleteJob
 //	}
 	
-	/*
-	 * We can either directly access the field or perhaps have this method...
-	 * we should decide soon.
-	 */
 //	public List<Job> getListOfPendingJobs() {
 //		return recordOfJobs;
 //	}
 	
+	/*
+	 * Checks that there is only 5 jobs at a time for any given week.
+	 */
 	public int calculateWeekPendingJobs(Date theDate){
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-		ListIterator<Job> jobItr = recordOfJobs.listIterator();
+		ListIterator<Job> jobItr = data.getJobs().listIterator();
 		int weekTotal =0;
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
 		curDay.setTime(theDate);
