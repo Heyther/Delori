@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,7 +52,6 @@ public class IODriver {
 			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
-
 				response = input.next();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
@@ -89,7 +89,7 @@ public class IODriver {
 				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
 					((ParkManager) currentUser).viewJobsManaged();
 				} else if (currentUser instanceof Volunteer) {
-					//calendar.getListOfPendingJobs();
+					menuBoxForJobs(storedData.getJobs());
 				}
 				break;
 	
@@ -180,11 +180,53 @@ public class IODriver {
 		System.out.println(results);
 	}
 
+	/*
+	 * Takes all of the jobs within the system and displays them in a box format
+	 */
+	private void menuBoxForJobs(ArrayList<Job> menuOptions) {
+		String results = "";
+		int boxWidth = getLongestStringInJobs(menuOptions) + 3; 
+		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
+
+		results += divider + "\n";
+		for (int i = 0; i < menuOptions.size(); i++) {
+			if (boxWidth == menuOptions.get(i).toString().length()) {
+				if (i == 1) { results += divider + "\n"; };
+				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", i + ". " + (menuOptions.get(i)).jobSummary(), "|\n"); }
+				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", (menuOptions.get(i)).jobSummary(), "|\n"); }
+				
+			} else {
+				if (i == 1) { results += divider + "\n"; };
+				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", i + ". " + (menuOptions.get(i)).jobSummary(),"|\n"); }
+				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", (menuOptions.get(i)).jobSummary(),"|\n"); }
+			}
+		}
+		results += divider + "\n";
+		System.out.println(results);
+	}
+	
+	/*
+	 * Finds the longest MenuOptions length
+	 */
 	private int getLongestString(ArrayList<MenuOptions> menuOptions) {
 		int maxLength = 0;
 		for (MenuOptions s : menuOptions) {
 			if (s.toString().length() > maxLength) {
 				maxLength = s.toString().length();
+			}
+		}
+		return maxLength;
+	}
+	
+	/*
+	 * Finds the longest Job Description length
+	 */
+	private int getLongestStringInJobs(ArrayList<Job> menuOptions) {
+		int maxLength = 0;
+		for (Job s : menuOptions) {
+			if (s.jobSummary().length() > maxLength) {
+				maxLength = s.jobSummary().length();
 			}
 		}
 		return maxLength;
