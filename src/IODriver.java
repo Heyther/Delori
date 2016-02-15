@@ -38,7 +38,7 @@ public class IODriver {
 	}
 
 	
-	private void runProgram() {
+	private void runProgram() throws IOException {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
@@ -46,9 +46,8 @@ public class IODriver {
 			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
-				response = input.nextLine();
+				response = input.next();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
-				
 				nextSelectionDisplay(selection);
 			}
 			
@@ -59,14 +58,20 @@ public class IODriver {
 	/*
 	 * Retrieves the next display based on user's selection
 	 */
-	public void nextSelectionDisplay(MenuOptions theOption) {
+	public void nextSelectionDisplay(MenuOptions theOption) throws IOException {
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
 				
 			case ADD_A_JOB:
+				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
+				((ParkManager) currentUser).addJob();	
+				break;
+				}
 			case VIEW_ALL_VOL:
 			case VIEW_UPCOMING_JOBS:  
-				System.out.println("");
+				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
+					((ParkManager) currentUser).viewJobsManaged();
+				}
 				break;
 	
 			case EXIT:    
@@ -74,8 +79,14 @@ public class IODriver {
 				break;
 	
 			case SEARCH_VOL_LASTNAME:
-			case VIEW_JOB_DETAIL:    
-				System.out.println("");
+				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
+					((UrbanParkStaffMember) currentUser).volunteerSearch();
+				}
+				break;
+			case VIEW_JOB_DETAIL: 
+				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
+					((UrbanParkStaffMember) currentUser).viewJobDetails();
+				}
 				break;
 	
 			default: System.out.println("");

@@ -516,13 +516,11 @@ public class Job implements Serializable {
 					this.setHeavySlots(inputI);
 					break;
 				case 11:
-					viewParkManagerJobMenu();
 					break;
 				default:
 					editJobMenu();
 					break;	
 				}
-				editJobMenu();
 			}
 		
 		/*

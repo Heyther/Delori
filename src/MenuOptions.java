@@ -10,6 +10,7 @@ public enum MenuOptions {
 	EXIT("Exit"),
 	SEARCH_VOL_LASTNAME("Search volunteer by last name"),
 	VIEW_JOB_DETAIL("View job details"),
+	
 		
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),

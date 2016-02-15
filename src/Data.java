@@ -23,7 +23,7 @@ public class Data {
 	private boolean dataInitialized;
 
 	public Data() throws ClassNotFoundException, IOException  {
-		dataInitialized = false;
+		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
 		loadData();
@@ -85,8 +85,9 @@ public class Data {
 	/*
 	 * Adds a job to the system.
 	 */
-	public void addJob(Job theJob) {
+	public void addJob(Job theJob) throws IOException {
 		allJobs.add(theJob);
+		serializeObject();
 	}
 	
 	///////////////

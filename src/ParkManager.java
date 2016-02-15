@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public class ParkManager extends AbstractUser
 	 * Prompts user for details of the job and creates a new job with the given details
 	 * U1
 	 */
-	public void addJob()
+	public void addJob() throws IOException
 	{
 		String title, startDate, startTime, duration, description;
 		int lightSlots = 0, medSlots = 0, heavySlots = 0;
@@ -88,6 +89,8 @@ public class ParkManager extends AbstractUser
 		System.out.println("\nJob Added! Review Job Details:\n");
 		System.out.println(newJob.toString());
 		
+		IODriver.storedData.addJob(newJob);
+
 		//Print menu of options 
 		jobDetailsMenu(newJob);
 		
