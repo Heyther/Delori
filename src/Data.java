@@ -90,6 +90,14 @@ public class Data {
 		serializeObject();
 	}
 	
+	/*
+	 * Deletes a job from the system
+	 */
+	public void deleteJob(Job theJob) throws IOException {
+		allJobs.remove(theJob);
+		serializeObject();
+	}
+	
 	///////////////
 	// Serialize  
 	///////////////
@@ -104,8 +112,8 @@ public class Data {
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		
 		
-		addJob(new Job("Title", "1/1/2016", "1:00pm", "1/2/2016", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
-		addJob(new Job("Job1", "1/2/2016", "1:00pm", "1/2/2016", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
+		addJob(new Job("Title", "1/1/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
+		addJob(new Job("Job1", "1/2/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
 
 		
 		System.out.println(m.getFname());
