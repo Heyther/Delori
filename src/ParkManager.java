@@ -30,7 +30,7 @@ public class ParkManager extends AbstractUser
 	
 	public String toString()
 	{
-		return this.fname + " " + this.lname;
+		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
 	}
 	
 	/*
