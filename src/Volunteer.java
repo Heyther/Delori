@@ -1,6 +1,7 @@
 
 
 import java.awt.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -67,6 +68,28 @@ public class Volunteer extends AbstractUser  {
 		}
 		result.substring(0, result.length());
 		System.out.println(result);
+		
+		
+		/*
+		 * 		//view list of all the park manager's upcoming jobs
+		int i;
+		for (i = 0; i < this.jobsManaging.size(); i++){
+			System.out.print((i+1) + ". ");
+			System.out.println(this.jobsManaging.get(i).jobSummary());
+		}
+		System.out.println("\nType a number to select a job or type 0 to go back: ");
+		int jobNumber = IODriver.input.nextInt();
+		//Keep prompting until good input in received
+		while (jobNumber > jobsManaging.size()) {
+			System.out.println("Invalid input. Please try again.");
+			jobNumber = IODriver.input.nextInt();
+		}
+		//If a job number was typed, print job details and options (If 0 was typed, do nothing)
+		if (jobNumber != 0){
+			System.out.println(jobsManaging.get(jobNumber-1));
+			jobDetailsMenu(jobsManaging.get(jobNumber-1));
+		}
+		 */
 	}
 	
 	/*
@@ -80,7 +103,16 @@ public class Volunteer extends AbstractUser  {
 	/*
 	 * Sign up for a job. (U6)
 	 */
-	public void signUp(Job theJob) {
+	public void signUp(Job theJob) throws IOException {
+		System.out.println("Please select a workload: \n1. Light \n 2. Medium \n 3. Heavy");
+		int response = IODriver.input.nextInt();
+		
+		//delete the job from the main job list (to be added back in once the volunteer has been added)
+		IODriver.storedData.deleteJob(theJob);
+		theJob.signUpVolunteer(this, response);
+		
+		//Add the job back into the main job list and to the volunteer's own list
+		IODriver.storedData.addJob(theJob);
 		enrolledJobs.add(theJob);
 	}
 
