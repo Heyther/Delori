@@ -308,22 +308,18 @@ public class Job implements Serializable {
 		 * Accepts a volunteer and a workload and deletes the volunteer from the appropriate list of volunteers
 		 * Increments number of available slots of that workload
 		 */
-		public void cancelVolunteer(Volunteer theVolunteer, String workload){
-			switch (workload){
-			case "light":
+		public void cancelVolunteer(Volunteer theVolunteer){
+			if (lightVolunteers.contains(theVolunteer)){
 				lightVolunteers.remove(theVolunteer);
 				lightSlots++;
-				break;
-			case "medium":
+			}
+			else if (mediumVolunteers.contains(theVolunteer)){
 				mediumVolunteers.remove(theVolunteer);
 				mediumSlots++;
-				break;
-			case "heavy":
+			}
+			else if (heavyVolunteers.contains(theVolunteer)){
 				heavyVolunteers.remove(theVolunteer);
 				heavySlots++;
-				break;
-			default: 
-				break;
 			}
 		}
 		

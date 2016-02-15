@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Represents a Volunteer.
  * 
- * @author Heather
+ * @author Heather (Modified by Luciana)
  * @date 
  */
 
@@ -50,13 +50,6 @@ public class Volunteer extends AbstractUser  {
 	public void setRole(UserStatus role) {
 		this.role = role;
 	}
-//
-//	/*
-//	 * Console/menu driven io
-//	 */
-//	public void volunteerMenu() {
-//		
-//	}
 
 	/*
 	 * View joined jobs specific to a volunteer. (U7)
@@ -68,35 +61,21 @@ public class Volunteer extends AbstractUser  {
 		}
 		result.substring(0, result.length());
 		System.out.println(result);
-		
-		
-		/*
-		 * 		//view list of all the park manager's upcoming jobs
-		int i;
-		for (i = 0; i < this.jobsManaging.size(); i++){
-			System.out.print((i+1) + ". ");
-			System.out.println(this.jobsManaging.get(i).jobSummary());
-		}
-		System.out.println("\nType a number to select a job or type 0 to go back: ");
-		int jobNumber = IODriver.input.nextInt();
-		//Keep prompting until good input in received
-		while (jobNumber > jobsManaging.size()) {
-			System.out.println("Invalid input. Please try again.");
-			jobNumber = IODriver.input.nextInt();
-		}
-		//If a job number was typed, print job details and options (If 0 was typed, do nothing)
-		if (jobNumber != 0){
-			System.out.println(jobsManaging.get(jobNumber-1));
-			jobDetailsMenu(jobsManaging.get(jobNumber-1));
-		}
-		 */
 	}
 	
 	/*
 	 * Cancel an enrolled job.
 	 */
-	public void cancelEnrolledJob(Job theJob) {
+	public void cancelEnrolledJob(Job theJob) throws IOException {
+		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
+		IODriver.storedData.deleteJob(theJob);
+		
+		theJob.cancelVolunteer(this);
+		
+		//Remove the job from the volunteer's list of jobs
 		enrolledJobs.remove(theJob);
+		//Add job (now without that volunteer signed up) into the main job list
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	
@@ -104,7 +83,7 @@ public class Volunteer extends AbstractUser  {
 	 * Sign up for a job. (U6)
 	 */
 	public void signUp(Job theJob) throws IOException {
-		System.out.println("Please select a workload: \n1. Light \n 2. Medium \n 3. Heavy");
+		System.out.println("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy");
 		int response = IODriver.input.nextInt();
 		
 		//delete the job from the main job list (to be added back in once the volunteer has been added)
