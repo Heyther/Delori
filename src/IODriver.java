@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,7 +36,9 @@ public class IODriver {
 		runProgram();
 	}
 
-	
+	/*
+	 * Prompts user for login and user options.
+	 */
 	private void runProgram() throws IOException {
 		while (!quitProgram) {
 			login();

@@ -46,7 +46,6 @@ public class Calendar {
 
 
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -62,12 +61,10 @@ public class Calendar {
 				if(jobStartDate != null){
 					
 				if(calculateWeekPendingJobs(jobStartDate) < 5){
-					//business rules 5 & 6(i think 6 is covered by this)
+					//business rules 5 & 6
 					System.out.println("in validate"+calculateWeekPendingJobs(sdf.parse(theJob.startDate)));
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
 					
-							//data.getJobs().add(theJob);
-							//checkedJob = theJob;
 							totalPendingJobs++;
 							canAdd = true;
 						
