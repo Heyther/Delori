@@ -10,6 +10,8 @@ public enum MenuOptions {
 	EXIT("Exit"),
 	SEARCH_VOL_LASTNAME("Search volunteer by last name"),
 	VIEW_JOB_DETAIL("View job details"),
+	SIGN_UP("Sign up for a job"),
+	//CANCEL_ENROLLED(""),
 	
 		
 	// Greetings or Titles

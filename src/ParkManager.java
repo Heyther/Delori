@@ -44,10 +44,10 @@ public class ParkManager extends AbstractUser
 		System.out.println("\nAdd New Job \n");
 		
 		System.out.println("Job Title: ");
-		title = IODriver.input.next();
+		title = IODriver.input.nextLine();
 		
 		System.out.println("Start date (mm/dd/yy): ");
-		startDate = IODriver.input.next();
+		startDate = IODriver.input.nextLine();
 		/*
 		 * if (response < currentDate) { 
 		 * System.out.println("That date is invalid. Please enter a different date. /n");
@@ -55,10 +55,10 @@ public class ParkManager extends AbstractUser
 		 * }
 		 */
 		System.out.println("Start time (hh:mm am/pm): "); 
-		startTime = IODriver.input.next();
+		startTime = IODriver.input.nextLine();
 		
 		System.out.println("Duration (1 or 2 days): ");
-		duration = IODriver.input.next();
+		duration = IODriver.input.nextLine();
 		/*
 		while (duration != "1" && duration != "2"){
 		   System.out.println("\nInvalid job duration. Please enter 1 or 2. Duration:");
@@ -67,16 +67,16 @@ public class ParkManager extends AbstractUser
 		*/
 		
 		System.out.println("Description of job: ");
-		description = IODriver.input.next();
+		description = IODriver.input.nextLine();
 		
 		System.out.println("Number of light slots: ");
-		lightSlots = IODriver.input.nextInt();
+		lightSlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		System.out.println("Number of medium slots: ");
-		medSlots = IODriver.input.nextInt();
+		medSlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		System.out.println("\nNumber of heavy slots: ");
-		heavySlots = IODriver.input.nextInt();
+		heavySlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		//Create new Job object and add to main job list and park manager's job list
 		Job newJob = new Job(title, startDate, startTime, duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
@@ -88,7 +88,7 @@ public class ParkManager extends AbstractUser
 		System.out.println(newJob.toString());
 		
 		//Print menu of options 
-		jobDetailsMenu(newJob);
+		//jobDetailsMenu(newJob);
 		
 	}
 	
@@ -226,23 +226,27 @@ public class ParkManager extends AbstractUser
 	 * U8
 	 */
 	public void viewJobsManaged() throws IOException {
-		//view list of all the park manager's upcoming jobs
-		int i;
-		for (i = 0; i < this.jobsManaging.size(); i++){
-			System.out.print((i+1) + ". ");
-			System.out.println(this.jobsManaging.get(i).jobSummary());
-		}
-		System.out.println("\nType a number to select a job or type 0 to go back: ");
-		int jobNumber = IODriver.input.nextInt();
-		//Keep prompting until good input in received
-		while (jobNumber > jobsManaging.size()) {
-			System.out.println("Invalid input. Please try again.");
-			jobNumber = IODriver.input.nextInt();
-		}
-		//If a job number was typed, print job details and options (If 0 was typed, do nothing)
-		if (jobNumber != 0){
-			System.out.println(jobsManaging.get(jobNumber-1));
-			jobDetailsMenu(jobsManaging.get(jobNumber-1));
+		if (this.jobsManaging.size() > 0) {
+			//view list of all the park manager's upcoming jobs
+			int i;
+			for (i = 0; i < this.jobsManaging.size(); i++){
+				System.out.print((i+1) + ". ");
+				System.out.println(this.jobsManaging.get(i).jobSummary());
+			}
+			System.out.println("\nType a number to select a job or type 0 to go back: ");
+			int jobNumber = IODriver.input.nextInt();
+			//Keep prompting until good input in received
+			while (jobNumber > jobsManaging.size()) {
+				System.out.println("Invalid input. Please try again.");
+				jobNumber = IODriver.input.nextInt();
+			}
+			//If a job number was typed, print job details and options (If 0 was typed, do nothing)
+			if (jobNumber != 0){
+				System.out.println(jobsManaging.get(jobNumber-1));
+				jobDetailsMenu(jobsManaging.get(jobNumber-1));
+			}
+		} else {
+			System.out.println("You currently have no jobs up.");
 		}
 	}
 	
