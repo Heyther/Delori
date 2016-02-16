@@ -7,8 +7,9 @@ import java.util.Scanner;
 /**
  * Represents a Volunteer.
  * 
- * @author Heather (Modified by Luciana)
+ * @author: Luciana, Winfield, Heather, Sean
  * @date 2/16/2016
+ * @version 1.0
  */
 
 public class Volunteer extends AbstractUser  {
@@ -135,12 +136,14 @@ public class Volunteer extends AbstractUser  {
 	public void viewJobDetails() {
 		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		System.out.println("View job details:");
-		System.out.print("Select job number:\n>");
+		System.out.print("Select job number, or enter 0 to go back:\n>");
 		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
-		if (responseJobNum <= 0 || responseJobNum > allJobs.size()) {
+		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
 			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
-		} else {
+		} else if (responseJobNum == 0) { // do nothing to go back to main menu
+			System.out.println("");
+		}else {
 			System.out.println(allJobs.get(responseJobNum - 1).toString());
 		}
 	}

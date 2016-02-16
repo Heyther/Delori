@@ -7,9 +7,9 @@ import java.util.Scanner;
 /**
  * Console driven i/o Urban Park Staff Member.
  * 
- * @author Winfield Brooks
- * @version 1.1
- *
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 
 public class UrbanParkStaffMember extends AbstractUser {

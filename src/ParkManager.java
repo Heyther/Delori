@@ -4,10 +4,12 @@ import java.util.Objects;
 
 import org.omg.Messaging.SyncScopeHelper;
 
-/* 
+/**
+ * Represents a Park Manager.
  * 
- * @author: Luciana (Modified by Heather)
- * @date 2/16/16
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 
 public class ParkManager extends AbstractUser 

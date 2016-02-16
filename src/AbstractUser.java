@@ -5,8 +5,9 @@ import java.util.Objects;
 /**
  * Represents a user.
  * 
- * @author Heather
- * @date
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 public abstract class AbstractUser implements Serializable {
 

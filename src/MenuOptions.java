@@ -1,4 +1,10 @@
-
+/**
+ * Represents the different common options for UI.
+ * 
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
+ */
 public enum MenuOptions {
 
 	

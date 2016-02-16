@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests the Data class
+ * 
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
+ */
 public class DataTest {
 
 	private Data data;

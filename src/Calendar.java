@@ -9,8 +9,9 @@ import java.util.GregorianCalendar;
 /**
  * Represents a calendar full of jobs.
  * 
- * @author Heather modified by Sean 
- * @date
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 public class Calendar {
 	public int totalPendingJobs;
@@ -25,17 +26,7 @@ public class Calendar {
 	 */
 	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
-		//for unit testing calendar only
-		//recordOfJobs = theRecordOfJobs;
-		//recordOfUsers = theRecordOfUsers;
 	}
-	
-	/*
-	 * Constructs a calendar
-	 */
-	//public Calendar() {
-	//	totalPendingJobs = 0;
-	//}
 
 	/*
 	 * Checks if the job is legitimate.
