@@ -35,7 +35,7 @@ public class IODriver {
 		response = "";
 		currentUser = null;
 		input = new Scanner(System.in);
-		input.useDelimiter("\n");
+		//input.useDelimiter("\n");
 		quitProgram = false;
 		//MenuOptions init = null;
 		runProgram();
@@ -48,11 +48,12 @@ public class IODriver {
 			MenuOptions selection = null;
 			//menuBox(currentUser.usersHomeMenu());
 			//System.out.print(">");
-			
+			//response = input.nextLine();
+			//selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
-				response = input.next();
+				response = input.nextLine();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
 				input.nextLine();
@@ -66,7 +67,7 @@ public class IODriver {
 	 * Retrieves the next display based on user's selection
 	 */
 	public void nextSelectionDisplay(MenuOptions theOption) throws IOException {
-		
+
 //		if (currentUser instanceof Volunteer) {
 //			currentUser = (Volunteer) currentUser;
 //		} else if (currentUser instanceof ParkManager) {
@@ -78,8 +79,9 @@ public class IODriver {
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
 				if (currentUser instanceof Volunteer) {
-					((Volunteer) currentUser).viewEnrolledJobs(storedData.getJobs());
+					((Volunteer) currentUser).viewEnrolledJobs();
 				}
+				break;
 			case ADD_A_JOB:
 				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
 					((ParkManager) currentUser).addJob();	
@@ -107,6 +109,12 @@ public class IODriver {
 				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
 				}
+				break;
+			case SIGN_UP: 
+				System.out.print("Please, select a job number:\n>");
+				response = input.nextLine();
+				int index = Integer.parseInt(response);
+				((Volunteer) currentUser).signUp(storedData.getJobs().get(index-1));
 				break;
 	
 			default: System.out.println("");
@@ -188,20 +196,21 @@ public class IODriver {
 		String results = "";
 		int boxWidth = getLongestStringInJobs(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
-
+		
 		results += divider + "\n";
+		results += "List of Jobs:\n";
 		for (int i = 0; i < menuOptions.size(); i++) {
-			if (boxWidth == menuOptions.get(i).toString().length()) {
-				if (i == 1) { results += divider + "\n"; };
-				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", i + ". " + (menuOptions.get(i)).jobSummary(), "|\n"); }
-				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", (menuOptions.get(i)).jobSummary(), "|\n"); }
+			//if (boxWidth == menuOptions.get(i).jobSummary().toString().length()) {
+				//if (i == 1) { results += divider + "\n"; };
+				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
+				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
 				
-			} else {
-				if (i == 1) { results += divider + "\n"; };
-				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
-				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", i + ". " + (menuOptions.get(i)).jobSummary(),"|\n"); }
-				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", (menuOptions.get(i)).jobSummary(),"|\n"); }
-			}
+//			} else {
+//				//if (i == 1) { results += divider + "\n"; };
+//				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).jobSummary().toString().length()) + 4);
+//				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + (menuOptions.get(i)).jobSummary(),"\n"); }
+//				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + (menuOptions.get(i)).jobSummary(),"\n"); }
+//			}
 		}
 		results += divider + "\n";
 		System.out.println(results);
