@@ -10,9 +10,7 @@ import java.util.List;
  */
 public class Data {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -3014553440474186296L;
 	private static final String SERIALIZED_FILE = "./urbanParkData.ser";
 	private ArrayList<Job> allJobs;
@@ -21,7 +19,9 @@ public class Data {
 	String myDataFile = "urbanParkData.ser";
 	private boolean dataInitialized;
 
-
+	/**
+	 * Constructs a new Data class.
+	 */
 	public Data() throws ClassNotFoundException, IOException  {
 		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
@@ -112,6 +112,9 @@ public class Data {
 	// Serialize  
 	///////////////
 	
+	/*
+	 * Initialize data for single use to add users. Method controlled by field dataInitialized.
+	 */
 	public void initializeData() throws IOException {
 		ParkManager m = new ParkManager("Mary", "Thompson", "m@gmail.com", "Green Park");
 		addUser(m);
@@ -128,8 +131,6 @@ public class Data {
 		//addJob(new Job("Paint", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Paint the wall by the soccer fields.", 1, 2, 3));
 
 		
-		//System.out.println(m.getFname());
-		//System.out.println(m.getEmail());
 		
 		serializeObject();
 	}

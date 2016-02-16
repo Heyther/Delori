@@ -12,9 +12,6 @@ import java.util.Objects;
 public abstract class AbstractUser implements Serializable {
 
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1322725593346883536L;
 	protected String fname, lname, email;
 	

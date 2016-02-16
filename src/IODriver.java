@@ -36,7 +36,9 @@ public class IODriver {
 		runProgram();
 	}
 
-	
+	/*
+	 * Prompts user for login and user options.
+	 */
 	private void runProgram() throws IOException {
 		while (!quitProgram) {
 			login();

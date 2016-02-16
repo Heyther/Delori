@@ -14,9 +14,7 @@ import java.util.Scanner;
 
 public class Volunteer extends AbstractUser  {
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		

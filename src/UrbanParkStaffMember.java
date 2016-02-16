@@ -108,8 +108,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	}
 	
     /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
+     * Hashcode for equals method.
      */
     @Override
     public int hashCode() {
