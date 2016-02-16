@@ -285,23 +285,33 @@ public class Job implements Serializable {
 		 * Accepts a Volunteer and a workload and adds the volunteer to the appropriate list of volunteers
 		 * Decrements number of available slots of that workload
 		 */
-		public void signUpVolunteer(Volunteer theVolunteer, int workload){
+		public boolean signUpVolunteer(Volunteer theVolunteer, int workload){
 			switch (workload){
 			case LIGHT:
-				lightVolunteers.add(theVolunteer);
-				lightSlots--;
-				break;
+				if (lightVolunteers.size() < lightSlots) {
+					lightVolunteers.add(theVolunteer);
+					lightSlots--;
+					return true;
+				}
+				else return false;
 			case MEDIUM:
-				mediumVolunteers.add(theVolunteer);
-				mediumSlots--;
-				break;
+				if (mediumVolunteers.size() < mediumSlots) {
+					mediumVolunteers.add(theVolunteer);
+					mediumSlots--;
+					return true;
+				}
+				else return false;
 			case HEAVY:
-				heavyVolunteers.add(theVolunteer);
-				heavySlots--;
-				break;
+				if (heavyVolunteers.size() < heavySlots) {
+					heavyVolunteers.add(theVolunteer);
+					heavySlots--;
+					return true;
+				}
+				else return false;
 			default: 
 				break;
 			}
+			return false;
 		}
 		
 		/*

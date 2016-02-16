@@ -118,6 +118,7 @@ public class IODriver {
 				break;
 			case VIEW_JOB_DETAIL: 
 				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
+					menuBoxForJobs(storedData.getJobs());
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
 				}
 				break;

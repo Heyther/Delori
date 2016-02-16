@@ -17,6 +17,38 @@ public class DataTest {
 		
 	} 
 
+	@Test
+	public void testGetReturningUser() {
+		AbstractUser user = data.getReturningUser("b@gmail.com");
+		assertEquals("Krom", user.getLname());
+		
+	}
+	
+	@Test
+	public void testGetReturningUser2() {
+		AbstractUser user = data.getReturningUser("junkEmail@gmail.com");
+		assertNull(user);
+		
+	}
+	
+	@Test
+	public void testAddUser() {
+		UrbanParkStaffMember staff = new UrbanParkStaffMember("Tim", "Jones", "tj@gmail.com");
+		data.addUser(staff);
+		assertTrue(data.getUsers().contains(staff));
+		
+		
+	}
+	
+	public void testDeletJob() throws IOException {
+		Job job = new Job("Title", "02/26/2016", "1:00pm", "1",
+				"Tacoma", "Evergreen Park", "Description:..", 1, 2, 3);
+		data.addJob(job);
+		assertTrue(data.getJobs().contains(job));
+		data.deleteJob(job);
+		assertFalse(data.getJobs().contains(job));
+		
+	}
 	
 	@Test
 	public void testSearchVolunteerByLastLname() {
@@ -33,17 +65,11 @@ public class DataTest {
 	}
 
 	@Test
-	public void testAddJob() {
-		int sizeBeforeAdd = data.getJobs().size();
+	public void testAddJob() throws IOException {
 		Job job = new Job("Title", "02/26/2016", "1:00pm", "1",
 				"Tacoma", "Evergreen Park", "Description:..", 1, 2, 3);
-		try {
-			data.addJob(job);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertEquals(sizeBeforeAdd + 1, data.getJobs().size());
+		data.addJob(job);
+		assertTrue(data.getJobs().contains(job));
+		data.deleteJob(job);
 	}
-
 }

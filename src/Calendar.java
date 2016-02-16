@@ -25,6 +25,7 @@ public class Calendar {
 	 */
 	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
+		//for unit testing calendar only
 		//recordOfJobs = theRecordOfJobs;
 		//recordOfUsers = theRecordOfUsers;
 	}
@@ -67,8 +68,9 @@ public class Calendar {
 		if(totalPendingJobs < 30 && Integer.parseInt(theJob.duration) <= 2){
 			try {
 				//business rule 2
-				if(theJob.startDate != null){
-				if(calculateWeekPendingJobs(sdf.parse(theJob.startDate)) < 5){
+				if(jobStartDate != null){
+					
+				if(calculateWeekPendingJobs(jobStartDate) < 5){
 					//business rules 5 & 6(i think 6 is covered by this)
 					System.out.println("in validate"+calculateWeekPendingJobs(sdf.parse(theJob.startDate)));
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
@@ -104,8 +106,11 @@ public class Calendar {
 	 * Checks that there is only 5 jobs at a time for any given week.
 	 */
 	public int calculateWeekPendingJobs(Date theDate){
-		SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		
 		ListIterator<Job> jobItr = (ListIterator<Job>) IODriver.storedData.getJobs().listIterator();
+		//For unit testing  Calendar only
+		//ListIterator<Job> jobItr = (ListIterator<Job>)recordOfJobs.listIterator();
 		int weekTotal =0;
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
 		curDay.setTime(theDate);
