@@ -105,7 +105,12 @@ public class IODriver {
 				}
 				break;
 			case VIEW_UPCOMING_JOBS:  
-				menuBoxForJobs(storedData.getJobs());
+				if (currentUser instanceof Volunteer) {
+					menuBoxForJobs(storedData.getJobs());
+					//((Volunteer) currentUser).signUpOrViewJobDetail();
+				} else {
+					menuBoxForJobs(storedData.getJobs());
+				}
 				break;
 			case EXIT:    
 				quitProgram = true;
@@ -120,9 +125,13 @@ public class IODriver {
 				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
 					menuBoxForJobs(storedData.getJobs());
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
+				} else if (currentUser instanceof Volunteer) {
+					menuBoxForJobs(storedData.getJobs());
+					((Volunteer) currentUser).viewJobDetails();
 				}
 				break;
 			case SIGN_UP: 
+				menuBoxForJobs(storedData.getJobs());
 				System.out.print("Please, select a job number:\n>");
 				response = input.nextLine();
 				int index = Integer.parseInt(response);
@@ -178,7 +187,7 @@ public class IODriver {
 	/*
 	 * Takes a list of menu options and displays them in a box format
 	 */
-	private void menuBox(ArrayList<MenuOptions> menuOptions) {
+	public void menuBox(ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestString(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
