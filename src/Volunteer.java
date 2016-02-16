@@ -86,8 +86,6 @@ public class Volunteer extends AbstractUser  {
 		
 		System.out.println("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n\n>");
 		
-<<<<<<< HEAD
-		
 		// BR7
 		boolean signUp = false;
 		for (Job j : enrolledJobs) {
@@ -106,21 +104,22 @@ public class Volunteer extends AbstractUser  {
 		} else {
 			System.out.println("Sorry, you cannot sign up for another job with time conflicts.\n");
 		}
-=======
-		//delete the job from the main job list (to be added back in once the volunteer has been added)
-		IODriver.storedData.deleteJob(theJob);
 		
-		if (theJob.signUpVolunteer(this, response)) {
-			//Add the job to the volunteer's list
-			IODriver.storedData.addJob(theJob);
-		}
-		else {
-			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
-		}
-		
-		//Add the job back into the main job list
-		enrolledJobs.add(theJob);
->>>>>>> 610a4f7006b0660849866fc65c6d6241e32a0c85
+//		// BR3?
+//		//delete the job from the main job list (to be added back in once the volunteer has been added)
+//		IODriver.storedData.deleteJob(theJob);
+//		int response = Integer.parseInt(IODriver.input.nextLine());
+//		if (theJob.signUpVolunteer(this, response)) {
+//			//Add the job to the volunteer's list
+//			IODriver.storedData.addJob(theJob);
+//		}
+//		else {
+//			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+//		}
+//		
+//		//Add the job back into the main job list
+//		enrolledJobs.add(theJob);
+
 	}
 
     /*
