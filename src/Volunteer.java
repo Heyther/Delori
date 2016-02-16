@@ -89,10 +89,16 @@ public class Volunteer extends AbstractUser  {
 		
 		//delete the job from the main job list (to be added back in once the volunteer has been added)
 		IODriver.storedData.deleteJob(theJob);
-		theJob.signUpVolunteer(this, response);
 		
-		//Add the job back into the main job list and to the volunteer's own list
-		IODriver.storedData.addJob(theJob);
+		if (theJob.signUpVolunteer(this, response)) {
+			//Add the job to the volunteer's list
+			IODriver.storedData.addJob(theJob);
+		}
+		else {
+			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+		}
+		
+		//Add the job back into the main job list
 		enrolledJobs.add(theJob);
 	}
 
