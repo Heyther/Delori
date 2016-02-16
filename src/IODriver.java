@@ -70,6 +70,7 @@ public class IODriver {
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
 				//input.nextLine();
+
 			}
 		}
 		System.out.println("\nGoodbye");
