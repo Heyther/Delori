@@ -56,6 +56,7 @@ public class IODriver {
 				response = input.nextLine();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
+				input.nextLine();
 			}
 			
 		}

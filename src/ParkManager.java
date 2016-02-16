@@ -6,8 +6,8 @@ import org.omg.Messaging.SyncScopeHelper;
 
 /* 
  * 
- * @author: Luciana
- * @date
+ * @author: Luciana (Modified by Heather)
+ * @date 2/16/16
  */
 
 public class ParkManager extends AbstractUser 
@@ -46,7 +46,7 @@ public class ParkManager extends AbstractUser
 		System.out.println("Job Title: ");
 		title = IODriver.input.nextLine();
 		
-		System.out.println("Start date (mm/dd/yy): ");
+		System.out.println("Start date (mm/dd/yyyy): ");
 		startDate = IODriver.input.nextLine();
 		/*
 		 * if (response < currentDate) { 
@@ -80,15 +80,23 @@ public class ParkManager extends AbstractUser
 		
 		//Create new Job object and add to main job list and park manager's job list
 		Job newJob = new Job(title, startDate, startTime, duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-		IODriver.storedData.addJob(newJob);
-		this.jobsManaging.add(newJob);
+		//IODriver.storedData.addJob(newJob);
+		//this.jobsManaging.add(newJob);
 		
-		//Show confirmation
-		System.out.println("\nJob Added! Review Job Details:\n");
-		System.out.println(newJob.toString());
+		if(IODriver.storedData.calendar.verifyJob(newJob)) {
+			this.jobsManaging.add(newJob);
+			IODriver.storedData.addJob(newJob);
+			//Show confirmation
+			System.out.println("\nJob Added! Review Job Details:\n");
+			System.out.println(newJob.toString());
+		}
+		else {
+			System.out.println("Unable to add job. Too many jobs scheduled selected week.");
+
+		}
 		
 		//Print menu of options 
-		//jobDetailsMenu(newJob);
+		jobDetailsMenu(newJob);
 		
 	}
 	

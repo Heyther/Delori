@@ -26,8 +26,8 @@ public class Calendar {
 	 */
 	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
-		recordOfJobs = theRecordOfJobs;
-		recordOfUsers = theRecordOfUsers;
+		//recordOfJobs = theRecordOfJobs;
+		//recordOfUsers = theRecordOfUsers;
 	}
 	
 	/*
@@ -40,8 +40,9 @@ public class Calendar {
 	/*
 	 * Checks if the job is legitimate.
 	 */
-	public void verifyJob(Job theJob) {
+	public boolean verifyJob(Job theJob) {
 		//Job checkedJob = null;
+		boolean canAdd = false;
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		//String[] start = theJob.getStartDate().split("/");
 		//String[] end = theJob.getEndDate().split("/");
@@ -70,12 +71,13 @@ public class Calendar {
 				if(theJob.startDate != null){
 				if(calculateWeekPendingJobs(sdf.parse(theJob.startDate)) < 5){
 					//business rules 5 & 6(i think 6 is covered by this)
+					System.out.println("in validate"+calculateWeekPendingJobs(sdf.parse(theJob.startDate)));
 					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
 					
 							//data.getJobs().add(theJob);
 							//checkedJob = theJob;
-							recordOfJobs.add(theJob);
 							totalPendingJobs++;
+							canAdd = true;
 						
 					}
 					
@@ -87,7 +89,7 @@ public class Calendar {
 		
 		}
 		//}
-		//return checkedJob;
+		return canAdd;
 	}
 	
 //	public void deleteFromJobList(Job theJob){
@@ -104,8 +106,7 @@ public class Calendar {
 	 */
 	public int calculateWeekPendingJobs(Date theDate){
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		//ListIterator<Job> jobItr = data.getJobs().listIterator();
-		ListIterator<Job> jobItr = recordOfJobs.listIterator();
+		ListIterator<Job> jobItr = (ListIterator<Job>) IODriver.storedData.getJobs().listIterator();
 		int weekTotal =0;
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
 		curDay.setTime(theDate);
@@ -119,10 +120,8 @@ public class Calendar {
 			pastDays[i] = curDay.get(GregorianCalendar.DAY_OF_WEEK);
 			week[i] = curDay.get(GregorianCalendar.WEEK_OF_MONTH);
 			curDay.setTime(theDate);
-			//System.out.println(pastDays[i]);
 		}
 		curDay.setTime(theDate);
-		
 		while(jobItr.hasNext()){
 			try {
 				Date tempDate = sdf.parse(jobItr.next().startDate);
@@ -130,17 +129,13 @@ public class Calendar {
 				for(i =0; i < 7; i++){
 					if(pastDays[i] == curDay.get(GregorianCalendar.DAY_OF_WEEK)
 							&& week[i] == curDay.get(GregorianCalendar.WEEK_OF_MONTH)){
-						weekTotal++;						
+						weekTotal++;		
 					}
 				}
-		
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
 		}
 		return weekTotal;
 	}
-		
-	
 }
