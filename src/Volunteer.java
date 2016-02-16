@@ -1,16 +1,12 @@
 
-
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Represents a Volunteer.
  * 
  * @author Heather (Modified by Luciana)
- * @date 
+ * @date 2/16/2016
  */
 
 public class Volunteer extends AbstractUser  {
@@ -56,12 +52,15 @@ public class Volunteer extends AbstractUser  {
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
-		result.append("Jobs you are enrolled in:\n");
-		for (Job j : enrolledJobs) {
-			result.append(j.getJobTitle() + "\n");
+		if (enrolledJobs.size() > 0) {
+			result.append("Jobs you are enrolled in:\n");
+			for (Job j : enrolledJobs) {
+				result.append(j.getJobTitle() + "\n");
+			}
+		} else {
+			result.append("You are currently not enrolled in any jobs\n");
 		}
-		//result.substring(0, result.length());
-		System.out.println(result);
+			System.out.println(result);
 	}
 	
 	/*
@@ -84,32 +83,53 @@ public class Volunteer extends AbstractUser  {
 	 * Sign up for a job. (U6)
 	 */
 	public void signUp(Job theJob) throws IOException {
+		
 		System.out.println("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n\n>");
-		int response = Integer.parseInt(IODriver.input.nextLine());
 		
-		//delete the job from the main job list (to be added back in once the volunteer has been added)
-		IODriver.storedData.deleteJob(theJob);
-		
-		if (theJob.signUpVolunteer(this, response)) {
-			//Add the job to the volunteer's list
+		// BR7
+		boolean signUp = false;
+		for (Job j : enrolledJobs) {
+			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
+		}
+		if (signUp || enrolledJobs.size() == 0) {
+			//delete the job from the main job list (to be added back in once the volunteer has been added)
+			IODriver.storedData.deleteJob(theJob);
+			int response = Integer.parseInt(IODriver.input.nextLine());
+			theJob.signUpVolunteer(this, response);
+			
+			//Add the job back into the main job list and to the volunteer's own list
 			IODriver.storedData.addJob(theJob);
-		}
-		else {
-			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+
+			enrolledJobs.add(theJob);
+		} else {
+			System.out.println("Sorry, you cannot sign up for another job with time conflicts.\n");
 		}
 		
-		//Add the job back into the main job list
-		enrolledJobs.add(theJob);
+//		// BR3?
+//		//delete the job from the main job list (to be added back in once the volunteer has been added)
+//		IODriver.storedData.deleteJob(theJob);
+//		int response = Integer.parseInt(IODriver.input.nextLine());
+//		if (theJob.signUpVolunteer(this, response)) {
+//			//Add the job to the volunteer's list
+//			IODriver.storedData.addJob(theJob);
+//		}
+//		else {
+//			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+//		}
+//		
+//		//Add the job back into the main job list
+//		enrolledJobs.add(theJob);
+
 	}
 
     /*
      * (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getRole());
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(super.hashCode(), getRole());
+//    }
 	
 	/*
 	 * Checks if the object is-a volunteer.
