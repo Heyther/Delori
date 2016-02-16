@@ -134,21 +134,6 @@ public class Data {
 		serializeObject();
 	}
 	
-	/*
-	 * Save persistent data to specified file
-	 */
-//	public void saveData(List<Job> theJobs, List<AbstractUser> theUsers) {
-//
-//		try (OutputStream file = new FileOutputStream(myDataFile);
-//				ObjectOutputStream  buffer = new BufferedOutputStream(file);
-//				ObjectOutput out = new ObjectOutputStream(buffer);) {
-//
-//			out.writeObject(theJobs);
-//			out.writeObject(theUsers);
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		}
-//	}
 	
 	/*
 	 * Load persistent data from specified file
@@ -159,12 +144,6 @@ public class Data {
 			initializeData();
 		}
 		readObject();
-		
-//		// load existing system's database
-//		ArrayList<Object> allData = readObject(); // retrieve saved data
-//		allUsers.addAll((ArrayList<AbstractUser>) allData.get(0));
-//		allJobs.add((Job) allData.get(1));
-			
 	}
 	
 

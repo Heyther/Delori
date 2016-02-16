@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
@@ -28,37 +27,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 		role = UserStatus.UPSMEMBER;
 	}
 
-	/*
-	 * Console driven menu to select staff member functions.
-	 */
-//	public void staffMenu() {
-//		int select = -1;
-//		System.out.println("Urban Park Staff Member: " + this.getFname() + " "
-//				+ this.getLname() + "\n");
-//		System.out.println("Select from the following:");
-//		System.out.println("\t1) Search volunteer by last name.");
-//		System.out.println("\t2) View job details.");
-//		System.out.println("\t3) Exit.");
-//
-//		System.out.println("Enter item number:");
-//		try {
-//			select = IODriver.input.nextInt();
-//		} catch (InputMismatchException e) {
-//			IODriver.input.next();
-//		}
-//		switch (select) {
-//		case 1: volunteerSearch();
-//			break;
-//		case 2: viewJobDetails();
-//			break;
-//		case 3 : ;
-//			break;
-//		default :
-//			System.out.println("Invalid entry. Try again. Menu");
-//			staffMenu();
-//			break;
-//		}
-//	}
 
 	/*
 	 * Search for a volunteer by last name.
@@ -91,10 +59,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 		ArrayList<Job> jobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		int jobNumber = 0;
 		System.out.println("View job details:");
-//		for (int i = 0; i < jobs.size(); i++) {
-//			System.out.println("\t" + (i + 1) + ") " + jobs.get(i).jobSummary());
-//		}
-		
 		System.out.println("Select job number:");
 		try {
 			jobNumber = Integer.parseInt(IODriver.input.nextLine());
@@ -107,11 +71,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 			System.out.println(jobs.get(jobNumber - 1).toString());
 			
 		}
-		
 	}
-
 	
-
 	/*
 	/*
 	 * Displays the menu for a UP staff member.
@@ -129,7 +90,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 			
 		return result;
 	}
-
 
 	/*
 	 * Retrieves the user's role.
