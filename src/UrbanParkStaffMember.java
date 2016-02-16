@@ -67,7 +67,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 		String name;
 		System.out.println("Volunteer Search:");
 		System.out.println("Enter volunteers last name or 'b' to go back:");
-		name = IODriver.input.next();
+		name = IODriver.input.nextLine();
 		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
 		if(volunteers.size() > 0) {
 			for(Volunteer vol: volunteers ) {
@@ -97,9 +97,8 @@ public class UrbanParkStaffMember extends AbstractUser {
 		
 		System.out.println("Select job number:");
 		try {
-			jobNumber = IODriver.input.nextInt();
+			jobNumber = Integer.parseInt(IODriver.input.nextLine());
 		} catch (InputMismatchException e) {
-			IODriver.input.next();
 		}
 		if (jobNumber <= 0 || jobNumber > jobs.size()) {
 			System.out.println("Invalid entry, try again.\n");
