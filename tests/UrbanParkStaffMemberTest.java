@@ -12,10 +12,6 @@ public class UrbanParkStaffMemberTest {
 		staff = new UrbanParkStaffMember("first", "last", "email");
 	}
 
-	@Test
-	public void testVolunteerSearch() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testEqualsObject() {
