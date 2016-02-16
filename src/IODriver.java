@@ -1,6 +1,9 @@
 
 import java.io.IOException;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -23,6 +26,11 @@ public class IODriver {
 	String response;
 	//private Volunteer currentIdentifiedUser;
 
+	private String month="";
+	private String day="";
+	private String year="";
+	
+	
 	/*
 	 * Constructs the driver for the program.
 	 */
@@ -46,19 +54,23 @@ public class IODriver {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
-			//menuBox(currentUser.usersHomeMenu());
-			//System.out.print(">");
-			//response = input.nextLine();
-			//selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
+			
+//			Calendar rightNow = Calendar.getInstance();
+//			java.text.SimpleDateFormat df1 = new java.text.SimpleDateFormat("MM"); //02
+//			java.text.SimpleDateFormat df2 = new java.text.SimpleDateFormat("MMM"); //Feb
+//			java.text.SimpleDateFormat df3 = new java.text.SimpleDateFormat("MMMM"); // February
+//			System.out.println(df1.format(rightNow.getTime()));
+//			System.out.println(df2.format(rightNow.getTime()));
+//			System.out.println(df3.format(rightNow.getTime()));
+						
 			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
-				input.nextLine();
+				//input.nextLine();
 			}
-			
 		}
 		System.out.println("\nGoodbye");
 	}
@@ -87,15 +99,14 @@ public class IODriver {
 					((ParkManager) currentUser).addJob();	
 					break;
 				}
-			case VIEW_ALL_VOL:
-			case VIEW_UPCOMING_JOBS:  
+			case VIEW_JOBS_MANAGED:
 				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
 					((ParkManager) currentUser).viewJobsManaged();
-				} else if (currentUser instanceof Volunteer) {
-					menuBoxForJobs(storedData.getJobs());
 				}
 				break;
-	
+			case VIEW_UPCOMING_JOBS:  
+				menuBoxForJobs(storedData.getJobs());
+				break;
 			case EXIT:    
 				quitProgram = true;
 				break;

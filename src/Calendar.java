@@ -1,5 +1,4 @@
 import java.text.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
@@ -105,7 +104,7 @@ public class Calendar {
 	 * Checks that there is only 5 jobs at a time for any given week.
 	 */
 	public int calculateWeekPendingJobs(Date theDate){
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
 		ListIterator<Job> jobItr = (ListIterator<Job>) IODriver.storedData.getJobs().listIterator();
 		int weekTotal =0;
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();

@@ -22,15 +22,17 @@ public class VolunteerTest {
 	}
 
 
-    /*
-     * Test Volunteer Constructor
-     */
 	@Test
-	public void testVolunteer() {
-		Volunteer vol1 = new Volunteer("John", "Doe", "dough@gmail.com");
-		assertEquals("Not a volunteer. ", "John", vol1.getFname());
+	public void testEqualsObject() {
+		Volunteer same = new Volunteer("John", "Doe", "dough@gmail.com");
+		assertTrue(vol.equals(same));
 	}
-
+	
+	@Test
+	public void testNotEqualsObject() {
+		Volunteer diff = new Volunteer("notfirst", "notlast", "notemail");
+		assertFalse(vol.equals(diff));
+	}
 
 //	
 //    /*

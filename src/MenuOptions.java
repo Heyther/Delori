@@ -11,7 +11,7 @@ public enum MenuOptions {
 	SEARCH_VOL_LASTNAME("Search volunteer by last name"),
 	VIEW_JOB_DETAIL("View job details"),
 	SIGN_UP("Sign up for a job"),
-	//CANCEL_ENROLLED(""),
+	VIEW_JOBS_MANAGED("View managed jobs"),
 	
 		
 	// Greetings or Titles
