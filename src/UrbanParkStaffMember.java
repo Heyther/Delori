@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
@@ -89,6 +90,7 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public void viewJobDetails() {
 		ArrayList<Job> jobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		int jobNumber = 0;
+		System.out.println("View job details:");
 //		for (int i = 0; i < jobs.size(); i++) {
 //			System.out.println("\t" + (i + 1) + ") " + jobs.get(i).jobSummary());
 //		}
@@ -167,5 +169,4 @@ public class UrbanParkStaffMember extends AbstractUser {
 		}
 		return false;
 	}
-
 }

@@ -75,7 +75,7 @@ public class ParkManager extends AbstractUser
 		System.out.println("Number of medium slots: ");
 		medSlots = Integer.parseInt(IODriver.input.nextLine());
 		
-		System.out.println("\nNumber of heavy slots: ");
+		System.out.println("Number of heavy slots: ");
 		heavySlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		//Create new Job object and add to main job list and park manager's job list
@@ -108,7 +108,7 @@ public class ParkManager extends AbstractUser
 				+ "2) Cancel job\n " 
 				+ "3) View signed-up volunteers\n "
 				+ "4) Exit " );
-		String response = IODriver.input.next();
+		String response = IODriver.input.nextLine();
 		
 		switch (response){
 		case "1": editJob(theJob);
@@ -131,7 +131,7 @@ public class ParkManager extends AbstractUser
 	public void cancelJob(Job theJob) throws IOException {
 		System.out.println("Are you sure you want to cancel this job?");
 		System.out.println(" 1) Yes, cancel the job. \n 2) No, keep the job \n");
-		String response = IODriver.input.next();
+		String response = IODriver.input.nextLine();
 		switch (response){
 		case "1": 
 			this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
@@ -164,7 +164,7 @@ public class ParkManager extends AbstractUser
 					         +" 7) Medium slots "+"\n" 
 					         +" 8) Heavy slots "+"\n"
 					         +" 9) Done editing ");
-		String response = IODriver.input.next();
+		String response = IODriver.input.nextLine();
 		String newValue;
 		
 		//For the field the user selected to edit, prompt for the new value and change the appropriate field in the job
@@ -172,49 +172,49 @@ public class ParkManager extends AbstractUser
 		switch (response){
 		case "1":
 			System.out.println("Enter new Job Title: ");
-			theJob.setJobTitle(IODriver.input.next());
+			theJob.setJobTitle(IODriver.input.nextLine());
 			System.out.println("Job Title has been changed");
 			editJob(theJob);
 			break;
 		case "2":
 			System.out.println("Enter new Date: ");
-			theJob.setStartDate(IODriver.input.next());
+			theJob.setStartDate(IODriver.input.nextLine());
 			System.out.println("Start Date has been changed");
 			editJob(theJob);
 			break;
 		case "3":
 			System.out.println("Enter new Time: ");
-			theJob.setStartTime(IODriver.input.next());
+			theJob.setStartTime(IODriver.input.nextLine());
 			System.out.println("Time has been changed");
 			editJob(theJob);
 			break;
 		case "4":
 			System.out.println("Enter new Duration: ");
-			theJob.setDuration(IODriver.input.next());
+			theJob.setDuration(IODriver.input.nextLine());
 			System.out.println("Duration has been changed");
 			editJob(theJob);
 			break;
 		case "5":
 			System.out.println("Enter new Description: ");
-			theJob.setDescription(IODriver.input.next());
+			theJob.setDescription(IODriver.input.nextLine());
 			System.out.println("Description has been changed");
 			editJob(theJob);
 			break;
 		case "6":
 			System.out.println("Enter new number of Light Slots: ");
-			theJob.setLightSlots(IODriver.input.nextInt());
+			theJob.setLightSlots(Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Light Slots has been changed");
 			editJob(theJob);
 			break;
 		case "7":
 			System.out.println("Enter new number of Medium Slots: ");
-			theJob.setMediumSlots(IODriver.input.nextInt());
+			theJob.setMediumSlots(Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Medium Slots has been changed");
 			editJob(theJob);
 			break;
 		case "8":
 			System.out.println("Enter new number of Heavy Slots: ");
-			theJob.setHeavySlots(IODriver.input.nextInt());
+			theJob.setHeavySlots(Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Heavy Slots has been changed");
 			editJob(theJob);
 			break;
@@ -244,11 +244,11 @@ public class ParkManager extends AbstractUser
 				System.out.println(this.jobsManaging.get(i).jobSummary());
 			}
 			System.out.println("\nType a number to select a job or type 0 to go back: ");
-			int jobNumber = IODriver.input.nextInt();
+			int jobNumber = Integer.parseInt(IODriver.input.nextLine());
 			//Keep prompting until good input in received
 			while (jobNumber > jobsManaging.size()) {
 				System.out.println("Invalid input. Please try again.");
-				jobNumber = IODriver.input.nextInt();
+				jobNumber = Integer.parseInt(IODriver.input.nextLine());
 			}
 			//If a job number was typed, print job details and options (If 0 was typed, do nothing)
 			if (jobNumber != 0){
@@ -280,6 +280,7 @@ public class ParkManager extends AbstractUser
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
+		result.add(MenuOptions.VIEW_JOBS_MANAGED);
 		result.add(MenuOptions.ADD_A_JOB);
 		result.add(MenuOptions.EXIT);
 			
