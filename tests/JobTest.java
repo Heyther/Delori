@@ -3,7 +3,13 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Tests the Job class
+ * 
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
+ */
 public class JobTest {
 
 	Job someJob;

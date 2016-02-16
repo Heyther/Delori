@@ -11,14 +11,13 @@ import org.junit.Test;
 
 /**
  * 
- */
-
-/**
- * @author Sean
  * In order to run these tests it requires editing the specifically commented lines
  * inside Calendar. As I didn't want to mess with our serializable data whilst testing.
  * These changes are at line 30 and line 114 of Calendar.java
- *
+ * 
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 public class CalendarTest {
 	ArrayList<Job> jobs;

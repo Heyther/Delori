@@ -4,9 +4,9 @@ import java.util.List;
 
 /**
  * Save and load persistent data.
- * @author Winfield Brooks (Modified: Heather)
- * @version 2/13/16
- *
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 public class Data {
 

@@ -1,9 +1,7 @@
 
 import java.io.IOException;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -11,8 +9,9 @@ import java.util.Scanner;
 /**
  * Driver class. Controls menus and user types.
  * 
- * @author: Luciana (Modified by Heather)
- * @date 2/13/2016
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 2/16/2016
+ * @version 1.0
  */
 
 public class IODriver {
@@ -24,28 +23,17 @@ public class IODriver {
 	static boolean quitProgram;
 	Data jobs, users;
 	String response;
-	//private Volunteer currentIdentifiedUser;
 
-	private String month="";
-	private String day="";
-	private String year="";
-	
-	
 	/*
 	 * Constructs the driver for the program.
 	 */
 	public IODriver() throws ClassNotFoundException, IOException {
-		//calendar = new Calendar();
 		// loads all the users and jobs data
 		storedData = new Data();
-		//calendar = new Calendar(storedData.getUsers(), storedData.getJobs());
-		
 		response = "";
 		currentUser = null;
 		input = new Scanner(System.in);
-		//input.useDelimiter("\n");
 		quitProgram = false;
-		//MenuOptions init = null;
 		runProgram();
 	}
 
@@ -54,23 +42,13 @@ public class IODriver {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
-			
-//			Calendar rightNow = Calendar.getInstance();
-//			java.text.SimpleDateFormat df1 = new java.text.SimpleDateFormat("MM"); //02
-//			java.text.SimpleDateFormat df2 = new java.text.SimpleDateFormat("MMM"); //Feb
-//			java.text.SimpleDateFormat df3 = new java.text.SimpleDateFormat("MMMM"); // February
-//			System.out.println(df1.format(rightNow.getTime()));
-//			System.out.println(df2.format(rightNow.getTime()));
-//			System.out.println(df3.format(rightNow.getTime()));
-						
+
 			while (selection != MenuOptions.EXIT) {
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
-				//input.nextLine();
-
 			}
 		}
 		System.out.println("\nGoodbye");
@@ -81,14 +59,6 @@ public class IODriver {
 	 */
 	public void nextSelectionDisplay(MenuOptions theOption) throws IOException {
 
-//		if (currentUser instanceof Volunteer) {
-//			currentUser = (Volunteer) currentUser;
-//		} else if (currentUser instanceof ParkManager) {
-//			currentUser = (ParkManager) currentUser;
-//		} else {
-//			currentUser = (UrbanParkStaffMember) currentUser;
-//		}
-		
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
 				if (currentUser instanceof Volunteer) {
@@ -106,7 +76,12 @@ public class IODriver {
 				}
 				break;
 			case VIEW_UPCOMING_JOBS:  
-				menuBoxForJobs(storedData.getJobs());
+				if (currentUser instanceof Volunteer) {
+					menuBoxForJobs(storedData.getJobs());
+					//((Volunteer) currentUser).signUpOrViewJobDetail();
+				} else {
+					menuBoxForJobs(storedData.getJobs());
+				}
 				break;
 			case EXIT:    
 				quitProgram = true;
@@ -121,9 +96,13 @@ public class IODriver {
 				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
 					menuBoxForJobs(storedData.getJobs());
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
+				} else if (currentUser instanceof Volunteer) {
+					menuBoxForJobs(storedData.getJobs());
+					((Volunteer) currentUser).viewJobDetails();
 				}
 				break;
 			case SIGN_UP: 
+				menuBoxForJobs(storedData.getJobs());
 				System.out.print("Please, select a job number:\n>");
 				response = input.nextLine();
 				int index = Integer.parseInt(response);
@@ -158,12 +137,6 @@ public class IODriver {
 		currentUser = storedData.getReturningUser(response);
 	}
 
-	
-	public void upcomingJobsMenu(AbstractUser currentUser) {
-		//allJobs
-		//menuBox();
-	}
-
 
 	/*
 	 * Repeats a string pattern n times
@@ -179,7 +152,7 @@ public class IODriver {
 	/*
 	 * Takes a list of menu options and displays them in a box format
 	 */
-	private void menuBox(ArrayList<MenuOptions> menuOptions) {
+	public void menuBox(ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestString(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
@@ -217,13 +190,7 @@ public class IODriver {
 				//if (i == 1) { results += divider + "\n"; };
 				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
 				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
-				
-//			} else {
-//				//if (i == 1) { results += divider + "\n"; };
-//				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).jobSummary().toString().length()) + 4);
-//				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + (menuOptions.get(i)).jobSummary(),"\n"); }
-//				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + (menuOptions.get(i)).jobSummary(),"\n"); }
-//			}
+
 		}
 		results += divider + "\n";
 		System.out.println(results);
@@ -256,6 +223,9 @@ public class IODriver {
 	}
 
 
+	/*
+	 * Starts the program.
+	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		IODriver driver = new IODriver();
 	}

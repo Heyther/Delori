@@ -1,12 +1,15 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * Represents a Volunteer.
  * 
- * @author Heather (Modified by Luciana)
+ * @author: Luciana, Winfield, Heather, Sean
  * @date 2/16/2016
+ * @version 1.0
  */
 
 public class Volunteer extends AbstractUser  {
@@ -78,7 +81,6 @@ public class Volunteer extends AbstractUser  {
 		IODriver.storedData.addJob(theJob);
 	}
 	
-	
 	/*
 	 * Sign up for a job. (U6)
 	 */
@@ -109,16 +111,12 @@ public class Volunteer extends AbstractUser  {
 			System.out.println("Sorry, you cannot sign up for another job with time conflicts.\n");
 		}
 	}
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(super.hashCode(), getRole());
-//    }
 	
+//	public void signUpOrViewJobDetail() {
+//		String response = IODriver.input.nextLine();
+//		IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
+//	}
+
 	/*
 	 * Checks if the object is-a volunteer.
 	 * @see AbstractUser#equals(java.lang.Object)
@@ -133,6 +131,25 @@ public class Volunteer extends AbstractUser  {
 	}
 	
 	/*
+	 * Select job from job list and view the job details.
+	 */
+	public void viewJobDetails() {
+		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
+		System.out.println("View job details:");
+		System.out.print("Select job number, or enter 0 to go back:\n>");
+		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
+		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
+			System.out.println("Invalid entry, try again.\n");
+			viewJobDetails();
+		} else if (responseJobNum == 0) { // do nothing to go back to main menu
+			System.out.println("");
+		}else {
+			System.out.println(allJobs.get(responseJobNum - 1).toString());
+		}
+	}
+	
+	
+	/*
 	 * Displays the menu for a volunteer.
 	 * @see AbstractUser#userDisplayMenu()
 	 */
@@ -141,6 +158,7 @@ public class Volunteer extends AbstractUser  {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
+		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SIGN_UP);
 		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
 		result.add(MenuOptions.EXIT);
@@ -149,7 +167,7 @@ public class Volunteer extends AbstractUser  {
 	}
 	
 	/*
-	 * (non-Javadoc)
+	 * Displays last name, first name and email.
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
