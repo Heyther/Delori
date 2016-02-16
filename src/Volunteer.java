@@ -1,8 +1,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.Objects;
 
 /**
  * Represents a Volunteer.
@@ -14,14 +13,10 @@ import java.util.Scanner;
 
 public class Volunteer extends AbstractUser  {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
 
-	//public transient Scanner scanner = new Scanner(System.in);
 	public ArrayList<Job> enrolledJobs;
 	
 	/*
@@ -61,7 +56,7 @@ public class Volunteer extends AbstractUser  {
 				result.append(j.getJobTitle() + "\n");
 			}
 		} else {
-			result.append("You are currently not enrolled in any jobs\n");
+			result.append("You are currently not enrolled in any jobs. Please enter 3 to sign up.\n");
 		}
 			System.out.println(result);
 	}
@@ -112,11 +107,6 @@ public class Volunteer extends AbstractUser  {
 		}
 	}
 	
-//	public void signUpOrViewJobDetail() {
-//		String response = IODriver.input.nextLine();
-//		IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
-//	}
-
 	/*
 	 * Checks if the object is-a volunteer.
 	 * @see AbstractUser#equals(java.lang.Object)
@@ -135,6 +125,7 @@ public class Volunteer extends AbstractUser  {
 	 */
 	public void viewJobDetails() {
 		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
+		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
 		System.out.println("View job details:");
 		System.out.print("Select job number, or enter 0 to go back:\n>");
 		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
@@ -142,10 +133,15 @@ public class Volunteer extends AbstractUser  {
 			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
 		} else if (responseJobNum == 0) { // do nothing to go back to main menu
-			System.out.println("");
+			try {
+				IODriver.clearConsole();
+			} catch (IOException e) {
+				// do nothing
+			}
 		}else {
 			System.out.println(allJobs.get(responseJobNum - 1).toString());
 		}
+
 	}
 	
 	
@@ -162,7 +158,7 @@ public class Volunteer extends AbstractUser  {
 		result.add(MenuOptions.SIGN_UP);
 		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
 		result.add(MenuOptions.EXIT);
-			
+
 		return result;
 	}
 	
@@ -174,5 +170,13 @@ public class Volunteer extends AbstractUser  {
 		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
 	}
 	
+    /*
+     * Hashcode for equals
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
+    }
 	
 }

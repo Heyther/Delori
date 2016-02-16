@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import org.omg.Messaging.SyncScopeHelper;
 
 /**
  * Represents a Park Manager.
@@ -14,14 +13,15 @@ import org.omg.Messaging.SyncScopeHelper;
 
 public class ParkManager extends AbstractUser 
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 3323557037867953268L;
 	protected UserStatus role;
 	private String parkName;
 	private ArrayList<Job> jobsManaging;
 	
+	/*
+	 * Constructs a Park Manager.
+	 */
 	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
 	{
 		super(theFname, theLname, theEmail);
@@ -30,6 +30,10 @@ public class ParkManager extends AbstractUser
 		jobsManaging = new ArrayList<Job>();
 	}
 	
+	/*
+	 * Displays the user's last name, first name, and email.
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString()
 	{
 		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
@@ -50,23 +54,12 @@ public class ParkManager extends AbstractUser
 		
 		System.out.println("Start date (mm/dd/yyyy): ");
 		startDate = IODriver.input.nextLine();
-		/*
-		 * if (response < currentDate) { 
-		 * System.out.println("That date is invalid. Please enter a different date. /n");
-		 * System.out.println("Start date: /n");
-		 * }
-		 */
+
 		System.out.println("Start time (hh:mm am/pm): "); 
 		startTime = IODriver.input.nextLine();
 		
 		System.out.println("Duration (1 or 2 days): ");
 		duration = IODriver.input.nextLine();
-		/*
-		while (duration != "1" && duration != "2"){
-		   System.out.println("\nInvalid job duration. Please enter 1 or 2. Duration:");
-		   duration = IODriver.input.next();
-		}
-		*/
 		
 		System.out.println("Description of job: ");
 		description = IODriver.input.nextLine();
@@ -82,8 +75,7 @@ public class ParkManager extends AbstractUser
 		
 		//Create new Job object and add to main job list and park manager's job list
 		Job newJob = new Job(title, startDate, startTime, duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-		//IODriver.storedData.addJob(newJob);
-		//this.jobsManaging.add(newJob);
+
 		
 		if(IODriver.storedData.calendar.verifyJob(newJob)) {
 			this.jobsManaging.add(newJob);
@@ -97,13 +89,12 @@ public class ParkManager extends AbstractUser
 		else {
 			System.out.println("Unable to add job. Too many jobs scheduled selected week.");
 
-		}
-		
-		//Print menu of options 
-		//jobDetailsMenu(newJob);
-		
+		}		
 	}
 	
+	/*
+	 * Displays options on a job.
+	 */
 	public void jobDetailsMenu(Job theJob) throws IOException {
 		System.out.println("\nPlease type a number: \n "
 				+ "1) Edit job \n "
@@ -119,9 +110,11 @@ public class ParkManager extends AbstractUser
 			break;
 		case "3": viewEnrolledVolunteers(theJob);
 			break;
-		case "4"://Do nothing to go back to home menu
+		case "4": IODriver.clearConsole();
 			break;
-		default: jobDetailsMenu(theJob); //Invalid response. Try again.
+		default: 
+			
+			jobDetailsMenu(theJob); //Invalid response. Try again.
 			break;
 		}
 	}
@@ -167,7 +160,6 @@ public class ParkManager extends AbstractUser
 					         +" 8) Heavy slots "+"\n"
 					         +" 9) Done editing ");
 		String response = IODriver.input.nextLine();
-		String newValue;
 		
 		//For the field the user selected to edit, prompt for the new value and change the appropriate field in the job
 		//call the method again so that the user may edit another field
@@ -245,7 +237,7 @@ public class ParkManager extends AbstractUser
 				System.out.print((i+1) + ". ");
 				System.out.println(this.jobsManaging.get(i).jobSummary());
 			}
-			System.out.println("\nType a number to select a job or type 0 to go back: ");
+			System.out.print("\nType a number to select a job or type 0 to go back:\n>");
 			int jobNumber = Integer.parseInt(IODriver.input.nextLine());
 			//Keep prompting until good input in received
 			while (jobNumber > jobsManaging.size()) {
@@ -254,8 +246,11 @@ public class ParkManager extends AbstractUser
 			}
 			//If a job number was typed, print job details and options (If 0 was typed, do nothing)
 			if (jobNumber != 0){
+				
 				System.out.println(jobsManaging.get(jobNumber-1));
 				jobDetailsMenu(jobsManaging.get(jobNumber-1));
+			} else {
+				IODriver.clearConsole();
 			}
 		} else {
 			System.out.println("You currently have no jobs up.");
@@ -287,11 +282,6 @@ public class ParkManager extends AbstractUser
 		result.add(MenuOptions.EXIT);
 			
 		return result;
-
-//				+ "1) View my upcoming jobs \n"
-//				+ "2) Add new job \n"
-//				+ "3) Edit or cancel a job \n"
-//				+ "4) Exit ");
 	}
 	
 	/*
@@ -310,7 +300,7 @@ public class ParkManager extends AbstractUser
 	}
 
     /*
-     * (non-Javadoc)
+     * Hashcode for equals
      * @see java.lang.Object#hashCode()
      */
     @Override
