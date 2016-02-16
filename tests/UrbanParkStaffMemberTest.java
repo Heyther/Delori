@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +13,12 @@ public class UrbanParkStaffMemberTest {
 		staff = new UrbanParkStaffMember("first", "last", "email");
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
 
 	@Test
 	public void testEqualsObject() {
