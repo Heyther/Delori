@@ -89,6 +89,8 @@ public class ParkManager extends AbstractUser
 			//Show confirmation
 			System.out.println("\nJob Added! Review Job Details:\n");
 			System.out.println(newJob.toString());
+			//Print menu of options 
+			jobDetailsMenu(newJob);
 		}
 		else {
 			System.out.println("Unable to add job. Too many jobs scheduled selected week.");
@@ -96,7 +98,7 @@ public class ParkManager extends AbstractUser
 		}
 		
 		//Print menu of options 
-		jobDetailsMenu(newJob);
+		//jobDetailsMenu(newJob);
 		
 	}
 	
