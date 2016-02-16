@@ -34,8 +34,8 @@ public class DataTest {
 
 	@Test
 	public void testAddJob() {
-		assertEquals(2, data.getJobs().size());
-		Job job = new Job("Title", "1/1/2016", "1:00pm", "1",
+		int sizeBeforeAdd = data.getJobs().size();
+		Job job = new Job("Title", "02/26/2016", "1:00pm", "1",
 				"Tacoma", "Evergreen Park", "Description:..", 1, 2, 3);
 		try {
 			data.addJob(job);
@@ -43,7 +43,7 @@ public class DataTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(3, data.getJobs().size());
+		assertEquals(sizeBeforeAdd + 1, data.getJobs().size());
 	}
 
 }
