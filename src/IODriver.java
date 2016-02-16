@@ -45,11 +45,14 @@ public class IODriver {
 			MenuOptions selection = null;
 
 			while (selection != MenuOptions.EXIT) {
+				
 				menuBox(currentUser.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
+				clearConsole();
 				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
+				
 			}
 		}
 		System.out.println("\nGoodbye");
@@ -63,6 +66,7 @@ public class IODriver {
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
 				if (currentUser instanceof Volunteer) {
+					clearConsole();
 					((Volunteer) currentUser).viewEnrolledJobs();
 				}
 				break;
@@ -81,6 +85,7 @@ public class IODriver {
 					menuBoxForJobs(storedData.getJobs());
 					//((Volunteer) currentUser).signUpOrViewJobDetail();
 				} else {
+					clearConsole();
 					menuBoxForJobs(storedData.getJobs());
 				}
 				break;
@@ -98,16 +103,24 @@ public class IODriver {
 					menuBoxForJobs(storedData.getJobs());
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
 				} else if (currentUser instanceof Volunteer) {
+					clearConsole();
 					menuBoxForJobs(storedData.getJobs());
 					((Volunteer) currentUser).viewJobDetails();
 				}
 				break;
 			case SIGN_UP: 
+				clearConsole();
 				menuBoxForJobs(storedData.getJobs());
-				System.out.print("Please, select a job number:\n>");
+				System.out.print("Please, select a job number or enter 0 to go back:\n>");
 				response = input.nextLine();
 				int index = Integer.parseInt(response);
-				((Volunteer) currentUser).signUp(storedData.getJobs().get(index-1));
+				if (index != 0) {
+					
+					((Volunteer) currentUser).signUp(storedData.getJobs().get(index-1));
+				} else {
+					//do nothing
+					clearConsole();
+				}
 				break;
 	
 			default: System.out.println("");
@@ -123,9 +136,13 @@ public class IODriver {
 		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
 			greet.add(MenuOptions.OPTION_LOGIN);
 			greet.add(MenuOptions.OPTION_ENTER_EMAIL);
+//		
+//		menuBox(greet);
+		int boxWidth = getLongestString(greet) + 3; 
+		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
 		
-		menuBox(greet);
-		System.out.print(">");
+		System.out.print(divider + "\n" + MenuOptions.OPTION_LOGIN +"\n" + MenuOptions.OPTION_ENTER_EMAIL+ "\n" +divider + "\n>");
+		//System.out.print(">");
 		
 		
 		while (Objects.isNull(currentUser) ) {
@@ -136,13 +153,27 @@ public class IODriver {
 			}
 		}
 		currentUser = storedData.getReturningUser(response);
+		try {
+			clearConsole();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-
+	/*
+	 * Clears the console.
+	 */
+	public static void clearConsole() throws IOException {
+		for(int clear = 0; clear < 1000; clear++) {
+		    System.out.println("\n") ;
+		}
+	} 
+	
 	/*
 	 * Repeats a string pattern n times
 	 */
-	private StringBuilder repeat(String str, int times) {
+	private static StringBuilder repeat(String str, int times) {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < times; i++) {
 			result.append(str);
@@ -179,7 +210,7 @@ public class IODriver {
 	/*
 	 * Takes all of the jobs within the system and displays them in a box format
 	 */
-	private void menuBoxForJobs(ArrayList<Job> menuOptions) {
+	public void menuBoxForJobs(ArrayList<Job> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestStringInJobs(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 

@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  * A job class, that can be used in console i/o.
@@ -32,18 +31,8 @@ public class Job implements Serializable {
 		ArrayList<Volunteer> heavyVolunteers;
 		
 
-		/**
+		/*
 		 * Job constructor
-		 * @param jobTitle Title description of job.
-		 * @param start Start date of job.
-		 * @param startTime Start time of job.
-		 * @param dur Duration of job.
-		 * @param loc Location of job.
-		 * @param parkMan Park manager in charge of job.
-		 * @param descript Description of job.
-		 * @param light The number of light positions available in job.
-		 * @param med The number of medium positions available in job.
-		 * @param heavy The number of heavy positions available in job.
 		 */
 		public Job(String jobTitle, String start, String time, String dur, String loc, String parkMan, 
 				String descript, int light, int med, int heavy){
@@ -66,6 +55,10 @@ public class Job implements Serializable {
 	    }
 		
 
+		/*
+		 *  Displays a job and all its details.
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString(){
 			String toString = "Job Title: "+this.jobTitle+"\n"
@@ -81,6 +74,9 @@ public class Job implements Serializable {
 			return toString;
 		}
 		
+		/*
+		 * Checks if the job is the same job.
+		 */
 		public boolean equals(Job other){
 			if (this.jobTitle.equals(other.jobTitle) && this.startDate.equals(other.startDate) 
 					&& this.startTime.equals(other.startTime) && this.location.equals(other.location) 
@@ -92,156 +88,136 @@ public class Job implements Serializable {
 				return false;
 		}
 		
-		/**
-		*Getter for job title.
-		*/
+		/*
+		 * Getter for job title.
+		 */
 		public String getJobTitle(){
 		    return jobTitle;
 		}
-		/**
-		*Setter for job title.
-		*@param theJobTitle
-		*/
+		/*
+		 * Setter for job title.
+		 */
         public void setJobTitle(String theJobTitle){
             this.jobTitle = theJobTitle;
         }		
         
-		/**
+		/*
 		 * Getter for start date.
-		 * @return Returns startDate.
 		 */
 		public String getStartDate() {
 			return startDate;
 		}
-		/**
+		/*
 		 * Setter for start date.
 		 */
 		public void setStartDate(String startDate) {
 			this.startDate = startDate;
 		}
-		/**
+		/*
 		 * Getter for start time.
-		 * @return Returns startDate.
 		 */
 		public String getStartTime() {
 			return startDate;
 		}
-		/**
+		/*
 		 * Setter for start time.
 		 */
 		public void setStartTime(String startTime) {
 			this.startTime = startTime;
 		}
 
-		/**
+		/*
 		 * Getter for duration.
-		 * @return Returns String endDate.
 		 */
 		public String getDuration() {
 			return duration;
 		}
-		/**
+		/*
 		 * Setter for duration
-		 * @param duration.
 		 */
 		public void setDuration(String duration) {
 			this.duration = duration;
 		}
-		/**
+		/*
 		 * Getter for location.
-		 * @return String location.
 		 */
 		public String getLocation() {
 			return location;
 		}
-		/**
+		/*
 		 * Setter for a location. 
-		 * @param location New location for job.
 		 */
 		public void setLocation(String location) {
 			this.location = location;
 		}
-		/**
+		/*
 		 * Getter for a description.
-		 * 
-		 * @return String description of a job.
 		 */
 		public String getDescription() {
 			return description;
 		}
-		/**
+		/*
 		 * Setter for description.
-		 * @param description New description for job.
 		 */
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		/**
+		/*
 		**Getter for parkManager
-		/*@return parkManager 
 		*/
 		public String getParkManager() {
 			return parkManager;
 		}
-		/**
+		/*
 		 * Setter for parkManager.
-		 * @param description New description for job.
 		 */
 		public void setParkManager(String parkManager) {
 			this.parkManager = parkManager;
 		}
-		/**
+		/*
 		 * Getter for lightSlots.
-		 * @return Number of lightSlots.
 		 */
 		public int getLightSlots() {
 			return lightSlots;
 		}
-		/**
+		/*
 		 * Setter for LighSlots.
-		 * @param lightSlots New number of light slots.
 		 */
 		public void setLightSlots(int lightSlots) {
 			this.lightSlots = lightSlots;
 		}
-		/**
+		/*
 		 * Getter for medium slots.
-		 * @return int number of mediumSlots.
 		 */
 		public int getMediumSlots() {
 			return mediumSlots;
 		}
-		/**
+		/*
 		 * Setter for medium slots.
-		 * @param mediumSlots New number of medium slots.
 		 */
 		public void setMediumSlots(int mediumSlots) {
 			this.mediumSlots = mediumSlots;
 		}
-		/**
+		/*
 		 * Getter for heavy slots.
-		 * @return int number of heavy slots.
 		 */
 		public int getHeavySlots() {
 			return heavySlots;
 		}
-		/**
+		/*
 		 * Setter for heavy slots.
-		 * @param heavySlots New number of heavySlots.
 		 */
 		public void setHeavySlots(int heavySlots) {
 			this.heavySlots = heavySlots;
 		}
-		/**
+		/*
 		 * Getter for total slots.
-		 * @return total number of slots. 
 		 */
 		public int getTotalSlots() {
 			return totalSlots;
 		}
-		/**
+		/*
 		 * Setter for total slots.
-		 * @param totalSlots new number total slots.
 		 */
 		public void setTotalSlots(int totalSlots) {
 			this.totalSlots = totalSlots;
@@ -291,21 +267,21 @@ public class Job implements Serializable {
 			case LIGHT:
 				if (lightVolunteers.size() < lightSlots) {
 					lightVolunteers.add(theVolunteer);
-					lightSlots--;
+					totalSlots--;
 					return true;
 				}
 				else return false;
 			case MEDIUM:
 				if (mediumVolunteers.size() < mediumSlots) {
 					mediumVolunteers.add(theVolunteer);
-					mediumSlots--;
+					totalSlots--;
 					return true;
 				}
 				else return false;
 			case HEAVY:
 				if (heavyVolunteers.size() < heavySlots) {
 					heavyVolunteers.add(theVolunteer);
-					heavySlots--;
+					totalSlots--;
 					return true;
 				}
 				else return false;
@@ -322,15 +298,15 @@ public class Job implements Serializable {
 		public void cancelVolunteer(Volunteer theVolunteer){
 			if (lightVolunteers.contains(theVolunteer)){
 				lightVolunteers.remove(theVolunteer);
-				lightSlots++;
+				totalSlots++;
 			}
 			else if (mediumVolunteers.contains(theVolunteer)){
 				mediumVolunteers.remove(theVolunteer);
-				mediumSlots++;
+				totalSlots++;
 			}
 			else if (heavyVolunteers.contains(theVolunteer)){
 				heavyVolunteers.remove(theVolunteer);
-				heavySlots++;
+				totalSlots++;
 			}
 		}
 		
