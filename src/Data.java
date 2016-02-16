@@ -124,12 +124,12 @@ public class Data {
 		
 		addJob(new Job("Pet Lions", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
 		addJob(new Job("Feed Ducks", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
-		addJob(new Job("Clean trash", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Clean trash in the parking lot", 1, 2, 3));
-		addJob(new Job("Paint", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Paint the wall by the soccer fields.", 1, 2, 3));
+		//addJob(new Job("Clean trash", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Clean trash in the parking lot", 1, 2, 3));
+		//addJob(new Job("Paint", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Paint the wall by the soccer fields.", 1, 2, 3));
 
 		
-		System.out.println(m.getFname());
-		System.out.println(m.getEmail());
+		//System.out.println(m.getFname());
+		//System.out.println(m.getEmail());
 		
 		serializeObject();
 	}

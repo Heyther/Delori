@@ -92,34 +92,22 @@ public class Volunteer extends AbstractUser  {
 			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 		}
 		if (signUp || enrolledJobs.size() == 0) {
-			//delete the job from the main job list (to be added back in once the volunteer has been added)
-			IODriver.storedData.deleteJob(theJob);
 			int response = Integer.parseInt(IODriver.input.nextLine());
-			theJob.signUpVolunteer(this, response);
-			
-			//Add the job back into the main job list and to the volunteer's own list
-			IODriver.storedData.addJob(theJob);
-
-			enrolledJobs.add(theJob);
+			// BR3
+			if (theJob.signUpVolunteer(this, response)) {
+				//delete the job from the main job list (to be added back in once the volunteer has been added)
+				IODriver.storedData.deleteJob(theJob);
+				
+				
+				//Add the job back into the main job list and to the volunteer's own list
+				IODriver.storedData.addJob(theJob);
+				enrolledJobs.add(theJob);
+			} else {
+				System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+			}
 		} else {
 			System.out.println("Sorry, you cannot sign up for another job with time conflicts.\n");
 		}
-		
-//		// BR3?
-//		//delete the job from the main job list (to be added back in once the volunteer has been added)
-//		IODriver.storedData.deleteJob(theJob);
-//		int response = Integer.parseInt(IODriver.input.nextLine());
-//		if (theJob.signUpVolunteer(this, response)) {
-//			//Add the job to the volunteer's list
-//			IODriver.storedData.addJob(theJob);
-//		}
-//		else {
-//			System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
-//		}
-//		
-//		//Add the job back into the main job list
-//		enrolledJobs.add(theJob);
-
 	}
 
     /*
