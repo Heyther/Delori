@@ -17,8 +17,8 @@ import org.junit.Test;
  * @author Sean
  * In order to run these tests it requires editing the specifically commented lines
  * inside Calendar. As I didn't want to mess with our serializable data whilst testing.
- * These changes are at line 30 and line 114 of Calendar.java
- *
+ * These changes are at line 30 and line 91 of Calendar.java
+ *@date 2/27/16
  */
 public class CalendarTest {
 	ArrayList<Job> jobs;
@@ -32,6 +32,9 @@ public class CalendarTest {
 	Job job7;
 	Job job8;
 	Job job9;
+	Job job10;
+	Job job11;
+	Job job12;
 	Calendar cally;
 	/**
 	 * @throws java.lang.Exception
@@ -61,6 +64,12 @@ public class CalendarTest {
 				"Moooove slowwwwwly", 1, 1, 1);
 		job9 = new Job("Incinerate yardwaste", "04/19/2016", "12:00 pm", "3", "Gonyea", "Me", 
 				"Who needs a trash can?", 1, 1, 1);
+		job10 = new Job("Incinerate yardwaste", "04/20/2016", "12:00 pm", "2", "Sprinker", "Me", 
+				"Who needs a trash can?", 1, 1, 1);
+		job11 = new Job("Prepare space shuttle", "05/20/2016", "12:00 pm", "0", "Sprinker", "Me", 
+				"The martians are coming <.<", 1, 1, 1);
+		job12 = new Job("Chase geese", "01/10/2016", "12:00 pm", "1", "Gonyea", "Me", 
+				"Them geese won't catch themselves!", 1, 1, 1);
 	}
 
 	/**
@@ -98,6 +107,7 @@ public class CalendarTest {
 		int i =0;
 		for(i =0; i < 30; i++){
 			jobs.add(job1);
+			cally.totalPendingJobs++;
 		}
 		assertFalse(cally.verifyJob(job2));
 	}
@@ -152,6 +162,118 @@ public class CalendarTest {
 		jobDate = sdf.parse(job3.startDate);
 		assertEquals(5, cally.calculateWeekPendingJobs(jobDate));
 		
+	}
+	/**
+	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 */
+	@Test
+	public void testCheckTotalPendingJobsAtMax() {
+		int i =0;
+		for(i =0; i < 30; i++){
+			jobs.add(job1);
+			cally.totalPendingJobs++;
+		}
+		assertFalse(cally.checkTotalPendingJobs());
+	}
+	/**
+	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 */
+	@Test
+	public void testCheckTotalPendingJobsAtN() {
+		int i =0;
+		int N = 16;
+		for(i =0; i < N; i++){
+			jobs.add(job1);
+			cally.totalPendingJobs++;
+		}
+		assertTrue(cally.checkTotalPendingJobs());
+	}
+	/**
+	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 */
+	@Test
+	public void testCheckTotalPendingJobsEmpty() {	
+		assertTrue(cally.checkTotalPendingJobs());
+	}
+	/**
+	 * Test method for {@link Calendar#checkJobDuration(Job)}.
+	 */
+	@Test
+	public void testCheckJobDurationMax() {	
+		assertTrue(cally.checkJobDuration(job10));
+	}
+	/**
+	 * Test method for {@link Calendar#checkJobDuration(Job)}.
+	 */
+	@Test
+	public void testCheckJobDurationOverMax() {	
+		assertFalse(cally.checkJobDuration(job9));
+	}
+	/**
+	 * Test method for {@link Calendar#checkJobDuration(Job)}.
+	 */
+	@Test
+	public void testCheckJobDurationUnderMax() {	
+		assertTrue(cally.checkJobDuration(job8));
+	}
+	/**
+	 * Test method for {@link Calendar#checkJobDuration(Job)}.
+	 */
+	@Test
+	public void testCheckJobDurationEmpty() {	
+		assertFalse(cally.checkJobDuration(job11));
+	}
+	/**
+	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testCheckDateJobStartAfterMax() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date start = sdf.parse(job8.startDate);
+		Date max = sdf.parse(job10.startDate);
+		Date current = sdf.parse(job7.startDate);
+		
+		assertFalse(cally.checkDate(start, max, current));
+	}
+	/**
+	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testCheckDateJobStartBeforeMax() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date start = sdf.parse(job3.startDate);
+		Date max = sdf.parse(job10.startDate);
+		Date current = sdf.parse(job7.startDate);
+		
+		assertTrue(cally.checkDate(start, max, current));
+	}
+	/**
+	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testCheckDateJobStartAfterCurrentTime() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date start = sdf.parse(job3.startDate);
+		Date max = sdf.parse(job10.startDate);
+		Date current = sdf.parse(job7.startDate);
+		
+		assertTrue(cally.checkDate(start, max, current));
+	}
+	/**
+	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
+	 * @throws ParseException 
+	 */
+	@Test
+	public void testCheckDateJobStartBeforeCurrentTime() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date start = sdf.parse(job12.startDate);
+		Date max = sdf.parse(job10.startDate);
+		Date current = sdf.parse(job7.startDate);
+		
+		assertFalse(cally.checkDate(start, max, current));
 	}
 
 }
