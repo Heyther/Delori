@@ -31,9 +31,8 @@ public class Calendar {
 	 */
 	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
+		//recordOfJobs = theRecordOfJobs;
 	}
-<<<<<<< HEAD
-=======
 	
 	/*
 	 * Constructs a calendar
@@ -41,7 +40,7 @@ public class Calendar {
 	public Calendar() {
 		totalPendingJobs = 0;
 	}
->>>>>>> shoyt-dev
+
 
 	/**
 	 * Checks through various business rules to see if job is able to be added to current list of jobs.
@@ -67,18 +66,7 @@ public class Calendar {
 		//business rules 1 & 4
 		if(checkTotalPendingJobs() && checkJobDuration(theJob)){
 				//business rule 2
-<<<<<<< HEAD
-				if(jobStartDate != null){
-					
-				if(calculateWeekPendingJobs(jobStartDate) < 5){
-					//business rules 5 & 6
-					System.out.println("in validate"+calculateWeekPendingJobs(sdf.parse(theJob.startDate)));
-					if(jobStartDate.before(maxJobDate) && (jobStartDate.after(myDate))){
-					
-							totalPendingJobs++;
-							canAdd = true;
-						
-=======
+
 				if(jobStartDate != null){				
 					if(calculateWeekPendingJobs(jobStartDate) < 5){
 					//business rule 5
@@ -87,7 +75,7 @@ public class Calendar {
 								canAdd = true;					
 						}
 					
->>>>>>> shoyt-dev
+
 					}
 				}		
 		}
