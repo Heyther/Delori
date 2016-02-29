@@ -24,15 +24,6 @@ public abstract class AbstractUser implements Serializable {
 		this.email = theEmail;
 	}
 
-	// Displays a menu with options for a user.
-	public abstract ArrayList<MenuOptions> usersHomeMenu();
-	
-	// Retrieves the role of the user.
-	public abstract UserStatus getRole();
-	
-	// Retrieves all upcoming jobs.
-	//public abstract StringBuilder upcomingJobsMenu();
-	
 	/*
 	 * Retrieves user's first name.
 	 */

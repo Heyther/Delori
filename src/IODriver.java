@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 /**
- * Driver class. Controls menus and user types.
+ * Driver(/Controller) class. Controls menus and user types.
  * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 2/16/2016
@@ -18,6 +18,7 @@ public class IODriver {
 	public static Scanner input;
 	static Calendar calendar;
 	public static AbstractUser currentUser;
+	public static UI_AbstractUser currentUserUI;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
@@ -31,6 +32,7 @@ public class IODriver {
 		storedData = new Data();
 		response = "";
 		currentUser = null;
+		currentUserUI = null;
 		input = new Scanner(System.in);
 		quitProgram = false;
 		runProgram();
@@ -46,11 +48,11 @@ public class IODriver {
 
 			while (selection != MenuOptions.EXIT) {
 				
-				menuBox(currentUser.usersHomeMenu());
+				menuBox(currentUserUI.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
 				clearConsole();
-				selection = currentUser.usersHomeMenu().get(Integer.parseInt(response));
+				selection = currentUserUI.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
 				
 			}
@@ -65,18 +67,18 @@ public class IODriver {
 
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
-				if (currentUser instanceof Volunteer) {
+				if (currentUserUI instanceof UI_Volunteer) {
 					clearConsole();
-					((Volunteer) currentUser).viewEnrolledJobs();
+					((UI_Volunteer) currentUserUI).viewEnrolledJobs();
 				}
 				break;
 			case ADD_A_JOB:
-				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
+				if (currentUserUI instanceof UI_ParkManager) {
 					((ParkManager) currentUser).addJob();	
 					break;
 				}
 			case VIEW_JOBS_MANAGED:
-				if (currentUser.getRole().equals(UserStatus.PARKMANAGER)) {
+				if (currentUserUI instanceof UI_ParkManager) {
 					((ParkManager) currentUser).viewJobsManaged();
 				}
 				break;
@@ -94,18 +96,18 @@ public class IODriver {
 				break;
 	
 			case SEARCH_VOL_LASTNAME:
-				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
+				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
 					((UrbanParkStaffMember) currentUser).volunteerSearch();
 				}
 				break;
 			case VIEW_JOB_DETAIL: 
-				if (currentUser.getRole().equals(UserStatus.UPSMEMBER)) {
+				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
 					menuBoxForJobs(storedData.getJobs());
 					((UrbanParkStaffMember) currentUser).viewJobDetails();
-				} else if (currentUser instanceof Volunteer) {
+				} else if (currentUserUI instanceof UI_Volunteer) {
 					clearConsole();
 					menuBoxForJobs(storedData.getJobs());
-					((Volunteer) currentUser).viewJobDetails();
+					((UI_Volunteer) currentUserUI).viewJobDetails();
 				}
 				break;
 			case SIGN_UP: 
