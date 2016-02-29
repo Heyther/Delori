@@ -7,20 +7,18 @@ import java.util.Objects;
  * Represents a Volunteer.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 2/28/2016
  * @version 1.0
  */
 
 public class Volunteer extends AbstractUser  {
 	
-
-	
 	private static final long serialVersionUID = 3505720660401145090L;
 	protected UserStatus role; 
 	public ArrayList<Job> jobs;		
-
 	public ArrayList<Job> enrolledJobs;
-	
+
+
 	/*
 	 * Constructs a volunteer
 	 */
@@ -33,11 +31,10 @@ public class Volunteer extends AbstractUser  {
 	}
 	
 	/*
-	 * Retrieves the user's role.
-	 * @see AbstractUser#getRole()
+	 * Retrieve the Volunteer's enrolled jobs.
 	 */
-	public UserStatus getRole() {
-		return role;
+	public ArrayList<Job> getEnrolledJobs() {
+		return enrolledJobs;
 	}
 
 	/*
@@ -48,19 +45,10 @@ public class Volunteer extends AbstractUser  {
 	}
 
 	/*
-	 * View joined jobs specific to a volunteer. (U7)
+	 * Retrieves the user's role.
 	 */
-	public void viewEnrolledJobs() {
-		StringBuilder result = new StringBuilder();
-		if (enrolledJobs.size() > 0) {
-			result.append("Jobs you are enrolled in:\n");
-			for (Job j : enrolledJobs) {
-				result.append(j.getJobTitle() + "\n");
-			}
-		} else {
-			result.append("You are currently not enrolled in any jobs. Please enter 3 to sign up.\n");
-		}
-			System.out.println(result);
+	public UserStatus getRole() {
+		return role;
 	}
 	
 	/*
@@ -82,9 +70,6 @@ public class Volunteer extends AbstractUser  {
 	 * Sign up for a job. (U6)
 	 */
 	public void signUp(Job theJob) throws IOException {
-		
-		System.out.println("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n\n>");
-		
 		// BR7
 		boolean signUp = false;
 		for (Job j : enrolledJobs) {
@@ -120,48 +105,6 @@ public class Volunteer extends AbstractUser  {
 			if (getRole().equals(v.getRole())) { return true; };
 		}
 		return false;
-	}
-	
-	/*
-	 * Select job from job list and view the job details.
-	 */
-	public void viewJobDetails() {
-		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
-		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
-		System.out.println("View job details:");
-		System.out.print("Select job number, or enter 0 to go back:\n>");
-		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
-		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
-			System.out.println("Invalid entry, try again.\n");
-			viewJobDetails();
-		} else if (responseJobNum == 0) { // do nothing to go back to main menu
-			try {
-				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
-		}else {
-			System.out.println(allJobs.get(responseJobNum - 1).toString());
-		}
-
-	}
-	
-	
-	/*
-	 * Displays the menu for a volunteer.
-	 * @see AbstractUser#userDisplayMenu()
-	 */
-	@Override
-	public ArrayList<MenuOptions> usersHomeMenu() {
-		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.OPTION_WELCOME);
-		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
-		result.add(MenuOptions.VIEW_JOB_DETAIL);
-		result.add(MenuOptions.SIGN_UP);
-		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
-		result.add(MenuOptions.EXIT);
-
-		return result;
 	}
 	
 	/*

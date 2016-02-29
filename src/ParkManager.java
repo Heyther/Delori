@@ -267,22 +267,7 @@ public class ParkManager extends AbstractUser
 		jobDetailsMenu(theJob);
 	}
 
-	/*
-	 * Park Manager's display menu.
-	 * 
-	 * @see AbstractUser#userDisplayMenu()
-	 */
-	@Override
-	public ArrayList<MenuOptions> usersHomeMenu() {
-		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.OPTION_WELCOME);
-		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
-		result.add(MenuOptions.VIEW_JOBS_MANAGED);
-		result.add(MenuOptions.ADD_A_JOB);
-		result.add(MenuOptions.EXIT);
-			
-		return result;
-	}
+
 	
 	/*
 	 * Retrieves the user's role.
