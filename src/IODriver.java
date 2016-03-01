@@ -155,6 +155,14 @@ public class IODriver {
 			}
 		}
 		currentUser = storedData.getReturningUser(response);
+		if (currentUser instanceof Volunteer) {
+			currentUserUI = new UI_Volunteer();
+		} else if (currentUser instanceof ParkManager) {
+			currentUserUI = new UI_ParkManager();
+		} else {
+			currentUserUI = new UI_UrbanParkStaffMember();
+		}
+		
 		try {
 			clearConsole();
 		} catch (IOException e) {
@@ -167,7 +175,7 @@ public class IODriver {
 	 * Clears the console.
 	 */
 	public static void clearConsole() throws IOException {
-		for(int clear = 0; clear < 1000; clear++) {
+		for(int clear = 0; clear < 6; clear++) {
 		    System.out.println("\n") ;
 		}
 	} 

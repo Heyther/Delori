@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public abstract class UI_AbstractUser extends CustomExceptions {
+public abstract class UI_AbstractUser {
 	
 	public UI_AbstractUser() {
 		
