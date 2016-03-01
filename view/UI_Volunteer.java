@@ -44,31 +44,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 	}
 	
 	
-	/*
-	 * Select job from job list and view the job details.
-	 */
-	public void viewJobDetails() {
-		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
-		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
-		System.out.println("View job details:");
-		System.out.print("Select job number, or enter 0 to go back:\n>");
-		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
-		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
-			// turn below into exception?...
-			//System.out.println(CustomExceptions InvalidUserInput);
-			System.out.println("Invalid entry, try again.\n");
-			viewJobDetails();
-		} else if (responseJobNum == 0) { // do nothing to go back to main menu
-			try {
-				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
-		}else {
-			System.out.println(allJobs.get(responseJobNum - 1).toString());
-		}
-
-	}
+	
 	
 	/*
 	 * Displays the menu for a volunteer.

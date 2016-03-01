@@ -97,13 +97,13 @@ public class IODriver {
 	
 			case SEARCH_VOL_LASTNAME:
 				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
-					((UrbanParkStaffMember) currentUser).volunteerSearch();
+					((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
 				}
 				break;
 			case VIEW_JOB_DETAIL: 
 				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
 					menuBoxForJobs(storedData.getJobs());
-					((UrbanParkStaffMember) currentUser).viewJobDetails();
+					((UI_UrbanParkStaffMember) currentUserUI).viewJobDetails();
 				} else if (currentUserUI instanceof UI_Volunteer) {
 					clearConsole();
 					menuBoxForJobs(storedData.getJobs());
@@ -183,7 +183,7 @@ public class IODriver {
 	/*
 	 * Repeats a string pattern n times
 	 */
-	private static StringBuilder repeat(String str, int times) {
+	protected static StringBuilder repeat(String str, int times) {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < times; i++) {
 			result.append(str);
@@ -237,6 +237,8 @@ public class IODriver {
 		results += divider + "\n";
 		System.out.println(results);
 	}
+	
+
 	
 	/*
 	 * Finds the longest MenuOptions length

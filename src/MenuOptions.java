@@ -22,6 +22,10 @@ public enum MenuOptions {
 	VIEW_ENROLLED_JOBS("View enrolled jobs"),
 	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n"),
 	
+	// Staff specific options
+	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
+	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
+	
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),

@@ -30,68 +30,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 
 
 	/*
-	 * Search for a volunteer by last name.
-	 */
-	public void volunteerSearch() {
-
-		String name;
-		System.out.println("Volunteer Search:");
-		System.out.print("Enter volunteers last name or 'b' to go back:\n>");
-		name = IODriver.input.nextLine();
-		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
-		if(volunteers.size() > 0) {
-			try {
-				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
-			for(Volunteer vol: volunteers ) {
-				System.out.println(vol.toString() + "\n");
-			}
-			//usersHomeMenu();
-
-		} else if(name.equals("b")) {
-			//usersHomeMenu();
-			try {
-				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
-		}else {
-			try {
-				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
-			System.out.println("Volunteer not found, try again.\n");
-			volunteerSearch();
-		}
-	}
-
-	/*
-	 * Select job from job list and view the job details.
-	 */
-	public void viewJobDetails() {
-		ArrayList<Job> jobs = (ArrayList<Job>) IODriver.storedData.getJobs();
-		int jobNumber = 0;
-		System.out.println("View job details:");
-		System.out.print("Select job number:\n>");
-		try {
-			jobNumber = Integer.parseInt(IODriver.input.nextLine());
-		} catch (InputMismatchException e) {
-		}
-		if (jobNumber <= 0 || jobNumber > jobs.size()) {
-			System.out.println("Invalid entry, try again.\n");
-			viewJobDetails();
-		} else {
-			System.out.println(jobs.get(jobNumber - 1).toString());
-			
-		}
-	}
-	
-
-
-	/*
 	 * Retrieves the user's role.
 	 * 
 	 * @see AbstractUser#getRole()
