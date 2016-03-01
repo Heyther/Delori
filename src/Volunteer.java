@@ -33,7 +33,10 @@ public class Volunteer extends AbstractUser  {
 	/*
 	 * Retrieve the Volunteer's enrolled jobs.
 	 */
-	public ArrayList<Job> getEnrolledJobs() {
+	public ArrayList<Job> getEnrolledJobs() throws NoEnrolledJobsPresentException  {
+		if (enrolledJobs == null) {
+			throw new NoEnrolledJobsPresentException();   // this way or do in a try catch.
+		}
 		return enrolledJobs;
 	}
 
@@ -70,27 +73,30 @@ public class Volunteer extends AbstractUser  {
 	 * Sign up for a job. (U6)
 	 */
 	public void signUp(Job theJob) throws IOException {
-		// BR7
-		boolean signUp = false;
-		for (Job j : enrolledJobs) {
-			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
-		}
-		if (signUp || enrolledJobs.size() == 0) {
-			int response = Integer.parseInt(IODriver.input.nextLine());
-			// BR3
-			if (theJob.signUpVolunteer(this, response)) {
-				//delete the job from the main job list (to be added back in once the volunteer has been added)
-				IODriver.storedData.deleteJob(theJob);
-				
-				
-				//Add the job back into the main job list and to the volunteer's own list
-				IODriver.storedData.addJob(theJob);
-				enrolledJobs.add(theJob);
-			} else {
-				System.out.println("Sorry, all slots of that category are filled. You cannot sign up.");
+		try {
+			// BR7
+			boolean signUp = false;
+			for (Job j : enrolledJobs) {
+				if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 			}
-		} else {
-			System.out.println("Sorry, you cannot sign up for another job with time conflicts.\n");
+			if (signUp || enrolledJobs.size() == 0) {
+				int response = Integer.parseInt(IODriver.input.nextLine());
+				// BR3
+				if (theJob.signUpVolunteer(this, response)) {
+					//delete the job from the main job list (to be added back in once the volunteer has been added)
+					IODriver.storedData.deleteJob(theJob);
+					
+					//Add the job back into the main job list and to the volunteer's own list
+					IODriver.storedData.addJob(theJob);
+					enrolledJobs.add(theJob);
+				} else {
+					throw new JobSlotFilledException();
+				}
+			} else {
+				throw new MultipleSignUpException();
+			}
+		} catch (JobSlotFilledException | MultipleSignUpException e) {
+			System.out.println(e.toString());
 		}
 	}
 	

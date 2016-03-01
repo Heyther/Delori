@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class UI_Volunteer extends UI_AbstractUser {
 
+	private static final long serialVersionUID = -7797674674958830828L;
 	public Volunteer user;
 
 	public UI_Volunteer() {
@@ -24,16 +25,17 @@ public class UI_Volunteer extends UI_AbstractUser {
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
 		
-		if (user.getEnrolledJobs().size() > 0) {
-			result.append("Jobs you are enrolled in:\n");
-			for (Job j : user.getEnrolledJobs()) {
-				result.append(j.getJobTitle() + "\n");
+		try {
+			if (user.getEnrolledJobs().size() > 0) {
+				result.append("Jobs you are enrolled in:\n");
+				for (Job j : user.getEnrolledJobs()) {
+					result.append(j.getJobTitle() + "\n");
+				}
 			}
-		} else {
-			// turn below into exception...
-			result.append("You are currently not enrolled in any jobs. Please enter 3 to sign up.\n");
-		}
 			System.out.println(result);
+		} catch (NoEnrolledJobsPresentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void signUp() {
