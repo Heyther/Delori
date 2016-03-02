@@ -20,6 +20,11 @@ public abstract class UI_AbstractUser implements Serializable {
 	// Displays a menu with options for a user.
 	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
+	public void showUser() {
+		if (user != null) {
+			System.out.println("Signed in as " + user.getFullName() + ", " + user.getRole());
+		}
+	}
 	
 	/*
 	 * Select job from job list and view the job details.

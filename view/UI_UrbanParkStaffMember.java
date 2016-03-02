@@ -14,6 +14,7 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	 */
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
+		showUser();
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);

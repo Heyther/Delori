@@ -74,12 +74,12 @@ public class IODriver {
 				break;
 			case ADD_A_JOB:
 				if (currentUserUI instanceof UI_ParkManager) {
-					((ParkManager) currentUser).addJob();	
+					((UI_ParkManager) currentUserUI).createJob();
 					break;
 				}
 			case VIEW_JOBS_MANAGED:
 				if (currentUserUI instanceof UI_ParkManager) {
-					((ParkManager) currentUser).viewJobsManaged();
+					((UI_ParkManager) currentUserUI).viewJobsManaged();
 				}
 				break;
 			case VIEW_UPCOMING_JOBS:  
@@ -108,6 +108,10 @@ public class IODriver {
 					clearConsole();
 					menuBoxForJobs(storedData.getJobs());
 					((UI_Volunteer) currentUserUI).viewJobDetails();
+				} else if (currentUserUI instanceof UI_ParkManager) {
+					clearConsole();
+					menuBoxForJobs(storedData.getJobs());
+					((UI_ParkManager) currentUserUI).viewJobDetails();
 				}
 				break;
 			case SIGN_UP: 
@@ -146,14 +150,24 @@ public class IODriver {
 		System.out.print(divider + "\n" + MenuOptions.OPTION_LOGIN +"\n" + MenuOptions.OPTION_ENTER_EMAIL+ "\n" +divider + "\n>");
 		//System.out.print(">");
 		
-		
+		/*
 		while (Objects.isNull(currentUser) ) {
 			response = input.nextLine();
 			currentUser = storedData.getReturningUser(response);
 			if (Objects.isNull(currentUser)) {
 				System.out.println("Wrong Email...\n Please, try again.\n>");
 			}
+		}*/
+		
+		
+		while (currentUser == null) {
+			response = input.nextLine();
+			currentUser = storedData.getReturningUser(response);
+			if (currentUser == null) {
+				System.out.println("Wrong Email...\n Please, try again.\n>");
+			}
 		}
+		
 		currentUser = storedData.getReturningUser(response);
 		if (currentUser instanceof Volunteer) {
 			currentUserUI = new UI_Volunteer();

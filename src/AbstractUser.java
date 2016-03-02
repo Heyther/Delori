@@ -14,6 +14,7 @@ public abstract class AbstractUser implements Serializable {
 
 	private static final long serialVersionUID = 1322725593346883536L;
 	protected String fname, lname, email;
+	protected UserStatus role;
 	
 	/*
 	 * Constructs an instance of a user
@@ -71,6 +72,10 @@ public abstract class AbstractUser implements Serializable {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public UserStatus getRole() {
+		return role;
 	}
 
 	/*

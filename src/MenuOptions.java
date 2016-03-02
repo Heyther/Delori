@@ -26,6 +26,11 @@ public enum MenuOptions {
 	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
 	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
 	
+	//Park Manager specific options
+	EDIT_JOB("Edit job details"),
+	CANCEL_JOB("Cancel job"),
+	VIEW_ENROLLED_VOLUNTEERS("View signed-up volunteers"),
+	
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),
