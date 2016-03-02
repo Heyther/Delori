@@ -64,6 +64,12 @@ public class UI_Volunteer extends UI_AbstractUser {
 		return result;
 	}
 
+	@Override
+	public ArrayList<MenuOptions> jobOptionsMenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

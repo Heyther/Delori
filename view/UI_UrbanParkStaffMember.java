@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5078784213187752662L;
+
 	public UI_UrbanParkStaffMember() {
 		
 	}
@@ -61,6 +66,12 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 			System.out.println("Volunteer not found, try again.\n");
 			volunteerSearch();
 		}
+	}
+
+	@Override
+	public ArrayList<MenuOptions> jobOptionsMenu() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

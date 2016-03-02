@@ -19,6 +19,7 @@ public class IODriver {
 	static Calendar calendar;
 	public static AbstractUser currentUser;
 	public static UI_AbstractUser currentUserUI;
+	public static Job currentJob;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
@@ -33,6 +34,7 @@ public class IODriver {
 		response = "";
 		currentUser = null;
 		currentUserUI = null;
+		currentJob = null;
 		input = new Scanner(System.in);
 		quitProgram = false;
 		runProgram();
@@ -70,16 +72,19 @@ public class IODriver {
 				if (currentUserUI instanceof UI_Volunteer) {
 					clearConsole();
 					((UI_Volunteer) currentUserUI).viewEnrolledJobs();
+					
 				}
 				break;
 			case ADD_A_JOB:
 				if (currentUserUI instanceof UI_ParkManager) {
 					((UI_ParkManager) currentUserUI).createJob();
+					menuBox(currentUserUI.jobOptionsMenu());
 					break;
 				}
 			case VIEW_JOBS_MANAGED:
 				if (currentUserUI instanceof UI_ParkManager) {
 					((UI_ParkManager) currentUserUI).viewJobsManaged();
+					
 				}
 				break;
 			case VIEW_UPCOMING_JOBS:  
@@ -128,7 +133,10 @@ public class IODriver {
 					clearConsole();
 				}
 				break;
-	
+			case EDIT_JOB:
+				if (currentUserUI instanceof UI_ParkManager) {
+					((UI_ParkManager) currentUserUI).editJob(currentJob);
+				}
 			default: System.out.println("");
 		}
 	}

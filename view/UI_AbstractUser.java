@@ -11,6 +11,10 @@ import java.util.ArrayList;
  */
 public abstract class UI_AbstractUser implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6133973165093948247L;
 	AbstractUser user;
 	
 	public UI_AbstractUser() {
@@ -20,10 +24,30 @@ public abstract class UI_AbstractUser implements Serializable {
 	// Displays a menu with options for a user.
 	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
+	public abstract ArrayList<MenuOptions> jobOptionsMenu();
+	
 	public void showUser() {
 		if (user != null) {
 			System.out.println("Signed in as " + user.getFullName() + ", " + user.getRole());
 		}
+	}
+	
+	
+	/*
+	 * Select job number from a printed menu of jobs
+	 */
+	public Job selectJob(ArrayList<Job> jobChoices) {
+		System.out.println("Select a job number.");
+		String response = IODriver.input.nextLine();
+		int jobNumber = Integer.parseInt(response);
+		
+		while (jobNumber == 0 || jobNumber > jobChoices.size()) {
+			System.out.println("Invalid input. Please type a number from the list.");
+			response = IODriver.input.nextLine();
+			jobNumber = Integer.parseInt(response);
+		}
+		
+		return jobChoices.get(jobNumber-1);
 	}
 	
 	/*

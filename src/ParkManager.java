@@ -42,9 +42,10 @@ public class ParkManager extends AbstractUser
 	/*
 	 * Creates a new job with the details that have been set by the UI 
 	 * and adds it to the main job list and the park manager's job list
+	 * Returns the Job if one was created, null otherwise
 	 * U1
 	 */
-	public void addJob(String jobTitle, String start, String time, String dur, 
+	public Job addJob(String jobTitle, String start, String time, String dur, 
 			String descript, int light, int med, int heavy) throws IOException {
 		
 		//Create new Job object and add to main job list and park manager's job list
@@ -53,14 +54,10 @@ public class ParkManager extends AbstractUser
 		if(IODriver.storedData.calendar.verifyJob(newJob)) {
 			this.jobsManaging.add(newJob);
 			IODriver.storedData.addJob(newJob);
-			//Show confirmation
-			System.out.println("\nJob Added! Review Job Details:\n");
-			System.out.println(newJob.toString());
-			//Print menu of options 
-			//jobDetailsMenu(newJob);
+			return newJob;
 		}
 		else {
-			System.out.println("Unable to add job. Too many jobs scheduled selected week.");
+			return null;
 		}
 	}
 	

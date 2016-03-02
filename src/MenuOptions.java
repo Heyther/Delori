@@ -15,6 +15,8 @@ public enum MenuOptions {
 	SEARCH_VOL_LASTNAME("Search volunteer by last name"),
 	VIEW_JOB_DETAIL("View job details"),
 	VIEW_JOBS_MANAGED("View managed jobs"),
+	SELECT_JOB_NUMBER("Select a job number to see more options"),
+	JOB_OPTIONS("Job Options"),
 	
 		
 	// Volunteer specific options
