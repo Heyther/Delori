@@ -35,20 +35,6 @@ public class UI_ParkManager extends UI_AbstractUser {
 		return result;
 	}
 	
-	/*
-	 * Park Manager's menu of actions to take once a job has been selected
-	 */
-	@Override
-	public ArrayList<MenuOptions> jobOptionsMenu() {
-		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.JOB_OPTIONS);
-		result.add(MenuOptions.EDIT_JOB);
-		result.add(MenuOptions.CANCEL_JOB);
-		result.add(MenuOptions.VIEW_ENROLLED_VOLUNTEERS);
-		result.add(MenuOptions.EXIT);
-
-		return result;
-	}
 	
 	/*
 	 * Prompts user for details of the job and calls ParkManager's addJob method
