@@ -24,7 +24,7 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SEARCH_VOL_LASTNAME);
-		result.add(MenuOptions.EXIT);
+		result.add(MenuOptions.LOGOUT);
 			
 		return result;
 	}

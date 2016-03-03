@@ -117,7 +117,7 @@ public class Job implements Serializable {
 		 * Getter for start time.
 		 */
 		public String getStartTime() {
-			return startDate;
+			return startTime;
 		}
 		/*
 		 * Setter for start time.
@@ -314,7 +314,7 @@ public class Job implements Serializable {
 		 * Returns a brief summary of job.
 		 */
 		public String jobSummary() {
-			return this.getJobTitle() + ", " + this.getLocation() + ", " + this.getStartDate();
+			return this.getJobTitle() + ", " + this.getLocation() + ", " + this.getStartDate() + ", " + this.getStartTime();
 		}
 	    
 }
