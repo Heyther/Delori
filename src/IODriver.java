@@ -46,7 +46,7 @@ public class IODriver {
 		login();
 		while (selection != MenuOptions.EXIT) {
 			while (selection != MenuOptions.LOGOUT) {
-				currentUserUI.showUser();
+				//currentUserUI.showUser();
 				menuBox(currentUserUI.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
