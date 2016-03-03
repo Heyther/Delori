@@ -238,32 +238,30 @@ public class IODriver {
 		StringBuilder divider = repeat("=", (int) boxWidth + 9);
 
 		results += divider + "\n";
-		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "", currentUserUI.showUser(), "\n");
 		for (int i = 0; i < menuOptions.size(); i++) {
 			if (boxWidth == menuOptions.get(i).toString().length()) {
 				if (i == 1) {
 					results += divider + "\n";
-				}
-				;
+				};
 				if (i > 0) {
-					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|" + menuOptions.get(i), "|\n");
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "" + menuOptions.get(i), "\n");
 				} else {
-					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "", menuOptions.get(i), "\n");
 				}
 
 			} else {
 				if (i == 1) {
 					results += divider + "\n";
-				}
-				;
+				};
 				String stringLengthDifference = Integer
 						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
 				if (i > 0) {
-					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
-							"|\n");
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "", menuOptions.get(i),
+							"\n");
 				} else {
-					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
-							"|\n");
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "", menuOptions.get(i),
+							"\n");
 				}
 			}
 		}
@@ -306,33 +304,31 @@ public class IODriver {
 		StringBuilder divider = repeat("=", (int) boxWidth + 9);
 
 		results += divider + "\n";
-		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "", currentUserUI.showUser(), "\n");
 		for (int i = 0; i < menuOptions.size(); i++) {
 			if (boxWidth == menuOptions.get(i).toString().length()) {
 				if (i == 1) {
 					results += divider + "\n";
-				}
-				;
+				};
 				if (i > 0) {
-					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", i + ". " + menuOptions.get(i),
-							"|\n");
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "", i + ". " + menuOptions.get(i),
+							"\n");
 				} else {
-					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "", menuOptions.get(i), "\n");
 				}
 
 			} else {
 				if (i == 1) {
 					results += divider + "\n";
-				}
-				;
+				};
 				String stringLengthDifference = Integer
 						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
 				if (i > 0) {
-					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|",
-							i + ". " + menuOptions.get(i), "|\n");
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "",
+							i + ". " + menuOptions.get(i), "\n");
 				} else {
-					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
-							"|\n");
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "", menuOptions.get(i),
+							"\n");
 				}
 			}
 		}
