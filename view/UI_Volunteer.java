@@ -65,6 +65,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 	 */
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
+		//showUser();
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
@@ -75,7 +76,13 @@ public class UI_Volunteer extends UI_AbstractUser {
 
 		return result;
 	}
-
+//
+//	@Override
+//	public ArrayList<MenuOptions> jobOptionsMenu() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 
 	
 }

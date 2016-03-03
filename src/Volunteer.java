@@ -14,9 +14,8 @@ import java.util.Objects;
 public class Volunteer extends AbstractUser  {
 	
 	private static final long serialVersionUID = 3505720660401145090L;
-	protected UserStatus role; 
-	public ArrayList<Job> jobs;		
-	public ArrayList<Job> enrolledJobs;
+	private UserStatus role; 	
+	private ArrayList<Job> enrolledJobs;
 	private int workloadResponse;
 
 	/*
@@ -24,9 +23,7 @@ public class Volunteer extends AbstractUser  {
 	 */
 	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
-		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
-		//volunteerMenu();
 		role = UserStatus.VOLUNTEER;
 		workloadResponse = 0;
 	}
@@ -62,13 +59,9 @@ public class Volunteer extends AbstractUser  {
 	public void cancelEnrolledJob(Job theJob) throws IOException {
 		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
 		IODriver.storedData.deleteJob(theJob);
-		
-		theJob.cancelVolunteer(this);
-		
-		//Remove the job from the volunteer's list of jobs
-		enrolledJobs.remove(theJob);
-		//Add job (now without that volunteer signed up) into the main job list
-		IODriver.storedData.addJob(theJob);
+		theJob.cancelVolunteer(this); // remove volunteer from job
+		enrolledJobs.remove(theJob); // remove enrolled job
+		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
 	}
 	
 	/*

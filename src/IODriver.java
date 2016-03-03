@@ -46,8 +46,9 @@ public class IODriver {
 			login();
 			MenuOptions selection = null;
 
+			
 			while (selection != MenuOptions.EXIT) {
-				
+				currentUserUI.showUser();
 				menuBox(currentUserUI.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
@@ -71,9 +72,9 @@ public class IODriver {
 				((UI_Volunteer) currentUserUI).viewEnrolledJobs();
 				break;
 			case ADD_A_JOB:
-				((UI_ParkManager) currentUserUI).createJob();	
+				((UI_ParkManager) currentUserUI).createJob();
+				//menuBox(currentUserUI.jobOptionsMenu());
 				break;
-				
 			case VIEW_JOBS_MANAGED:
 				((UI_ParkManager) currentUserUI).viewJobsManaged();
 				break;
@@ -81,10 +82,9 @@ public class IODriver {
 				clearConsole();
 				menuBoxForJobs(storedData.getJobs());
 				break;
-			case EXIT:    
+			case EXIT:
 				quitProgram = true;
 				break;
-	
 			case SEARCH_VOL_LASTNAME:
 				((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
 				break;
@@ -110,16 +110,13 @@ public class IODriver {
 	 */
 	public void login(){		
 		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
-			greet.add(MenuOptions.OPTION_LOGIN);
-			greet.add(MenuOptions.OPTION_ENTER_EMAIL);
-//		
-//		menuBox(greet);
+		greet.add(MenuOptions.OPTION_LOGIN);
+		greet.add(MenuOptions.OPTION_ENTER_EMAIL);
+		
 		int boxWidth = getLongestString(greet) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
 		
 		System.out.print(divider + "\n" + MenuOptions.OPTION_LOGIN +"\n" + MenuOptions.OPTION_ENTER_EMAIL+ "\n" +divider + "\n>");
-		//System.out.print(">");
-		
 		
 		while (Objects.isNull(currentUser) ) {
 			response = input.nextLine();
@@ -143,6 +140,13 @@ public class IODriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * 
+	 */
+	public void logOff() {
+		
 	}
 
 	/*
@@ -245,6 +249,7 @@ public class IODriver {
 	 * Starts the program.
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		@SuppressWarnings("unused")
 		IODriver driver = new IODriver();
 	}
 
