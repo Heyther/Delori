@@ -71,7 +71,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SIGN_UP);
 		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
-		result.add(MenuOptions.EXIT);
+		result.add(MenuOptions.LOGOUT);
 
 		return result;
 	}

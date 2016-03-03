@@ -6,8 +6,9 @@
  * @version 1.0
  */
 public enum MenuOptions {
-
 	// User selection options
+	LOGIN("login"),
+	LOGOUT("Logout"),
 	EXIT("Exit"),
 	ADD_A_JOB("Add a job"),
 	VIEW_ALL_VOL("View all volunteers"),
@@ -36,7 +37,8 @@ public enum MenuOptions {
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),
-	OPTION_ENTER_EMAIL("Please, enter your email.")
+	OPTION_ENTER_EMAIL("Please, enter your email."),
+	LOGGING_OUT("Sucessfully logged out...")
     ;
 	
 	private final String text;

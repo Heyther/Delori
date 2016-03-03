@@ -31,7 +31,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.VIEW_JOBS_MANAGED);
 		result.add(MenuOptions.ADD_A_JOB);
-		result.add(MenuOptions.EXIT);
+		result.add(MenuOptions.LOGOUT);
 			
 		return result;
 	}
