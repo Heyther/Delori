@@ -184,32 +184,32 @@ public class IODriver {
 		return result;
 	}
 
-	/*
-	 * Takes a list of menu options and displays them in a box format
-	 * with a title as the first element.
-	 */
-	public void menuBox(ArrayList<MenuOptions> menuOptions) {
-		String results = "";
-		int boxWidth = getLongestString(menuOptions) + 3; 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
-
-		results += divider + "\n";
-		for (int i = 0; i < menuOptions.size(); i++) {
-			if (boxWidth == menuOptions.get(i).toString().length()) {
-				if (i == 1) { results += divider + "\n"; };
-				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + ". " + menuOptions.get(i), "\n"); }
-				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", menuOptions.get(i), "\n"); }
-				
-			} else {
-				if (i == 1) { results += divider + "\n"; };
-				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
-				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + menuOptions.get(i),"\n"); }
-				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", menuOptions.get(i),"\n"); }
-			}
-		}
-		results += divider + "\n";
-		System.out.println(results);
-	}
+//	/*
+//	 * Takes a list of menu options and displays them in a box format
+//	 * with a title as the first element.
+//	 */
+//	public void menuBox(ArrayList<MenuOptions> menuOptions) {
+//		String results = "";
+//		int boxWidth = getLongestString(menuOptions) + 3; 
+//		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
+//
+//		results += divider + "\n";
+//		for (int i = 0; i < menuOptions.size(); i++) {
+//			if (boxWidth == menuOptions.get(i).toString().length()) {
+//				if (i == 1) { results += divider + "\n"; };
+//				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + ". " + menuOptions.get(i), "\n"); }
+//				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", menuOptions.get(i), "\n"); }
+//				
+//			} else {
+//				if (i == 1) { results += divider + "\n"; };
+//				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+//				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", i + ". " + menuOptions.get(i),"\n"); }
+//				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "", menuOptions.get(i),"\n"); }
+//			}
+//		}
+//		results += divider + "\n";
+//		System.out.println(results);
+//	}
 
 	/*
 	 * Takes all of the jobs within the system and displays them in a box format
@@ -274,7 +274,7 @@ public class IODriver {
 	/*
 	 * Finds the longest MenuOptions length
 	 */
-	private int getLongestString(ArrayList<MenuOptions> menuOptions) {
+	private static int getLongestString(ArrayList<MenuOptions> menuOptions) {
 		int maxLength = 0;
 		for (MenuOptions s : menuOptions) {
 			if (s.toString().length() > maxLength) {
@@ -300,7 +300,7 @@ public class IODriver {
 		/*
 	 * Takes a list of menu options and displays them in a box format
 	 */
-	public void menuBox(ArrayList<MenuOptions> menuOptions) {
+	public static void menuBox(ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestString(menuOptions) + 3;
 		StringBuilder divider = repeat("=", (int) boxWidth + 9);
