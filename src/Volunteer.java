@@ -14,28 +14,27 @@ import java.util.Objects;
 public class Volunteer extends AbstractUser  {
 	
 	private static final long serialVersionUID = 3505720660401145090L;
-	protected UserStatus role; 
-	public ArrayList<Job> jobs;		
-	public ArrayList<Job> enrolledJobs;
-
+	private UserStatus role; 	
+	private ArrayList<Job> enrolledJobs;
+	private int workloadResponse;
 
 	/*
 	 * Constructs a volunteer
 	 */
 	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
-		jobs = new ArrayList<Job>();
 		enrolledJobs = new ArrayList<Job>();
-		//volunteerMenu();
 		role = UserStatus.VOLUNTEER;
+		workloadResponse = 0;
 	}
 	
 	/*
 	 * Retrieve the Volunteer's enrolled jobs.
 	 */
 	public ArrayList<Job> getEnrolledJobs() throws NoEnrolledJobsPresentException  {
-		if (enrolledJobs == null) {
-			throw new NoEnrolledJobsPresentException();   // this way or do in a try catch.
+		if (enrolledJobs.isEmpty()) {
+			throw new NoEnrolledJobsPresentException();
+			
 		}
 		return enrolledJobs;
 	}
@@ -60,44 +59,48 @@ public class Volunteer extends AbstractUser  {
 	public void cancelEnrolledJob(Job theJob) throws IOException {
 		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
 		IODriver.storedData.deleteJob(theJob);
-		
-		theJob.cancelVolunteer(this);
-		
-		//Remove the job from the volunteer's list of jobs
-		enrolledJobs.remove(theJob);
-		//Add job (now without that volunteer signed up) into the main job list
-		IODriver.storedData.addJob(theJob);
+		theJob.cancelVolunteer(this); // remove volunteer from job
+		enrolledJobs.remove(theJob); // remove enrolled job
+		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
 	}
 	
 	/*
 	 * Sign up for a job. (U6)
 	 */
-	public void signUp(Job theJob) throws IOException {
-		try {
-			// BR7
-			boolean signUp = false;
-			for (Job j : enrolledJobs) {
-				if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
-			}
-			if (signUp || enrolledJobs.size() == 0) {
-				int response = Integer.parseInt(IODriver.input.nextLine());
-				// BR3
-				if (theJob.signUpVolunteer(this, response)) {
-					//delete the job from the main job list (to be added back in once the volunteer has been added)
-					IODriver.storedData.deleteJob(theJob);
-					
-					//Add the job back into the main job list and to the volunteer's own list
-					IODriver.storedData.addJob(theJob);
-					enrolledJobs.add(theJob);
-				} else {
-					throw new JobSlotFilledException();
-				}
-			} else {
-				throw new MultipleSignUpException();
-			}
-		} catch (JobSlotFilledException | MultipleSignUpException e) {
-			System.out.println(e.toString());
+	public void signUp(Job theJob) throws IOException, JobSlotFilledException, SignUpOnSameDayException {
+		
+		// BR7: A Volunteer may not sign up for two jobs on the same day.
+		boolean signUp = false;
+		for (Job j : enrolledJobs) {
+			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 		}
+		
+		if (signUp || enrolledJobs.size() == 0) {
+			
+			// BR3: A Volunteer may not sign up for a work category on a job if the maximum number of Volunteers for
+			// that work category has already been reached. (handled in jobs)
+			if (theJob.signUpVolunteer(this, getWorkloadResponse())) {
+				//delete the job from the main job list (to be added back in once the volunteer has been added)
+				IODriver.storedData.deleteJob(theJob);
+				
+				//Add the job back into the main job list and to the volunteer's own list
+				IODriver.storedData.addJob(theJob);
+				enrolledJobs.add(theJob);
+			} else {
+				throw new JobSlotFilledException();
+			}
+		} else {
+			throw new SignUpOnSameDayException();
+		}
+	}
+	
+	// odd-ball methods in obtaining user input from 
+	// view without having view code within model.
+	public void setWorkloadResponse(int theWorkloadResponse) {
+		workloadResponse = theWorkloadResponse;
+	}
+	public int getWorkloadResponse() {
+		return workloadResponse;
 	}
 	
 	/*

@@ -8,7 +8,7 @@ import java.util.Objects;
  * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 2/16/2016
- * @version 2.0
+ * @version 1.0
  */
 
 public class ParkManager extends AbstractUser 
@@ -60,36 +60,6 @@ public class ParkManager extends AbstractUser
 			return null;
 		}
 	}
-	
-	
-	/*
-	 * Displays options on a job.
-	 */
-	/*
-	public void jobDetailsMenu(Job theJob) throws IOException {
-		System.out.println("\nPlease type a number: \n "
-				+ "1) Edit job \n "
-				+ "2) Cancel job\n " 
-				+ "3) View signed-up volunteers\n "
-				+ "4) Exit " );
-		String response = IODriver.input.nextLine();
-		
-		switch (response){
-		case "1": editJob(theJob);
-			break;
-		case "2": cancelJob(theJob);
-			break;
-		case "3": viewEnrolledVolunteers(theJob);
-			break;
-		case "4": IODriver.clearConsole();
-			break;
-		default: 
-			
-			jobDetailsMenu(theJob); //Invalid response. Try again.
-			break;
-		}
-	}
-	*/
 	
 	/*
 	 * Cancel a job (Delete it from the list of jobs)
@@ -167,41 +137,6 @@ public class ParkManager extends AbstractUser
 	public ArrayList<Job> getJobsManaging(){
 		return this.jobsManaging;
 	}
-	
-	/*
-	 * View all the park manager's upcoming jobs
-	 * U8
-	 */
-	/*
-	public void viewJobsManaged() throws IOException {
-		if (this.jobsManaging.size() > 0) {
-			//view list of all the park manager's upcoming jobs
-			int i;
-			for (i = 0; i < this.jobsManaging.size(); i++){
-				System.out.print((i+1) + ". ");
-				System.out.println(this.jobsManaging.get(i).jobSummary());
-			}
-			System.out.print("\nType a number to select a job or type 0 to go back:\n>");
-			int jobNumber = Integer.parseInt(IODriver.input.nextLine());
-			//Keep prompting until good input in received
-			while (jobNumber > jobsManaging.size()) {
-				System.out.println("Invalid input. Please try again.");
-				jobNumber = Integer.parseInt(IODriver.input.nextLine());
-			}
-			//If a job number was typed, print job details and options (If 0 was typed, do nothing)
-			if (jobNumber != 0){
-				
-				System.out.println(jobsManaging.get(jobNumber-1));
-				jobDetailsMenu(jobsManaging.get(jobNumber-1));
-			} else {
-				IODriver.clearConsole();
-			}
-		} else {
-			System.out.println("You currently have no jobs up.");
-		}
-	}
-	 */
-
 	
 	/*
 	 * Retrieves the user's role.

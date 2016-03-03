@@ -22,16 +22,16 @@ public enum MenuOptions {
 	// Volunteer specific options
 	SIGN_UP("Sign up for a job"),
 	VIEW_ENROLLED_JOBS("View enrolled jobs"),
-	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n"),
-	
-	// Staff specific options
-	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
-	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
+	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n>\n"),
 	
 	//Park Manager specific options
 	EDIT_JOB("Edit job details"),
 	CANCEL_JOB("Cancel job"),
 	VIEW_ENROLLED_VOLUNTEERS("View signed-up volunteers"),
+	
+	// Staff specific options
+	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
+	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
 	
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),

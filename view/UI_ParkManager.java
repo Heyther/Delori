@@ -25,7 +25,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 */
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
-		this.showUser();
+		//this.showUser();
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
@@ -33,21 +33,6 @@ public class UI_ParkManager extends UI_AbstractUser {
 		result.add(MenuOptions.ADD_A_JOB);
 		result.add(MenuOptions.EXIT);
 			
-		return result;
-	}
-	
-	/*
-	 * Park Manager's menu of actions to take once a job has been selected
-	 */
-	@Override
-	public ArrayList<MenuOptions> jobOptionsMenu() {
-		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.JOB_OPTIONS);
-		result.add(MenuOptions.EDIT_JOB);
-		result.add(MenuOptions.CANCEL_JOB);
-		result.add(MenuOptions.VIEW_ENROLLED_VOLUNTEERS);
-		result.add(MenuOptions.EXIT);
-
 		return result;
 	}
 	
@@ -86,18 +71,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 		System.out.println("Number of heavy slots: ");
 		heavySlots = Integer.parseInt(IODriver.input.nextLine());
 		
-		Job newJob = this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
-		
-		if (newJob == null) {
-			System.out.println("Unable to add job");
-		}
-		else {
-			System.out.println("\nJob Added! Review Job Details:\n");
-			System.out.println(newJob.toString());
-		}
-		
-		jobOptionsMenu();
-		
+		this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
 	}
 	
 	/*
@@ -230,4 +204,10 @@ public class UI_ParkManager extends UI_AbstractUser {
 	public void viewEnrolledVolunteers(Job theJob) {
 		theJob.printVolunteers();
 	}
+
+//	@Override
+//	public ArrayList<MenuOptions> jobOptionsMenu() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

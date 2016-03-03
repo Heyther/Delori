@@ -24,7 +24,7 @@ public abstract class UI_AbstractUser implements Serializable {
 	// Displays a menu with options for a user.
 	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
-	public abstract ArrayList<MenuOptions> jobOptionsMenu();
+	//public abstract ArrayList<MenuOptions> jobOptionsMenu();
 	
 	public void showUser() {
 		if (user != null) {
@@ -32,6 +32,13 @@ public abstract class UI_AbstractUser implements Serializable {
 		}
 	}
 	
+//	/*
+//	 * Clears the showUser display (working comment)
+//   * Might need to create another display for logging-off to logging-in
+//	 */
+//	public void clearUser() {
+//		user = null;
+//	}
 	
 	/*
 	 * Select job number from a printed menu of jobs

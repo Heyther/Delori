@@ -24,7 +24,6 @@ public class UI_Volunteer extends UI_AbstractUser {
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
-		
 		try {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
@@ -32,15 +31,29 @@ public class UI_Volunteer extends UI_AbstractUser {
 					result.append(j.getJobTitle() + "\n");
 				}
 			}
-			System.out.println(result);
 		} catch (NoEnrolledJobsPresentException e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(result);
 	}
 	
-	public void signUp() {
-		System.out.println(MenuOptions.SELECT_WORKLOAD);
-		
+	public void signUpView() throws IOException {
+		try {
+			System.out.print("Please, select a job number or enter 0 to go back:\n>");
+			int responseIndex = Integer.parseInt(IODriver.input.nextLine());
+			
+			if (responseIndex != 0) {
+				System.out.println(MenuOptions.SELECT_WORKLOAD);
+				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
+				user.setWorkloadResponse(responseWorkloadIndex);
+				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(responseWorkloadIndex-1));
+			} else {
+				//do nothing
+				IODriver.clearConsole();
+			}
+		} catch (JobSlotFilledException | SignUpOnSameDayException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
@@ -52,7 +65,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 	 */
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
-		showUser();
+		//showUser();
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
 		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
@@ -63,13 +76,13 @@ public class UI_Volunteer extends UI_AbstractUser {
 
 		return result;
 	}
-
-	@Override
-	public ArrayList<MenuOptions> jobOptionsMenu() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+//
+//	@Override
+//	public ArrayList<MenuOptions> jobOptionsMenu() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
 
 	
 }

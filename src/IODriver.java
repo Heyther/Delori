@@ -19,7 +19,6 @@ public class IODriver {
 	static Calendar calendar;
 	public static AbstractUser currentUser;
 	public static UI_AbstractUser currentUserUI;
-	public static Job currentJob;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
@@ -34,7 +33,6 @@ public class IODriver {
 		response = "";
 		currentUser = null;
 		currentUserUI = null;
-		currentJob = null;
 		input = new Scanner(System.in);
 		quitProgram = false;
 		runProgram();
@@ -48,8 +46,9 @@ public class IODriver {
 			login();
 			MenuOptions selection = null;
 
+			
 			while (selection != MenuOptions.EXIT) {
-				
+				currentUserUI.showUser();
 				menuBox(currentUserUI.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
@@ -69,74 +68,37 @@ public class IODriver {
 
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
-				if (currentUserUI instanceof UI_Volunteer) {
-					clearConsole();
-					((UI_Volunteer) currentUserUI).viewEnrolledJobs();
-					
-				}
+				clearConsole();
+				((UI_Volunteer) currentUserUI).viewEnrolledJobs();
 				break;
 			case ADD_A_JOB:
-				if (currentUserUI instanceof UI_ParkManager) {
-					((UI_ParkManager) currentUserUI).createJob();
-					menuBox(currentUserUI.jobOptionsMenu());
-					break;
-				}
+				((UI_ParkManager) currentUserUI).createJob();
+				//menuBox(currentUserUI.jobOptionsMenu());
+				break;
 			case VIEW_JOBS_MANAGED:
-				if (currentUserUI instanceof UI_ParkManager) {
-					((UI_ParkManager) currentUserUI).viewJobsManaged();
-					
-				}
+				((UI_ParkManager) currentUserUI).viewJobsManaged();
 				break;
-			case VIEW_UPCOMING_JOBS:  
-				if (currentUser instanceof Volunteer) {
-					menuBoxForJobs(storedData.getJobs());
-					//((Volunteer) currentUser).signUpOrViewJobDetail();
-				} else {
-					clearConsole();
-					menuBoxForJobs(storedData.getJobs());
-				}
+			case VIEW_UPCOMING_JOBS:
+				clearConsole();
+				menuBoxForJobs(storedData.getJobs());
 				break;
-			case EXIT:    
+			case EXIT:
 				quitProgram = true;
 				break;
-	
 			case SEARCH_VOL_LASTNAME:
-				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
-					((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
-				}
+				((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
 				break;
 			case VIEW_JOB_DETAIL: 
-				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
-					menuBoxForJobs(storedData.getJobs());
-					((UI_UrbanParkStaffMember) currentUserUI).viewJobDetails();
-				} else if (currentUserUI instanceof UI_Volunteer) {
-					clearConsole();
-					menuBoxForJobs(storedData.getJobs());
-					((UI_Volunteer) currentUserUI).viewJobDetails();
-				} else if (currentUserUI instanceof UI_ParkManager) {
-					clearConsole();
-					menuBoxForJobs(storedData.getJobs());
-					((UI_ParkManager) currentUserUI).viewJobDetails();
-				}
+				clearConsole();
+				menuBoxForJobs(storedData.getJobs());
+				currentUserUI.viewJobDetails();
 				break;
 			case SIGN_UP: 
 				clearConsole();
 				menuBoxForJobs(storedData.getJobs());
-				System.out.print("Please, select a job number or enter 0 to go back:\n>");
-				response = input.nextLine();
-				int index = Integer.parseInt(response);
-				if (index != 0) {
-					
-					((Volunteer) currentUser).signUp(storedData.getJobs().get(index-1));
-				} else {
-					//do nothing
-					clearConsole();
-				}
+				((UI_Volunteer) currentUserUI).signUpView();
 				break;
-			case EDIT_JOB:
-				if (currentUserUI instanceof UI_ParkManager) {
-					((UI_ParkManager) currentUserUI).editJob(currentJob);
-				}
+	
 			default: System.out.println("");
 		}
 	}
@@ -148,34 +110,21 @@ public class IODriver {
 	 */
 	public void login(){		
 		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
-			greet.add(MenuOptions.OPTION_LOGIN);
-			greet.add(MenuOptions.OPTION_ENTER_EMAIL);
-//		
-//		menuBox(greet);
+		greet.add(MenuOptions.OPTION_LOGIN);
+		greet.add(MenuOptions.OPTION_ENTER_EMAIL);
+		
 		int boxWidth = getLongestString(greet) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
 		
 		System.out.print(divider + "\n" + MenuOptions.OPTION_LOGIN +"\n" + MenuOptions.OPTION_ENTER_EMAIL+ "\n" +divider + "\n>");
-		//System.out.print(">");
 		
-		/*
 		while (Objects.isNull(currentUser) ) {
 			response = input.nextLine();
 			currentUser = storedData.getReturningUser(response);
 			if (Objects.isNull(currentUser)) {
 				System.out.println("Wrong Email...\n Please, try again.\n>");
 			}
-		}*/
-		
-		
-		while (currentUser == null) {
-			response = input.nextLine();
-			currentUser = storedData.getReturningUser(response);
-			if (currentUser == null) {
-				System.out.println("Wrong Email...\n Please, try again.\n>");
-			}
 		}
-		
 		currentUser = storedData.getReturningUser(response);
 		if (currentUser instanceof Volunteer) {
 			currentUserUI = new UI_Volunteer();
@@ -191,6 +140,13 @@ public class IODriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * 
+	 */
+	public void logOff() {
+		
 	}
 
 	/*
@@ -293,6 +249,7 @@ public class IODriver {
 	 * Starts the program.
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		@SuppressWarnings("unused")
 		IODriver driver = new IODriver();
 	}
 

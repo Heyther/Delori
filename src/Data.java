@@ -5,13 +5,10 @@ import java.util.List;
 /**
  * Save and load persistent data.
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/2/2016
  * @version 1.0
  */
 public class Data {
-
-	
-	private static final long serialVersionUID = -3014553440474186296L;
 	private static final String SERIALIZED_FILE = "./urbanParkData.ser";
 	private ArrayList<Job> allJobs;
 	private ArrayList<AbstractUser> allUsers;
@@ -99,15 +96,7 @@ public class Data {
 		calendar.totalPendingJobs--;
 		serializeObject();
 	}
-	
-	/*
-	 * Displays all upcoming jobs
-	 */
-//	public ArrayList<Job> getUpcomingJobs() {
-//		return 
-//	}
 
-	
 	///////////////
 	// Serialize  
 	///////////////
@@ -117,6 +106,9 @@ public class Data {
 	 */
 	public void initializeData() throws IOException {
 		ParkManager m = new ParkManager("Mary", "Thompson", "m@gmail.com", "Green Park");
+		//m.addJob("Pet Lions", "03/24/2016", "1:00pm", "1", "Description:..", 1, 2, 3); // pre-add jobs
+		//m.addJob("Feed Ducks", "03/10/2016", "1:00pm", "1", "Description1:..", 1, 2, 3);
+		
 		addUser(m);
 		addUser(new ParkManager("Smith", "Smithers", "s@gmail.com", "Evergreen Park"));
 		addUser(new UrbanParkStaffMember("Joe", "Fogel", "j@gmail.com"));
@@ -124,14 +116,11 @@ public class Data {
 		addUser(new Volunteer("Beth", "Krom", "b@gmail.com"));
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		
-		
-		addJob(new Job("Pet Lions", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
-		addJob(new Job("Feed Ducks", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
+		//addJob(new Job("Pet Lions", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
+		//addJob(new Job("Feed Ducks", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
 		//addJob(new Job("Clean trash", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Clean trash in the parking lot", 1, 2, 3));
 		//addJob(new Job("Paint", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Paint the wall by the soccer fields.", 1, 2, 3));
 
-		
-		
 		serializeObject();
 	}
 	
