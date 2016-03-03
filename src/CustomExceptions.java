@@ -71,6 +71,18 @@ class InvalidUserInput extends CustomExceptions {
 	}
 }
 
+class VolunteerNotFoundException extends CustomExceptions {
+
+	private static final long serialVersionUID = 1L;
+
+	public VolunteerNotFoundException() {
+		super("No volunteer with that last name exists.");
+	} 
+	public String toString() {
+		return getClass().getName();
+	}
+	
+}
 
 	
 

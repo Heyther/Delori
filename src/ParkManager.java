@@ -145,6 +145,10 @@ public class ParkManager extends AbstractUser
 	public UserStatus getRole() {
 		return role;
 	}
+	
+	public String getRoleString() {
+		return "Park Manager";
+	}
 
 	/*
 	 * Sets the user's role.

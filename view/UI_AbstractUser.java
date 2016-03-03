@@ -26,10 +26,12 @@ public abstract class UI_AbstractUser implements Serializable {
 	
 	//public abstract ArrayList<MenuOptions> jobOptionsMenu();
 	
-	public void showUser() {
+	public String showUser() {
 		if (user != null) {
-			System.out.println("Signed in as " + user.getFullName() + ", " + user.getRole());
-		}
+			//System.out.println(user.getFullName() + ", " + user.getRoleString());
+			return user.getFullName() + ", " + user.getRoleString();
+		} else 
+			return null;
 	}
 	
 //	/*

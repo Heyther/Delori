@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 /**
  * Driver(/Controller) class. Controls menus and user types.
  * 
@@ -14,11 +13,12 @@ import java.util.Scanner;
  */
 
 public class IODriver {
-	
+
 	public static Scanner input;
 	static Calendar calendar;
 	public static AbstractUser currentUser;
 	public static UI_AbstractUser currentUserUI;
+	public static Job currentJob;
 	static Data storedData;
 	static boolean quitProgram;
 	Data jobs, users;
@@ -33,6 +33,7 @@ public class IODriver {
 		response = "";
 		currentUser = null;
 		currentUserUI = null;
+		currentJob = null;
 		input = new Scanner(System.in);
 		quitProgram = false;
 		runProgram();
@@ -45,17 +46,14 @@ public class IODriver {
 		while (!quitProgram) {
 			login();
 			MenuOptions selection = null;
-
-			
 			while (selection != MenuOptions.EXIT) {
-				currentUserUI.showUser();
+
 				menuBox(currentUserUI.usersHomeMenu());
 				System.out.print(">");
 				response = input.nextLine();
 				clearConsole();
 				selection = currentUserUI.usersHomeMenu().get(Integer.parseInt(response));
 				nextSelectionDisplay(selection);
-				
 			}
 		}
 		System.out.println("\nGoodbye");
@@ -133,7 +131,7 @@ public class IODriver {
 		} else {
 			currentUserUI = new UI_UrbanParkStaffMember();
 		}
-		
+
 		try {
 			clearConsole();
 		} catch (IOException e) {
@@ -149,15 +147,16 @@ public class IODriver {
 		
 	}
 
+
 	/*
 	 * Clears the console.
 	 */
 	public static void clearConsole() throws IOException {
-		for(int clear = 0; clear < 6; clear++) {
-		    System.out.println("\n") ;
+		for (int clear = 0; clear < 6; clear++) {
+			System.out.println("\n");
 		}
-	} 
-	
+	}
+
 	/*
 	 * Repeats a string pattern n times
 	 */
@@ -174,21 +173,38 @@ public class IODriver {
 	 */
 	public void menuBox(ArrayList<MenuOptions> menuOptions) {
 		String results = "";
-		int boxWidth = getLongestString(menuOptions) + 3; 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
+		int boxWidth = getLongestString(menuOptions) + 3;
+		StringBuilder divider = repeat("=", (int) boxWidth + 9);
 
 		results += divider + "\n";
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
 		for (int i = 0; i < menuOptions.size(); i++) {
 			if (boxWidth == menuOptions.get(i).toString().length()) {
-				if (i == 1) { results += divider + "\n"; };
-				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", i + ". " + menuOptions.get(i), "|\n"); }
-				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n"); }
-				
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				if (i > 0) {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", i + ". " + menuOptions.get(i),
+							"|\n");
+				} else {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+				}
+
 			} else {
-				if (i == 1) { results += divider + "\n"; };
-				String stringLengthDifference = Integer.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
-				if (i > 0) { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", i + ". " + menuOptions.get(i),"|\n"); }
-				else { results += String.format("%-5s %s" + "%"+stringLengthDifference + "s", "|", menuOptions.get(i),"|\n"); }
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				String stringLengthDifference = Integer
+						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|",
+							i + ". " + menuOptions.get(i), "|\n");
+				} else {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				}
 			}
 		}
 		results += divider + "\n";
@@ -200,28 +216,71 @@ public class IODriver {
 	 */
 	public void menuBoxForJobs(ArrayList<Job> menuOptions) {
 		String results = "";
-		int boxWidth = getLongestStringInJobs(menuOptions) + 3; 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
-		
+		int boxWidth = getLongestStringInJobs(menuOptions) + 3;
+		StringBuilder divider = repeat("=", (int) boxWidth + 9);
+
 		results += divider + "\n";
 		results += "List of Jobs:\n";
 		for (int i = 0; i < menuOptions.size(); i++) {
-			//if (boxWidth == menuOptions.get(i).jobSummary().toString().length()) {
-				//if (i == 1) { results += divider + "\n"; };
-				if (i > 0) { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
-				else { results += String.format("%-5s %-"+ boxWidth + "s" + "%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n"); }
+			// if (boxWidth ==
+			// menuOptions.get(i).jobSummary().toString().length()) {
+			// if (i == 1) { results += divider + "\n"; };
+			if (i > 0) {
+				results += String.format("%-5s %-" + boxWidth + "s" + "%s", "",
+						i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n");
+			} else {
+				results += String.format("%-5s %-" + boxWidth + "s" + "%s", "",
+						i + 1 + ". " + (menuOptions.get(i)).jobSummary(), "\n");
+			}
 
 		}
 		results += divider + "\n";
 		System.out.println(results);
 	}
-	
 
-	
+	public static void menuBoxNotNumbered(ArrayList<MenuOptions> menuOptions) {
+		String results = "";
+		int boxWidth = getLongestString(menuOptions) + 3;
+		StringBuilder divider = repeat("=", (int) boxWidth + 9);
+
+		results += divider + "\n";
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
+		for (int i = 0; i < menuOptions.size(); i++) {
+			if (boxWidth == menuOptions.get(i).toString().length()) {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				if (i > 0) {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|" + menuOptions.get(i), "|\n");
+				} else {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+				}
+
+			} else {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				String stringLengthDifference = Integer
+						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				} else {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				}
+			}
+		}
+		results += divider + "\n";
+		System.out.println(results);
+	}
+
 	/*
 	 * Finds the longest MenuOptions length
 	 */
-	private int getLongestString(ArrayList<MenuOptions> menuOptions) {
+	private static int getLongestString(ArrayList<MenuOptions> menuOptions) {
 		int maxLength = 0;
 		for (MenuOptions s : menuOptions) {
 			if (s.toString().length() > maxLength) {
@@ -230,7 +289,7 @@ public class IODriver {
 		}
 		return maxLength;
 	}
-	
+
 	/*
 	 * Finds the longest Job Description length
 	 */
@@ -243,7 +302,6 @@ public class IODriver {
 		}
 		return maxLength;
 	}
-
 
 	/*
 	 * Starts the program.
