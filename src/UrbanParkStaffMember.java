@@ -37,6 +37,10 @@ public class UrbanParkStaffMember extends AbstractUser {
 	public UserStatus getRole() {
 		return role;
 	}
+	
+	public String getRoleString() {
+		return "Urban Park Staff Member";
+	}
 
 	/*
 	 * Sets the user's role.

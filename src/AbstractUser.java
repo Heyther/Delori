@@ -77,6 +77,8 @@ public abstract class AbstractUser implements Serializable {
 	public UserStatus getRole() {
 		return role;
 	}
+	
+	public abstract String getRoleString() ;
 
 	/*
 	 * 

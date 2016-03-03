@@ -168,7 +168,7 @@ public class IODriver {
 	 * Clears the console.
 	 */
 	public static void clearConsole() throws IOException {
-		for(int clear = 0; clear < 6; clear++) {
+		for (int clear = 0; clear < 6; clear++) {
 		    System.out.println("\n") ;
 		}
 	} 
@@ -232,7 +232,44 @@ public class IODriver {
 		System.out.println(results);
 	}
 	
+	public static void menuBoxNotNumbered(ArrayList<MenuOptions> menuOptions) {
+		String results = "";
+		int boxWidth = getLongestString(menuOptions) + 3;
+		StringBuilder divider = repeat("=", (int) boxWidth + 9);
 
+		results += divider + "\n";
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
+		for (int i = 0; i < menuOptions.size(); i++) {
+			if (boxWidth == menuOptions.get(i).toString().length()) {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				if (i > 0) {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|" + menuOptions.get(i), "|\n");
+				} else {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+				}
+
+			} else {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				String stringLengthDifference = Integer
+						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				} else {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				}
+			}
+		}
+		results += divider + "\n";
+		System.out.println(results);
+	}
 	
 	/*
 	 * Finds the longest MenuOptions length
@@ -258,6 +295,49 @@ public class IODriver {
 			}
 		}
 		return maxLength;
+	}
+	
+		/*
+	 * Takes a list of menu options and displays them in a box format
+	 */
+	public void menuBox(ArrayList<MenuOptions> menuOptions) {
+		String results = "";
+		int boxWidth = getLongestString(menuOptions) + 3;
+		StringBuilder divider = repeat("=", (int) boxWidth + 9);
+
+		results += divider + "\n";
+		results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", currentUserUI.showUser(), "|\n");
+		for (int i = 0; i < menuOptions.size(); i++) {
+			if (boxWidth == menuOptions.get(i).toString().length()) {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				if (i > 0) {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", i + ". " + menuOptions.get(i),
+							"|\n");
+				} else {
+					results += String.format("%-5s %-" + boxWidth + "s" + "%s", "|", menuOptions.get(i), "|\n");
+				}
+
+			} else {
+				if (i == 1) {
+					results += divider + "\n";
+				}
+				;
+				String stringLengthDifference = Integer
+						.toString((boxWidth - menuOptions.get(i).toString().length()) + 4);
+				if (i > 0) {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|",
+							i + ". " + menuOptions.get(i), "|\n");
+				} else {
+					results += String.format("%-5s %s" + "%" + stringLengthDifference + "s", "|", menuOptions.get(i),
+							"|\n");
+				}
+			}
+		}
+		results += divider + "\n";
+		System.out.println(results);
 	}
 
 

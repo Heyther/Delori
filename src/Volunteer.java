@@ -53,6 +53,11 @@ public class Volunteer extends AbstractUser  {
 		return role;
 	}
 	
+	
+	public String getRoleString() {
+		return "Volunteer";
+	}
+	
 	/*
 	 * Cancel an enrolled job.
 	 */
