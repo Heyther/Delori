@@ -19,11 +19,11 @@ public class CustomExceptions extends Exception {
 	}
 }	
 	
-class MultipleSignUpException extends CustomExceptions {
+class SignUpOnSameDayException extends CustomExceptions {
 	
 	private static final long serialVersionUID = 7981376760024255950L;
 
-	public MultipleSignUpException() {
+	public SignUpOnSameDayException() {
 		super("You are not allowed to signUp for more than" 
 				+ "1 job with the same start day.");
 	}

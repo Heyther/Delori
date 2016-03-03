@@ -40,82 +40,27 @@ public class ParkManager extends AbstractUser
 	}
 	
 	/*
-	 * Prompts user for details of the job and creates a new job with the given details
+	 * Creates a new job with the details that have been set by the UI 
+	 * and adds it to the main job list and the park manager's job list
 	 * U1
 	 */
-	public void addJob() throws IOException
-	{
-		String title, startDate, startTime, duration, description;
-		int lightSlots = 0, medSlots = 0, heavySlots = 0;
-		System.out.println("\nAdd New Job \n");
-		
-		System.out.println("Job Title: ");
-		title = IODriver.input.nextLine();
-		
-		System.out.println("Start date (mm/dd/yyyy): ");
-		startDate = IODriver.input.nextLine();
-
-		System.out.println("Start time (hh:mm am/pm): "); 
-		startTime = IODriver.input.nextLine();
-		
-		System.out.println("Duration (1 or 2 days): ");
-		duration = IODriver.input.nextLine();
-		
-		System.out.println("Description of job: ");
-		description = IODriver.input.nextLine();
-		
-		System.out.println("Number of light slots: ");
-		lightSlots = Integer.parseInt(IODriver.input.nextLine());
-		
-		System.out.println("Number of medium slots: ");
-		medSlots = Integer.parseInt(IODriver.input.nextLine());
-		
-		System.out.println("Number of heavy slots: ");
-		heavySlots = Integer.parseInt(IODriver.input.nextLine());
+	public void addJob(String jobTitle, String start, String time, String dur, 
+			String descript, int light, int med, int heavy) throws IOException {
 		
 		//Create new Job object and add to main job list and park manager's job list
-		Job newJob = new Job(title, startDate, startTime, duration, this.parkName, this.getFullName(), description, lightSlots, medSlots, heavySlots);
-
+		Job newJob = new Job(jobTitle, start, time, dur, this.parkName, this.getFullName(), descript, light, med, heavy);
 		
-		if(IODriver.storedData.calendar.verifyJob(newJob)) {
+		if(IODriver.storedData.calendar.verifyJob(newJob)) { // error occurs here if job is not verified, add exception?
 			this.jobsManaging.add(newJob);
 			IODriver.storedData.addJob(newJob);
 			//Show confirmation
 			System.out.println("\nJob Added! Review Job Details:\n");
 			System.out.println(newJob.toString());
 			//Print menu of options 
-			jobDetailsMenu(newJob);
+			//jobDetailsMenu(newJob);
 		}
 		else {
 			System.out.println("Unable to add job. Too many jobs scheduled selected week.");
-
-		}		
-	}
-	
-	/*
-	 * Displays options on a job.
-	 */
-	public void jobDetailsMenu(Job theJob) throws IOException {
-		System.out.println("\nPlease type a number: \n "
-				+ "1) Edit job \n "
-				+ "2) Cancel job\n " 
-				+ "3) View signed-up volunteers\n "
-				+ "4) Exit " );
-		String response = IODriver.input.nextLine();
-		
-		switch (response){
-		case "1": editJob(theJob);
-			break;
-		case "2": cancelJob(theJob);
-			break;
-		case "3": viewEnrolledVolunteers(theJob);
-			break;
-		case "4": IODriver.clearConsole();
-			break;
-		default: 
-			
-			jobDetailsMenu(theJob); //Invalid response. Try again.
-			break;
 		}
 	}
 	
@@ -124,150 +69,77 @@ public class ParkManager extends AbstractUser
 	 * U2
 	 */
 	public void cancelJob(Job theJob) throws IOException {
-		System.out.println("Are you sure you want to cancel this job?");
-		System.out.println(" 1) Yes, cancel the job. \n 2) No, keep the job \n");
-		String response = IODriver.input.nextLine();
-		switch (response){
-		case "1": 
-			this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
-			IODriver.storedData.deleteJob(theJob);//delete job from main job list
-			break;
-		case "2": 
-			jobDetailsMenu(theJob); //Go back to job details menu
-			break;
-		default: 
-			System.out.println("Invalid input. Please type 1 or 2. ");
-			break;
-		}
+		this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
+		IODriver.storedData.deleteJob(theJob);//delete job from main job list
 	}
 	
-	/*
-	 * Edit the details of a job
-	 * U3
-	 */
-	public void editJob(Job theJob) throws IOException {
-		//Delete the job from the main job list (the edited one will be added instead)
+	public void editJobTitle(Job theJob, String newTitle) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
-		
-		System.out.println("Which detail would you like to edit?");
-		System.out.println(" 1) Job Title " + "\n"
-					         +" 2) Date " + "\n"
-					         +" 3) Time " + "\n"
-					         +" 4) Duration " + "\n"        
-					         +" 5) Description "+"\n"
-					         +" 6) Light slots "+"\n"
-					         +" 7) Medium slots "+"\n" 
-					         +" 8) Heavy slots "+"\n"
-					         +" 9) Done editing ");
-		String response = IODriver.input.nextLine();
-		
-		//For the field the user selected to edit, prompt for the new value and change the appropriate field in the job
-		//call the method again so that the user may edit another field
-		switch (response){
-		case "1":
-			System.out.println("Enter new Job Title: ");
-			theJob.setJobTitle(IODriver.input.nextLine());
-			System.out.println("Job Title has been changed");
-			editJob(theJob);
-			break;
-		case "2":
-			System.out.println("Enter new Date: ");
-			theJob.setStartDate(IODriver.input.nextLine());
-			System.out.println("Start Date has been changed");
-			editJob(theJob);
-			break;
-		case "3":
-			System.out.println("Enter new Time: ");
-			theJob.setStartTime(IODriver.input.nextLine());
-			System.out.println("Time has been changed");
-			editJob(theJob);
-			break;
-		case "4":
-			System.out.println("Enter new Duration: ");
-			theJob.setDuration(IODriver.input.nextLine());
-			System.out.println("Duration has been changed");
-			editJob(theJob);
-			break;
-		case "5":
-			System.out.println("Enter new Description: ");
-			theJob.setDescription(IODriver.input.nextLine());
-			System.out.println("Description has been changed");
-			editJob(theJob);
-			break;
-		case "6":
-			System.out.println("Enter new number of Light Slots: ");
-			theJob.setLightSlots(Integer.parseInt(IODriver.input.nextLine()));
-			System.out.println("Number of Light Slots has been changed");
-			editJob(theJob);
-			break;
-		case "7":
-			System.out.println("Enter new number of Medium Slots: ");
-			theJob.setMediumSlots(Integer.parseInt(IODriver.input.nextLine()));
-			System.out.println("Number of Medium Slots has been changed");
-			editJob(theJob);
-			break;
-		case "8":
-			System.out.println("Enter new number of Heavy Slots: ");
-			theJob.setHeavySlots(Integer.parseInt(IODriver.input.nextLine()));
-			System.out.println("Number of Heavy Slots has been changed");
-			editJob(theJob);
-			break;
-		case "9": 
-			IODriver.storedData.addJob(theJob);
-			System.out.println("Review Job Details: \n");
-			System.out.println(theJob.toString());
-			jobDetailsMenu(theJob);
-			break;
-		default:
-			System.out.println("Invalid input. Please type a number 1-9.");
-			editJob(theJob);
-			break;	
-		}
+		this.jobsManaging.remove(theJob);
+		theJob.setJobTitle(newTitle);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
 	}
 	
-	/*
-	 * View all the park manager's upcoming jobs
-	 * U8
-	 */
-	public void viewJobsManaged() throws IOException {
-		if (this.jobsManaging.size() > 0) {
-			//view list of all the park manager's upcoming jobs
-			int i;
-			for (i = 0; i < this.jobsManaging.size(); i++){
-				System.out.print((i+1) + ". ");
-				System.out.println(this.jobsManaging.get(i).jobSummary());
-			}
-			System.out.print("\nType a number to select a job or type 0 to go back:\n>");
-			int jobNumber = Integer.parseInt(IODriver.input.nextLine());
-			//Keep prompting until good input in received
-			while (jobNumber > jobsManaging.size()) {
-				System.out.println("Invalid input. Please try again.");
-				jobNumber = Integer.parseInt(IODriver.input.nextLine());
-			}
-			//If a job number was typed, print job details and options (If 0 was typed, do nothing)
-			if (jobNumber != 0){
-				
-				System.out.println(jobsManaging.get(jobNumber-1));
-				jobDetailsMenu(jobsManaging.get(jobNumber-1));
-			} else {
-				IODriver.clearConsole();
-			}
-		} else {
-			System.out.println("You currently have no jobs up.");
-		}
+	public void editJobDate(Job theJob, String newDate) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setStartDate(newDate);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
 	}
 	
-	/*
-	 * View the volunteers signed up for my job
-	 * Only prints the volunteers, does not allow the park manager to select the volunteers in any way
-	 * U9
-	 */
-	public void viewEnrolledVolunteers(Job theJob) throws IOException{
-		theJob.printVolunteers();
-		jobDetailsMenu(theJob);
+	public void editJobTime(Job theJob, String newTime) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setStartTime(newTime);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
 	}
-
-
+	
+	public void editJobDuration(Job theJob, String newDuration) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setDuration(newDuration);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
+	}
+	
+	public void editJobDescription(Job theJob, String newDescription) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setDescription(newDescription);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
+	}
+	
+	public void editJobLightSlots(Job theJob, Integer newLightSlots) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setLightSlots(newLightSlots);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
+	}
+	
+	public void editJobMediumSlots(Job theJob, Integer newMediumSlots) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setMediumSlots(newMediumSlots);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
+	}
+	
+	public void editJobHeavySlots(Job theJob, Integer newHeavySlots) throws IOException{
+		IODriver.storedData.deleteJob(theJob);
+		this.jobsManaging.remove(theJob);
+		theJob.setHeavySlots(newHeavySlots);
+		IODriver.storedData.addJob(theJob);
+		this.jobsManaging.add(theJob);
+	}
+	
+	public ArrayList<Job> getJobsManaging(){
+		return this.jobsManaging;
+	}
 	
 	/*
 	 * Retrieves the user's role.

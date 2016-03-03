@@ -24,7 +24,6 @@ public class UI_Volunteer extends UI_AbstractUser {
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
-		
 		try {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
@@ -32,15 +31,29 @@ public class UI_Volunteer extends UI_AbstractUser {
 					result.append(j.getJobTitle() + "\n");
 				}
 			}
-			System.out.println(result);
 		} catch (NoEnrolledJobsPresentException e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(result);
 	}
 	
-	public void signUp() {
-		System.out.println(MenuOptions.SELECT_WORKLOAD);
-		
+	public void signUpView() throws IOException {
+		try {
+			System.out.print("Please, select a job number or enter 0 to go back:\n>");
+			int responseIndex = Integer.parseInt(IODriver.input.nextLine());
+			
+			if (responseIndex != 0) {
+				System.out.println(MenuOptions.SELECT_WORKLOAD);
+				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
+				user.setWorkloadResponse(responseWorkloadIndex);
+				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(responseWorkloadIndex-1));
+			} else {
+				//do nothing
+				IODriver.clearConsole();
+			}
+		} catch (JobSlotFilledException | SignUpOnSameDayException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	

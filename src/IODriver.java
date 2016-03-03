@@ -67,62 +67,36 @@ public class IODriver {
 
 		switch (theOption) {
 			case VIEW_ENROLLED_JOBS:
-				if (currentUserUI instanceof UI_Volunteer) {
-					clearConsole();
-					((UI_Volunteer) currentUserUI).viewEnrolledJobs();
-				}
+				clearConsole();
+				((UI_Volunteer) currentUserUI).viewEnrolledJobs();
 				break;
 			case ADD_A_JOB:
-				if (currentUserUI instanceof UI_ParkManager) {
-					((ParkManager) currentUser).addJob();	
-					break;
-				}
-			case VIEW_JOBS_MANAGED:
-				if (currentUserUI instanceof UI_ParkManager) {
-					((ParkManager) currentUser).viewJobsManaged();
-				}
+				((UI_ParkManager) currentUserUI).createJob();	
 				break;
-			case VIEW_UPCOMING_JOBS:  
-				if (currentUser instanceof Volunteer) {
-					menuBoxForJobs(storedData.getJobs());
-					//((Volunteer) currentUser).signUpOrViewJobDetail();
-				} else {
-					clearConsole();
-					menuBoxForJobs(storedData.getJobs());
-				}
+				
+			case VIEW_JOBS_MANAGED:
+				((UI_ParkManager) currentUserUI).viewJobsManaged();
+				break;
+			case VIEW_UPCOMING_JOBS:
+				clearConsole();
+				menuBoxForJobs(storedData.getJobs());
 				break;
 			case EXIT:    
 				quitProgram = true;
 				break;
 	
 			case SEARCH_VOL_LASTNAME:
-				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
-					((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
-				}
+				((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
 				break;
 			case VIEW_JOB_DETAIL: 
-				if (currentUserUI instanceof UI_UrbanParkStaffMember) {
-					menuBoxForJobs(storedData.getJobs());
-					((UI_UrbanParkStaffMember) currentUserUI).viewJobDetails();
-				} else if (currentUserUI instanceof UI_Volunteer) {
-					clearConsole();
-					menuBoxForJobs(storedData.getJobs());
-					((UI_Volunteer) currentUserUI).viewJobDetails();
-				}
+				clearConsole();
+				menuBoxForJobs(storedData.getJobs());
+				currentUserUI.viewJobDetails();
 				break;
 			case SIGN_UP: 
 				clearConsole();
 				menuBoxForJobs(storedData.getJobs());
-				System.out.print("Please, select a job number or enter 0 to go back:\n>");
-				response = input.nextLine();
-				int index = Integer.parseInt(response);
-				if (index != 0) {
-					
-					((Volunteer) currentUser).signUp(storedData.getJobs().get(index-1));
-				} else {
-					//do nothing
-					clearConsole();
-				}
+				((UI_Volunteer) currentUserUI).signUpView();
 				break;
 	
 			default: System.out.println("");
