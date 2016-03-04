@@ -33,14 +33,7 @@ public abstract class UI_AbstractUser implements Serializable {
 		} else 
 			return null;
 	}
-	
-//	/*
-//	 * Clears the showUser display (working comment)
-//   * Might need to create another display for logging-off to logging-in
-//	 */
-//	public void clearUser() {
-//		user = null;
-//	}
+
 	
 	/*
 	 * Select job number from a printed menu of jobs
@@ -62,27 +55,21 @@ public abstract class UI_AbstractUser implements Serializable {
 	/*
 	 * Select job from job list and view the job details.
 	 */
-	public void viewJobDetails() {
+	public void viewJobDetails() throws IOException {
 		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
 		System.out.println("View job details:");
 		System.out.print("Select job number, or enter 0 to go back:\n>");
 		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
 		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
-			// turn below into exception?...
-			//System.out.println(CustomExceptions InvalidUserInput);
 			System.out.println("Invalid entry, try again.\n");
 			viewJobDetails();
 		} else if (responseJobNum == 0) { // do nothing to go back to main menu
-			try {
 				IODriver.clearConsole();
-			} catch (IOException e) {
-				// do nothing
-			}
 		}else {
+			IODriver.clearConsole();
 			jobDetailsBox(allJobs.get(responseJobNum - 1));
 		}
-
 	}
 	
 	/*

@@ -20,7 +20,7 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.OPTION_WELCOME);
+		//result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SEARCH_VOL_LASTNAME);
 		result.add(MenuOptions.LOGOUT);
@@ -38,6 +38,7 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 		result.add(MenuOptions.VOLUNTEER_SEARCH_TITLE);
 		result.add(MenuOptions.VOLUNTEER_SEARCH_PROMPT);
 		IODriver.menuBoxNotNumbered(result);
+		System.out.print(">");
 		name = IODriver.input.nextLine();
 		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
 		if(volunteers.size() > 0) {
