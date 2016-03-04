@@ -108,5 +108,17 @@ class JobScheduleConflict extends CustomExceptions {
 	}
 }
 
+class NoManagedJobsException extends CustomExceptions {
+
+	private static final long serialVersionUID = 6719553768306932668L;
+	
+	public NoManagedJobsException() {
+		super("You do not have any upcoming jobs in your park");
+	}
+	public String toString() {
+		return getClass().getName();
+	}
+}
+
 	
 

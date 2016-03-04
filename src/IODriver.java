@@ -219,7 +219,7 @@ public class IODriver {
 	/*
 	 * Takes all of the jobs within the system and displays them in a box format
 	 */
-	public void menuBoxForJobs(ArrayList<Job> menuOptions) {
+	public static void menuBoxForJobs(ArrayList<Job> menuOptions) {
 		String results = "";
 		int boxWidth = getLongestStringLength(menuOptions) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 

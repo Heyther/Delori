@@ -134,8 +134,13 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
-	public ArrayList<Job> getJobsManaging(){
-		return this.jobsManaging;
+	public ArrayList<Job> getJobsManaging() throws NoManagedJobsException {
+		if (this.jobsManaging.size() == 0) {
+			throw new NoManagedJobsException();
+		}
+		else {
+			return this.jobsManaging;
+		}
 	}
 	
 	/*

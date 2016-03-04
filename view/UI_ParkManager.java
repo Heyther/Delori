@@ -56,7 +56,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 		MenuOptions selection = showJobOptionsMenu();
 		switch (selection) {
 		case VIEW_JOB_DETAIL:
-			System.out.println(theJob.toString());
+			jobDetailsBox(theJob);
 			break;
 		case EDIT_JOB:
 			editJob(theJob);
@@ -221,27 +221,17 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 * U8
 	 */
 	public void viewJobsManaged() throws IOException {
-		if (this.user.getJobsManaging().size() > 0) {
-			StringBuilder str = new StringBuilder();
-			for (int i = 0; i < this.user.getJobsManaging().size(); i++) {
-				str.append(i+1);
-				str.append(". ");
-				str.append(this.user.getJobsManaging().get(i).jobSummary());
-				str.append("\n");
-			}
-			System.out.println(str.toString());
+		
+		
+		try {
+			IODriver.menuBoxForJobs(this.user.getJobsManaging());
 			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
-			if (jobNumber >= 0) {
-				Job selectedJob = this.user.getJobsManaging().get(jobNumber);
-				jobOptions(selectedJob);
-			}
-			else {
-				return; //User selected to go back
-			}
-				
+			Job selectedJob = this.user.getJobsManaging().get(jobNumber);
+			jobOptions(selectedJob);
 		}
-		else
-			System.out.println("You do not have any upcoming jobs in your park.");
+		catch (NoManagedJobsException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	/*
