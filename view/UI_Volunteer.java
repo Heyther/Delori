@@ -14,9 +14,8 @@ public class UI_Volunteer extends UI_AbstractUser {
 	public Volunteer user;
 
 	public UI_Volunteer() {
-		// sets specific user to their UI  (this could be done in control)
-		user = (Volunteer) IODriver.currentUser; // <- is this okay to have here 
-												 //    instead of in IODriver?
+		// sets specific user to their UI
+		user = (Volunteer) IODriver.currentUser; 
 	}
 	
 	/*
@@ -48,16 +47,12 @@ public class UI_Volunteer extends UI_AbstractUser {
 				user.setWorkloadResponse(responseWorkloadIndex);
 				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(responseWorkloadIndex-1));
 			} else {
-				//do nothing
 				IODriver.clearConsole();
 			}
 		} catch (JobSlotFilledException | SignUpOnSameDayException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
-	
 	
 	/*
 	 * Displays the menu for a volunteer.
@@ -66,7 +61,6 @@ public class UI_Volunteer extends UI_AbstractUser {
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SIGN_UP);
@@ -74,14 +68,5 @@ public class UI_Volunteer extends UI_AbstractUser {
 		result.add(MenuOptions.LOGOUT);
 
 		return result;
-	}
-//
-//	@Override
-//	public ArrayList<MenuOptions> jobOptionsMenu() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-
-	
+	}	
 }
