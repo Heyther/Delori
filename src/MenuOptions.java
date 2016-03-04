@@ -18,6 +18,7 @@ public enum MenuOptions {
 	VIEW_JOBS_MANAGED("View managed jobs"),
 	SELECT_JOB_NUMBER("Select a job number to see more options"),
 	JOB_OPTIONS("Job Options"),
+	HOME("Back to home menu"),
 	
 		
 	// Volunteer specific options

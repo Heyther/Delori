@@ -84,5 +84,29 @@ class VolunteerNotFoundException extends CustomExceptions {
 	
 }
 
+class InvalidJob extends CustomExceptions {
+
+	private static final long serialVersionUID = -4664167119716193265L;
+	
+	public InvalidJob() {
+		super("One of the fields entered is invalid. The job could not be created.");
+	}
+	public String toString() {
+		return getClass().getName();
+	}
+}
+
+class JobScheduleConflict extends CustomExceptions {
+
+	private static final long serialVersionUID = 6181125847932663311L;
+	
+	public JobScheduleConflict() {
+		super("A job cannot be added on that day.");
+	}
+	public String toString() {
+		return getClass().getName();
+	}
+}
+
 	
 
