@@ -78,7 +78,6 @@ public class IODriver {
 			break;
 		case VIEW_JOBS_MANAGED:
 			((UI_ParkManager) currentUserUI).viewJobsManaged();
-
 			break;
 		case VIEW_UPCOMING_JOBS:
 			menuBoxForJobs(storedData.getJobs());
@@ -86,7 +85,6 @@ public class IODriver {
 		case EXIT:
 			quitProgram = true;
 			break;
-
 		case SEARCH_VOL_LASTNAME:
 			((UI_UrbanParkStaffMember) currentUserUI).volunteerSearch();
 			break;
