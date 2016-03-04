@@ -195,7 +195,7 @@ public class IODriver {
 	/*
 	 * Takes a list of menu options and displays them in a box format
 	 */
-	public void numberedMenuBox(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
+	public static void numberedMenuBox(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int longestTitle = getLongestStringLength(theTitles);
 		int longestMenuOption = getLongestStringLength(menuOptions) + 3;

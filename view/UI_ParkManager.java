@@ -36,19 +36,22 @@ public class UI_ParkManager extends UI_AbstractUser {
 		return result;
 	}
 	
+	//Show the menu of job options and return the option selected
 	public MenuOptions showJobOptionsMenu() {
+		ArrayList<String> titles = new ArrayList<String>();
+		titles.add("Job Options");
 		ArrayList<MenuOptions> menu = new ArrayList<MenuOptions>();
-		menu.add(MenuOptions.JOB_OPTIONS);
 		menu.add(MenuOptions.VIEW_JOB_DETAIL);
 		menu.add(MenuOptions.EDIT_JOB);
 		menu.add(MenuOptions.CANCEL_JOB);
 		menu.add(MenuOptions.VIEW_ENROLLED_VOLUNTEERS);
 		menu.add(MenuOptions.HOME);
-		IODriver.menuBox(menu);
-		MenuOptions response = menu.get(Integer.parseInt(IODriver.input.nextLine()));
+		IODriver.numberedMenuBox(titles, menu);
+		MenuOptions response = menu.get(Integer.parseInt(IODriver.input.nextLine()) - 1);
 		return response;
 	}
 	
+	//Options for what to do after a job has been selected
 	public void jobOptions(Job theJob) throws IOException {
 		MenuOptions selection = showJobOptionsMenu();
 		switch (selection) {
@@ -66,8 +69,10 @@ public class UI_ParkManager extends UI_AbstractUser {
 			break;
 		case HOME:
 			return;
+		default:
+			jobOptions(theJob);
+			break;
 		}
-		jobOptions(theJob);
 	}
 	
 	
@@ -203,7 +208,6 @@ public class UI_ParkManager extends UI_AbstractUser {
 		case "9": 
 			System.out.println("Review Job Details: \n");
 			System.out.println(theJob.toString());
-			jobOptions(theJob);
 			return;
 		default:
 			System.out.println("Invalid input. Please type a number 1-9.");
