@@ -58,16 +58,16 @@ public class Volunteer extends AbstractUser  {
 		return "Volunteer";
 	}
 	
-	/*
-	 * Cancel an enrolled job.
-	 */
-	public void cancelEnrolledJob(Job theJob) throws IOException {
-		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
-		IODriver.storedData.deleteJob(theJob);
-		theJob.cancelVolunteer(this); // remove volunteer from job
-		enrolledJobs.remove(theJob); // remove enrolled job
-		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
-	}
+//	/*
+//	 * Cancel an enrolled job.
+//	 */
+//	public void cancelEnrolledJob(Job theJob) throws IOException {
+//		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
+//		IODriver.storedData.deleteJob(theJob);
+//		theJob.cancelVolunteer(this); // remove volunteer from job
+//		enrolledJobs.remove(theJob); // remove enrolled job
+//		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
+//	}
 	
 	/*
 	 * Sign up for a job. (U6)
