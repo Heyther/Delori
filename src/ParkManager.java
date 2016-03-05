@@ -30,6 +30,14 @@ public class ParkManager extends AbstractUser
 		jobsManaging = new ArrayList<Job>();
 	}
 	
+	public String getParkName() {
+		return this.parkName;
+	}
+	
+	public void setParkName(String newName) {
+		this.parkName = newName;
+	}
+	
 	/*
 	 * Displays the user's last name, first name, and email.
 	 * @see java.lang.Object#toString()
