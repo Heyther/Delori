@@ -30,6 +30,14 @@ public class ParkManager extends AbstractUser
 		jobsManaging = new ArrayList<Job>();
 	}
 	
+	public String getParkName() {
+		return this.parkName;
+	}
+	
+	public void setParkName(String newName) {
+		this.parkName = newName;
+	}
+	
 	/*
 	 * Displays the user's last name, first name, and email.
 	 * @see java.lang.Object#toString()
@@ -74,68 +82,73 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setJobTitle(newTitle);
+		jobsManaging.add(theJob);
 		IODriver.storedData.addJob(theJob);
-		this.jobsManaging.add(theJob);
 	}
 	
 	public void editJobDate(Job theJob, String newDate) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setStartDate(newDate);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobTime(Job theJob, String newTime) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setStartTime(newTime);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobDuration(Job theJob, String newDuration) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setDuration(newDuration);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobDescription(Job theJob, String newDescription) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setDescription(newDescription);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobLightSlots(Job theJob, Integer newLightSlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setLightSlots(newLightSlots);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobMediumSlots(Job theJob, Integer newMediumSlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setMediumSlots(newMediumSlots);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
 	public void editJobHeavySlots(Job theJob, Integer newHeavySlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
 		theJob.setHeavySlots(newHeavySlots);
-		IODriver.storedData.addJob(theJob);
 		this.jobsManaging.add(theJob);
+		IODriver.storedData.addJob(theJob);
 	}
 	
-	public ArrayList<Job> getJobsManaging(){
-		return this.jobsManaging;
+	public ArrayList<Job> getJobsManaging() throws NoManagedJobsException {
+		if (this.jobsManaging.size() == 0) {
+			throw new NoManagedJobsException();
+		}
+		else {
+			return this.jobsManaging;
+		}
 	}
 	
 	/*

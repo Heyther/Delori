@@ -38,18 +38,19 @@ public abstract class UI_AbstractUser implements Serializable {
 	/*
 	 * Select job number from a printed menu of jobs
 	 */
-	public Job selectJob(ArrayList<Job> jobChoices) {
-		System.out.println("Select a job number.");
-		String response = IODriver.input.nextLine();
-		int jobNumber = Integer.parseInt(response);
+	public int selectJobNumber(int listSize) {
+		System.out.println("Select job number, or enter 0 to go back:\n>");
 		
-		while (jobNumber == 0 || jobNumber > jobChoices.size()) {
-			System.out.println("Invalid input. Please type a number from the list.");
+		String response = IODriver.input.nextLine();
+		int selection = Integer.parseInt(response);
+		
+		while (selection < 0 || selection > listSize) {
+			System.out.println("Invalid input. Please type a number 0-" + listSize);
 			response = IODriver.input.nextLine();
-			jobNumber = Integer.parseInt(response);
+			selection = Integer.parseInt(response);
 		}
 		
-		return jobChoices.get(jobNumber-1);
+		return selection-1;
 	}
 	
 	/*

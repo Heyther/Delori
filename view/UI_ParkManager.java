@@ -36,6 +36,45 @@ public class UI_ParkManager extends UI_AbstractUser {
 		return result;
 	}
 	
+	//Show the menu of job options and return the option selected
+	public MenuOptions showJobOptionsMenu() {
+		ArrayList<String> titles = new ArrayList<String>();
+		titles.add("Job Options");
+		ArrayList<MenuOptions> menu = new ArrayList<MenuOptions>();
+		menu.add(MenuOptions.VIEW_JOB_DETAIL);
+		menu.add(MenuOptions.EDIT_JOB);
+		menu.add(MenuOptions.CANCEL_JOB);
+		menu.add(MenuOptions.VIEW_ENROLLED_VOLUNTEERS);
+		menu.add(MenuOptions.HOME);
+		IODriver.numberedMenuBox(titles, menu);
+		MenuOptions response = menu.get(Integer.parseInt(IODriver.input.nextLine()) - 1);
+		return response;
+	}
+	
+	//Options for what to do after a job has been selected
+	public void jobOptions(Job theJob) throws IOException {
+		MenuOptions selection = showJobOptionsMenu();
+		switch (selection) {
+		case VIEW_JOB_DETAIL:
+			jobDetailsBox(theJob);
+			break;
+		case EDIT_JOB:
+			editJob(theJob);
+			break;
+		case CANCEL_JOB:
+			cancelJob(theJob);
+			return;
+		case VIEW_ENROLLED_VOLUNTEERS:
+			viewEnrolledVolunteers(theJob);
+			break;
+		case HOME:
+			return;
+		default:
+			jobOptions(theJob);
+			break;
+		}
+	}
+	
 	
 	/*
 	 * Prompts user for details of the job and calls ParkManager's addJob method
@@ -71,7 +110,14 @@ public class UI_ParkManager extends UI_AbstractUser {
 		System.out.println("Number of heavy slots: ");
 		heavySlots = Integer.parseInt(IODriver.input.nextLine());
 		
-		this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
+		Job newJob = this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
+		
+		//Check if job actually was add
+		System.out.println("Job Added! \nReview job details:");
+		System.out.println(newJob.toString());
+		//Options for what to do with this job
+		jobOptions(newJob);
+		
 	}
 	
 	/*
@@ -123,59 +169,51 @@ public class UI_ParkManager extends UI_AbstractUser {
 			this.user.editJobTitle(theJob, IODriver.input.nextLine());
 			//Have editJobTitle return boolean to see if edit was successful
 			System.out.println("Job Title has been changed");
-			editJob(theJob);
 			break;
 		case "2":
 			System.out.println("Enter new Date: ");
 			this.user.editJobDate(theJob, IODriver.input.nextLine());
 			System.out.println("Start Date has been changed");
-			editJob(theJob);
 			break;
 		case "3":
 			System.out.println("Enter new Time: ");
 			this.user.editJobTime(theJob, IODriver.input.nextLine());
 			System.out.println("Time has been changed");
-			editJob(theJob);
 			break;
 		case "4":
 			System.out.println("Enter new Duration: ");
 			this.user.editJobDuration(theJob, IODriver.input.nextLine());
 			System.out.println("Duration has been changed");
-			editJob(theJob);
 			break;
 		case "5":
 			System.out.println("Enter new Description: ");
 			this.user.editJobDescription(theJob, IODriver.input.nextLine());
 			System.out.println("Description has been changed");
-			editJob(theJob);
 			break;
 		case "6":
 			System.out.println("Enter new number of Light Slots: ");
 			this.user.editJobLightSlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Light Slots has been changed");
-			editJob(theJob);
 			break;
 		case "7":
 			System.out.println("Enter new number of Medium Slots: ");
 			this.user.editJobMediumSlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Medium Slots has been changed");
-			editJob(theJob);
 			break;
 		case "8":
 			System.out.println("Enter new number of Heavy Slots: ");
 			this.user.editJobHeavySlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Heavy Slots has been changed");
-			editJob(theJob);
 			break;
 		case "9": 
 			System.out.println("Review Job Details: \n");
 			System.out.println(theJob.toString());
-			break;
+			return;
 		default:
 			System.out.println("Invalid input. Please type a number 1-9.");
-			editJob(theJob);
 			break;	
 		}
+		editJob(theJob);
 	}
 	
 	/*
@@ -183,18 +221,17 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 * U8
 	 */
 	public void viewJobsManaged() throws IOException {
-		if (this.user.getJobsManaging().size() > 0) {
-			StringBuilder str = new StringBuilder();
-			for (int i = 0; i < this.user.getJobsManaging().size(); i++) {
-				str.append(i+1);
-				str.append(". ");
-				str.append(this.user.getJobsManaging().get(i).jobSummary());
-				str.append("\n");
-			}
-			System.out.println(str.toString());
+		
+		
+		try {
+			IODriver.menuBoxForJobs(this.user.getJobsManaging());
+			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
+			Job selectedJob = this.user.getJobsManaging().get(jobNumber);
+			jobOptions(selectedJob);
 		}
-		else
-			System.out.println("You do not have any upcoming jobs in your park.");
+		catch (NoManagedJobsException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	/*

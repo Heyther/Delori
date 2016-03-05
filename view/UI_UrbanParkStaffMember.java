@@ -35,9 +35,11 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 
 		String name;
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		result.add(MenuOptions.VOLUNTEER_SEARCH_TITLE);
+		ArrayList<String> title = new ArrayList<String>();
+		title.add(MenuOptions.VOLUNTEER_SEARCH_TITLE.toString());
+		title.add(showUser());
 		result.add(MenuOptions.VOLUNTEER_SEARCH_PROMPT);
-		IODriver.menuBoxNotNumbered(result);
+		IODriver.menuBoxNotNumbered(title, result);
 		System.out.print(">");
 		name = IODriver.input.nextLine();
 		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
