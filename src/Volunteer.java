@@ -89,8 +89,8 @@ public class Volunteer extends AbstractUser  {
 				IODriver.storedData.deleteJob(theJob);
 				
 				//Add the job back into the main job list and to the volunteer's own list
-				IODriver.storedData.addJob(theJob);
 				enrolledJobs.add(theJob);
+				IODriver.storedData.addJob(theJob);
 			} else {
 				throw new JobSlotFilledException();
 			}

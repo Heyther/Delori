@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Represents a Volunteer's UI.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/28/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class UI_Volunteer extends UI_AbstractUser {
@@ -13,13 +13,16 @@ public class UI_Volunteer extends UI_AbstractUser {
 	private static final long serialVersionUID = -7797674674958830828L;
 	public Volunteer user;
 
+	/*
+	 * Constructs volunteer UI methods
+	 */
 	public UI_Volunteer() {
-		// sets specific user to their UI
-		user = (Volunteer) IODriver.currentUser; 
+		user = (Volunteer) IODriver.currentUser; // sets specific user to their UI
 	}
 	
 	/*
-	 * View joined jobs specific to a volunteer. (U7)
+	 * View joined jobs specific to a volunteer. 
+	 * (U7: As a Volunteer I want to view the jobs I am signed up for)
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
