@@ -1,194 +1,100 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
-
-
-/**
- * Represents a Park Manager.
+/*
  * 
- * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
- * @version 1.0
  */
-
-public class ParkManager extends AbstractUser 
+public class ParkManager extends User
 {
-
-	private static final long serialVersionUID = 3323557037867953268L;
-	protected UserStatus role;
-	private String parkName;
-	private ArrayList<Job> jobsManaging;
+	public String parkName;
+	public String parkAddress;
+	public String parkCity;
 	
-	/*
-	 * Constructs a Park Manager.
-	 */
-	public ParkManager(String theFname, String theLname, String theEmail, String thePark)
+	public ParkManager(String name, String email, String park)
 	{
-		super(theFname, theLname, theEmail);
-		this.parkName = thePark;
-		role = UserStatus.PARKMANAGER;
-		jobsManaging = new ArrayList<Job>();
-	}
-	
-	public String getParkName() {
-		return this.parkName;
-	}
-	
-	public void setParkName(String newName) {
-		this.parkName = newName;
+		this.name = name;
+		this.email = email;
+		this.parkName = park;
+		this.type = "Park Manager";
 	}
 	
 	/*
-	 * Displays the user's last name, first name, and email.
-	 * @see java.lang.Object#toString()
+	 * Prompts user for details of the job and creates a new job with the given details
 	 */
-	public String toString()
+	public void addJob()
 	{
-		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
-	}
-	
-	/*
-	 * Creates a new job with the details that have been set by the UI 
-	 * and adds it to the main job list and the park manager's job list
-	 * Returns the Job if one was created, null otherwise
-	 * U1
-	 */
-	public Job addJob(String jobTitle, String start, String time, String dur, 
-			String descript, int light, int med, int heavy) throws IOException {
+		String startDate, startTime, duration, description;
+		int lightSlots = 0, medSlots = 0, heavySlots = 0;
+		System.out.println("\nAdd New Job \n");
 		
-		//Create new Job object and add to main job list and park manager's job list
-		Job newJob = new Job(jobTitle, start, time, dur, this.parkName, this.getFullName(), descript, light, med, heavy);
+		System.out.println("\nStart date (mm/dd/yy): ");
+		startDate = IODriver.input.next();
+		/*
+		 * if (response < currentDate) { 
+		 * System.out.println("That date is invalid. Please enter a different date. /n");
+		 * System.out.println("Start date: /n");
+		 * }
+		 */
+		//System.out.println("\nStart time (hh:mm): "); //(hh:mm am/pm)
+		//startTime = IODriver.input.next();
 		
-		if(IODriver.storedData.calendar.verifyJob(newJob)) {
-			this.jobsManaging.add(newJob);
-			IODriver.storedData.addJob(newJob);
-			return newJob;
+		System.out.println("\nDuration (1 or 2 days): ");
+		duration = IODriver.input.next();
+		/*
+		while (duration != "1" && duration != "2"){
+		   System.out.println("\nInvalid job duration. Please enter 1 or 2. Duration:");
+		   duration = IODriver.input.next();
 		}
-		else {
-			return null;
-		}
+		*/
+		
+		System.out.println("\nDescription of job: ");
+		description = IODriver.input.next();
+		
+		System.out.println("\nNumber of light slots: ");
+		lightSlots = IODriver.input.nextInt();
+		
+		System.out.println("\nNumber of medium slots: ");
+		medSlots = IODriver.input.nextInt();
+		
+		System.out.println("\nNumber of heavy slots: ");
+		heavySlots = IODriver.input.nextInt();
+		
+		Job newJob = new Job(startDate, duration, this.parkName, this.name, description, lightSlots, medSlots, heavySlots);
+		//add to job list
+		System.out.println("Job Added! Review Job Details:\n");
+		System.out.println(newJob.toString());
+		
+		//Print menu of options 
+		jobDetailsMenu(newJob);
+		
 	}
 	
-	/*
-	 * Cancel a job (Delete it from the list of jobs)
-	 * U2
-	 */
-	public void cancelJob(Job theJob) throws IOException {
-		this.jobsManaging.remove(theJob); //delete job from park manager's personal job list
-		IODriver.storedData.deleteJob(theJob);//delete job from main job list
-	}
-	
-	public void editJobTitle(Job theJob, String newTitle) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setJobTitle(newTitle);
-		jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobDate(Job theJob, String newDate) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setStartDate(newDate);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobTime(Job theJob, String newTime) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setStartTime(newTime);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobDuration(Job theJob, String newDuration) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setDuration(newDuration);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobDescription(Job theJob, String newDescription) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setDescription(newDescription);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobLightSlots(Job theJob, Integer newLightSlots) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setLightSlots(newLightSlots);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobMediumSlots(Job theJob, Integer newMediumSlots) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setMediumSlots(newMediumSlots);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public void editJobHeavySlots(Job theJob, Integer newHeavySlots) throws IOException{
-		IODriver.storedData.deleteJob(theJob);
-		this.jobsManaging.remove(theJob);
-		theJob.setHeavySlots(newHeavySlots);
-		this.jobsManaging.add(theJob);
-		IODriver.storedData.addJob(theJob);
-	}
-	
-	public ArrayList<Job> getJobsManaging() throws NoManagedJobsException {
-		if (this.jobsManaging.size() == 0) {
-			throw new NoManagedJobsException();
-		}
-		else {
-			return this.jobsManaging;
+	public void jobDetailsMenu(Job theJob){
+		System.out.println("\nPlease type a number: \n "
+				+ "1) Edit job \n "
+				+ "2) Cancel job\n "
+				+ "3) Exit " );
+		String response = IODriver.input.next();
+		
+		switch (response){
+		case "1": editJob(theJob);
+			break;
+		case "2": cancelJob(theJob);
+			break;
+		case "3": //Do nothing to go back to home menu
+			break;
+		default: jobDetailsMenu(theJob); //Invalid response. Try again.
+			break;
 		}
 	}
 	
-	/*
-	 * Retrieves the user's role.
-	 * @see AbstractUser#getRole()
-	 */
-	public UserStatus getRole() {
-		return role;
+	public void cancelJob(Job theJob){
+		//find job in job list and remove it
 	}
 	
-	public String getRoleString() {
-		return "Park Manager";
+	public void editJob(Job theJob){
+		//find job in job list and edit it
+	}
+	
+	public void viewJobs(){
+		//view list of all the park manager's upcoming jobs
 	}
 
-	/*
-	 * Sets the user's role.
-	 */
-	public void setRole(UserStatus role) {
-		this.role = role;
-	}
-
-    /*
-     * Hashcode for equals
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getRole());
-    }
-	
-	/*
-	 * Checks if the object is-a Park Manager.
-	 * @see AbstractUser#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object theObject){
-		if (super.equals(theObject)) {
-			ParkManager v = (ParkManager) theObject;
-			if (getRole().equals(v.getRole())) { return true; };
-		}
-		return false;
-	}
 }

@@ -231,13 +231,16 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 * U8
 	 */
 	public void viewJobsManaged() throws IOException {
-		
-		
 		try {
 			IODriver.menuBoxForJobs(this.user.getJobsManaging());
 			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
-			Job selectedJob = this.user.getJobsManaging().get(jobNumber);
-			jobOptions(selectedJob);
+			if (jobNumber >= 1) {
+				Job selectedJob = this.user.getJobsManaging().get(jobNumber);
+				jobOptions(selectedJob);
+			}
+			else {
+				IODriver.clearConsole();
+			}
 		}
 		catch (NoManagedJobsException e) {
 			System.out.println(e.getMessage());

@@ -14,8 +14,6 @@ public class ParkManagerTest {
 	@Before
 	public void setUp() throws Exception {
 		manager = new ParkManager("first", "last", "email", "park");
-		job1 = new Job("Job Title", "03/05/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), 
-				"Some decription", 1, 1, 1);
 	}
 
 	@After
@@ -28,33 +26,47 @@ public class ParkManagerTest {
 	}
 
 	@Test
-	public void testGetRole() {
-		fail("Not yet implemented");
+	public void testEqualsObjectSame() {
+		ParkManager same = new ParkManager("first", "last", "email", "park");
+		assertTrue(manager.equals(same));
 	}
-
+	
 	@Test
-	public void testGetRoleString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEqualsObject() {
+	public void testEqualsObjectDifferent() {
 		//Test with two equal objects
-		//Two not equal objects
-		//One object and one null
-		fail("Not yet implemented");
+		ParkManager different = new ParkManager("Different first", "Different last", "Different email", "Different park");
+		assertFalse(manager.equals(different));
 	}
-
+	
 	@Test
-	public void testParkManager() {
-		fail("Not yet implemented");
+	public void testEqualsObjectSimilar() {
+		ParkManager similar = new ParkManager("first", "last", "different email", "park");
+		assertFalse(manager.equals(similar));
 	}
-
+	
 	@Test
-	public void testToString() {
-		fail("Not yet implemented");
+	public void testAddJobNoJobsInList() throws IOException, NoManagedJobsException {
+		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		
+		assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
 	}
-
+	
+	@Test
+	public void testAddJobTwoJobsInList() throws IOException, NoManagedJobsException {
+		Job job1 = new Job ("Title 1", "04/02/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 1", 1, 1, 1);  
+		Job job2 = new Job ("Title 2", "04/03/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 2", 1, 1, 1); 
+		
+		manager.jobsManaging.add(job1);
+		IODriver.storedData.addJob(job1);
+		manager.jobsManaging.add(job2);
+		IODriver.storedData.addJob(job2);
+		
+		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		
+		assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
+	}
+	
+	
 	@Test
 	public void testAddJobValid() throws IOException, NoManagedJobsException {
 		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -64,7 +76,7 @@ public class ParkManagerTest {
 	}
 	
 	@Test
-	public void testAddJobInvalidJob() throws IOException, NoManagedJobsException {
+	public void testAddJobInvalid() throws IOException, NoManagedJobsException {
 		Job invalidJob = manager.addJob("Title", "02/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
 		
 		assertFalse(manager.getJobsManaging().contains(invalidJob) || IODriver.storedData.getJobs().contains(invalidJob));
@@ -78,18 +90,19 @@ public class ParkManagerTest {
 		assertFalse(manager.getJobsManaging().contains(jobOnSameDay) || IODriver.storedData.getJobs().contains(jobOnSameDay));
 	}
 
-	@Test
-	public void testCancelJob() throws IOException, NoManagedJobsException {
-		Job toBeDeleted = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
-		manager.cancelJob(toBeDeleted);
-		assertFalse(manager.getJobsManaging().contains(toBeDeleted) || IODriver.storedData.getJobs().contains(toBeDeleted));
+	@Test 
+	public void testCancelJobOneJobInList() throws IOException, NoManagedJobsException {
+		Job toBeCanceled = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		manager.cancelJob(toBeCanceled);
+		assertFalse(manager.getJobsManaging().contains(toBeCanceled) || IODriver.storedData.getJobs().contains(toBeCanceled));
 	}
 	
 	@Test
-	public void testCancelJobNonexistantJob() throws IOException, NoManagedJobsException {
-		Job toBeDeleted = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
-		manager.cancelJob(toBeDeleted);
-		assertFalse(manager.getJobsManaging().contains(toBeDeleted) || IODriver.storedData.getJobs().contains(toBeDeleted));
+	public void testCancelJobTwoJobsInList() throws IOException, NoManagedJobsException {
+		Job toBeCanceled1 = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		Job toBeCanceled2 = manager.addJob("Other Title", "03/19/2016", "12:00 pm", "1", "Other Description", 1, 1, 1);
+		manager.cancelJob(toBeCanceled1);
+		assertFalse(manager.getJobsManaging().contains(toBeCanceled1) || IODriver.storedData.getJobs().contains(toBeCanceled1));
 	}
 
 	@Test
@@ -151,51 +164,6 @@ public class ParkManagerTest {
 
 	@Test
 	public void testGetJobsManaging() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetRole() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAbstractUser() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetFname() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetFname() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLname() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetLname() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetFullName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetEmail() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetEmail() {
 		fail("Not yet implemented");
 	}
 
