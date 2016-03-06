@@ -76,7 +76,7 @@ class VolunteerNotFoundException extends CustomExceptions {
 	private static final long serialVersionUID = 1L;
 
 	public VolunteerNotFoundException() {
-		super("No volunteer with that last name exists.");
+		super("No volunteer with that last name exists.  Try again.");
 	} 
 	public String toString() {
 		return getClass().getName();
@@ -120,5 +120,17 @@ class NoManagedJobsException extends CustomExceptions {
 	}
 }
 
+class CanNotEditJobException extends CustomExceptions {
+	
+	private static final long serialVersionUID = 1L;
+
+	public CanNotEditJobException() {
+		super("This job has volunteers signed up for it and cannot be edited.");
+	}
+	public String toString() {
+		return getClass().getName();
+	}
+}
+	
 	
 

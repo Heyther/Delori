@@ -317,4 +317,17 @@ public class Job implements Serializable {
 			return this.getJobTitle() + ", " + this.getLocation() + ", " + this.getStartDate() + ", " + this.getStartTime();
 		}
 	    
+		/*
+		 * Check if job can be edited.
+		 * @return true if no volunteers have signed up for the job.
+		 */
+		public boolean canEditJob() throws CanNotEditJobException {
+			
+			if(lightVolunteers.isEmpty() && mediumVolunteers.isEmpty() && heavyVolunteers.isEmpty()) {
+				return true;
+			}
+			else {
+				throw new CanNotEditJobException();
+			}
+		}
 }

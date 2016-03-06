@@ -59,10 +59,20 @@ public class UI_ParkManager extends UI_AbstractUser {
 			jobDetailsBox(theJob);
 			break;
 		case EDIT_JOB:
-			editJob(theJob);
+			try {
+				theJob.canEditJob();
+				editJob(theJob);
+			} catch(CanNotEditJobException e) {
+				System.out.println(e.getMessage());
+			}
 			break;
 		case CANCEL_JOB:
-			cancelJob(theJob);
+			try {
+				theJob.canEditJob();
+				cancelJob(theJob);
+			} catch(CanNotEditJobException e) {
+				System.out.println(e.getMessage());
+			}			
 			return;
 		case VIEW_ENROLLED_VOLUNTEERS:
 			viewEnrolledVolunteers(theJob);
