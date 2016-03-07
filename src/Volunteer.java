@@ -15,7 +15,7 @@ public class Volunteer extends AbstractUser  {
 	
 	private static final long serialVersionUID = 3505720660401145090L;
 	private UserStatus role; 	
-	private ArrayList<Job> enrolledJobs;
+	protected ArrayList<Job> enrolledJobs;
 	private int workloadResponse;
 
 	/*
@@ -76,7 +76,7 @@ public class Volunteer extends AbstractUser  {
 		
 		// BR7: A Volunteer may not sign up for two jobs on the same day.
 		boolean signUp = false;
-		for (Job j : enrolledJobs) {
+		for (Job j : enrolledJobs) { 
 			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 		}
 		
@@ -98,6 +98,8 @@ public class Volunteer extends AbstractUser  {
 			throw new SignUpOnSameDayException();
 		}
 	}
+
+	
 	
 	// odd-ball methods in obtaining user input from 
 	// view without having view code within model.

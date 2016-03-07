@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ParkManagerTest {
+public class ParkManagerTest { 
 	
 	ParkManager manager;
 	Job job1;
