@@ -52,7 +52,7 @@ public class IODriver {
 			titleList.add(currentUserUI.showUser());
 			while (selection != MenuOptions.LOGOUT) {
 				
-				numberedMenuBox(titleList, currentUserUI.usersHomeMenu());
+				numberedMenuBox(titleList, currentUserUI.usersHomeMenu()); 
 				System.out.print(">");
 				response = input.nextLine();
 				clearConsole();
@@ -219,14 +219,14 @@ public class IODriver {
 	/*
 	 * Takes all of the jobs within the system and displays them in a box format
 	 */
-	public static void menuBoxForJobs(ArrayList<Job> menuOptions) {
+	public static void menuBoxForJobs(ArrayList<Job> theJobs) {
 		String results = "";
-		int boxWidth = getLongestStringLength(menuOptions) + 3; 
+		int boxWidth = getLongestStringLength(theJobs) + 3; 
 		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
 		
 		results += divider + "\nList of Jobs:\n";
-		for (int i = 0; i < menuOptions.size(); i++) {
-			results += String.format("%-5s%s", "", i + 1 + ". " + (menuOptions.get(i)).jobSummary() + "\n");
+		for (int i = 0; i < theJobs.size(); i++) {
+			results += String.format("%-5s%s", "", i + 1 + ". " + (theJobs.get(i)).jobSummary() + "\n");
 		}
 		results += divider + "\n";
 		System.out.println(results);

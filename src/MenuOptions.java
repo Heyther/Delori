@@ -6,6 +6,7 @@
  * @version 1.0
  */
 public enum MenuOptions {
+
 	// User selection options
 	LOGIN("Login"),
 	LOGOUT("Logout"),

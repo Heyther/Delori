@@ -26,11 +26,13 @@ public class UI_Volunteer extends UI_AbstractUser {
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
+		//IODriver.menuBoxNotNumbered(theTitles, menuOptions);
 		try {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
 				for (Job j : user.getEnrolledJobs()) {
-					result.append(j.jobSummary() + "\n");
+					result.append("   o " + j.jobSummary() + "\n");
+
 				}
 			}
 		} catch (NoEnrolledJobsPresentException e) {

@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ParkManagerTest {
+public class ParkManagerTest { 
 	
 	ParkManager manager;
 	Job job1;
@@ -53,13 +53,13 @@ public class ParkManagerTest {
 	
 	@Test
 	public void testAddJobTwoJobsInList() throws IOException, NoManagedJobsException {
-		Job job1 = new Job ("Title 1", "04/02/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 1", 1, 1, 1);  
-		Job job2 = new Job ("Title 2", "04/03/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 2", 1, 1, 1); 
+		//Job job1 = new Job ("Title 1", "04/02/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 1", 1, 1, 1);  
+		//Job job2 = new Job ("Title 2", "04/03/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 2", 1, 1, 1); 
 		
-		manager.jobsManaging.add(job1);
+		//manager.jobsManaging.add(job1);
 		IODriver.storedData.addJob(job1);
-		manager.jobsManaging.add(job2);
-		IODriver.storedData.addJob(job2);
+		//manager.jobsManaging.add(job2);
+		//IODriver.storedData.addJob(job2);
 		
 		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
 		
