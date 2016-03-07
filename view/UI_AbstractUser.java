@@ -11,12 +11,13 @@ import java.util.ArrayList;
  */
 public abstract class UI_AbstractUser implements Serializable {
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 6133973165093948247L;
 	AbstractUser user;
 	
+	/*
+	 * Construct view with reference to current logged in user.
+	 */
 	public UI_AbstractUser() {
 		user = IODriver.currentUser;
 	}
@@ -25,7 +26,6 @@ public abstract class UI_AbstractUser implements Serializable {
 	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
 	//public abstract ArrayList<MenuOptions> jobOptionsMenu();
-	
 	public String showUser() {
 		if (user != null) {
 			//System.out.println(user.getFullName() + ", " + user.getRoleString());
@@ -33,7 +33,6 @@ public abstract class UI_AbstractUser implements Serializable {
 		} else 
 			return null;
 	}
-
 	
 	/*
 	 * Select job number from a printed menu of jobs
@@ -86,5 +85,4 @@ public abstract class UI_AbstractUser implements Serializable {
 		results += divider + "\n";
 		System.out.println(results);
 	}
-	
 }

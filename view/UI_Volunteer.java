@@ -47,7 +47,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
 				user.setWorkloadResponse(responseWorkloadIndex);
 				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(jobIndex));
-				System.out.println("You've signed up for " + IODriver.storedData.getJobs().get(jobIndex - 1).jobTitle );
+				System.out.println("You've signed up for " + IODriver.storedData.getJobs().get(jobIndex).jobTitle );
 			} else {
 				IODriver.clearConsole();
 			}
