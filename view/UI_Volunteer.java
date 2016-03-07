@@ -30,7 +30,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
 				for (Job j : user.getEnrolledJobs()) {
-					result.append(j.getJobTitle() + "\n");
+					result.append(j.jobSummary() + "\n");
 				}
 			}
 		} catch (NoEnrolledJobsPresentException e) {
@@ -41,14 +41,13 @@ public class UI_Volunteer extends UI_AbstractUser {
 	
 	public void signUpView() throws IOException {
 		try {
-			System.out.print("Please, select a job number or enter 0 to go back:\n>");
-			int responseIndex = Integer.parseInt(IODriver.input.nextLine());
-			
-			if (responseIndex != 0) {
+			int jobIndex = selectJobNumber(IODriver.storedData.getJobs().size());
+			if (jobIndex != 0) {
 				System.out.println(MenuOptions.SELECT_WORKLOAD);
 				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
 				user.setWorkloadResponse(responseWorkloadIndex);
-				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(responseWorkloadIndex-1));
+				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(jobIndex));
+				System.out.println("You've signed up for " + IODriver.storedData.getJobs().get(jobIndex).jobTitle );
 			} else {
 				IODriver.clearConsole();
 			}

@@ -7,7 +7,7 @@
  */
 public enum MenuOptions {
 	// User selection options
-	LOGIN("login"),
+	LOGIN("Login"),
 	LOGOUT("Logout"),
 	EXIT("Exit"),
 	ADD_A_JOB("Add a job"),
@@ -33,12 +33,12 @@ public enum MenuOptions {
 	
 	// Staff specific options
 	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
-	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
+	VOLUNTEER_SEARCH_PROMPT("Enter volunteer's last name or '0' to go back:"),
 	
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),
-	OPTION_ENTER_EMAIL("Please, enter your email."),
+	OPTION_ENTER_EMAIL("Please enter your email."),
 	LOGGING_OUT("Sucessfully logged out...")
     ;
 	
