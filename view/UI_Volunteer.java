@@ -45,11 +45,12 @@ public class UI_Volunteer extends UI_AbstractUser {
 		try {
 			int jobIndex = selectJobNumber(IODriver.storedData.getJobs().size());
 			if (jobIndex != 0) {
-				System.out.println(MenuOptions.SELECT_WORKLOAD);
+				System.out.println("\n" + MenuOptions.SELECT_WORKLOAD);
+				System.out.print("\n>");
 				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
 				user.setWorkloadResponse(responseWorkloadIndex);
-				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(jobIndex));
-				System.out.println("You've signed up for " + IODriver.storedData.getJobs().get(jobIndex).jobTitle );
+				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(jobIndex - 1));
+				System.out.println("\nYou've signed up for " + IODriver.storedData.getJobs().get(jobIndex - 1).jobTitle +"\n\n" );
 			} else {
 				IODriver.clearConsole();
 			}
