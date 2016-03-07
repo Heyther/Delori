@@ -57,19 +57,22 @@ public class Data {
 		return allUsers;
 	}
 	
-	/* 
-	 * Search by last name on all users who are volunteers. U10
-	 */
-	public ArrayList<Volunteer> searchVolunteerByLname(String theLName){
-		ArrayList<Volunteer> volunteers = new ArrayList<Volunteer>();
-		for (AbstractUser aUser : allUsers)  {
-			if (aUser instanceof Volunteer && ( aUser.getLname().toLowerCase().equals( theLName.toLowerCase() ) )) {
-				volunteers.add((Volunteer) aUser);
-			}
-		}
-		return volunteers;		
-	}
-	
+	/*
+     * Search by last name on all users who are volunteers. U10
+     */
+    public ArrayList<Volunteer> searchVolunteerByLname(String theLName) throws VolunteerNotFoundException{
+        ArrayList<Volunteer> volunteers = new ArrayList<Volunteer>();
+        for (AbstractUser aUser : allUsers)  {
+            if (aUser instanceof Volunteer && ( aUser.getLname().toLowerCase().equals( theLName.toLowerCase() ) )) {
+                volunteers.add((Volunteer) aUser);
+            }
+        }
+        if(volunteers.size() == 0) {
+            throw new VolunteerNotFoundException();
+        } else {
+        return volunteers;    
+        }
+    }
 
 	
 	///////////////

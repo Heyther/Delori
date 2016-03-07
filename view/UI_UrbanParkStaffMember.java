@@ -29,35 +29,41 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	}
 	
 	/*
-	 * Search for a volunteer by last name.
-	 */
-	public void volunteerSearch() throws IOException {
+     * Search for a volunteer by last name.
+     */
+    public void volunteerSearch() throws IOException {
 
-		String name;
-		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		ArrayList<String> title = new ArrayList<String>();
-		title.add(MenuOptions.VOLUNTEER_SEARCH_TITLE.toString());
-		title.add(showUser());
-		result.add(MenuOptions.VOLUNTEER_SEARCH_PROMPT);
-		IODriver.menuBoxNotNumbered(title, result);
-		System.out.print(">");
-		name = IODriver.input.nextLine();
-		ArrayList<Volunteer> volunteers = IODriver.storedData.searchVolunteerByLname(name);
-		if(volunteers.size() > 0) {
-				IODriver.clearConsole();
-			for(Volunteer vol: volunteers ) {
-				System.out.println(vol.toString() + "\n");
-			}
+        String name;
+        ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
+        ArrayList<String> title = new ArrayList<String>();
+        title.add(MenuOptions.VOLUNTEER_SEARCH_TITLE.toString());
+        title.add(showUser());
+        result.add(MenuOptions.VOLUNTEER_SEARCH_PROMPT);
+        IODriver.menuBoxNotNumbered(title, result);
+        System.out.print(">");
+        name = IODriver.input.nextLine();
+        if (name.equals("0")) {
+            IODriver.clearConsole();
+        } else {
+            ArrayList<Volunteer> volunteers;
+            try {
+                volunteers = IODriver.storedData.searchVolunteerByLname(name);
+                if (volunteers.size() > 0) {
+                    IODriver.clearConsole();
+                    for (Volunteer vol : volunteers) {
+                        System.out.println(vol.toString() + "\n");
+                    }
+                }
 
-		} else if(name.equals("0")) {
-				IODriver.clearConsole();
-		}else {
-				IODriver.clearConsole();
-			System.out.println("No volunteer with last name " + name + " exists. Try again.\n");
-			volunteerSearch();
-		}
-	}
-
+            } catch (VolunteerNotFoundException e) {
+                // TODO Auto-generated catch block
+                System.out.println(e.getMessage());
+                volunteerSearch();
+            }
+        }
+    }
+    
+    
 //	@Override
 //	public ArrayList<MenuOptions> jobOptionsMenu() {
 //		// TODO Auto-generated method stub

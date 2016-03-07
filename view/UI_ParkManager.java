@@ -59,10 +59,20 @@ public class UI_ParkManager extends UI_AbstractUser {
 			jobDetailsBox(theJob);
 			break;
 		case EDIT_JOB:
-			editJob(theJob);
+			try {
+				theJob.canEditJob();
+				editJob(theJob);
+			} catch(CanNotEditJobException e) {
+				System.out.println(e.getMessage());
+			}
 			break;
 		case CANCEL_JOB:
-			cancelJob(theJob);
+			try {
+				theJob.canEditJob();
+				cancelJob(theJob);
+			} catch(CanNotEditJobException e) {
+				System.out.println(e.getMessage());
+			}			
 			return;
 		case VIEW_ENROLLED_VOLUNTEERS:
 			viewEnrolledVolunteers(theJob);
@@ -221,13 +231,17 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 * U8
 	 */
 	public void viewJobsManaged() throws IOException {
-		
-		
 		try {
 			IODriver.menuBoxForJobs(this.user.getJobsManaging());
 			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
-			Job selectedJob = this.user.getJobsManaging().get(jobNumber);
-			jobOptions(selectedJob);
+			if (jobNumber >= 0) {
+				Job selectedJob = this.user.getJobsManaging().get(jobNumber);
+				jobOptions(selectedJob);
+			}
+			else {
+				IODriver.clearConsole();
+				System.out.println("here");
+			}
 		}
 		catch (NoManagedJobsException e) {
 			System.out.println(e.getMessage());
