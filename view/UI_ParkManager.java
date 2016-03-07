@@ -235,7 +235,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 			IODriver.menuBoxForJobs(this.user.getJobsManaging());
 			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
 			if (jobNumber >= 0) {
-				Job selectedJob = this.user.getJobsManaging().get(jobNumber);
+				Job selectedJob = this.user.getJobsManaging().get(jobNumber - 1);
 				jobOptions(selectedJob);
 			}
 			else {

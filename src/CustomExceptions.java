@@ -25,7 +25,7 @@ class SignUpOnSameDayException extends CustomExceptions {
 
 	public SignUpOnSameDayException() {
 		super("You are not allowed to signUp for more than" 
-				+ "1 job with the same start day.");
+				+ " 1 job with the same start day.");
 	}
 	public String toString() {
 		return getClass().getName();
