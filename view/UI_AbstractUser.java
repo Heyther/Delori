@@ -38,7 +38,7 @@ public abstract class UI_AbstractUser implements Serializable {
 	 * Select job number from a printed menu of jobs
 	 */
 	public int selectJobNumber(int listSize) {
-		System.out.println("Select job number, or enter 0 to go back:\n>");
+		System.out.print("Select job number, or enter 0 to go back:\n>");
 		
 		String response = IODriver.input.nextLine();
 		int selection = Integer.parseInt(response);
@@ -49,7 +49,7 @@ public abstract class UI_AbstractUser implements Serializable {
 			selection = Integer.parseInt(response);
 		}
 		
-		return selection-1;
+		return selection;
 	}
 	
 	/*
@@ -58,8 +58,8 @@ public abstract class UI_AbstractUser implements Serializable {
 	public void viewJobDetails() throws IOException {
 		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
 		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
-		System.out.println("View job details:");
-		System.out.print("Select job number, or enter 0 to go back:\n>");
+		//System.out.println("View job details:");
+		System.out.print("Select a job number to view its details (or enter 0 to go back):\n>");
 		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
 		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
 			System.out.println("Invalid entry, try again.\n");

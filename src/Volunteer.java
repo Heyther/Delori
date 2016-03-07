@@ -15,7 +15,7 @@ public class Volunteer extends AbstractUser  {
 	
 	private static final long serialVersionUID = 3505720660401145090L;
 	private UserStatus role; 	
-	private ArrayList<Job> enrolledJobs;
+	protected ArrayList<Job> enrolledJobs;
 	private int workloadResponse;
 
 	/*
@@ -58,16 +58,16 @@ public class Volunteer extends AbstractUser  {
 		return "Volunteer";
 	}
 	
-	/*
-	 * Cancel an enrolled job.
-	 */
-	public void cancelEnrolledJob(Job theJob) throws IOException {
-		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
-		IODriver.storedData.deleteJob(theJob);
-		theJob.cancelVolunteer(this); // remove volunteer from job
-		enrolledJobs.remove(theJob); // remove enrolled job
-		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
-	}
+//	/*
+//	 * Cancel an enrolled job.
+//	 */
+//	public void cancelEnrolledJob(Job theJob) throws IOException {
+//		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
+//		IODriver.storedData.deleteJob(theJob);
+//		theJob.cancelVolunteer(this); // remove volunteer from job
+//		enrolledJobs.remove(theJob); // remove enrolled job
+//		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
+//	}
 	
 	/*
 	 * Sign up for a job. (U6)
@@ -76,7 +76,7 @@ public class Volunteer extends AbstractUser  {
 		
 		// BR7: A Volunteer may not sign up for two jobs on the same day.
 		boolean signUp = false;
-		for (Job j : enrolledJobs) {
+		for (Job j : enrolledJobs) { 
 			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 		}
 		
@@ -98,6 +98,8 @@ public class Volunteer extends AbstractUser  {
 			throw new SignUpOnSameDayException();
 		}
 	}
+
+	
 	
 	// odd-ball methods in obtaining user input from 
 	// view without having view code within model.

@@ -6,6 +6,7 @@
  * @version 1.0
  */
 public enum MenuOptions {
+
 	// User selection options
 	LOGIN("Login"),
 	LOGOUT("Logout"),
@@ -24,7 +25,7 @@ public enum MenuOptions {
 	// Volunteer specific options
 	SIGN_UP("Sign up for a job"),
 	VIEW_ENROLLED_JOBS("View enrolled jobs"),
-	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n>\n"),
+	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy"),
 	
 	//Park Manager specific options
 	EDIT_JOB("Edit job details"),
