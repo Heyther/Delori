@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.*;
 import java.util.Date;
 import java.util.List;
@@ -206,14 +207,19 @@ public class Calendar {
 	}
 	
 	/*
-	 * Set the totalPending job field to number of upcoming jobs
+	 * Removes past jobs from job list to ensure volunteers cannot sign up for jobs in the past.
 	 */
-	public void setTotalPendingJobs() {
-		totalPendingJobs = 0;
+	public void removePastJobs() throws IOException, ParseException {
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
-		for(Job j : IODriver.storedData.getJobs()) {
-			if(curDay.before(j.getStartDate())) {
-				totalPendingJobs++;
+		Date myDate = curDay.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date jobStartDate = null;
+		Job job = null;
+		for(int i = 0; i < IODriver.storedData.getJobs().size(); i++) {
+			job = IODriver.storedData.getJobs().get(i);
+			jobStartDate = sdf.parse(job.startDate);
+			if(myDate.after(jobStartDate)) {
+				IODriver.storedData.deleteJob(job);;
 			}
 		}
 	}

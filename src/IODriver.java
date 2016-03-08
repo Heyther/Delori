@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class IODriver {
 	/*
 	 * Constructs the driver for the program.
 	 */
-	public IODriver(boolean run) throws ClassNotFoundException, IOException {
+	public IODriver(boolean run) throws ClassNotFoundException, IOException, ParseException {
 		storedData = new Data(); // loads all the users and jobs data
 		response = "";
 		currentUser = null;
@@ -46,9 +47,9 @@ public class IODriver {
 	/*
 	 * Prompts user for login and user options.
 	 */
-	private void runProgram() throws IOException {
+	private void runProgram() throws IOException, ParseException {
 		login();
-		storedData.calendar.setTotalPendingJobs();
+		storedData.calendar.removePastJobs();
 		while (selection != MenuOptions.EXIT) {
 			
 			titleList.add(currentUserUI.showUser());
@@ -279,7 +280,7 @@ public class IODriver {
 	/*
 	 * Starts the program.
 	 */
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
 		@SuppressWarnings("unused")
 		IODriver driver = new IODriver(true);
 	}

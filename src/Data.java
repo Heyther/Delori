@@ -21,7 +21,7 @@ public class Data {
 	 * Constructs a new Data class.
 	 */
 	public Data() throws ClassNotFoundException, IOException  {
-		dataInitialized = false;
+		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
 		calendar = new Calendar();
@@ -120,8 +120,6 @@ public class Data {
 		addUser(new Volunteer("Beth", "Krom", "b@gmail.com"));
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
 		addUser(new ParkManager("first", "last", "manageremail", "park"));
-		addJob(new Job("Krusty Krab phone clerk", "03/1/2016", "12:00 pm", "1", "KrustyKrab", "Mr. Krabs", 
-				"Is this the Krusty Krab? No this is Patrick", 1, 1, 1));
 		serializeObject();
 	}
 	
