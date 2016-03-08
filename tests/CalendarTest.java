@@ -15,6 +15,7 @@ import org.junit.Test;
  * inside Calendar. As I didn't want to mess with our serializable data whilst testing.
  * These changes are at line 32 and line 91 of Calendar.java
  *@date 3/8/16
+ ** @version 2.0
  */
 public class CalendarTest {
 	ArrayList<Job> jobs;

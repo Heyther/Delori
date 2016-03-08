@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
  * 
  * @authors: Luciana, Winfield, Heather, Sean
  * @date 3/8/2016
- * @version 1.0
+ * @version 2.0
  */
 public class Calendar {
 	public int totalPendingJobs;

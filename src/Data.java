@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Save and load persistent data.  If first run set dataInitialized field to false and run program.
- * After first run set dataInitialized to true.
+ * Save and load persistent data.
  * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 3/8/2016

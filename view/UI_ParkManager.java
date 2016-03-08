@@ -46,6 +46,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 		menu.add(MenuOptions.VIEW_ENROLLED_VOLUNTEERS);
 		menu.add(MenuOptions.HOME);
 		IODriver.numberedMenuBox(titles, menu);
+		System.out.print(">");
 		MenuOptions response = menu.get(Integer.parseInt(IODriver.input.nextLine()) - 1);
 		return response;
 	}
@@ -96,27 +97,35 @@ public class UI_ParkManager extends UI_AbstractUser {
 		System.out.println("\nAdd New Job \n");
 		
 		System.out.println("Job Title: ");
+		System.out.print(">");
 		title = IODriver.input.nextLine();
 		
 		System.out.println("Start date (mm/dd/yyyy): ");
+		System.out.print(">");
 		startDate = IODriver.input.nextLine();
 
 		System.out.println("Start time (hh:mm am/pm): "); 
+		System.out.print(">");
 		startTime = IODriver.input.nextLine();
 		
 		System.out.println("Duration (1 or 2 days): ");
+		System.out.print(">");
 		duration = IODriver.input.nextLine();
 		
 		System.out.println("Description of job: ");
+		System.out.print(">");
 		description = IODriver.input.nextLine();
 		
 		System.out.println("Number of light slots: ");
+		System.out.print(">");
 		lightSlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		System.out.println("Number of medium slots: ");
+		System.out.print(">");
 		medSlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		System.out.println("Number of heavy slots: ");
+		System.out.print(">");
 		heavySlots = Integer.parseInt(IODriver.input.nextLine());
 		
 		Job newJob = this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
@@ -136,7 +145,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 	 */
 	public void cancelJob(Job theJob) throws IOException {
 		System.out.println("Are you sure you want to cancel this job?");
-		System.out.println(" 1) Yes, cancel the job. \n 2) No, keep the job \n");
+		System.out.print(" 1) Yes, cancel the job. \n 2) No, keep the job \n>");
 		String response = IODriver.input.nextLine();
 		switch (response){
 		case "1": 
@@ -169,6 +178,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 					         +" 7) Medium slots "+"\n" 
 					         +" 8) Heavy slots "+"\n"
 					         +" 9) Done editing ");
+		System.out.print(">");
 		String response = IODriver.input.nextLine();
 		
 		//For the field the user selected to edit, prompt for the new value and change the appropriate field in the job
@@ -176,42 +186,50 @@ public class UI_ParkManager extends UI_AbstractUser {
 		switch (response){
 		case "1":
 			System.out.println("Enter new Job Title: ");
+			System.out.print(">");
 			this.user.editJobTitle(theJob, IODriver.input.nextLine());
 			//Have editJobTitle return boolean to see if edit was successful
 			System.out.println("Job Title has been changed");
 			break;
 		case "2":
 			System.out.println("Enter new Date: ");
+			System.out.print(">");
 			this.user.editJobDate(theJob, IODriver.input.nextLine());
 			System.out.println("Start Date has been changed");
 			break;
 		case "3":
 			System.out.println("Enter new Time: ");
+			System.out.print(">");
 			this.user.editJobTime(theJob, IODriver.input.nextLine());
 			System.out.println("Time has been changed");
 			break;
 		case "4":
 			System.out.println("Enter new Duration: ");
+			System.out.print(">");
 			this.user.editJobDuration(theJob, IODriver.input.nextLine());
 			System.out.println("Duration has been changed");
 			break;
 		case "5":
 			System.out.println("Enter new Description: ");
+			System.out.print(">");
 			this.user.editJobDescription(theJob, IODriver.input.nextLine());
 			System.out.println("Description has been changed");
 			break;
 		case "6":
 			System.out.println("Enter new number of Light Slots: ");
+			System.out.print(">");
 			this.user.editJobLightSlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Light Slots has been changed");
 			break;
 		case "7":
 			System.out.println("Enter new number of Medium Slots: ");
+			System.out.print(">");
 			this.user.editJobMediumSlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Medium Slots has been changed");
 			break;
 		case "8":
 			System.out.println("Enter new number of Heavy Slots: ");
+			System.out.print(">");
 			this.user.editJobHeavySlots(theJob, Integer.parseInt(IODriver.input.nextLine()));
 			System.out.println("Number of Heavy Slots has been changed");
 			break;

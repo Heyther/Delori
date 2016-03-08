@@ -5,7 +5,7 @@ import java.util.Objects;
  * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 3/8/2016
- * @version 1.0
+ * @version 2.0
  */
 public class UrbanParkStaffMember extends AbstractUser {
 

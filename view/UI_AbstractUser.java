@@ -39,12 +39,14 @@ public abstract class UI_AbstractUser implements Serializable {
 	 */
 	public int selectJobNumber(int listSize) {
 
-		System.out.print("Select job number, or enter 0 to go back:\n>");
+		System.out.println("Select job number, or enter 0 to go back:");
+		System.out.print(">");
 		String response = IODriver.input.nextLine();
 		int selection = Integer.parseInt(response);
 		
 		while (selection < 0 || selection > listSize) {
 			System.out.println("Invalid input. Please type a number 1-" + listSize);
+			System.out.print(">");
 			response = IODriver.input.nextLine();
 			selection = Integer.parseInt(response);
 		}

@@ -13,7 +13,7 @@ import java.util.Scanner;
  * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 3/8/2016
- * @version 1.0
+ * @version 2.0
  */
 public class IODriver {
 	
@@ -138,7 +138,7 @@ public class IODriver {
 			response = input.nextLine();
 			currentUser = storedData.getReturningUser(response);
 			if (Objects.isNull(currentUser)) {
-				System.out.println("Wrong Email...\n Please, try again.\n>");
+				System.out.print("Wrong Email...\n Please, try again.\n>");
 			}
 		}
 		
