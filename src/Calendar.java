@@ -4,22 +4,17 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.GregorianCalendar;
 
-
-
 /**
  * Represents a calendar full of jobs.
  * 
  * @authors: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
- * @author Heather modified by Sean 
- * @date 3/8/16
  */
 public class Calendar {
 	public int totalPendingJobs;
 	Data data;
 	public List<Job> recordOfJobs;
-	public List<AbstractUser> recordOfUsers;
 	
 	/*
 	 * This method might not be needed anymore, 
@@ -38,12 +33,11 @@ public class Calendar {
 		totalPendingJobs = 0;
 	}
 
-
 	/**
 	 * Checks through various business rules to see if job is able to be added to current list of jobs.
 	 * 
 	 * @param theJob
-	 * @return Returns true if job is able to added to current list, else false.
+	 * @return True if job is able to added to current list, else false.
 	 */
 	public boolean verifyJob(Job theJob) {
 		boolean canAdd = false;
@@ -76,7 +70,6 @@ public class Calendar {
 		}
 		return canAdd;
 	}
-	
 	
 	/**
 	 * A job may not be added if the total number of pending jobs during that week 
@@ -122,11 +115,11 @@ public class Calendar {
 		}
 		return weekTotal;
 	}
+	
 	/**
-
 	 * A job may not be added if the total number of pending jobs is currently 30.
 	 *(Business rule 1)
-	 * @return Returns True if total is less than 30 else false.
+	 * @return True if total is less than 30 else false.
 	 */
 	public boolean checkTotalPendingJobs(){
 		boolean canAdd = false;
@@ -142,10 +135,11 @@ public class Calendar {
 		}
 		return canAdd;
 	}
+	
 	/**
 	 * A job may not be scheduled that lasts more than two days(Business rule 4).
-	 * @param theJob Returns True if job duration is less than or equal to 2 days else false.
-	 * @return
+	 * @param theJob 
+	 * @return True if job duration is less than or equal to 2 days else false.
 	 */
 	public boolean checkJobDuration(Job theJob){
 		boolean canAdd = false;
@@ -162,6 +156,7 @@ public class Calendar {
 		
 		return canAdd;
 	}
+	
 	/**
 	 * A job may not be added that is in the past 
 	 * or more than three months in the future(Business rule 5).
@@ -183,6 +178,7 @@ public class Calendar {
 		}
 		return canAdd;
 	}
+	
 	/**
 	 *  A job may not be added if the total number of pending jobs during that week 
 	 * (3 days on either side of the job days) is currently 5.In other words, during any 

@@ -8,13 +8,8 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 /**
- * 
- */
-
-/**
- * @author Sean
+ * @author Sean, Winfield, Luciana, Heather
  * In order to run these tests it requires editing the specifically commented lines
  * inside Calendar. As I didn't want to mess with our serializable data whilst testing.
  * These changes are at line 32 and line 91 of Calendar.java
@@ -36,6 +31,7 @@ public class CalendarTest {
 	Job job11;
 	Job job12;
 	Calendar cally;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -98,6 +94,7 @@ public class CalendarTest {
 		assertFalse(cally.verifyJob(job6));
 		
 	}
+	
 	/**
 	 * Test method for {@link Calendar#verifyJob(Job)}.
 	 */
@@ -111,6 +108,7 @@ public class CalendarTest {
 		}
 		assertFalse(cally.verifyJob(job2));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#verifyJob(Job)}.
 	 */
@@ -119,6 +117,7 @@ public class CalendarTest {
 		//Business Rule 5/6
 		assertFalse(cally.verifyJob(job7));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#verifyJob(Job)}.
 	 */
@@ -127,6 +126,7 @@ public class CalendarTest {
 		//Business Rule 5/6
 		assertFalse(cally.verifyJob(job8));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#verifyJob(Job)}.
 	 */
@@ -135,7 +135,6 @@ public class CalendarTest {
 		//Business Rule 4
 		assertFalse(cally.verifyJob(job9));
 	}
-
 
 	/**
 	 * Test method for {@link Calendar#calculateWeekPendingJobs(java.util.Date)}.
@@ -160,9 +159,10 @@ public class CalendarTest {
 		assertEquals(4, cally.calculateWeekPendingJobs(jobDate));
 		jobs.add(job4);
 		jobDate = sdf.parse(job3.startDate);
-		assertEquals(5, cally.calculateWeekPendingJobs(jobDate));
 		
+		assertEquals(5, cally.calculateWeekPendingJobs(jobDate));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
 	 * @throws TooManyPendingJobsException 
@@ -175,8 +175,8 @@ public class CalendarTest {
 			cally.totalPendingJobs++;
 		}
 		assertFalse(cally.checkTotalPendingJobs());
-		
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
 	 * @throws TooManyPendingJobsException 
@@ -191,6 +191,7 @@ public class CalendarTest {
 		}
 		assertTrue(cally.checkTotalPendingJobs());
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
 	 * @throws TooManyPendingJobsException 
@@ -199,6 +200,7 @@ public class CalendarTest {
 	public void testCheckTotalPendingJobsEmpty() throws TooManyPendingJobsException {	
 		assertTrue(cally.checkTotalPendingJobs());
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkJobDuration(Job)}.
 	 */
@@ -206,6 +208,7 @@ public class CalendarTest {
 	public void testCheckJobDurationMax() {	
 		assertTrue(cally.checkJobDuration(job10));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkJobDuration(Job)}.
 	 */
@@ -213,6 +216,7 @@ public class CalendarTest {
 	public void testCheckJobDurationOverMax() {	
 		assertFalse(cally.checkJobDuration(job9));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkJobDuration(Job)}.
 	 */
@@ -220,6 +224,7 @@ public class CalendarTest {
 	public void testCheckJobDurationUnderMax() {	
 		assertTrue(cally.checkJobDuration(job8));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkJobDuration(Job)}.
 	 */
@@ -227,6 +232,7 @@ public class CalendarTest {
 	public void testCheckJobDurationEmpty() {	
 		assertFalse(cally.checkJobDuration(job11));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
 	 * @throws ParseException 
@@ -240,6 +246,7 @@ public class CalendarTest {
 		
 		assertFalse(cally.checkDate(start, max, current));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
 	 * @throws ParseException 
@@ -253,6 +260,7 @@ public class CalendarTest {
 		
 		assertTrue(cally.checkDate(start, max, current));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
 	 * @throws ParseException 
@@ -266,6 +274,7 @@ public class CalendarTest {
 		
 		assertTrue(cally.checkDate(start, max, current));
 	}
+	
 	/**
 	 * Test method for {@link Calendar#checkDate(Date, Date, Date)}.
 	 * @throws ParseException 
@@ -279,5 +288,4 @@ public class CalendarTest {
 		
 		assertFalse(cally.checkDate(start, max, current));
 	}
-
 }

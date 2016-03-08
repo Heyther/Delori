@@ -1,14 +1,21 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * User interface for Urban Park Staff Members.
+ * 
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 3/8/2016
+ * @version 1.0
+ */
 public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 
-	
 	private static final long serialVersionUID = -5078784213187752662L;
 
+	/*
+	 * Constructor
+	 */
 	public UI_UrbanParkStaffMember() {
-		
 	}
 	
 	/*
@@ -18,7 +25,6 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		//result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SEARCH_VOL_LASTNAME);
 		result.add(MenuOptions.LOGOUT);
@@ -53,7 +59,6 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
                     }
                 }
             } catch (VolunteerNotFoundException e) {
-                // TODO Auto-generated catch block
                 System.out.println(e.getMessage());
                 volunteerSearch();
             }

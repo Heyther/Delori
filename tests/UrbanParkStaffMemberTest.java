@@ -26,6 +26,9 @@ public class UrbanParkStaffMemberTest {
 	public void tearDown() throws Exception {
 	}
 
+	/*
+	 * Tests if two staff member objects are equals.
+	 */
 	@Test
 	public void testEqualsObject() {
 		
@@ -33,6 +36,9 @@ public class UrbanParkStaffMemberTest {
 		assertTrue(staff.equals(same));
 	}
 	
+	/*
+	 * Tests if two different staff member objects are not equal.
+	 */
 	@Test
 	public void testNotEqualsObject() {
 		UrbanParkStaffMember diff = new UrbanParkStaffMember("notfirst", "notlast", "notemail");

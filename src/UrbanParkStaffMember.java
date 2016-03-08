@@ -1,25 +1,17 @@
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Objects;
 
 /**
  * Console driven i/o Urban Park Staff Member.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
-
 public class UrbanParkStaffMember extends AbstractUser {
-
 
 	private static final long serialVersionUID = 1483276272402890408L;
 	protected UserStatus role;
 	
-
-
 	/*
 	 * Constructs an Urban Park Staff Member.
 	 */

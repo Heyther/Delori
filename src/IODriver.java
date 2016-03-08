@@ -19,6 +19,9 @@ public class IODriver {
 	public static UI_AbstractUser currentUserUI;
 	static Data storedData;
 	static boolean quitProgram;
+	private static int BOXWIDTHPADDING_THREE = 3;
+	private static int BOXWIDTHPADDING_NINE = 9;
+	private static int N_LINES = 15;
 	Data jobs, users;
 	String response;
 	MenuOptions selection;
@@ -40,7 +43,6 @@ public class IODriver {
 		if (run) {
 			runProgram();
 		}
-		
 	}
 
 	/*
@@ -50,10 +52,8 @@ public class IODriver {
 		login();
 		storedData.calendar.setTotalPendingJobs();
 		while (selection != MenuOptions.EXIT) {
-			
 			titleList.add(currentUserUI.showUser());
 			while (selection != MenuOptions.LOGOUT) {
-				
 				numberedMenuBox(titleList, currentUserUI.usersHomeMenu()); 
 				System.out.print(">");
 				response = input.nextLine();
@@ -80,7 +80,6 @@ public class IODriver {
 				break;
 			case ADD_A_JOB:
 				((UI_ParkManager) currentUserUI).createJob();
-				//menuBox(currentUserUI.jobOptionsMenu());
 				break;
 			case VIEW_JOBS_MANAGED:
 				((UI_ParkManager) currentUserUI).viewJobsManaged();
@@ -125,8 +124,8 @@ public class IODriver {
 		greet.add(MenuOptions.OPTION_LOGIN);
 		greet.add(MenuOptions.OPTION_ENTER_EMAIL);
 		
-		int boxWidth = getLongestStringLength(greet) + 3; 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
+		int boxWidth = getLongestStringLength(greet) + BOXWIDTHPADDING_THREE; 
+		StringBuilder divider = repeat("=", (int) boxWidth + BOXWIDTHPADDING_NINE); 
 		
 		System.out.print(divider + "\n" + MenuOptions.OPTION_LOGIN +"\n" + MenuOptions.OPTION_ENTER_EMAIL+ "\n" +divider + "\n>");
 		
@@ -178,7 +177,7 @@ public class IODriver {
 	 * Clears the console.
 	 */
 	public static void clearConsole() throws IOException {
-		for (int clear = 0; clear < 6; clear++) {
+		for (int clear = 0; clear < N_LINES; clear++) {
 		    System.out.println("\n") ;
 		}
 	} 
@@ -200,9 +199,9 @@ public class IODriver {
 	public static void numberedMenuBox(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int longestTitle = getLongestStringLength(theTitles);
-		int longestMenuOption = getLongestStringLength(menuOptions) + 3;
+		int longestMenuOption = getLongestStringLength(menuOptions) + BOXWIDTHPADDING_THREE;
 		int boxWidth = Math.max(longestTitle, longestMenuOption); 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9);
+		StringBuilder divider = repeat("=", (int) boxWidth + BOXWIDTHPADDING_NINE);
 		
 		// divider with titles below
 		results += divider + "\n";
@@ -223,8 +222,8 @@ public class IODriver {
 	 */
 	public static void menuBoxForJobs(ArrayList<Job> theJobs) {
 		String results = "";
-		int boxWidth = getLongestStringLength(theJobs) + 3; 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9); 
+		int boxWidth = getLongestStringLength(theJobs) + BOXWIDTHPADDING_THREE; 
+		StringBuilder divider = repeat("=", (int) boxWidth + BOXWIDTHPADDING_NINE); 
 		
 		results += divider + "\nList of Jobs:\n";
 		for (int i = 0; i < theJobs.size(); i++) {
@@ -240,9 +239,9 @@ public class IODriver {
 	public static void menuBoxNotNumbered(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
 		String results = "";
 		int longestTitle = getLongestStringLength(theTitles);
-		int longestMenuOption = getLongestStringLength(menuOptions) + 3;
+		int longestMenuOption = getLongestStringLength(menuOptions) + BOXWIDTHPADDING_THREE;
 		int boxWidth = Math.max(longestTitle, longestMenuOption); 
-		StringBuilder divider = repeat("=", (int) boxWidth + 9);
+		StringBuilder divider = repeat("=", (int) boxWidth + BOXWIDTHPADDING_NINE);
 		
 		// divider with titles below
 		results += divider + "\n";
