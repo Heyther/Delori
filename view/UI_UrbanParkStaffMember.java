@@ -27,10 +27,10 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	}
 	
 	/*
-     * Search for a volunteer by last name.
+     * Search for a volunteer by last name.  Throws VolunteerNotFoundException is no
+     * volunteer has specified last name.
      */
     public void volunteerSearch() throws IOException {
-
         String name;
         ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
         ArrayList<String> title = new ArrayList<String>();
@@ -52,7 +52,6 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
                         System.out.println(vol.toString() + "\n");
                     }
                 }
-
             } catch (VolunteerNotFoundException e) {
                 // TODO Auto-generated catch block
                 System.out.println(e.getMessage());

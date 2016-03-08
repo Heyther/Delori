@@ -20,7 +20,7 @@ public class Data {
 	 * Constructs a new Data class.
 	 */
 	public Data() throws ClassNotFoundException, IOException  {
-		dataInitialized = true;
+		dataInitialized = false;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
 		calendar = new Calendar(allUsers, allJobs);

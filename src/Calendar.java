@@ -169,5 +169,17 @@ public class Calendar {
 		return canAdd;
 	}
 	
+	/*
+	 * Set the totalPending job field to number of upcoming jobs
+	 */
+	public void setTotalPendingJobs() {
+		totalPendingJobs = 0;
+		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
+		for(Job j : IODriver.storedData.getJobs()) {
+			if(curDay.before(j.getStartDate())) {
+				totalPendingJobs++;
+			}
+		}
+	}
 }
 

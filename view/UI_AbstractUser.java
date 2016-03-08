@@ -57,8 +57,6 @@ public abstract class UI_AbstractUser implements Serializable {
 	 */
 	public void viewJobDetails() throws IOException {
 		ArrayList<Job> allJobs = (ArrayList<Job>) IODriver.storedData.getJobs();
-		//IODriver.menuBoxForJobs(IODriver.storedData.getJobs());
-		//System.out.println("View job details:");
 		System.out.print("Select a job number to view its details (or enter 0 to go back):\n>");
 		int responseJobNum = Integer.parseInt(IODriver.input.nextLine());
 		if (responseJobNum < 0 || responseJobNum > allJobs.size()) {
