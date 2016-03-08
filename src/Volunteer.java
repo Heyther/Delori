@@ -7,10 +7,9 @@ import java.util.Objects;
  * Represents a Volunteer.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/28/2016
+ * @date 3/8/2016
  * @version 1.0
  */
-
 public class Volunteer extends AbstractUser  {
 	
 	private static final long serialVersionUID = 3505720660401145090L;
@@ -19,7 +18,7 @@ public class Volunteer extends AbstractUser  {
 	private int workloadResponse;
 
 	/*
-	 * Constructs a volunteer
+	 * Constructs a volunteer.
 	 */
 	public Volunteer(String theFname, String theLname, String theEmail) {
 		super(theFname, theLname, theEmail);
@@ -53,44 +52,32 @@ public class Volunteer extends AbstractUser  {
 		return role;
 	}
 	
-	
+	/*
+	 * Retrieves the user's role.
+	 * @see AbstractUser#getRoleString()
+	 */
 	public String getRoleString() {
 		return "Volunteer";
 	}
 	
-//	/*
-//	 * Cancel an enrolled job.
-//	 */
-//	public void cancelEnrolledJob(Job theJob) throws IOException {
-//		//Delete the job from the main job list (to be added back in after the volunteer is deleted from it)
-//		IODriver.storedData.deleteJob(theJob);
-//		theJob.cancelVolunteer(this); // remove volunteer from job
-//		enrolledJobs.remove(theJob); // remove enrolled job
-//		IODriver.storedData.addJob(theJob); //add job without volunteer to main job list
-//	}
-	
 	/*
-	 * Sign up for a job. (U6)
+	 * Sign up a volunteer for a job. 
+	 * (U6: As a Volunteer I want to volunteer for a job.)
 	 */
 	public void signUp(Job theJob) throws IOException, JobSlotFilledException, SignUpOnSameDayException {
-		
-		// BR7: A Volunteer may not sign up for two jobs on the same day.
+		// (BR7: A Volunteer may not sign up for two jobs on the same day.)
 		boolean signUp = false;
 		for (Job j : enrolledJobs) { 
 			if (!j.getStartDate().equals(theJob.getStartDate())) signUp = true; 
 		}
 		
 		if (signUp || enrolledJobs.size() == 0) {
-			
-			// BR3: A Volunteer may not sign up for a work category on a job if the maximum number of Volunteers for
-			// that work category has already been reached. (handled in jobs)
+			/* (BR3: A Volunteer may not sign up for a work category on a job if the maximum 
+			    number of Volunteers for that work category has already been reached.) */
 			if (theJob.signUpVolunteer(this, getWorkloadResponse())) {
-				//delete the job from the main job list (to be added back in once the volunteer has been added)
-				IODriver.storedData.deleteJob(theJob);
-				
-				//Add the job back into the main job list and to the volunteer's own list
-				enrolledJobs.add(theJob);
-				IODriver.storedData.addJob(theJob);
+				IODriver.storedData.deleteJob(theJob); // delete old job from main list
+				enrolledJobs.add(theJob); // add newly enrolled job to volunteer's list
+				IODriver.storedData.addJob(theJob); // add job with volunteer back into main list
 			} else {
 				throw new JobSlotFilledException();
 			}
@@ -98,14 +85,17 @@ public class Volunteer extends AbstractUser  {
 			throw new SignUpOnSameDayException();
 		}
 	}
-
 	
-	
-	// odd-ball methods in obtaining user input from 
-	// view without having view code within model.
+	/*
+	 * Sets user's workload response.
+	 */
 	public void setWorkloadResponse(int theWorkloadResponse) {
 		workloadResponse = theWorkloadResponse;
 	}
+	
+	/*
+	 * Get the specified workload response.
+	 */
 	public int getWorkloadResponse() {
 		return workloadResponse;
 	}
@@ -132,7 +122,7 @@ public class Volunteer extends AbstractUser  {
 	}
 	
     /*
-     * Hashcode for equals
+     * Hashcode for equals method
      * @see java.lang.Object#hashCode()
      */
     @Override
