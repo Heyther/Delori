@@ -7,7 +7,7 @@ import org.junit.Test;
  * Tests the Job class
  * 
  * @authors: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class JobTest {
@@ -30,6 +30,9 @@ public class JobTest {
 	public void tearDown() throws Exception {
 	}
 
+	/*
+	 * Test if jobs are equal.
+	 */
 	@Test
 	public void testEqualsJob() {
 		Job same = new Job("Job Title", "03/26/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
@@ -37,6 +40,9 @@ public class JobTest {
 		assertTrue(someJob.equals(same));
 	}
 	
+	/*
+	 * Test non-equality between two different jobs.
+	 */
 	@Test
 	public void testNotEqualsJob() {
 		Job diff = new Job("Different Job Title", "03/25/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
@@ -44,6 +50,9 @@ public class JobTest {
 		assertFalse(someJob.equals(diff));
 	}
 
+	/*
+	 * Checking retrieval of volunteers.
+	 */
 	@Test
 	public void testGetVolunteers() {
 		someJob.signUpVolunteer(vol1, 1);
@@ -55,6 +64,9 @@ public class JobTest {
 		assertTrue(someJob.getVolunteers().contains(vol3));
 	}
 
+	/*
+	 * Test volunteer sign up on a job.
+	 */
 	@Test
 	public void testSignUpVolunteer() {
 		
@@ -83,6 +95,9 @@ public class JobTest {
 		assertEquals(someJob.heavyVolunteers.size(), 1);
 	}
 
+	/*
+	 * Tests when volunteer cancels a job.
+	 */
 	@Test
 	public void testCancelVolunteer() {
 		//Test cancel light slot

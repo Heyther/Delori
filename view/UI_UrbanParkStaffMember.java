@@ -1,14 +1,21 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * User interface for Urban Park Staff Members.
+ * 
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 3/8/2016
+ * @version 1.0
+ */
 public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 
-	
 	private static final long serialVersionUID = -5078784213187752662L;
 
+	/*
+	 * Constructor
+	 */
 	public UI_UrbanParkStaffMember() {
-		
 	}
 	
 	/*
