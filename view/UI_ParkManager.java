@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Represents a Park Manager's UI.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/28/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class UI_ParkManager extends UI_AbstractUser {
@@ -12,6 +12,9 @@ public class UI_ParkManager extends UI_AbstractUser {
 	private static final long serialVersionUID = 6557601314417133384L;
 	public ParkManager user; 
 	
+	/*
+	 * Constructor
+	 */
 	public UI_ParkManager() {
 		user = (ParkManager) IODriver.currentUser;
 	}
@@ -84,7 +87,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 	
 	/*
 	 * Prompts user for details of the job and calls ParkManager's addJob method
-	 * U1
+	 * (U1: As a Park Manager I want to submit a new job.)
 	 */
 	public void createJob() throws IOException
 	{
@@ -149,11 +152,10 @@ public class UI_ParkManager extends UI_AbstractUser {
 		}
 	}
 	
-	
 	/*
 	 * Ask user what field to edit, get new value for that field,
 	 * then send the new value to the appropriate edit method of the ParkManager class
-	 * U3
+	 * (U3: As a Park Manager I want to edit the details of a job.)
 	 */
 	public void editJob(Job theJob) throws IOException {
 		
@@ -226,7 +228,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 	
 	/*
 	 * Show all the park manager's upcoming jobs
-	 * U8
+	 * (U8: As a Park Manager I want to view a summary of all upcoming jobs in the parks that I manage.)
 	 */
 	public void viewJobsManaged() throws IOException {
 		try {
@@ -247,15 +249,9 @@ public class UI_ParkManager extends UI_AbstractUser {
 	
 	/*
 	 * View the volunteers signed up for my job
-	 * U9
+	 * (U9: As a Park Manager I want to view the Volunteers for a job in the parks that I manage)
 	 */
 	public void viewEnrolledVolunteers(Job theJob) {
 		theJob.printVolunteers();
 	}
-
-//	@Override
-//	public ArrayList<MenuOptions> jobOptionsMenu() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

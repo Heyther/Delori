@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Tests the ParkManager class.
+ * 
+ * @authors: Luciana, Winfield, Heather, Sean
+ * @date 3/8/2016
+ * @version 1.0
+ */
 public class ParkManagerTest { 
 	
 	ParkManager manager;
@@ -14,6 +20,7 @@ public class ParkManagerTest {
 	@Before
 	public void setUp() throws Exception {
 		//manager = new ParkManager("first", "last", "email", "park");
+		@SuppressWarnings("unused")
 		IODriver driver = new IODriver(false);
 		manager = (ParkManager)IODriver.storedData.getReturningUser("manageremail");
 		//IODriver.storedData.addUser(manager);
@@ -21,11 +28,9 @@ public class ParkManagerTest {
 
 	@After
 	public void tearDown() throws Exception {
-		
 		for (int i = 0; i < manager.jobsManaging.size(); i++) {
 			manager.cancelJob(manager.jobsManaging.get(i));
 		}
-
 	}
 
 	/*
@@ -98,6 +103,7 @@ public class ParkManagerTest {
 	 */
 	@Test
 	public void testAddJobInvalid() throws IOException {
+		@SuppressWarnings("unused")
 		Job validJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
 		Job invalidJob = manager.addJob("Title", "02/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
 		
@@ -131,6 +137,7 @@ public class ParkManagerTest {
 	@Test
 	public void testCancelJobTwoJobsInList() throws IOException, NoManagedJobsException {
 		Job toBeCanceled1 = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		@SuppressWarnings("unused")
 		Job toBeCanceled2 = manager.addJob("Other Title", "03/19/2016", "12:00 pm", "1", "Other Description", 1, 1, 1);
 		manager.cancelJob(toBeCanceled1);
 		assertFalse(manager.getJobsManaging().contains(toBeCanceled1) || IODriver.storedData.getJobs().contains(toBeCanceled1));
@@ -222,7 +229,9 @@ public class ParkManagerTest {
 	 */
 	@Test
 	public void testGetJobsManagingSomeJobs() throws NoManagedJobsException, IOException {
+		@SuppressWarnings("unused")
 		Job job1 = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
+		@SuppressWarnings("unused")
 		Job job2 = manager.addJob("Other Title", "03/19/2016", "12:00 pm", "1", "Other Description", 1, 1, 1);
 		
 		ArrayList<Job> jobsManagingCopy = manager.getJobsManaging();

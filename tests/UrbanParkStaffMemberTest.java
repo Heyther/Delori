@@ -7,7 +7,7 @@ import org.junit.Test;
  * Tests the UrbanParkStaffMember class
  * 
  * @authors: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class UrbanParkStaffMemberTest {
