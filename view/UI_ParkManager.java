@@ -123,7 +123,7 @@ public class UI_ParkManager extends UI_AbstractUser {
 		
 		if (newJob != null) {
 			System.out.println("Job Added! \nReview job details:");
-			System.out.println(newJob.toString());
+			jobDetailsBox(newJob);
 			//Options for what to do with this job
 			jobOptions(newJob);
 		}
