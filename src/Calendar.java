@@ -29,7 +29,7 @@ public class Calendar {
 	 */
 	public Calendar(List<AbstractUser> theRecordOfUsers, List<Job> theRecordOfJobs) {
 		totalPendingJobs = 0;
-		//recordOfJobs = theRecordOfJobs;
+		//recordOfJobs = theRecordOfJobs;      //Uncomment for running test
 	}
 	
 	/*
