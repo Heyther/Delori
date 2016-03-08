@@ -20,7 +20,6 @@ public class DataTest {
     
     @Before
     public void setUp() throws Exception {
-        //Calendar calendar = new Calendar(data.getUsers(), data.getJobs());
         data = new Data();
         
     }

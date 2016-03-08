@@ -23,7 +23,6 @@ public class UI_ParkManager extends UI_AbstractUser {
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		//result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_UPCOMING_JOBS);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.VIEW_JOBS_MANAGED);

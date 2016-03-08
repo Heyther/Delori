@@ -18,7 +18,6 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
 	@Override
 	public ArrayList<MenuOptions> usersHomeMenu() {
 		ArrayList<MenuOptions> result = new ArrayList<MenuOptions>();
-		//result.add(MenuOptions.OPTION_WELCOME);
 		result.add(MenuOptions.VIEW_JOB_DETAIL);
 		result.add(MenuOptions.SEARCH_VOL_LASTNAME);
 		result.add(MenuOptions.LOGOUT);
@@ -53,7 +52,6 @@ public class UI_UrbanParkStaffMember extends UI_AbstractUser {
                     }
                 }
             } catch (VolunteerNotFoundException e) {
-                // TODO Auto-generated catch block
                 System.out.println(e.getMessage());
                 volunteerSearch();
             }

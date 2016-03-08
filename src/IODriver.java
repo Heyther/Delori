@@ -80,7 +80,6 @@ public class IODriver {
 				break;
 			case ADD_A_JOB:
 				((UI_ParkManager) currentUserUI).createJob();
-				//menuBox(currentUserUI.jobOptionsMenu());
 				break;
 			case VIEW_JOBS_MANAGED:
 				((UI_ParkManager) currentUserUI).viewJobsManaged();

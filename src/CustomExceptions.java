@@ -125,7 +125,7 @@ class CanNotEditJobException extends CustomExceptions {
 	private static final long serialVersionUID = 1L;
 
 	public CanNotEditJobException() {
-		super("This job has volunteers signed up for it and cannot be edited.");
+		super("This job has volunteers signed up for it and cannot be edited or canceled.");
 	}
 	public String toString() {
 		return getClass().getName();
