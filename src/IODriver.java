@@ -29,7 +29,7 @@ public class IODriver {
 	/*
 	 * Constructs the driver for the program.
 	 */
-	public IODriver() throws ClassNotFoundException, IOException {
+	public IODriver(boolean run) throws ClassNotFoundException, IOException {
 		storedData = new Data(); // loads all the users and jobs data
 		response = "";
 		currentUser = null;
@@ -39,7 +39,10 @@ public class IODriver {
 		selection = null;
 		titleList = new ArrayList<String>();
 		titleList.add(MenuOptions.OPTION_WELCOME.toString());
-		runProgram();
+		if (run) {
+			runProgram();
+		}
+		
 	}
 
 	/*
@@ -280,7 +283,7 @@ public class IODriver {
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		@SuppressWarnings("unused")
-		IODriver driver = new IODriver();
+		IODriver driver = new IODriver(true);
 	}
 
 }
