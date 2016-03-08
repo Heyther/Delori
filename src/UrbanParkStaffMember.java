@@ -23,7 +23,6 @@ public class UrbanParkStaffMember extends AbstractUser {
 
 	/*
 	 * Retrieves the user's role.
-	 * 
 	 * @see AbstractUser#getRole()
 	 */
 	public UserStatus getRole() {

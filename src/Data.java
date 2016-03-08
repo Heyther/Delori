@@ -24,7 +24,7 @@ public class Data {
 		dataInitialized = true;
 		allUsers = new ArrayList<AbstractUser>();
 		allJobs = new ArrayList<Job>();
-		calendar = new Calendar(allUsers, allJobs);
+		calendar = new Calendar();
 		loadData();
 	}
 
@@ -119,9 +119,7 @@ public class Data {
 		addUser(new UrbanParkStaffMember("Zoey", "Sitz", "z@gmail.com"));
 		addUser(new Volunteer("Beth", "Krom", "b@gmail.com"));
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
-
 		addUser(new ParkManager("first", "last", "manageremail", "park"));
-
 		serializeObject();
 	}
 	

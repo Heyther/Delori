@@ -7,7 +7,7 @@ import org.junit.Test;
  * Tests the UrbanParkStaffMember class
  * 
  * @authors: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class UrbanParkStaffMemberTest {
@@ -27,7 +27,7 @@ public class UrbanParkStaffMemberTest {
 	}
 
 	/*
-	 * Tests if two staff member objects are equals.
+	 * Tests if two staff members are the same.
 	 */
 	@Test
 	public void testEqualsObject() {
@@ -37,7 +37,7 @@ public class UrbanParkStaffMemberTest {
 	}
 	
 	/*
-	 * Tests if two different staff member objects are not equal.
+	 * Test if two staff members are not the same.
 	 */
 	@Test
 	public void testNotEqualsObject() {
