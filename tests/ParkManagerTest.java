@@ -28,32 +28,46 @@ public class ParkManagerTest {
 
 	}
 
+	/*
+	 * Tests if two equal ParkManagers are considered equal
+	 */
 	@Test
 	public void testEqualsObjectSame() {
 		ParkManager same = new ParkManager("first", "last", "manageremail", "park");
 		assertTrue(manager.equals(same));
 	}
 	
+	/*
+	 * Tests if two not equal ParkManagers are considered equal, every parameter is different 
+	 */
 	@Test
 	public void testEqualsObjectDifferent() {
 		ParkManager different = new ParkManager("Different first", "Different last", "Different email", "Different park");
 		assertFalse(manager.equals(different));
 	}
 	
+	/*
+	 * Tests if two not equal objects are considered equal, only one parameter is different
+	 */
 	@Test
 	public void testEqualsObjectSimilar() {
 		ParkManager similar = new ParkManager("first", "last", "different email", "park");
 		assertFalse(manager.equals(similar));
 	}
 	
+	/*
+	 * Tests if a job can be added when the ParkManager currently has no jobs
+	 */
 	@Test
 	public void testAddJobNoJobsInList() throws IOException, NoManagedJobsException {
 		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
 		
-		assertTrue(manager.getJobsManaging().contains(newJob));
-		//assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
+		assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
 	}
 	
+	/*
+	 * Tests if a job can be added when the ParkManager currently has two jobs 
+	 */
 	@Test
 	public void testAddJobTwoJobsInList() throws IOException, NoManagedJobsException {
 		Job job1 = new Job ("Title 1", "04/02/2016", "12:00 pm", "1", manager.getParkName(), manager.getFullName(), "Description 1", 1, 1, 1);  
@@ -69,6 +83,9 @@ public class ParkManagerTest {
 		assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
 	}
 	
+	/*
+	 * Tests if a valid job can be added
+	 */
 	@Test
 	public void testAddJobValid() throws IOException, NoManagedJobsException {
 		Job newJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -76,6 +93,9 @@ public class ParkManagerTest {
 		assertTrue(manager.getJobsManaging().contains(newJob) && IODriver.storedData.getJobs().contains(newJob));
 	}
 	
+	/*
+	 * Tests if an invalid job can be added
+	 */
 	@Test
 	public void testAddJobInvalid() throws IOException {
 		Job validJob = manager.addJob("Title", "04/04/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -88,6 +108,9 @@ public class ParkManagerTest {
 		}
 	}
 
+	/*
+	 * Tests if a job can be canceled when it is the only job in the list
+	 */
 	@Test 
 	public void testCancelJobOneJobInList() throws IOException, NoManagedJobsException {
 		Job toBeCanceled = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -102,6 +125,9 @@ public class ParkManagerTest {
 		assertTrue(exceptionCaught && !IODriver.storedData.getJobs().contains(toBeCanceled));
 	}
 	
+	/*
+	 * Tests if a job can be canceled when there is another job in the list
+	 */
 	@Test
 	public void testCancelJobTwoJobsInList() throws IOException, NoManagedJobsException {
 		Job toBeCanceled1 = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -110,6 +136,9 @@ public class ParkManagerTest {
 		assertFalse(manager.getJobsManaging().contains(toBeCanceled1) || IODriver.storedData.getJobs().contains(toBeCanceled1));
 	}
 
+	/*
+	 * Tests if a job's title can be edited
+	 */
 	@Test
 	public void testEditJobTitle() throws IOException {
 		
@@ -118,6 +147,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getJobTitle().equals("New Title"));
 	}
 
+	/*
+	 * Tests if a job's start date can be edited
+	 */
 	@Test
 	public void testEditJobDate() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -125,6 +157,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getStartDate().equals("04/29/2016"));
 	}
 
+	/*
+	 * Tests if a job's start time can be edited
+	 */
 	@Test
 	public void testEditJobTime() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -132,6 +167,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getStartTime().equals("1:00 pm"));
 	}
 
+	/*
+	 * Tests if a job's duration can be edited
+	 */
 	@Test
 	public void testEditJobDuration() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -139,6 +177,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getDuration().equals("2"));
 	}
 
+	/*
+	 * Tests if a job's description can be edited
+	 */
 	@Test
 	public void testEditJobDescription() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -146,6 +187,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getDescription().equals("New Description"));
 	}
 
+	/*
+	 * Tests if a job's number of light slots can be edited
+	 */
 	@Test
 	public void testEditJobLightSlots() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -153,6 +197,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getLightSlots() == 2);
 	}
 
+	/*
+	 * Tests if a job's number of medium slots can be edited
+	 */
 	@Test
 	public void testEditJobMediumSlots() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -160,6 +207,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getMediumSlots() == 2);
 	}
 
+	/*
+	 * Tests if a job's number of heavy slots can be edited
+	 */
 	@Test
 	public void testEditJobHeavySlots() throws IOException {
 		Job toBeEdited = manager.addJob("Original Title", "04/30/2016", "12:00 pm", "1", "Original Description", 1, 1, 1);
@@ -167,6 +217,9 @@ public class ParkManagerTest {
 		assertTrue(toBeEdited.getHeavySlots() == 2);
 	}
 
+	/*
+	 * Tests if the list of the park manager's jobs is properly returned when there are jobs in the list
+	 */
 	@Test
 	public void testGetJobsManagingSomeJobs() throws NoManagedJobsException, IOException {
 		Job job1 = manager.addJob("Title", "03/16/2016", "12:00 pm", "1", "Description", 1, 1, 1);
@@ -179,6 +232,9 @@ public class ParkManagerTest {
 		}
 	}
 	
+	/*
+	 * Tests if a NoManagedJobsException is thrown when getJobsManaging is called and there are no jobs in the list
+	 */
 	@Test
 	public void testGetJobsManagingNoJobs() throws IOException {
 		boolean exceptionCaught = false;
