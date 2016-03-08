@@ -9,14 +9,11 @@ import java.util.GregorianCalendar;
 /**
  * Represents a calendar full of jobs.
  * 
-<<<<<<< HEAD
  * @authors: Luciana, Winfield, Heather, Sean
  * @date 2/16/2016
  * @version 1.0
-=======
  * @author Heather modified by Sean 
- * @date 2/27/16
->>>>>>> shoyt-dev
+ * @date 3/8/16
  */
 public class Calendar {
 	public int totalPendingJobs;
@@ -63,19 +60,17 @@ public class Calendar {
 		curDay.add(java.util.Calendar.MONTH, 3);
 		Date maxJobDate = curDay.getTime();
 		
-		//business rules 1 & 4
 		if(checkTotalPendingJobs() && checkJobDuration(theJob)){
 				//business rule 2
 
 				if(jobStartDate != null){				
-					if(calculateWeekPendingJobs(jobStartDate) < 5){
+					if(canAddInWorkWeek(jobStartDate)){
 					//business rule 5
 						if(checkDate(jobStartDate,maxJobDate, myDate)){					
 								totalPendingJobs++;
 								canAdd = true;					
 						}
 					
-
 					}
 				}		
 		}
@@ -135,8 +130,15 @@ public class Calendar {
 	 */
 	public boolean checkTotalPendingJobs(){
 		boolean canAdd = false;
-		if(totalPendingJobs < 30){
+		try{
+			if(totalPendingJobs < 30){
 			canAdd = true;
+			}else {
+				throw new TooManyPendingJobsException();
+			}
+			
+		}catch(TooManyPendingJobsException j){
+			System.err.println(j.getMessage());
 		}
 		return canAdd;
 	}
@@ -147,10 +149,17 @@ public class Calendar {
 	 */
 	public boolean checkJobDuration(Job theJob){
 		boolean canAdd = false;
-		int duration =Integer.parseInt(theJob.duration); 
-		if( duration > 0 && duration<= 2){
-			canAdd = true;
+		try{
+			int duration =Integer.parseInt(theJob.duration); 
+			if( duration > 0 && duration<= 2){
+				canAdd = true;
+			}else {
+				throw new JobExceedsMaxDurationException();
+			}
+		}catch(JobExceedsMaxDurationException j){
+			System.err.println(j.getMessage());
 		}
+		
 		return canAdd;
 	}
 	/**
@@ -163,8 +172,35 @@ public class Calendar {
 	 */
 	public boolean checkDate(Date jobStartDate, Date maxJobDate, Date theDate){
 		boolean canAdd = false;
-		if(jobStartDate.before(maxJobDate) && jobStartDate.after(theDate)){
+		try{
+			if(jobStartDate.before(maxJobDate) && jobStartDate.after(theDate)){
+				canAdd = true;
+			}else {
+				throw new JobDateExceedsBoundsException();
+			}
+		}catch(JobDateExceedsBoundsException j){
+			System.err.println(j.getMessage());
+		}
+		return canAdd;
+	}
+	/**
+	 *  A job may not be added if the total number of pending jobs during that week 
+	 * (3 days on either side of the job days) is currently 5.In other words, during any 
+	 * consecutive 7 day period there can be no more than 5 jobs.
+	 * Boolean test to see if total number in work week is less than 5
+	 * @param theDate the job start date
+	 * @return Returns true if the current work week has less than 5 jobs else false.
+	 */
+	public boolean canAddInWorkWeek(Date theDate){
+		boolean canAdd = false;
+		try{
+		if(calculateWeekPendingJobs(theDate)< 5){
 			canAdd = true;
+		}else {
+			throw new TooManyPendingJobsInWorkWeekException();
+		}
+		}catch(TooManyPendingJobsInWorkWeekException t){
+			System.err.println(t.getMessage());
 		}
 		return canAdd;
 	}

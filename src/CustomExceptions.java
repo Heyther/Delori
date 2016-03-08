@@ -131,6 +131,43 @@ class CanNotEditJobException extends CustomExceptions {
 		return getClass().getName();
 	}
 }
+class TooManyPendingJobsException extends CustomExceptions {
+
+	private static final long serialVersionUID = 4048794057309074193L;
+
+	public TooManyPendingJobsException(){
+		super("Cannot add job, already 30 jobs scheduled");
+	}
+	public String toString(){
+		return getClass().getName();
+	}
 	
-	
+}
+class TooManyPendingJobsInWorkWeekException extends CustomExceptions {
+	private static final long serialVersionUID = -6762763443247158874L;
+	public TooManyPendingJobsInWorkWeekException(){
+		super("Cannot add job, already 5 jobs scheduled in work week");
+	}
+	public String toString(){
+		return getClass().getName();
+	}
+}
+class JobExceedsMaxDurationException extends CustomExceptions {
+	private static final long serialVersionUID = -6689919139279730059L;
+	public JobExceedsMaxDurationException(){
+		super("Cannot add job, with duration exceeding 2 days");
+	}
+	public String toString(){
+		return getClass().getName();
+	}
+}
+class JobDateExceedsBoundsException extends CustomExceptions {
+	private static final long serialVersionUID = -6689919139279730059L;
+	public JobDateExceedsBoundsException(){
+		super("Cannot add job, Start date may not be in past, or more than 3 month in future.");
+	}
+	public String toString(){
+		return getClass().getName();
+	}
+}
 

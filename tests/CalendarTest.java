@@ -17,8 +17,8 @@ import org.junit.Test;
  * @author Sean
  * In order to run these tests it requires editing the specifically commented lines
  * inside Calendar. As I didn't want to mess with our serializable data whilst testing.
- * These changes are at line 34 and line 97 of Calendar.java
- *@date 2/27/16
+ * These changes are at line 32 and line 91 of Calendar.java
+ *@date 3/8/16
  */
 public class CalendarTest {
 	ArrayList<Job> jobs;
@@ -165,6 +165,7 @@ public class CalendarTest {
 	}
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 * @throws TooManyPendingJobsException 
 	 */
 	@Test
 	public void testCheckTotalPendingJobsAtMax() {
@@ -174,12 +175,14 @@ public class CalendarTest {
 			cally.totalPendingJobs++;
 		}
 		assertFalse(cally.checkTotalPendingJobs());
+		
 	}
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 * @throws TooManyPendingJobsException 
 	 */
 	@Test
-	public void testCheckTotalPendingJobsAtN() {
+	public void testCheckTotalPendingJobsAtN() throws TooManyPendingJobsException {
 		int i =0;
 		int N = 16;
 		for(i =0; i < N; i++){
@@ -190,9 +193,10 @@ public class CalendarTest {
 	}
 	/**
 	 * Test method for {@link Calendar#checkTotalPendingJobs()}.
+	 * @throws TooManyPendingJobsException 
 	 */
 	@Test
-	public void testCheckTotalPendingJobsEmpty() {	
+	public void testCheckTotalPendingJobsEmpty() throws TooManyPendingJobsException {	
 		assertTrue(cally.checkTotalPendingJobs());
 	}
 	/**
