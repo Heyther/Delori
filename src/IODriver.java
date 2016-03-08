@@ -48,6 +48,7 @@ public class IODriver {
 	 */
 	private void runProgram() throws IOException {
 		login();
+		storedData.calendar.setTotalPendingJobs();
 		while (selection != MenuOptions.EXIT) {
 			
 			titleList.add(currentUserUI.showUser());
