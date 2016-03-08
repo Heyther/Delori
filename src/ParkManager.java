@@ -17,7 +17,7 @@ public class ParkManager extends AbstractUser
 	private static final long serialVersionUID = 3323557037867953268L;
 	protected UserStatus role;
 	private String parkName;
-	private ArrayList<Job> jobsManaging;
+	public ArrayList<Job> jobsManaging; //Made public for testing
 	
 	/*
 	 * Constructs a Park Manager.
@@ -28,23 +28,6 @@ public class ParkManager extends AbstractUser
 		this.parkName = thePark;
 		role = UserStatus.PARKMANAGER;
 		jobsManaging = new ArrayList<Job>();
-	}
-	
-	public String getParkName() {
-		return this.parkName;
-	}
-	
-	public void setParkName(String newName) {
-		this.parkName = newName;
-	}
-	
-	/*
-	 * Displays the user's last name, first name, and email.
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString()
-	{
-		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
 	}
 	
 	/*
@@ -70,7 +53,7 @@ public class ParkManager extends AbstractUser
 	}
 	
 	/*
-	 * Cancel a job (Delete it from the list of jobs)
+	 * Cancel a job (Delete it from the lists of jobs)
 	 * U2
 	 */
 	public void cancelJob(Job theJob) throws IOException {
@@ -78,6 +61,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.deleteJob(theJob);//delete job from main job list
 	}
 	
+	/*
+	 * Edit a job's title
+	 */
 	public void editJobTitle(Job theJob, String newTitle) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -86,6 +72,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's start date
+	 */
 	public void editJobDate(Job theJob, String newDate) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -94,6 +83,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's start time
+	 */
 	public void editJobTime(Job theJob, String newTime) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -102,6 +94,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's duration
+	 */
 	public void editJobDuration(Job theJob, String newDuration) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -110,6 +105,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's description
+	 */
 	public void editJobDescription(Job theJob, String newDescription) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -118,6 +116,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's number of slots that volunteers can sign up for with light workload
+	 */
 	public void editJobLightSlots(Job theJob, Integer newLightSlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -126,6 +127,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's number of slots that volunteers can sign up for with medium workload
+	 */
 	public void editJobMediumSlots(Job theJob, Integer newMediumSlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -134,6 +138,9 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Edit a job's number of slots that volunteers can sign up for with heavy workload
+	 */
 	public void editJobHeavySlots(Job theJob, Integer newHeavySlots) throws IOException{
 		IODriver.storedData.deleteJob(theJob);
 		this.jobsManaging.remove(theJob);
@@ -142,6 +149,10 @@ public class ParkManager extends AbstractUser
 		IODriver.storedData.addJob(theJob);
 	}
 	
+	/*
+	 * Returns the list of jobs managed by this manager if there are any. 
+	 * If there are no jobs, throws NoManagedJobsException
+	 */
 	public ArrayList<Job> getJobsManaging() throws NoManagedJobsException {
 		if (this.jobsManaging.size() == 0) {
 			throw new NoManagedJobsException();
@@ -152,6 +163,20 @@ public class ParkManager extends AbstractUser
 	}
 	
 	/*
+	 * Displays the user's last name, first name, and email.
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return getLname() + ", " + getFname() + "\nEmail: " + getEmail();
+	}
+	/*
+	 * Returns this park manager's park name as a String
+	 */
+	public String getParkName() {
+		return this.parkName;
+	}
+	
+	/*
 	 * Retrieves the user's role.
 	 * @see AbstractUser#getRole()
 	 */
@@ -159,6 +184,9 @@ public class ParkManager extends AbstractUser
 		return role;
 	}
 	
+	/*
+	 * Gets the String representation of the user's role.
+	 */
 	public String getRoleString() {
 		return "Park Manager";
 	}

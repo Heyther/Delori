@@ -14,14 +14,14 @@ public class UI_Volunteer extends UI_AbstractUser {
 	public Volunteer user;
 
 	/*
-	 * Constructs volunteer UI methods
+	 * Constructs volunteer UI methods.
 	 */
 	public UI_Volunteer() {
 		user = (Volunteer) IODriver.currentUser; // sets specific user to their UI
 	}
 	
 	/*
-	 * View joined jobs specific to a volunteer. 
+	 * View enrolled jobs specific to a volunteer. 
 	 * (U7: As a Volunteer I want to view the jobs I am signed up for)
 	 */
 	public void viewEnrolledJobs() {
@@ -30,7 +30,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
 				for (Job j : user.getEnrolledJobs()) {
-					result.append(j.getJobTitle() + "\n");
+					result.append("   o " + j.jobSummary() + "\n");
 				}
 			}
 		} catch (NoEnrolledJobsPresentException e) {
@@ -39,16 +39,20 @@ public class UI_Volunteer extends UI_AbstractUser {
 		System.out.println(result);
 	}
 	
+	/*
+	 * Displays the menu options of a job slot and
+	 * verifies what the user enrolled for.
+	 */
 	public void signUpView() throws IOException {
 		try {
-			System.out.print("Please, select a job number or enter 0 to go back:\n>");
-			int responseIndex = Integer.parseInt(IODriver.input.nextLine());
-			
-			if (responseIndex != 0) {
-				System.out.println(MenuOptions.SELECT_WORKLOAD);
+			int jobIndex = selectJobNumber(IODriver.storedData.getJobs().size());
+			if (jobIndex != 0) {
+				System.out.println("\n" + MenuOptions.SELECT_WORKLOAD);
+				System.out.print("\n>");
 				int responseWorkloadIndex = Integer.parseInt(IODriver.input.nextLine());
 				user.setWorkloadResponse(responseWorkloadIndex);
-				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(responseWorkloadIndex-1));
+				((Volunteer) user).signUp(IODriver.storedData.getJobs().get(jobIndex - 1));
+				System.out.println("\nYou've signed up for " + IODriver.storedData.getJobs().get(jobIndex - 1).jobTitle +"\n\n" );
 			} else {
 				IODriver.clearConsole();
 			}
@@ -58,7 +62,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 	}
 	
 	/*
-	 * Displays the menu for a volunteer.
+	 * Displays the home menu for a volunteer.
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
@@ -69,7 +73,6 @@ public class UI_Volunteer extends UI_AbstractUser {
 		result.add(MenuOptions.SIGN_UP);
 		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
 		result.add(MenuOptions.LOGOUT);
-
 		return result;
 	}	
 }

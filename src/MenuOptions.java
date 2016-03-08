@@ -2,12 +2,13 @@
  * Represents the different common options for UI.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public enum MenuOptions {
+
 	// User selection options
-	LOGIN("login"),
+	LOGIN("Login"),
 	LOGOUT("Logout"),
 	EXIT("Exit"),
 	ADD_A_JOB("Add a job"),
@@ -24,7 +25,7 @@ public enum MenuOptions {
 	// Volunteer specific options
 	SIGN_UP("Sign up for a job"),
 	VIEW_ENROLLED_JOBS("View enrolled jobs"),
-	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy\n>\n"),
+	SELECT_WORKLOAD("Please select a workload: \n 1. Light \n 2. Medium \n 3. Heavy"),
 	
 	//Park Manager specific options
 	EDIT_JOB("Edit job details"),
@@ -33,12 +34,12 @@ public enum MenuOptions {
 	
 	// Staff specific options
 	VOLUNTEER_SEARCH_TITLE("Volunteer Search"),
-	VOLUNTEER_SEARCH_PROMPT("Enter volunteers last name or '0' to go back:"),
+	VOLUNTEER_SEARCH_PROMPT("Enter volunteer's last name or '0' to go back:"),
 	
 	// Greetings or Titles
 	OPTION_LOGIN("Login to Urban Parks!"),
 	OPTION_WELCOME("Welcome to Urban Parks!"),
-	OPTION_ENTER_EMAIL("Please, enter your email."),
+	OPTION_ENTER_EMAIL("Please enter your email."),
 	LOGGING_OUT("Sucessfully logged out...")
     ;
 	
