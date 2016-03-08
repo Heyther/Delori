@@ -35,7 +35,7 @@ public class Job implements Serializable {
 	 * Job constructor
 	 */
 	public Job(String jobTitle, String start, String time, String dur, String loc, String parkMan, 
-			String descript, int light, int med, int heavy){
+			String descript, int light, int med, int heavy) {
 		IODriver.input = new Scanner(System.in);
 		this.jobTitle = jobTitle;
 		this.startDate = start;
@@ -60,7 +60,7 @@ public class Job implements Serializable {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString(){
+	public String toString() {
 		String toString = "Job Title: "+this.jobTitle+"\n"
 				+"Date: "+this.startDate+"\n"
 				+"Time: "+ this.startTime +"\n"
@@ -77,7 +77,7 @@ public class Job implements Serializable {
 	/*
 	 * Checks if the job is the same job.
 	 */
-	public boolean equals(Job other){
+	public boolean equals(Job other) {
 		if (this.jobTitle.equals(other.jobTitle) && this.startDate.equals(other.startDate) 
 				&& this.startTime.equals(other.startTime) && this.location.equals(other.location) 
 				&& this.duration.equals(other.duration) && this.location.equals(other.location) && 
@@ -91,13 +91,13 @@ public class Job implements Serializable {
 	/*
 	 * Getter for job title.
 	 */
-	public String getJobTitle(){
+	public String getJobTitle() {
 		return jobTitle;
 	}
 	/*
 	 * Setter for job title.
 	 */
-	public void setJobTitle(String theJobTitle){
+	public void setJobTitle(String theJobTitle) {
 		this.jobTitle = theJobTitle;
 	}		
 
@@ -227,8 +227,7 @@ public class Job implements Serializable {
 	 * Returns an array list of all Volunteer objects by combining the lists of 
 	 * light, medium, and heavy workload volunteers
 	 */
-	public ArrayList<Volunteer> getVolunteers()
-	{
+	public ArrayList<Volunteer> getVolunteers() {
 		ArrayList<Volunteer> allVolunteers = new ArrayList<Volunteer>();
 		allVolunteers.addAll(lightVolunteers);
 		allVolunteers.addAll(mediumVolunteers);
@@ -239,8 +238,7 @@ public class Job implements Serializable {
 	/*
 	 * Prints names of all volunteers who have signed up for this job to the console
 	 */
-	public void printVolunteers()
-	{
+	public void printVolunteers() {
 		int i;
 		System.out.println("Light Workload:");
 		for (i = 0; i < lightVolunteers.size(); i++){

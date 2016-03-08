@@ -1,16 +1,14 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * Represents a user.
  * 
  * @authors: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public abstract class AbstractUser implements Serializable {
-
 
 	private static final long serialVersionUID = 1322725593346883536L;
 	protected String fname, lname, email;
@@ -74,14 +72,21 @@ public abstract class AbstractUser implements Serializable {
 		this.email = email;
 	}
 	
+	/*
+	 * Returns a user's role.
+	 */
 	public UserStatus getRole() {
 		return role;
 	}
 	
+	/*
+	 * Gets the user's role representation as a string.
+	 */
 	public abstract String getRoleString() ;
 
 	/*
-	 * 
+	 * Hashes the object based on their first 
+	 * and last name and their email.
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
