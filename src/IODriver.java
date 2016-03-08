@@ -8,6 +8,9 @@ import java.util.Scanner;
 /**
  * Driver(/Controller) class. Controls menus and user types.
  * 
+ * If first run set dataInitialized field in Data class to false and run program.
+ * After first run set dataInitialized to true.
+ * 
  * @author: Luciana, Winfield, Heather, Sean
  * @date 3/8/2016
  * @version 1.0
@@ -51,8 +54,8 @@ public class IODriver {
 	 */
 	private void runProgram() throws IOException, ParseException {
 		login();
-		storedData.calendar.removePastJobs();
 		while (selection != MenuOptions.EXIT) {
+			storedData.calendar.removePastJobs();
 			titleList.add(currentUserUI.showUser());
 			while (selection != MenuOptions.LOGOUT) {
 				numberedMenuBox(titleList, currentUserUI.usersHomeMenu()); 
@@ -120,7 +123,8 @@ public class IODriver {
 	 * associated with that email. If the email is not in the system, 
 	 * prompts the user for email again.
 	 */
-	public void login(){		
+	public void login(){	
+
 		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
 		greet.add(MenuOptions.OPTION_LOGIN);
 		greet.add(MenuOptions.OPTION_ENTER_EMAIL);

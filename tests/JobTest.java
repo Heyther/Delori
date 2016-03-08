@@ -19,7 +19,7 @@ public class JobTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		someJob = new Job("Job Title", "03/01/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
+		someJob = new Job("Job Title", "03/26/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
 				"Some decription", 1, 1, 1);
 		vol1 = new Volunteer("Firstname1", "Lastname1", "email1");
 		vol2 = new Volunteer("Firstname2", "Lastname2", "email2");
@@ -35,7 +35,7 @@ public class JobTest {
 	 */
 	@Test
 	public void testEqualsJob() {
-		Job same = new Job("Job Title", "03/01/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
+		Job same = new Job("Job Title", "03/26/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
 				"Some decription", 1, 1, 1);
 		assertTrue(someJob.equals(same));
 	}
@@ -45,7 +45,7 @@ public class JobTest {
 	 */
 	@Test
 	public void testNotEqualsJob() {
-		Job diff = new Job("Different Job Title", "03/02/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
+		Job diff = new Job("Different Job Title", "03/25/2016", "12:00 pm", "1", "Some Park", "Some Manager", 
 				"Different decription", 1, 1, 1);
 		assertFalse(someJob.equals(diff));
 	}
@@ -76,7 +76,7 @@ public class JobTest {
 		someJob.signUpVolunteer(vol1, 1);
 		
 		assertTrue(someJob.lightVolunteers.contains(vol1));
-		assertTrue(someJob.lightSlots == openSlots-1);
+		assertEquals(someJob.lightVolunteers.size(), 1);
 		
 		//Test sign up for medium slot
 		assertFalse(someJob.mediumVolunteers.contains(vol2));
@@ -84,7 +84,7 @@ public class JobTest {
 		someJob.signUpVolunteer(vol2, 2);
 		
 		assertTrue(someJob.mediumVolunteers.contains(vol2));
-		assertTrue(someJob.mediumSlots == openSlots-1);
+		assertEquals(someJob.mediumVolunteers.size(), 1);
 		
 		//Test sign up for heavy slot
 		assertFalse(someJob.heavyVolunteers.contains(vol3));
@@ -92,7 +92,7 @@ public class JobTest {
 		someJob.signUpVolunteer(vol3, 3);
 				
 		assertTrue(someJob.heavyVolunteers.contains(vol3));
-		assertTrue(someJob.heavySlots == openSlots-1);
+		assertEquals(someJob.heavyVolunteers.size(), 1);
 	}
 
 	/*
