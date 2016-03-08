@@ -155,7 +155,7 @@ class TooManyPendingJobsInWorkWeekException extends CustomExceptions {
 class JobExceedsMaxDurationException extends CustomExceptions {
 	private static final long serialVersionUID = -6689919139279730059L;
 	public JobExceedsMaxDurationException(){
-		super("Cannot add job, with duration exceeding 2 days");
+		super("Cannot add job with duration exceeding 2 days");
 	}
 	public String toString(){
 		return getClass().getName();
@@ -164,7 +164,7 @@ class JobExceedsMaxDurationException extends CustomExceptions {
 class JobDateExceedsBoundsException extends CustomExceptions {
 	private static final long serialVersionUID = -6689919139279730059L;
 	public JobDateExceedsBoundsException(){
-		super("Cannot add job, Start date may not be in past, or more than 3 month in future.");
+		super("Cannot add job, start date may not be in the past or more than 3 month in the future.");
 	}
 	public String toString(){
 		return getClass().getName();

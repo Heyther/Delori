@@ -118,11 +118,13 @@ public class UI_ParkManager extends UI_AbstractUser {
 		
 		Job newJob = this.user.addJob(title, startDate, startTime, duration, description, lightSlots, medSlots, heavySlots);
 		
-		//Check if job actually was add
-		System.out.println("Job Added! \nReview job details:");
-		System.out.println(newJob.toString());
-		//Options for what to do with this job
-		jobOptions(newJob);
+		if (newJob != null) {
+			System.out.println("Job Added! \nReview job details:");
+			System.out.println(newJob.toString());
+			//Options for what to do with this job
+			jobOptions(newJob);
+		}
+		
 		
 	}
 	
