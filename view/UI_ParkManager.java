@@ -9,9 +9,6 @@ import java.util.ArrayList;
  */
 public class UI_ParkManager extends UI_AbstractUser {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6557601314417133384L;
 	public ParkManager user; 
 	
@@ -234,13 +231,12 @@ public class UI_ParkManager extends UI_AbstractUser {
 		try {
 			IODriver.menuBoxForJobs(this.user.getJobsManaging());
 			int jobNumber = selectJobNumber(this.user.getJobsManaging().size());
-			if (jobNumber >= 0) {
+			if (jobNumber > 0) {
 				Job selectedJob = this.user.getJobsManaging().get(jobNumber - 1);
 				jobOptions(selectedJob);
 			}
 			else {
 				IODriver.clearConsole();
-				System.out.println("here");
 			}
 		}
 		catch (NoManagedJobsException e) {

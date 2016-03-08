@@ -5,13 +5,12 @@ import java.util.ArrayList;
 /**
  * Abstract user interface class to hold common view methods for all users.
  * 
- * @author Winfield Brooks
- * @version 2/24/2016
- *
+ * @author: Luciana, Winfield, Heather, Sean
+ * @date 3/8/2016
+ * @version 1.0
  */
 public abstract class UI_AbstractUser implements Serializable {
 	
-
 	private static final long serialVersionUID = 6133973165093948247L;
 	AbstractUser user;
 	
@@ -22,24 +21,24 @@ public abstract class UI_AbstractUser implements Serializable {
 		user = IODriver.currentUser;
 	}
 	
-	// Displays a menu with options for a user.
+	// Displays a home menu with options for a user.
 	public abstract ArrayList<MenuOptions> usersHomeMenu();
 	
-	//public abstract ArrayList<MenuOptions> jobOptionsMenu();
+	/*
+	 * A string representation of the user's full name and role.
+	 */
 	public String showUser() {
 		if (user != null) {
-			//System.out.println(user.getFullName() + ", " + user.getRoleString());
 			return user.getFullName() + ", " + user.getRoleString();
 		} else 
 			return null;
 	}
 	
 	/*
-	 * Select job number from a printed menu of jobs
+	 * Select job number from a printed menu of jobs.
 	 */
 	public int selectJobNumber(int listSize) {
 		System.out.print("Select job number, or enter 0 to go back:\n>");
-		
 		String response = IODriver.input.nextLine();
 		int selection = Integer.parseInt(response);
 		
@@ -77,7 +76,6 @@ public abstract class UI_AbstractUser implements Serializable {
 		String results = "";
 		int boxWidth = job.getDescription().length() + 6; 
 		StringBuilder divider = IODriver.repeat("=", (int) boxWidth + 9); 
-		
 		results += divider + "\n";
 		results += job.toString() + "\n";
 		results += divider + "\n";
