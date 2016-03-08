@@ -9,9 +9,6 @@ import java.util.ArrayList;
  */
 public class UI_ParkManager extends UI_AbstractUser {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6557601314417133384L;
 	public ParkManager user; 
 	

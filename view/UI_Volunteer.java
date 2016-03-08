@@ -14,25 +14,23 @@ public class UI_Volunteer extends UI_AbstractUser {
 	public Volunteer user;
 
 	/*
-	 * Constructs volunteer UI methods
+	 * Constructs volunteer UI methods.
 	 */
 	public UI_Volunteer() {
 		user = (Volunteer) IODriver.currentUser; // sets specific user to their UI
 	}
 	
 	/*
-	 * View joined jobs specific to a volunteer. 
+	 * View enrolled jobs specific to a volunteer. 
 	 * (U7: As a Volunteer I want to view the jobs I am signed up for)
 	 */
 	public void viewEnrolledJobs() {
 		StringBuilder result = new StringBuilder();
-		//IODriver.menuBoxNotNumbered(theTitles, menuOptions);
 		try {
 			if (user.getEnrolledJobs().size() > 0) {
 				result.append("Jobs you are enrolled in:\n");
 				for (Job j : user.getEnrolledJobs()) {
 					result.append("   o " + j.jobSummary() + "\n");
-
 				}
 			}
 		} catch (NoEnrolledJobsPresentException e) {
@@ -41,6 +39,10 @@ public class UI_Volunteer extends UI_AbstractUser {
 		System.out.println(result);
 	}
 	
+	/*
+	 * Displays the menu options of a job slot and
+	 * verifies what the user enrolled for.
+	 */
 	public void signUpView() throws IOException {
 		try {
 			int jobIndex = selectJobNumber(IODriver.storedData.getJobs().size());
@@ -60,7 +62,7 @@ public class UI_Volunteer extends UI_AbstractUser {
 	}
 	
 	/*
-	 * Displays the menu for a volunteer.
+	 * Displays the home menu for a volunteer.
 	 * @see AbstractUser#userDisplayMenu()
 	 */
 	@Override
@@ -71,7 +73,6 @@ public class UI_Volunteer extends UI_AbstractUser {
 		result.add(MenuOptions.SIGN_UP);
 		result.add(MenuOptions.VIEW_ENROLLED_JOBS);
 		result.add(MenuOptions.LOGOUT);
-
 		return result;
 	}	
 }

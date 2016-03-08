@@ -4,8 +4,9 @@ import java.util.List;
 
 /**
  * Save and load persistent data.
+ * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 3/2/2016
+ * @date 3/8/2016
  * @version 1.0
  */
 public class Data {
@@ -16,7 +17,7 @@ public class Data {
 	String myDataFile = "urbanParkData.ser";
 	private boolean dataInitialized;
 
-	/**
+	/*
 	 * Constructs a new Data class.
 	 */
 	public Data() throws ClassNotFoundException, IOException  {
@@ -78,7 +79,10 @@ public class Data {
 	///////////////
 	// Job data  
 	///////////////
-	
+    
+	/*
+	 * Retrieves all jobs in system.
+	 */
 	public ArrayList<Job> getJobs() {
 		return allJobs;
 	}
@@ -109,22 +113,14 @@ public class Data {
 	 */
 	public void initializeData() throws IOException {
 		ParkManager m = new ParkManager("Mary", "Thompson", "m@gmail.com", "Green Park");
-		//m.addJob("Pet Lions", "03/24/2016", "1:00pm", "1", "Description:..", 1, 2, 3); // pre-add jobs
-		//m.addJob("Feed Ducks", "03/10/2016", "1:00pm", "1", "Description1:..", 1, 2, 3);
-		
 		addUser(m);
 		addUser(new ParkManager("Smith", "Smithers", "s@gmail.com", "Evergreen Park"));
 		addUser(new UrbanParkStaffMember("Joe", "Fogel", "j@gmail.com"));
 		addUser(new UrbanParkStaffMember("Zoey", "Sitz", "z@gmail.com"));
 		addUser(new Volunteer("Beth", "Krom", "b@gmail.com"));
 		addUser(new Volunteer("Liz", "Breton", "l@gmail.com"));
-		
-		addUser(new ParkManager("first", "last", "manageremail", "park"));
 
-		//addJob(new Job("Pet Lions", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Description:..", 1, 2, 3));
-		//addJob(new Job("Feed Ducks", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Description1:..", 1, 2, 3));
-		//addJob(new Job("Clean trash", "02/21/2016", "1:00pm", "1", "Tacoma", "Evergreen Park", "Clean trash in the parking lot", 1, 2, 3));
-		//addJob(new Job("Paint", "02/24/2016", "1:00pm", "1", "Seattle", "GreenLake", "Paint the wall by the soccer fields.", 1, 2, 3));
+		addUser(new ParkManager("first", "last", "manageremail", "park"));
 
 		serializeObject();
 	}

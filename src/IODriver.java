@@ -4,15 +4,13 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 /**
  * Driver(/Controller) class. Controls menus and user types.
  * 
  * @author: Luciana, Winfield, Heather, Sean
- * @date 2/16/2016
+ * @date 3/8/2016
  * @version 1.0
  */
-
 public class IODriver {
 	
 	public static Scanner input;
@@ -117,9 +115,9 @@ public class IODriver {
 	}
 	
 	/*
-	 * Asks the user to enter an email address and returns the user object 
-	 * associated with that email
-	 * If the email is not in the system, it prompts the user again
+	 * Asks the user to enter an email address and sets the user object 
+	 * associated with that email. If the email is not in the system, 
+	 * prompts the user for email again.
 	 */
 	public void login(){		
 		ArrayList<MenuOptions> greet = new ArrayList<MenuOptions>();
@@ -196,7 +194,7 @@ public class IODriver {
 	}
 
 	/*
-	 * Takes a list of menu options and displays them in a box format
+	 * Takes a list of strings and menu options and displays them in a numbered box format.
 	 */
 	public static void numberedMenuBox(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
 		String results = "";
@@ -220,7 +218,7 @@ public class IODriver {
 	}
 
 	/*
-	 * Takes all of the jobs within the system and displays them in a box format
+	 * Takes all of the jobs within the system and displays them in a box format.
 	 */
 	public static void menuBoxForJobs(ArrayList<Job> theJobs) {
 		String results = "";
@@ -236,7 +234,7 @@ public class IODriver {
 	}
 	
 	/*
-	 * Takes a list of menu options and displays them in a box format
+	 * Takes a list of menu options and displays them in a box format.
 	 */
 	public static void menuBoxNotNumbered(ArrayList<String> theTitles, ArrayList<MenuOptions> menuOptions) {
 		String results = "";
