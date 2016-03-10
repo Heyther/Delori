@@ -41,6 +41,7 @@ public class Calendar {
 	 * @return True if job is able to added to current list, else false.
 	 */
 	public boolean verifyJob(Job theJob) {
+		totalPendingJobs = IODriver.storedData.getJobs().size();
 		boolean canAdd = false;
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		GregorianCalendar curDay = (GregorianCalendar) GregorianCalendar.getInstance();
@@ -89,6 +90,7 @@ public class Calendar {
 		curDay.setTime(theDate);
 		int [] pastDays = new int[7];
 		int [] week = new int[7];
+		int [] month = new int[7];
 		int i =0;
 		int temp = GregorianCalendar.DAY_OF_WEEK;
 		//checks which days of week are in current work week and fills arrays.
@@ -96,6 +98,7 @@ public class Calendar {
 			curDay.add(temp,  i-3);
 			pastDays[i] = curDay.get(GregorianCalendar.DAY_OF_WEEK);
 			week[i] = curDay.get(GregorianCalendar.WEEK_OF_MONTH);
+			month[i] = curDay.get(GregorianCalendar.MONTH);
 			curDay.setTime(theDate);
 		}
 		curDay.setTime(theDate);
@@ -106,7 +109,8 @@ public class Calendar {
 				curDay.setTime(tempDate);
 				for(i =0; i < 7; i++){
 					if(pastDays[i] == curDay.get(GregorianCalendar.DAY_OF_WEEK)
-							&& week[i] == curDay.get(GregorianCalendar.WEEK_OF_MONTH)){
+							&& week[i] == curDay.get(GregorianCalendar.WEEK_OF_MONTH)
+							&& month[i] == curDay.get(GregorianCalendar.MONTH)){
 						weekTotal++;		
 					}
 				}
@@ -177,6 +181,7 @@ public class Calendar {
 		}catch(JobDateExceedsBoundsException j){
 			System.err.println(j.getMessage());
 		}
+		System.out.println(totalPendingJobs);
 		return canAdd;
 	}
 	
